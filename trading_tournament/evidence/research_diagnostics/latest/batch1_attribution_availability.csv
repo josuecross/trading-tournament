@@ -1,0 +1,9 @@
+diagnostic_family,infrastructure_available,batch1_export_available,batch1_status,notes
+target_window_attribution,true,true,available,Target hit and incremental target-window flags are exported.
+component_final_equity_contribution,true,true,available,Window-level final-equity component contribution is exported.
+component_drawdown_attribution,true,true,partial,Infrastructure supports this from component return streams; Batch 1 detail marks exact component drawdown contribution unavailable without daily component contribution streams.
+recovery_attribution,true,true,partial,Infrastructure supports this from component return streams; Batch 1 detail marks exact recovery contribution unavailable without daily component contribution streams.
+worst_n_drawdown_windows,true,true,available,Worst-N window rows are exported from window-level drawdown diagnostics.
+drawdown_coincidence_detail,true,true,available,Window-level overlap flags are available and reusable summary functions exist.
+duplicate_diversification_summary,true,false,infrastructure_only,Summary helper exists; future review should feed target attribution and drawdown co-incidence inputs.
+

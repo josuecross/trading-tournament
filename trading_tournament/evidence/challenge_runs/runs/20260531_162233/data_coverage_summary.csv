@@ -1,0 +1,3 @@
+lane,data_source,symbols,start_date,end_date,row_count,missing_data_notes,adjusted_or_unadjusted,raw_data_included_in_evidence,major_limitations
+etf_validated_lane,existing ETF adjusted OHLC via cache:19,"SPY,QQQ,IWM,XLK,XLF,XLE,XLV,XLY,XLP,XLU,XLI,XLB,XLC,SMH,IEF,TLT,GLD,SHY,BIL",2007-01-03,2026-05-29,89772,Exact focused finalist uses existing adjusted ETF OHLC cache; raw OHLCV is not copied into compact evidence.,adjusted OHLC per ETF evidence lane,False,yfinance/Yahoo cache limitations and ETF inception differences still apply.
+etf_benchmark,data/cache adjusted OHLCV,"BIL,SPY",2008-01-03,2026-05-29,9663,,adjusted close from existing ETF cache,False,"Benchmarks are exact from cached adjusted close, but compact challenge evidence does not include raw OHLCV."

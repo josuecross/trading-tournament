@@ -1,0 +1,3 @@
+symbol,cached_or_downloaded,cache_written,row_count,first_date,last_date,duplicate_date_count,missing_adjusted_close_or_close_count,missing_close_count,missing_volume_count,adjusted_close_available,close_available,volume_available,enough_rows_for_126d_momentum,enough_rows_for_200d_sma,enough_rows_for_180d_after_warmup,quality_status,notes
+BTC-USD,True,False,3072,2018-01-01,2026-05-31,0,0,0,0,True,True,True,True,True,True,pass,crypto trades 24/7; later research aligns to ETF/BIL trading days; source limitations remain exploratory
+ETH-USD,True,False,3072,2018-01-01,2026-05-31,0,0,0,0,True,True,True,True,True,True,pass,crypto trades 24/7; later research aligns to ETF/BIL trading days; source limitations remain exploratory

@@ -1,0 +1,38 @@
+{
+  "active_combo_rule_changed": false,
+  "backtest_run": false,
+  "best_risk_control_candidate": "combo_plus_crypto_spot_tsmom_90_10_v1",
+  "broker_integration": false,
+  "candidate_exhaustive_recommended": false,
+  "candidate_exhaustive_run": false,
+  "data_downloaded": false,
+  "direct_futures_contract_logic": false,
+  "exchange_execution": false,
+  "experiment_ids": [
+    "crypto_spot_tsmom_top1_cash_filter_v1",
+    "crypto_spot_equal_weight_200d_filter_v1",
+    "combo_plus_crypto_spot_tsmom_90_10_v1"
+  ],
+  "latest_folder_file_count": 9,
+  "live_orders": false,
+  "new_symbols_added": [],
+  "order_placement": false,
+  "paper_forward_active": false,
+  "paper_forward_rule_changed": false,
+  "profit_exploration_run": true,
+  "real_money_recommendation": false,
+  "research_sample_run": true,
+  "run_id": "20260608_053732",
+  "spy200d_replaced": false,
+  "symbols_used": [
+    "BTC-USD",
+    "ETH-USD",
+    "BIL"
+  ],
+  "uses_futures_contracts": false,
+  "uses_leverage": false,
+  "uses_margin": false,
+  "uses_options": false,
+  "uses_perpetuals": false,
+  "uses_shorting": false
+}

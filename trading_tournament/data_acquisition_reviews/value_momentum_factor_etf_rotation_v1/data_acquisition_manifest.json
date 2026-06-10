@@ -1,0 +1,68 @@
+{
+  "api_called": true,
+  "api_key_or_secret_written": false,
+  "backtest_run": false,
+  "broker_integration": false,
+  "candidate_providers_reviewed": [
+    "existing_local_cache",
+    "yfinance",
+    "alpha_vantage",
+    "tiingo",
+    "nasdaq_data_link_sharadar",
+    "polygon_or_massive",
+    "stooq_or_other_public_csv"
+  ],
+  "created_date": "2026-06-04",
+  "data_downloaded": true,
+  "data_states_defined": [
+    "available_in_local_cache",
+    "data_acquisition_required",
+    "provider_available_not_cached",
+    "provider_review_required",
+    "data_acquired_pending_quality_check",
+    "data_rejected",
+    "data_unavailable"
+  ],
+  "decision": "conditional_pending_terms_or_api_key",
+  "latest_acquisition_run_id": "20260604_213319",
+  "latest_acquisition_status": "data_quality_review_passed",
+  "latest_folder_file_count": 7,
+  "latest_quality_counts": {
+    "fail": 0,
+    "pass": 6,
+    "warning": 0
+  },
+  "live_orders": false,
+  "missing_cache_interpretation": "data_acquisition_required_or_provider_review_required_not_data_unavailable",
+  "next_allowed_action": "create_data_download_prompt",
+  "paper_forward_active": false,
+  "provider_terms_security_decision": "approve_future_yfinance_download_prompt",
+  "raw_ohlcv_included": false,
+  "real_money_recommendation": false,
+  "required_symbols_reviewed": [
+    "MTUM",
+    "VLUE",
+    "VTV",
+    "QUAL",
+    "USMV",
+    "SPLV",
+    "SPY",
+    "BIL"
+  ],
+  "review_id": "value_momentum_factor_etf_rotation_v1_data_acquisition_review",
+  "review_type": "data_source_acquisition_review",
+  "strategy_implemented": false,
+  "subject_id": "value_momentum_factor_etf_rotation_v1",
+  "symbols_currently_cached": [
+    "SPY",
+    "BIL"
+  ],
+  "symbols_missing_from_cache": [
+    "MTUM",
+    "VLUE",
+    "VTV",
+    "QUAL",
+    "USMV",
+    "SPLV"
+  ]
+}

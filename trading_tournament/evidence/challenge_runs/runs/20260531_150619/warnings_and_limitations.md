@@ -1,0 +1,21 @@
+# Warnings And Limitations
+
+- Research-only; no real-money recommendation.
+- No broker integration.
+- No live orders.
+- No exchange trading.
+- ETF lane and crypto lane have different credibility levels.
+- Crypto yfinance data is Tier 1 exploratory.
+- Crypto has no bid/ask, order book, outage, custody, delisting, or exchange-specific execution modeling.
+- Leverage is approximate simulated leverage only.
+- No actual margin, liquidation, or funding model is implemented unless explicitly stated.
+- Sampled rolling windows are non-final.
+- Sampled rolling windows are non-final unless candidate_exhaustive completes with all_possible windows.
+- ETF benchmark rows are required for fair ETF comparison.
+- Approximate stop-enforced values should not drive final decisions.
+- Stop-enforced equity is more relevant than unconditional final equity.
+- Taxes are ignored.
+- Cash yield is simplified.
+- Live execution may differ materially.
+- Excluded instruments are not tested.
+- No strategy here is validated, guaranteed, proven, reliable, paper-forward ready, or real-money suitable.

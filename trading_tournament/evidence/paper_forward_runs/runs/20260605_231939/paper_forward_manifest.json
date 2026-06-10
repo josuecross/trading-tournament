@@ -1,0 +1,22 @@
+{
+  "run_id": "20260605_231939",
+  "created_at_utc": "2026-06-05T23:19:40Z",
+  "paper_demo_only": true,
+  "combo_observation_included": true,
+  "combo_observation_status": "active_waiting_for_next_cached_trading_day",
+  "combo_paper_forward_active": false,
+  "combo_replaces_spy200d": false,
+  "spy200d_frozen_control": true,
+  "rule_hash_verified": true,
+  "canonical_rule_hash": "6695f0d3ec403e2f377d99f3f63d1fc57a66f45f2c27a9072ab8c0a60a19ee67",
+  "data_downloaded": false,
+  "backtest_run": false,
+  "profit_exploration_run": false,
+  "strategy_rules_changed": false,
+  "broker_integration": false,
+  "live_orders": false,
+  "order_placement": false,
+  "real_money_recommendation": false,
+  "raw_data_included": false,
+  "latest_folder_file_count": 10
+}

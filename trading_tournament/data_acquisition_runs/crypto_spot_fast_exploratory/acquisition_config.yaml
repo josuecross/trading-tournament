@@ -1,0 +1,27 @@
+lane_id: crypto_spot_fast_exploratory
+provider_priority:
+  - existing_cache
+  - yfinance_compatible_if_cache_missing
+allowed_symbols:
+  - BTC-USD
+  - ETH-USD
+fallback_or_cash_benchmark: BIL
+raw_ohlcv_in_evidence: false
+download_full_universe: false
+broker_integration: false
+exchange_execution: false
+live_orders: false
+order_placement: false
+real_money_recommendation: false
+requires_basic_qa: true
+quality_checks:
+  - row_count
+  - first_date
+  - last_date
+  - duplicate_date_count
+  - missing_adjusted_close_or_close_count
+  - missing_close_count
+  - missing_volume_count
+  - enough_rows_for_126d_momentum
+  - enough_rows_for_200d_sma
+  - enough_rows_for_180d_after_warmup

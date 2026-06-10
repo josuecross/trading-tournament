@@ -1,0 +1,3 @@
+symbol,cached_or_downloaded,cache_written,row_count,first_date,last_date,quality_status,notes
+BTC-USD,True,False,3072,2018-01-01,2026-05-31,pass,crypto trades 24/7; later research aligns to ETF/BIL trading days; source limitations remain exploratory
+ETH-USD,True,False,3072,2018-01-01,2026-05-31,pass,crypto trades 24/7; later research aligns to ETF/BIL trading days; source limitations remain exploratory

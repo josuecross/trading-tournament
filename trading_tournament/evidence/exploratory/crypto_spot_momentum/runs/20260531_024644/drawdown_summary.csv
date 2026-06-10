@@ -1,0 +1,15 @@
+strategy,slippage_label,max_drawdown_dollars,max_drawdown_pct
+crypto_time_series_momentum,standard,-19215.844050937,-0.6424906679166281
+crypto_cross_sectional_momentum,standard,-48034.4874644582,-0.7822035090133698
+crypto_dual_momentum_cash_filter,standard,-36248.198429371245,-0.6405730186573844
+crypto_time_series_momentum,stress,-19015.44900775728,-0.6509402954932743
+crypto_cross_sectional_momentum,stress,-45861.838738427345,-0.7883355041652805
+crypto_dual_momentum_cash_filter,stress,-35334.57868122988,-0.6435163122286472
+crypto_buy_hold_equal_weight,standard,-14868.296730511116,-0.8407066400473499
+cash_flat,standard,0.0,0.0
+BTC_buy_hold,standard,-13617.84323156678,-0.8153271113852913
+ETH_buy_hold,standard,-14813.276440707225,-0.9396254038538313
+crypto_buy_hold_equal_weight,stress,-14835.660772545443,-0.8410562894721527
+cash_flat,stress,0.0,0.0
+BTC_buy_hold,stress,-13592.99340335382,-0.8153271113852912
+ETH_buy_hold,stress,-14787.372364791154,-0.9396254038538314

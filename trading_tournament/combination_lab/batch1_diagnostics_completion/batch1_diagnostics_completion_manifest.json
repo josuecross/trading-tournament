@@ -1,0 +1,23 @@
+{
+  "active_combo_rule_changed": false,
+  "backtest_run": false,
+  "broker_integration": false,
+  "candidate_exhaustive_review_recommended": false,
+  "candidate_exhaustive_run": false,
+  "component_contribution_status": "partially_available",
+  "data_downloaded": false,
+  "diagnostics_completion_decision": "diagnostics_support_short_history_watchlist_only",
+  "diagnostics_only_profit_exploration_run": true,
+  "drawdown_coincidence_detail_status": "available_window_level_overlap",
+  "latest_folder_file_count": 9,
+  "live_orders": false,
+  "new_combination_added": false,
+  "order_placement": false,
+  "paper_forward_rule_changed": false,
+  "profit_exploration_latest_rewritten": false,
+  "real_money_recommendation": false,
+  "short_history_label_preserved": true,
+  "spy200d_replaced": false,
+  "strategy_implemented": false,
+  "target_window_comovement_status": "available"
+}

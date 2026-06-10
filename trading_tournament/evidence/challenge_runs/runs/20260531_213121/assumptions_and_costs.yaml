@@ -1,0 +1,61 @@
+research_only: true
+real_money_recommendation: false
+account:
+  starting_equity: 3000.0
+  target_300_equity: 3300.0
+  target_400_equity: 3400.0
+  absolute_stop_equity: 2400.0
+  trailing_drawdown_dollars: 600.0
+  project_stop_mode: both
+  independent_account_per_row: true
+validation:
+  mode: candidate_exhaustive
+  finalists:
+  - SPY_200d_trend_model
+  rolling_method_default: all_possible for focused candidate_exhaustive where computable;
+    deterministic research_sample otherwise
+  sampled_results_are_final: true
+  exhaustive_validation: true
+  final_validation_completed: true
+  incomplete_reason: ''
+costs:
+  etf_standard_slippage_per_side: 0.0005
+  etf_stress_slippage_per_side: 0.001
+  crypto_standard_fee_slippage_per_side: 0.001
+  crypto_stress_fee_slippage_per_side: 0.003
+leverage:
+  included: false
+  model: approximate_simulated_leverage only
+  multipliers:
+  - 1.0
+  financing_annualized:
+    1.0: 0.0
+    1.5: 0.05
+    2.0: 0.08
+  no_margin_account: true
+  no_liquidation_engine: true
+simulated_etf_leverage:
+  enabled: true
+  model: approximate_return_multiplier
+  multipliers:
+  - 1.25
+  - 1.5
+  financing_cost_annualized:
+    '1.25': 0.05
+    '1.5': 0.08
+  cost_model_quality: approximate
+  real_margin_model: false
+  liquidation_model: false
+  real_money_recommendation: false
+  notes: Diagnostic only. Not a real leverage product, margin model, or trading recommendation.
+lanes:
+  include_etf: true
+  include_crypto: false
+  include_benchmarks: true
+caveats:
+- No raw vendor data in evidence.
+- Focused candidate_exhaustive ETF finalist and benchmark stop-enforced values are
+  exact; other compact ETF evidence rows may be approximated when equity curves are
+  unavailable.
+- Crypto is Tier 1 exploratory and non-final.
+- No broker, exchange, live order, or real-money workflow.

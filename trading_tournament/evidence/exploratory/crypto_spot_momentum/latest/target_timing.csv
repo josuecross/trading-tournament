@@ -1,0 +1,15 @@
+strategy,slippage_label,target_300_hit,target_300_first_date,target_300_before_stop,target_400_hit,target_400_first_date,target_400_before_stop,any_project_stop_hit,first_project_stop_date
+crypto_time_series_momentum,standard,True,2019-05-10,True,True,2019-05-11,True,True,2019-06-09
+crypto_cross_sectional_momentum,standard,True,2019-05-08,False,True,2019-05-09,False,True,2018-11-14
+crypto_dual_momentum_cash_filter,standard,True,2019-05-03,True,True,2019-05-08,True,True,2019-06-04
+crypto_time_series_momentum,stress,True,2019-05-10,True,True,2019-05-11,True,True,2019-06-09
+crypto_cross_sectional_momentum,stress,True,2019-05-09,False,True,2019-05-09,False,True,2018-11-14
+crypto_dual_momentum_cash_filter,stress,True,2019-05-03,True,True,2019-05-08,True,True,2019-06-04
+crypto_buy_hold_equal_weight,standard,True,2020-11-30,False,True,2020-12-16,False,True,2018-02-04
+cash_flat,standard,False,,False,False,,False,False,
+BTC_buy_hold,standard,True,2018-01-03,True,True,2018-01-04,True,True,2018-01-09
+ETH_buy_hold,standard,True,2018-01-02,True,True,2018-01-02,True,True,2018-01-16
+crypto_buy_hold_equal_weight,stress,True,2020-11-30,False,True,2020-12-16,False,True,2018-02-04
+cash_flat,stress,False,,False,False,,False,False,
+BTC_buy_hold,stress,True,2018-01-03,True,True,2018-01-04,True,True,2018-01-09
+ETH_buy_hold,stress,True,2018-01-02,True,True,2018-01-02,True,True,2018-01-16

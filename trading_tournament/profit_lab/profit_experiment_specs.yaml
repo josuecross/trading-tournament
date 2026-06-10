@@ -1,0 +1,1533 @@
+profit_lab:
+  schema_version: 1
+  research_only: true
+  real_money_recommendation: false
+  broker_integration: false
+  live_orders: false
+  independent_account_per_experiment: true
+  starting_equity_per_experiment: 3000
+  shared_capital_across_experiments: false
+  parameter_optimization: false
+  grid_search: false
+  no_leverage: true
+  no_shorting: true
+  no_margin: true
+
+experiments:
+  - experiment_id: SPY_200d_trend_model
+    display_name: SPY 200-Day Trend Model
+    experiment_type: exact_family
+    family_group: broad_etf_trend
+    strategy_family: absolute_trend
+    evidence_tier: tier3_candidate_validation
+    run_allowed: true
+    implementation_status: implemented
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [SPY, BIL]
+    rule_source: existing SPY_200d_trend_model v1
+    expected_profit_mechanism: equity trend participation with defensive cash proxy during long downtrends
+    main_risk: equity drawdown and whipsaw
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [change_rules, tune_parameters, promote_to_real_money, add_broker_integration, modify_paper_forward_rules]
+    notes: Frozen paper-forward candidate is only compared here; its rules are not modified.
+
+  - experiment_id: SPY_buy_hold
+    display_name: SPY Buy And Hold
+    experiment_type: benchmark_family
+    family_group: broad_etf_buy_hold
+    strategy_family: buy_and_hold
+    evidence_tier: benchmark
+    run_allowed: true
+    implementation_status: benchmark_only
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [SPY]
+    rule_source: benchmark adjusted close buy-and-hold
+    expected_profit_mechanism: uncompensated broad equity beta
+    main_risk: deep equity drawdown
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [promote_to_real_money, add_broker_integration, modify_paper_forward_rules]
+    notes: Aggressive benchmark only.
+
+  - experiment_id: GLD_buy_hold
+    display_name: GLD Buy And Hold
+    experiment_type: benchmark_family
+    family_group: gold_commodity_etf
+    strategy_family: buy_and_hold
+    evidence_tier: benchmark
+    run_allowed: true
+    implementation_status: benchmark_only
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [GLD]
+    rule_source: benchmark adjusted close buy-and-hold
+    expected_profit_mechanism: gold trend and crisis/real-rate sensitivity
+    main_risk: commodity drawdown and regime shifts
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [promote_to_real_money, add_broker_integration, modify_paper_forward_rules]
+    notes: Target-rich benchmark in family challenge, but drawdown must be penalized.
+
+  - experiment_id: IEF_buy_hold
+    display_name: IEF Buy And Hold
+    experiment_type: benchmark_family
+    family_group: bond_treasury_etf
+    strategy_family: buy_and_hold
+    evidence_tier: benchmark
+    run_allowed: true
+    implementation_status: benchmark_only
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [IEF]
+    rule_source: benchmark adjusted close buy-and-hold
+    expected_profit_mechanism: intermediate Treasury total return
+    main_risk: rate drawdown and low upside
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [promote_to_real_money, add_broker_integration, modify_paper_forward_rules]
+    notes: Defensive benchmark.
+
+  - experiment_id: BIL_cash_proxy
+    display_name: BIL Cash Proxy
+    experiment_type: benchmark_family
+    family_group: cash_treasury_proxy
+    strategy_family: cash_proxy
+    evidence_tier: benchmark
+    run_allowed: true
+    implementation_status: benchmark_only
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [BIL]
+    rule_source: benchmark adjusted close buy-and-hold
+    expected_profit_mechanism: cash-like Treasury bill return
+    main_risk: too slow for challenge profit hurdles
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [promote_to_real_money, add_broker_integration, modify_paper_forward_rules]
+    notes: Defensive/cash benchmark only.
+
+  - experiment_id: A_ETF_sector_momentum
+    display_name: A ETF Sector Momentum
+    experiment_type: exact_family
+    family_group: etf_sector_momentum
+    strategy_family: sector_momentum
+    evidence_tier: tier2_credible_prototype
+    run_allowed: true_if_exact_stream_available
+    implementation_status: implemented_if_exact_stream_available
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [existing ETF strategy family A]
+    rule_source: existing A_ETF_sector_momentum rules
+    expected_profit_mechanism: sector momentum concentration
+    main_risk: exact fresh-window stream not exposed in compact mode
+    allowed_next_action: audit_harden
+    forbidden_next_actions: [approximate_from_summary_metrics, change_rules, tune_parameters, promote_to_real_money]
+    notes: Run only if exact fresh-window stream is exposed; otherwise incomplete.
+
+  - experiment_id: current_no_cash_proxy_alpha_AB
+    display_name: Current No-Cash-Proxy Alpha A/B
+    experiment_type: exact_family
+    family_group: etf_ab_strategy
+    strategy_family: sector_momentum_plus_trend_following
+    evidence_tier: tier3_candidate_validation_if_exhaustive
+    run_allowed: true_if_exact_stream_available
+    implementation_status: implemented_if_exact_stream_available
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [existing A/B ETF strategy]
+    rule_source: existing current_no_cash_proxy_alpha_AB v1
+    expected_profit_mechanism: custom ETF rotation/control logic
+    main_risk: exact fresh-window family stream not exposed in compact mode
+    allowed_next_action: audit_harden
+    forbidden_next_actions: [approximate_from_summary_metrics, change_rules, tune_parameters, promote_to_real_money]
+    notes: Frozen paper-forward control is not modified.
+
+  - experiment_id: GLD_200d_trend_model_v1
+    display_name: GLD 200-Day Trend Model
+    experiment_type: strategy_variant
+    family_group: gold_commodity_etf
+    strategy_family: absolute_trend
+    evidence_tier: tier2_credible_prototype
+    run_allowed: true
+    implementation_status: implemented_exploratory
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [GLD, BIL]
+    rule_source: predeclared profit exploration fixed rule
+    expected_profit_mechanism: gold trend participation with BIL defensive fallback
+    main_risk: whipsaw and reduced upside versus GLD buy-hold
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [tune_sma_length, tune_parameters, promote_to_real_money, add_broker_integration]
+    notes: New isolated profit experiment, not paper-forward.
+
+  - experiment_id: asset_class_tsmom_equal_weight_v1
+    display_name: Asset Class TSMOM Equal Weight
+    experiment_type: strategy_variant
+    family_group: multi_asset_etf
+    strategy_family: asset_class_time_series_momentum
+    evidence_tier: tier2_credible_prototype
+    run_allowed: true
+    implementation_status: implemented_exploratory
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [SPY, GLD, IEF, BIL]
+    rule_source: predeclared 126-day return and 200-day SMA filter across SPY/GLD/IEF with BIL fallback
+    expected_profit_mechanism: participate in all eligible positive asset-class trends while avoiding filtered risk assets
+    main_risk: diluted upside, regime whipsaw, and defensive drag
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [tune_lookback, tune_sma_length, tune_parameters, grid_search, promote_to_real_money, add_broker_integration, modify_paper_forward_rules]
+    canonical_rule:
+      strategy_family: asset_class_time_series_momentum
+      asset_universe: [SPY, GLD, IEF, BIL]
+      rebalance_frequency: monthly
+      ranking_lookback_trading_days: 126
+      trend_filter: price_gt_200_day_sma
+      cash_fallback_rule: all_to_BIL_if_no_risky_asset_eligible
+      number_of_selected_assets: all_eligible
+      weighting_rule: equal_weight_all_eligible
+      execution_timing_rule: next_trading_day_after_rebalance_signal
+      max_gross_exposure: 1.0
+      leverage_setting: none
+    notes: Independent $3,000 research-sample profit experiment; not paper-forward and not a real-money recommendation.
+
+  - experiment_id: asset_class_tsmom_top1_v1
+    display_name: Asset Class TSMOM Top 1
+    experiment_type: strategy_variant
+    family_group: multi_asset_etf
+    strategy_family: asset_class_time_series_momentum
+    evidence_tier: tier2_credible_prototype
+    run_allowed: true
+    implementation_status: implemented_exploratory
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [SPY, GLD, IEF, BIL]
+    rule_source: predeclared 126-day relative momentum top-1 with 200-day SMA absolute filter
+    expected_profit_mechanism: concentrate in the strongest eligible ETF asset-class trend
+    main_risk: whipsaw and single-asset concentration
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [tune_lookback, tune_sma_length, tune_parameters, grid_search, promote_to_real_money, add_broker_integration, modify_paper_forward_rules]
+    canonical_rule:
+      strategy_family: asset_class_time_series_momentum
+      asset_universe: [SPY, GLD, IEF, BIL]
+      rebalance_frequency: monthly
+      ranking_lookback_trading_days: 126
+      trend_filter: price_gt_200_day_sma
+      cash_fallback_rule: all_to_BIL_if_no_risky_asset_eligible
+      number_of_selected_assets: 1
+      weighting_rule: equal_weight_selected_assets
+      execution_timing_rule: next_trading_day_after_rebalance_signal
+      max_gross_exposure: 1.0
+      leverage_setting: none
+    notes: Independent $3,000 research-sample profit experiment; not paper-forward and not a real-money recommendation.
+
+  - experiment_id: asset_class_tsmom_top2_v1
+    display_name: Asset Class TSMOM Top 2
+    experiment_type: strategy_variant
+    family_group: multi_asset_etf
+    strategy_family: asset_class_time_series_momentum
+    evidence_tier: tier2_credible_prototype
+    run_allowed: true
+    implementation_status: implemented_exploratory
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [SPY, GLD, IEF, BIL]
+    rule_source: predeclared 126-day relative momentum top-2 with 200-day SMA absolute filter
+    expected_profit_mechanism: concentrate in up to two strongest eligible ETF asset-class trends
+    main_risk: whipsaw, concentration, and possible defensive drag
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [tune_lookback, tune_sma_length, tune_number_of_assets, tune_parameters, grid_search, promote_to_real_money, add_broker_integration, modify_paper_forward_rules]
+    canonical_rule:
+      strategy_family: asset_class_time_series_momentum
+      asset_universe: [SPY, GLD, IEF, BIL]
+      rebalance_frequency: monthly
+      ranking_lookback_trading_days: 126
+      trend_filter: price_gt_200_day_sma
+      cash_fallback_rule: all_to_BIL_if_no_risky_asset_eligible
+      number_of_selected_assets: 2
+      weighting_rule: equal_weight_selected_assets
+      execution_timing_rule: next_trading_day_after_rebalance_signal
+      max_gross_exposure: 1.0
+      leverage_setting: none
+    notes: Independent $3,000 research-sample profit experiment; not paper-forward and not a real-money recommendation.
+
+  - experiment_id: qqq_spy_gld_ief_dual_momentum_v1
+    display_name: QQQ/SPY/GLD/IEF Dual Momentum
+    version: v1
+    lane: profit_exploration
+    experiment_type: strategy_variant
+    family_group: dual_momentum
+    strategy_family: QQQ/SPY/GLD/IEF dual momentum
+    evidence_tier: tier2_credible_prototype
+    run_allowed: research_sample_only
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    independent_starting_equity: 3000
+    shared_capital: false
+    portfolio_mix: false
+    paper_forward_active: false
+    paper_forward_allowed_by_risk_framework: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    requires_network: false
+    required_symbols: [QQQ, SPY, GLD, IEF, BIL]
+    underlying_components: [QQQ, SPY, GLD, IEF, BIL]
+    primary_benchmark: asset_class_tsmom_top2_v1
+    secondary_benchmarks: [combo_SPY200d_GLD_50_50_v1, SPY_200d_trend_model, SPY_buy_hold, GLD_buy_hold, BIL_cash_proxy]
+    rule_source: approved implementation review packet; fixed top-1 126-day relative momentum with 200-day SMA absolute filter
+    expected_profit_mechanism: add QQQ growth/equity momentum exposure while retaining SPY/GLD/IEF/BIL defensive fallback
+    main_risk: higher-beta equity duplicate risk if QQQ/SPY dominate allocations
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [candidate_exhaustive_in_this_task, observe_as_paper_forward, tune_lookback, tune_sma_length, tune_parameters, grid_search, promote_to_real_money, add_broker_integration, modify_paper_forward_rules]
+    canonical_rule:
+      strategy_family: qqq_spy_gld_ief_dual_momentum
+      asset_universe: [QQQ, SPY, GLD, IEF, BIL]
+      rebalance_frequency: monthly
+      ranking_lookback_trading_days: 126
+      ranked_assets: [QQQ, SPY, GLD, IEF]
+      trend_filter: price_gt_200_day_sma
+      cash_fallback_rule: all_to_BIL_if_top_asset_fails_absolute_filter
+      number_of_selected_assets: 1
+      weighting_rule: full_weight_top_eligible_asset
+      execution_timing_rule: next_trading_day_after_rebalance_signal
+      max_gross_exposure: 1.0
+      leverage_setting: none
+    notes: Research-sample only implementation approved by implementation review; reports QQQ allocation concentration and equity-beta duplicate risk.
+
+  - experiment_id: value_momentum_factor_etf_rotation_v1
+    display_name: Value/Momentum Factor ETF Rotation
+    implementation_rule_id: value_momentum_factor_etf_rotation_top2_option_a_v1
+    version: v1
+    lane: profit_exploration
+    experiment_type: strategy_variant
+    family_group: factor_rotation
+    strategy_family: value_momentum_quality_lowvol_rotation
+    evidence_tier: tier2_credible_prototype
+    run_allowed: research_sample_only
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    independent_starting_equity: 3000
+    shared_capital: false
+    portfolio_mix: false
+    paper_forward_active: false
+    paper_forward_allowed_by_risk_framework: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    requires_network: false
+    required_symbols: [MTUM, VTV, QUAL, USMV, SPY, BIL]
+    reviewed_but_not_used_symbols: [VLUE, SPLV]
+    underlying_components: [MTUM, VTV, QUAL, USMV, SPY, BIL]
+    primary_benchmarks: [combo_SPY200d_GLD_50_50_v1, asset_class_tsmom_top2_v1]
+    secondary_benchmarks: [SPY_200d_trend_model, SPY_buy_hold, GLD_buy_hold, BIL_cash_proxy, qqq_spy_gld_ief_dual_momentum_v1]
+    rule_source: approved updated implementation review packet; fixed value/momentum factor ETF rotation top-2 Option A
+    expected_profit_mechanism: rotate among momentum, value, quality, low-volatility, and broad-market ETF factor proxies while using BIL for unused or filtered exposure
+    main_risk: U.S. equity beta duplication, factor proxy mismatch, one-ETF concentration, and 2013-onward inception/history limits
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [candidate_exhaustive_in_this_task, observe_as_paper_forward, tune_lookback, tune_sma_length, tune_number_of_assets, add_factor_variants_without_review, tune_parameters, grid_search, promote_to_real_money, add_broker_integration, modify_paper_forward_rules]
+    canonical_rule:
+      strategy_family: value_momentum_quality_lowvol_rotation
+      implementation_rule_id: value_momentum_factor_etf_rotation_top2_option_a_v1
+      asset_universe: [MTUM, VTV, QUAL, USMV, SPY, BIL]
+      reviewed_but_not_used_assets: [VLUE, SPLV]
+      rebalance_frequency: monthly
+      ranking_lookback_trading_days: 126
+      ranked_assets: [MTUM, VTV, QUAL, USMV, SPY]
+      trend_filter: price_gt_200_day_sma
+      cash_fallback_rule: unused_weight_to_BIL_and_all_to_BIL_if_no_asset_qualifies
+      number_of_selected_assets: 2
+      weighting_rule: equal_weight_top_qualifying_assets_unused_weight_to_BIL
+      execution_timing_rule: next_trading_day_after_rebalance_signal
+      max_gross_exposure: 1.0
+      leverage_setting: none
+    notes: Research-sample only implementation approved after controlled factor ETF data acquisition; reports allocation concentration and equity-beta duplicate risk.
+
+  - experiment_id: sector_top2_momentum_simple_v1
+    display_name: Simple Sector ETF Top-2 Momentum
+    implementation_rule_id: sector_top2_core_nine_momentum_v1
+    version: v1
+    lane: profit_exploration
+    experiment_type: strategy_variant
+    family_group: sector_momentum
+    strategy_family: core_nine_sector_top2_momentum
+    evidence_tier: tier2_credible_prototype
+    run_allowed: research_sample_only
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    independent_starting_equity: 3000
+    shared_capital: false
+    portfolio_mix: false
+    paper_forward_active: false
+    paper_forward_allowed_by_risk_framework: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    requires_network: false
+    required_symbols: [XLB, XLE, XLF, XLI, XLK, XLP, XLU, XLV, XLY, BIL]
+    excluded_symbols_first_rule: [XLC, XLRE]
+    underlying_components: [XLB, XLE, XLF, XLI, XLK, XLP, XLU, XLV, XLY, BIL]
+    primary_benchmarks: [combo_SPY200d_GLD_50_50_v1, asset_class_tsmom_top2_v1]
+    secondary_benchmarks: [SPY_200d_trend_model, SPY_buy_hold, BIL_cash_proxy, qqq_spy_gld_ief_dual_momentum_v1, value_momentum_factor_etf_rotation_v1]
+    rule_source: approved sector universe-policy review; fixed core-nine sector top-2 momentum rule
+    expected_profit_mechanism: capture sector dispersion through top-2 momentum while using BIL for filtered or unused exposure
+    main_risk: U.S. equity beta duplication, sector concentration, and drawdown if sector leadership fails in equity bear markets
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [candidate_exhaustive_in_this_task, observe_as_paper_forward, tune_lookback, tune_sma_length, tune_number_of_assets, add_sector_variants_without_review, add_xlc_or_xlre_without_review, modify_A_ETF_sector_momentum, tune_parameters, grid_search, promote_to_real_money, add_broker_integration, modify_paper_forward_rules]
+    canonical_rule:
+      strategy_family: core_nine_sector_top2_momentum
+      implementation_rule_id: sector_top2_core_nine_momentum_v1
+      asset_universe: [XLB, XLE, XLF, XLI, XLK, XLP, XLU, XLV, XLY, BIL]
+      ranked_assets: [XLB, XLE, XLF, XLI, XLK, XLP, XLU, XLV, XLY]
+      excluded_assets_first_rule: [XLC, XLRE]
+      rebalance_frequency: monthly
+      ranking_lookback_trading_days: 126
+      trend_filter: price_gt_200_day_sma
+      absolute_filter: selected_sector_126d_return_gt_0
+      cash_fallback_rule: unused_weight_to_BIL_and_all_to_BIL_if_no_sector_qualifies
+      number_of_selected_assets: 2
+      weighting_rule: equal_weight_top_qualifying_sectors_unused_weight_to_BIL
+      execution_timing_rule: next_trading_day_after_rebalance_signal
+      max_gross_exposure: 1.0
+      leverage_setting: none
+    notes: Research-sample only implementation approved by core-nine universe policy; XLC/XLRE are excluded and A_ETF_sector_momentum is not modified.
+
+  - experiment_id: managed_futures_proxy_etf_trend_v1
+    display_name: Managed-Futures Proxy ETF Trend
+    implementation_rule_id: managed_futures_proxy_dbmf_kmlm_trend_v1
+    version: v1
+    lane: profit_exploration
+    experiment_type: strategy_variant
+    family_group: managed_futures_proxy
+    strategy_family: managed_futures_proxy_wrapper_trend
+    evidence_tier: tier2_credible_prototype
+    run_allowed: research_sample_only
+    required_label: fund_wrapper_proxy_short_history_limited_inception_research_sample_only
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    independent_starting_equity: 3000
+    shared_capital: false
+    portfolio_mix: false
+    paper_forward_active: false
+    paper_forward_allowed_by_risk_framework: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    uses_futures_contracts: false
+    requires_network: false
+    required_symbols: [DBMF, KMLM, BIL]
+    excluded_symbols_first_rule: [CTA, FMF, WTMF]
+    underlying_components: [DBMF, KMLM, BIL]
+    primary_benchmarks: [combo_SPY200d_GLD_50_50_v1, asset_class_tsmom_top2_v1]
+    secondary_benchmarks: [SPY_200d_trend_model, GLD_buy_hold, BIL_cash_proxy, SPY_buy_hold, qqq_spy_gld_ief_dual_momentum_v1, value_momentum_factor_etf_rotation_v1, sector_top2_momentum_simple_v1]
+    rule_source: conditional methodology review approval; fixed DBMF/KMLM fund-wrapper proxy trend rule
+    expected_profit_mechanism: test whether managed-futures ETF/fund wrapper proxies add diversifying stop-aware return potential versus current finalists
+    main_risk: short-history, fund-wrapper proxy limitations, hidden internal futures mechanics, and too-slow target behavior
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [candidate_exhaustive_in_this_task, observe_as_paper_forward, tune_lookback, tune_sma_length, add_CTA_FMF_WTMF_without_review, add_futures_contract_logic, treat_as_direct_futures_strategy, tune_parameters, grid_search, promote_to_real_money, add_broker_integration, modify_paper_forward_rules]
+    canonical_rule:
+      strategy_family: managed_futures_proxy_wrapper_trend
+      implementation_rule_id: managed_futures_proxy_dbmf_kmlm_trend_v1
+      required_label: fund_wrapper_proxy_short_history_limited_inception_research_sample_only
+      asset_universe: [DBMF, KMLM, BIL]
+      ranked_assets: [DBMF, KMLM]
+      excluded_assets_first_rule: [CTA, FMF, WTMF]
+      rebalance_frequency: monthly
+      ranking_lookback_trading_days: 126
+      trend_filter: price_gt_200_day_sma
+      absolute_filter: selected_proxy_126d_return_gt_0
+      cash_fallback_rule: unused_weight_to_BIL_and_all_to_BIL_if_no_proxy_qualifies
+      number_of_selected_assets: 2
+      weighting_rule: equal_weight_top_qualifying_proxies_unused_weight_to_BIL
+      execution_timing_rule: next_trading_day_after_rebalance_signal
+      max_gross_exposure: 1.0
+      leverage_setting: none
+      futures_contract_logic: none
+    notes: Research-sample only implementation approved with short-history and fund-wrapper proxy labels. DBMF/KMLM are ETF/fund wrappers, not direct futures strategy tests. CTA/FMF/WTMF variants are not implemented.
+
+  - experiment_id: combo_plus_top2_50_50_v1
+    display_name: Combo Plus Top2 50/50
+    implementation_rule_id: combo_plus_top2_50_50_fixed_v1
+    version: v1
+    lane: profit_exploration
+    experiment_type: fixed_strategy_combination
+    family_group: historical_combination_batch1
+    strategy_family: fixed_strategy_combination
+    evidence_tier: tier2_credible_prototype
+    run_allowed: research_sample_only
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    independent_starting_equity: 3000
+    shared_capital: false
+    portfolio_mix: false
+    paper_forward_active: false
+    paper_forward_allowed_by_risk_framework: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    requires_network: false
+    required_symbols: [SPY, GLD, IEF, BIL]
+    underlying_components: [combo_SPY200d_GLD_50_50_v1, asset_class_tsmom_top2_v1]
+    fixed_weights:
+      combo_SPY200d_GLD_50_50_v1: 0.50
+      asset_class_tsmom_top2_v1: 0.50
+    primary_benchmarks: [combo_SPY200d_GLD_50_50_v1, asset_class_tsmom_top2_v1]
+    secondary_benchmarks: [SPY_200d_trend_model, GLD_buy_hold, SPY_buy_hold, BIL_cash_proxy, managed_futures_proxy_etf_trend_v1]
+    rule_source: historical_research_expansion combination queue; fixed Batch 1 predeclared blend
+    expected_profit_mechanism: blend drawdown-aware combo with stronger asset-class momentum target potential
+    main_risk: duplicate SPY/GLD/trend exposure; may not improve stop-aware profit/risk
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [candidate_exhaustive_in_this_task, observe_as_paper_forward, promote_to_real_money, add_broker_integration, place_live_orders, tune_weights, change_active_combo_rules, replace_spy200d, tune_parameters, grid_search]
+    canonical_rule:
+      strategy_family: fixed_strategy_combination
+      implementation_rule_id: combo_plus_top2_50_50_fixed_v1
+      components: [combo_SPY200d_GLD_50_50_v1, asset_class_tsmom_top2_v1]
+      fixed_weights:
+        combo_SPY200d_GLD_50_50_v1: 0.50
+        asset_class_tsmom_top2_v1: 0.50
+      rebalance_frequency: monthly
+      component_return_source: exact_window_local_component_returns
+      execution_timing_rule: inherited_from_component_streams_no_lookahead
+      max_gross_exposure: 1.0
+      leverage_setting: none
+      margin_setting: none
+      shorting_setting: none
+    notes: Historical Combination Research Sample Batch 1 row only. Fixed weights, no optimization, no paper-forward activation.
+
+  - experiment_id: commodity_basket_tsmom_top2_v1
+    display_name: Commodity Basket TSMOM Top 2
+    implementation_rule_id: commodity_basket_tsmom_top2_fast_exploratory_v1
+    version: v1
+    lane: profit_exploration
+    experiment_type: strategy_variant
+    family_group: commodity_basket_etf_momentum
+    strategy_family: commodity_wrapper_time_series_momentum
+    evidence_tier: tier1_or_tier2_exploratory
+    run_allowed: research_sample_only
+    required_label: commodity_wrapper_evidence_research_sample_only
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    independent_starting_equity: 3000
+    shared_capital: false
+    portfolio_mix: false
+    paper_forward_active: false
+    paper_forward_allowed_by_risk_framework: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    uses_futures_contracts: false
+    requires_network: false
+    required_symbols: [DBC, PDBC, COMT, GSG, USCI, BIL]
+    underlying_components: [DBC, PDBC, COMT, GSG, USCI, BIL]
+    labels: [exploratory_public_data, commodity_wrapper_evidence_research_sample_only, not_validated, not_paper_forward, not_real_money]
+    primary_benchmarks: [combo_SPY200d_GLD_50_50_v1, asset_class_tsmom_top2_v1]
+    secondary_benchmarks: [SPY_200d_trend_model, GLD_buy_hold, BIL_cash_proxy]
+    rule_source: fast exploratory ETF/fund wrapper data policy; fixed commodity basket top-2 rule
+    expected_profit_mechanism: test whether broad commodity ETF/fund wrappers add inflation/commodity trend exposure beyond GLD-heavy and equity-heavy leaders
+    main_risk: commodity wrapper product risk, roll yield, product concentration, short/uneven histories, and too-slow target behavior
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [candidate_exhaustive_in_this_task, observe_as_paper_forward, promote_to_real_money, add_broker_integration, place_live_orders, use_futures_contract_logic, tune_parameters, tune_lookback, tune_number_of_assets, add_symbols_without_review, grid_search, modify_paper_forward_rules]
+    canonical_rule:
+      strategy_family: commodity_wrapper_time_series_momentum
+      implementation_rule_id: commodity_basket_tsmom_top2_fast_exploratory_v1
+      required_label: commodity_wrapper_evidence_research_sample_only
+      asset_universe: [DBC, PDBC, COMT, GSG, USCI, BIL]
+      ranked_assets: [DBC, PDBC, COMT, GSG, USCI]
+      rebalance_frequency: monthly
+      ranking_lookback_trading_days: 126
+      trend_filter: none_first_fast_screen
+      absolute_filter: selected_wrapper_126d_return_gt_0
+      cash_fallback_rule: unused_weight_to_BIL_and_all_to_BIL_if_no_wrapper_qualifies
+      number_of_selected_assets: 2
+      weighting_rule: equal_weight_top_qualifying_wrappers_unused_weight_to_BIL
+      execution_timing_rule: next_trading_day_after_rebalance_signal
+      max_gross_exposure: 1.0
+      leverage_setting: none
+      margin_setting: none
+      shorting_setting: none
+      futures_contract_logic: none
+      product_specific_tuning: none
+    notes: Fast exploratory public-data commodity wrapper screen only. Adjusted ETF/fund wrapper evidence is not direct futures strategy evidence and is not paper-forward ready.
+
+  - experiment_id: commodity_basket_tsmom_top2_200d_filter_v1
+    display_name: Commodity Basket TSMOM Top 2 200d Filter
+    implementation_rule_id: commodity_basket_tsmom_top2_200d_filter_fixed_v1
+    version: v1
+    lane: profit_exploration
+    experiment_type: commodity_risk_control_exploratory
+    family_group: commodity_wrapper_momentum
+    strategy_family: commodity_wrapper_time_series_momentum
+    evidence_tier: tier1_or_tier2_exploratory
+    run_allowed: research_sample_only
+    required_label: exploratory_public_data,commodity_wrapper_evidence_research_sample_only,not_validated,not_paper_forward,not_real_money
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    independent_starting_equity: 3000
+    shared_capital: false
+    portfolio_mix: false
+    paper_forward_active: false
+    paper_forward_allowed_by_risk_framework: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    uses_futures_contracts: false
+    requires_network: false
+    required_symbols: [DBC, PDBC, COMT, GSG, USCI, BIL]
+    underlying_components: [DBC, PDBC, COMT, GSG, USCI, BIL]
+    labels: [exploratory_public_data, commodity_wrapper_evidence_research_sample_only, not_validated, not_paper_forward, not_real_money]
+    primary_benchmarks: [commodity_basket_tsmom_top2_v1, combo_SPY200d_GLD_50_50_v1, asset_class_tsmom_top2_v1]
+    secondary_benchmarks: [SPY_200d_trend_model, GLD_buy_hold, BIL_cash_proxy]
+    rule_source: commodity risk-control batch 1; fixed predeclared 200d absolute trend filter
+    expected_profit_mechanism: simple absolute trend filter may reduce drawdown-budget breaches
+    main_risk: may become too slow and reduce target rates
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [candidate_exhaustive_in_this_task, observe_as_paper_forward, promote_to_real_money, add_broker_integration, place_live_orders, use_futures_contract_logic, tune_parameters, tune_lookback, tune_number_of_assets, add_symbols_without_review, grid_search, modify_paper_forward_rules]
+    canonical_rule:
+      strategy_family: commodity_wrapper_time_series_momentum
+      implementation_rule_id: commodity_basket_tsmom_top2_200d_filter_fixed_v1
+      required_label: commodity_wrapper_evidence_research_sample_only
+      asset_universe: [DBC, PDBC, COMT, GSG, USCI, BIL]
+      ranked_assets: [DBC, PDBC, COMT, GSG, USCI]
+      rebalance_frequency: monthly
+      ranking_lookback_trading_days: 126
+      trend_filter: close_gt_200_day_sma
+      absolute_filter: selected_wrapper_126d_return_gt_0
+      cash_fallback_rule: unused_weight_to_BIL_and_all_to_BIL_if_no_wrapper_qualifies
+      number_of_selected_assets: 2
+      weighting_rule: equal_weight_top_qualifying_wrappers_unused_weight_to_BIL
+      execution_timing_rule: next_trading_day_after_rebalance_signal
+      max_gross_exposure: 1.0
+      leverage_setting: none
+      margin_setting: none
+      shorting_setting: none
+      futures_contract_logic: none
+      product_specific_tuning: none
+    notes: Commodity Risk-Control Batch 1 row only. Fixed rule, no optimization, no paper-forward activation.
+
+  - experiment_id: commodity_basket_tsmom_top2_half_bil_v1
+    display_name: Commodity Basket TSMOM Top 2 Half BIL
+    implementation_rule_id: commodity_basket_tsmom_top2_half_bil_fixed_v1
+    version: v1
+    lane: profit_exploration
+    experiment_type: commodity_risk_control_exploratory
+    family_group: commodity_wrapper_momentum
+    strategy_family: fixed_strategy_combination
+    evidence_tier: tier1_or_tier2_exploratory
+    run_allowed: research_sample_only
+    required_label: exploratory_public_data,commodity_wrapper_evidence_research_sample_only,not_validated,not_paper_forward,not_real_money
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    independent_starting_equity: 3000
+    shared_capital: false
+    portfolio_mix: false
+    paper_forward_active: false
+    paper_forward_allowed_by_risk_framework: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    uses_futures_contracts: false
+    requires_network: false
+    required_symbols: [DBC, PDBC, COMT, GSG, USCI, BIL]
+    underlying_components: [commodity_basket_tsmom_top2_v1, BIL_cash_proxy]
+    fixed_weights:
+      commodity_basket_tsmom_top2_v1: 0.50
+      BIL_cash_proxy: 0.50
+    labels: [exploratory_public_data, commodity_wrapper_evidence_research_sample_only, not_validated, not_paper_forward, not_real_money]
+    primary_benchmarks: [commodity_basket_tsmom_top2_v1, combo_SPY200d_GLD_50_50_v1, asset_class_tsmom_top2_v1]
+    secondary_benchmarks: [SPY_200d_trend_model, GLD_buy_hold, BIL_cash_proxy]
+    rule_source: commodity risk-control batch 1; fixed 50% base commodity sleeve and 50% BIL
+    expected_profit_mechanism: fixed defensive scaling may preserve some commodity upside while reducing drawdown
+    main_risk: target dilution and too-slow behavior
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [candidate_exhaustive_in_this_task, observe_as_paper_forward, promote_to_real_money, add_broker_integration, place_live_orders, use_futures_contract_logic, tune_parameters, tune_weights, add_symbols_without_review, grid_search, modify_paper_forward_rules]
+    canonical_rule:
+      strategy_family: fixed_strategy_combination
+      implementation_rule_id: commodity_basket_tsmom_top2_half_bil_fixed_v1
+      required_label: commodity_wrapper_evidence_research_sample_only
+      components: [commodity_basket_tsmom_top2_v1, BIL_cash_proxy]
+      fixed_weights:
+        commodity_basket_tsmom_top2_v1: 0.50
+        BIL_cash_proxy: 0.50
+      rebalance_frequency: monthly
+      component_return_source: exact_window_local_component_returns
+      execution_timing_rule: inherited_from_component_streams_no_lookahead
+      max_gross_exposure: 1.0
+      leverage_setting: none
+      margin_setting: none
+      shorting_setting: none
+      futures_contract_logic: none
+      optimized_weights: false
+    notes: Commodity Risk-Control Batch 1 row only. Fixed 50/50 defensive blend, no optimization, no paper-forward activation.
+
+  - experiment_id: combo_plus_commodity_basket_80_20_v1
+    display_name: Combo Plus Commodity Basket 80/20
+    implementation_rule_id: combo_plus_commodity_basket_80_20_fixed_v1
+    version: v1
+    lane: profit_exploration
+    experiment_type: commodity_risk_control_exploratory
+    family_group: commodity_wrapper_momentum
+    strategy_family: fixed_strategy_combination
+    evidence_tier: tier1_or_tier2_exploratory
+    run_allowed: research_sample_only
+    required_label: exploratory_public_data,commodity_wrapper_evidence_research_sample_only,not_validated,not_paper_forward,not_real_money
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    independent_starting_equity: 3000
+    shared_capital: false
+    portfolio_mix: false
+    paper_forward_active: false
+    paper_forward_allowed_by_risk_framework: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    uses_futures_contracts: false
+    requires_network: false
+    required_symbols: [SPY, GLD, BIL, DBC, PDBC, COMT, GSG, USCI]
+    underlying_components: [combo_SPY200d_GLD_50_50_v1, commodity_basket_tsmom_top2_v1]
+    fixed_weights:
+      combo_SPY200d_GLD_50_50_v1: 0.80
+      commodity_basket_tsmom_top2_v1: 0.20
+    labels: [exploratory_public_data, commodity_wrapper_evidence_research_sample_only, not_validated, not_paper_forward, not_real_money]
+    primary_benchmarks: [commodity_basket_tsmom_top2_v1, combo_SPY200d_GLD_50_50_v1, asset_class_tsmom_top2_v1]
+    secondary_benchmarks: [SPY_200d_trend_model, GLD_buy_hold, BIL_cash_proxy]
+    rule_source: commodity risk-control batch 1; fixed 80% historical combo component and 20% base commodity sleeve
+    expected_profit_mechanism: commodity basket exposure may add upside/regime diversification to the historical combo while keeping drawdown controlled
+    main_risk: may duplicate GLD/commodity exposure, add wrapper risk, or fail to improve target windows
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [candidate_exhaustive_in_this_task, observe_as_paper_forward, promote_to_real_money, add_broker_integration, place_live_orders, use_futures_contract_logic, tune_parameters, tune_weights, add_symbols_without_review, grid_search, modify_paper_forward_rules, change_active_combo_rules, replace_spy200d]
+    canonical_rule:
+      strategy_family: fixed_strategy_combination
+      implementation_rule_id: combo_plus_commodity_basket_80_20_fixed_v1
+      required_label: commodity_wrapper_evidence_research_sample_only
+      components: [combo_SPY200d_GLD_50_50_v1, commodity_basket_tsmom_top2_v1]
+      fixed_weights:
+        combo_SPY200d_GLD_50_50_v1: 0.80
+        commodity_basket_tsmom_top2_v1: 0.20
+      rebalance_frequency: monthly
+      component_return_source: exact_window_local_component_returns
+      execution_timing_rule: inherited_from_component_streams_no_lookahead
+      max_gross_exposure: 1.0
+      leverage_setting: none
+      margin_setting: none
+      shorting_setting: none
+      futures_contract_logic: none
+      optimized_weights: false
+      active_combo_paper_forward_rule_changed: false
+    notes: Historical-only Commodity Risk-Control Batch 1 row. It does not alter the active combo paper/demo observation.
+
+  - experiment_id: global_multi_asset_tsmom_top2_v1
+    display_name: Global Multi-Asset TSMOM Top 2
+    implementation_rule_id: global_multi_asset_tsmom_top2_fixed_v1
+    version: v1
+    lane: profit_exploration
+    experiment_type: global_multi_asset_fast_exploratory
+    family_group: global_multi_asset_etf_momentum
+    strategy_family: etf_fund_wrapper_time_series_momentum
+    evidence_tier: tier1_or_tier2_exploratory
+    run_allowed: research_sample_only
+    required_label: exploratory_public_data,etf_fund_wrapper_evidence_research_sample_only,not_validated,not_paper_forward,not_real_money
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    independent_starting_equity: 3000
+    shared_capital: false
+    portfolio_mix: false
+    paper_forward_active: false
+    paper_forward_allowed_by_risk_framework: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    uses_futures_contracts: false
+    uses_options: false
+    uses_forex: false
+    uses_intraday: false
+    requires_network: false
+    required_symbols: [SPY, QQQ, IWM, EFA, EEM, IEF, TLT, GLD, PDBC, COMT, BIL]
+    underlying_components: [SPY, QQQ, IWM, EFA, EEM, IEF, TLT, GLD, PDBC, COMT, BIL]
+    labels: [exploratory_public_data, etf_fund_wrapper_evidence_research_sample_only, not_validated, not_paper_forward, not_real_money]
+    primary_benchmarks: [combo_SPY200d_GLD_50_50_v1, asset_class_tsmom_top2_v1]
+    secondary_benchmarks: [SPY_200d_trend_model, GLD_buy_hold, BIL_cash_proxy, commodity_basket_tsmom_top2_v1, combo_plus_commodity_basket_80_20_v1, combo_plus_crypto_spot_tsmom_90_10_v1]
+    rule_source: global multi-asset fast exploration batch 1; fixed ETF/fund wrapper top-2 rule
+    expected_profit_mechanism: broader global equity, duration, gold, and commodity wrapper momentum may improve target probability and regime coverage
+    main_risk: high-beta equity rotation, product-wrapper risk, international/emerging-market tracking risk, duration whipsaw risk, and duplicate existing leaders
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [candidate_exhaustive_in_this_task, observe_as_paper_forward, promote_to_real_money, add_broker_integration, place_live_orders, use_futures_contract_logic, use_leverage, use_margin, use_shorting, tune_parameters, tune_lookback, tune_number_of_assets, add_symbols_without_review, grid_search, modify_paper_forward_rules, change_active_combo_rules, replace_spy200d]
+    canonical_rule:
+      strategy_family: etf_fund_wrapper_time_series_momentum
+      implementation_rule_id: global_multi_asset_tsmom_top2_fixed_v1
+      required_label: etf_fund_wrapper_evidence_research_sample_only
+      asset_universe: [SPY, QQQ, IWM, EFA, EEM, IEF, TLT, GLD, PDBC, COMT, BIL]
+      ranked_assets: [SPY, QQQ, IWM, EFA, EEM, IEF, TLT, GLD, PDBC, COMT]
+      rebalance_frequency: monthly
+      ranking_lookback_trading_days: 126
+      trend_filter: none_first_fast_screen
+      absolute_filter: selected_asset_126d_return_gt_0
+      cash_fallback_rule: unused_weight_to_BIL_and_all_to_BIL_if_no_asset_qualifies
+      number_of_selected_assets: 2
+      weighting_rule: equal_weight_top_qualifying_assets_unused_weight_to_BIL
+      execution_timing_rule: next_trading_day_after_rebalance_signal
+      max_gross_exposure: 1.0
+      leverage_setting: none
+      margin_setting: none
+      shorting_setting: none
+      futures_contract_logic: none
+      options_logic: none
+      forex_logic: none
+      intraday_logic: none
+      product_specific_tuning: none
+    notes: Fast exploratory public-data ETF/fund wrapper screen only. It is not paper-forward ready and does not replace any frozen control.
+
+  - experiment_id: global_multi_asset_tsmom_top2_defensive_50_v1
+    display_name: Global Multi-Asset TSMOM Top 2 Defensive 50
+    implementation_rule_id: global_multi_asset_tsmom_top2_defensive_50_fixed_v1
+    version: v1
+    lane: profit_exploration
+    experiment_type: global_multi_asset_fast_exploratory
+    family_group: global_multi_asset_etf_momentum
+    strategy_family: fixed_strategy_combination
+    evidence_tier: tier1_or_tier2_exploratory
+    run_allowed: research_sample_only
+    required_label: exploratory_public_data,etf_fund_wrapper_evidence_research_sample_only,not_validated,not_paper_forward,not_real_money
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    independent_starting_equity: 3000
+    shared_capital: false
+    portfolio_mix: false
+    paper_forward_active: false
+    paper_forward_allowed_by_risk_framework: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    uses_futures_contracts: false
+    uses_options: false
+    uses_forex: false
+    uses_intraday: false
+    requires_network: false
+    required_symbols: [SPY, QQQ, IWM, EFA, EEM, IEF, TLT, GLD, PDBC, COMT, BIL]
+    underlying_components: [global_multi_asset_tsmom_top2_v1, BIL_cash_proxy]
+    fixed_weights:
+      global_multi_asset_tsmom_top2_v1: 0.50
+      BIL_cash_proxy: 0.50
+    labels: [exploratory_public_data, etf_fund_wrapper_evidence_research_sample_only, not_validated, not_paper_forward, not_real_money]
+    primary_benchmarks: [global_multi_asset_tsmom_top2_v1, combo_SPY200d_GLD_50_50_v1, asset_class_tsmom_top2_v1]
+    secondary_benchmarks: [SPY_200d_trend_model, GLD_buy_hold, BIL_cash_proxy, commodity_basket_tsmom_top2_v1, combo_plus_commodity_basket_80_20_v1]
+    rule_source: global multi-asset fast exploration batch 1; fixed 50% global multi-asset sleeve and 50% BIL
+    expected_profit_mechanism: defensive scaling may preserve some target power while reducing drawdown
+    main_risk: target dilution and too-slow behavior
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [candidate_exhaustive_in_this_task, observe_as_paper_forward, promote_to_real_money, add_broker_integration, place_live_orders, use_futures_contract_logic, use_leverage, use_margin, use_shorting, tune_parameters, tune_weights, add_symbols_without_review, grid_search, modify_paper_forward_rules, change_active_combo_rules, replace_spy200d]
+    canonical_rule:
+      strategy_family: fixed_strategy_combination
+      implementation_rule_id: global_multi_asset_tsmom_top2_defensive_50_fixed_v1
+      required_label: etf_fund_wrapper_evidence_research_sample_only
+      components: [global_multi_asset_tsmom_top2_v1, BIL_cash_proxy]
+      fixed_weights:
+        global_multi_asset_tsmom_top2_v1: 0.50
+        BIL_cash_proxy: 0.50
+      rebalance_frequency: monthly
+      component_return_source: exact_window_local_component_returns
+      execution_timing_rule: inherited_from_component_streams_no_lookahead
+      max_gross_exposure: 1.0
+      leverage_setting: none
+      margin_setting: none
+      shorting_setting: none
+      futures_contract_logic: none
+      optimized_weights: false
+    notes: Historical-only defensive global multi-asset row. Fixed 50/50 rule, no optimization, no paper-forward activation.
+
+  - experiment_id: combo_plus_global_multi_asset_80_20_v1
+    display_name: Combo Plus Global Multi-Asset 80/20
+    implementation_rule_id: combo_plus_global_multi_asset_80_20_fixed_v1
+    version: v1
+    lane: profit_exploration
+    experiment_type: global_multi_asset_fast_exploratory
+    family_group: global_multi_asset_etf_momentum
+    strategy_family: fixed_strategy_combination
+    evidence_tier: tier1_or_tier2_exploratory
+    run_allowed: research_sample_only
+    required_label: exploratory_public_data,etf_fund_wrapper_evidence_research_sample_only,not_validated,not_paper_forward,not_real_money
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    independent_starting_equity: 3000
+    shared_capital: false
+    portfolio_mix: false
+    paper_forward_active: false
+    paper_forward_allowed_by_risk_framework: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    uses_futures_contracts: false
+    uses_options: false
+    uses_forex: false
+    uses_intraday: false
+    requires_network: false
+    required_symbols: [SPY, QQQ, IWM, EFA, EEM, IEF, TLT, GLD, PDBC, COMT, BIL]
+    underlying_components: [combo_SPY200d_GLD_50_50_v1, global_multi_asset_tsmom_top2_v1]
+    fixed_weights:
+      combo_SPY200d_GLD_50_50_v1: 0.80
+      global_multi_asset_tsmom_top2_v1: 0.20
+    labels: [exploratory_public_data, etf_fund_wrapper_evidence_research_sample_only, not_validated, not_paper_forward, not_real_money]
+    primary_benchmarks: [global_multi_asset_tsmom_top2_v1, combo_SPY200d_GLD_50_50_v1, asset_class_tsmom_top2_v1]
+    secondary_benchmarks: [SPY_200d_trend_model, GLD_buy_hold, BIL_cash_proxy, commodity_basket_tsmom_top2_v1, combo_plus_commodity_basket_80_20_v1, combo_plus_crypto_spot_tsmom_90_10_v1]
+    rule_source: global multi-asset fast exploration batch 1; fixed 80% historical combo component and 20% global multi-asset sleeve
+    expected_profit_mechanism: small global multi-asset sleeve may create incremental target windows beyond combo without breaching drawdown budget
+    main_risk: mostly combo behavior with a small multi-asset tilt; may duplicate existing leaders
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [candidate_exhaustive_in_this_task, observe_as_paper_forward, promote_to_real_money, add_broker_integration, place_live_orders, use_futures_contract_logic, use_leverage, use_margin, use_shorting, tune_parameters, tune_weights, add_symbols_without_review, grid_search, modify_paper_forward_rules, change_active_combo_rules, replace_spy200d]
+    canonical_rule:
+      strategy_family: fixed_strategy_combination
+      implementation_rule_id: combo_plus_global_multi_asset_80_20_fixed_v1
+      required_label: etf_fund_wrapper_evidence_research_sample_only
+      components: [combo_SPY200d_GLD_50_50_v1, global_multi_asset_tsmom_top2_v1]
+      fixed_weights:
+        combo_SPY200d_GLD_50_50_v1: 0.80
+        global_multi_asset_tsmom_top2_v1: 0.20
+      rebalance_frequency: monthly
+      component_return_source: exact_window_local_component_returns
+      execution_timing_rule: inherited_from_component_streams_no_lookahead
+      max_gross_exposure: 1.0
+      leverage_setting: none
+      margin_setting: none
+      shorting_setting: none
+      futures_contract_logic: none
+      optimized_weights: false
+      active_combo_paper_forward_rule_changed: false
+    notes: Historical-only combo-plus-global multi-asset row. It does not alter the active combo paper/demo observation.
+
+  - experiment_id: combo_plus_managed_futures_80_20_v1
+    display_name: Combo Plus Managed Futures Proxy 80/20
+    implementation_rule_id: combo_plus_managed_futures_80_20_fixed_v1
+    version: v1
+    lane: profit_exploration
+    experiment_type: fixed_strategy_combination
+    family_group: historical_combination_batch1
+    strategy_family: fixed_strategy_combination
+    evidence_tier: tier2_credible_prototype
+    run_allowed: research_sample_only
+    required_label: fund_wrapper_proxy_short_history_limited_inception_research_sample_only
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    independent_starting_equity: 3000
+    shared_capital: false
+    portfolio_mix: false
+    paper_forward_active: false
+    paper_forward_allowed_by_risk_framework: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    uses_futures_contracts: false
+    requires_network: false
+    required_symbols: [SPY, GLD, BIL, DBMF, KMLM]
+    excluded_symbols_first_rule: [CTA, FMF, WTMF]
+    underlying_components: [combo_SPY200d_GLD_50_50_v1, managed_futures_proxy_etf_trend_v1]
+    fixed_weights:
+      combo_SPY200d_GLD_50_50_v1: 0.80
+      managed_futures_proxy_etf_trend_v1: 0.20
+    primary_benchmarks: [combo_SPY200d_GLD_50_50_v1, asset_class_tsmom_top2_v1]
+    secondary_benchmarks: [SPY_200d_trend_model, GLD_buy_hold, SPY_buy_hold, BIL_cash_proxy, managed_futures_proxy_etf_trend_v1]
+    rule_source: historical_research_expansion combination queue; fixed Batch 1 predeclared blend
+    expected_profit_mechanism: add a different fund-wrapper proxy return driver to reduce drawdown or improve stress behavior
+    main_risk: managed-futures proxy was too slow as standalone and has short-history fund-wrapper limitations
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [candidate_exhaustive_in_this_task, observe_as_paper_forward, promote_to_real_money, add_broker_integration, place_live_orders, tune_weights, change_active_combo_rules, replace_spy200d, add_futures_contract_logic, treat_as_direct_futures_strategy, add_CTA_FMF_WTMF_without_review, tune_parameters, grid_search]
+    canonical_rule:
+      strategy_family: fixed_strategy_combination
+      implementation_rule_id: combo_plus_managed_futures_80_20_fixed_v1
+      required_label: fund_wrapper_proxy_short_history_limited_inception_research_sample_only
+      components: [combo_SPY200d_GLD_50_50_v1, managed_futures_proxy_etf_trend_v1]
+      fixed_weights:
+        combo_SPY200d_GLD_50_50_v1: 0.80
+        managed_futures_proxy_etf_trend_v1: 0.20
+      excluded_assets_first_rule: [CTA, FMF, WTMF]
+      rebalance_frequency: monthly
+      component_return_source: exact_window_local_component_returns
+      execution_timing_rule: inherited_from_component_streams_no_lookahead
+      max_gross_exposure: 1.0
+      leverage_setting: none
+      margin_setting: none
+      shorting_setting: none
+      futures_contract_logic: none
+    notes: Historical Combination Research Sample Batch 1 row only. Managed-futures sleeve is ETF/fund wrapper proxy evidence, not a direct futures strategy.
+
+  - experiment_id: top2_plus_managed_futures_80_20_v1
+    display_name: Top2 Plus Managed Futures Proxy 80/20
+    implementation_rule_id: top2_plus_managed_futures_80_20_fixed_v1
+    version: v1
+    lane: profit_exploration
+    experiment_type: fixed_strategy_combination
+    family_group: historical_combination_batch1
+    strategy_family: fixed_strategy_combination
+    evidence_tier: tier2_credible_prototype
+    run_allowed: research_sample_only
+    required_label: fund_wrapper_proxy_short_history_limited_inception_research_sample_only
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    independent_starting_equity: 3000
+    shared_capital: false
+    portfolio_mix: false
+    paper_forward_active: false
+    paper_forward_allowed_by_risk_framework: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    uses_futures_contracts: false
+    requires_network: false
+    required_symbols: [SPY, GLD, IEF, BIL, DBMF, KMLM]
+    excluded_symbols_first_rule: [CTA, FMF, WTMF]
+    underlying_components: [asset_class_tsmom_top2_v1, managed_futures_proxy_etf_trend_v1]
+    fixed_weights:
+      asset_class_tsmom_top2_v1: 0.80
+      managed_futures_proxy_etf_trend_v1: 0.20
+    primary_benchmarks: [combo_SPY200d_GLD_50_50_v1, asset_class_tsmom_top2_v1]
+    secondary_benchmarks: [SPY_200d_trend_model, GLD_buy_hold, SPY_buy_hold, BIL_cash_proxy, managed_futures_proxy_etf_trend_v1]
+    rule_source: historical_research_expansion combination queue; fixed Batch 1 predeclared blend
+    expected_profit_mechanism: reduce top2 drawdown-budget usage while retaining target potential
+    main_risk: target dilution and short-history managed-futures proxy evidence
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [candidate_exhaustive_in_this_task, observe_as_paper_forward, promote_to_real_money, add_broker_integration, place_live_orders, tune_weights, change_active_combo_rules, replace_spy200d, add_futures_contract_logic, treat_as_direct_futures_strategy, add_CTA_FMF_WTMF_without_review, tune_parameters, grid_search]
+    canonical_rule:
+      strategy_family: fixed_strategy_combination
+      implementation_rule_id: top2_plus_managed_futures_80_20_fixed_v1
+      required_label: fund_wrapper_proxy_short_history_limited_inception_research_sample_only
+      components: [asset_class_tsmom_top2_v1, managed_futures_proxy_etf_trend_v1]
+      fixed_weights:
+        asset_class_tsmom_top2_v1: 0.80
+        managed_futures_proxy_etf_trend_v1: 0.20
+      excluded_assets_first_rule: [CTA, FMF, WTMF]
+      rebalance_frequency: monthly
+      component_return_source: exact_window_local_component_returns
+      execution_timing_rule: inherited_from_component_streams_no_lookahead
+      max_gross_exposure: 1.0
+      leverage_setting: none
+      margin_setting: none
+      shorting_setting: none
+      futures_contract_logic: none
+    notes: Historical Combination Research Sample Batch 1 row only. Managed-futures sleeve is ETF/fund wrapper proxy evidence, not a direct futures strategy.
+
+  - experiment_id: dual_momentum_SPY_GLD_IEF_v1
+    display_name: Dual Momentum SPY GLD IEF
+    experiment_type: strategy_variant
+    family_group: multi_asset_etf
+    strategy_family: dual_momentum
+    evidence_tier: tier2_credible_prototype
+    run_allowed: true
+    implementation_status: duplicate_skipped
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [SPY, GLD, IEF, BIL]
+    rule_source: duplicate canonical rule of asset_class_tsmom_top1_v1
+    expected_profit_mechanism: same as asset_class_tsmom_top1_v1; duplicate row retained for audit visibility
+    main_risk: duplicate evidence inflation if counted independently
+    allowed_next_action: audit_harden
+    forbidden_next_actions: [count_as_independent_evidence, tune_lookback, tune_sma_length, tune_parameters, grid_search, promote_to_real_money, add_broker_integration, modify_paper_forward_rules]
+    canonical_rule:
+      strategy_family: asset_class_time_series_momentum
+      asset_universe: [SPY, GLD, IEF, BIL]
+      rebalance_frequency: monthly
+      ranking_lookback_trading_days: 126
+      trend_filter: price_gt_200_day_sma
+      cash_fallback_rule: all_to_BIL_if_no_risky_asset_eligible
+      number_of_selected_assets: 1
+      weighting_rule: equal_weight_selected_assets
+      execution_timing_rule: next_trading_day_after_rebalance_signal
+      max_gross_exposure: 1.0
+      leverage_setting: none
+    notes: Duplicate-skipped by canonical rule hash if asset_class_tsmom_top1_v1 is present.
+
+  - experiment_id: IEF_200d_trend_model_v1
+    display_name: IEF 200-Day Trend Model
+    experiment_type: strategy_variant
+    family_group: bond_treasury_etf
+    strategy_family: absolute_trend
+    evidence_tier: tier2_credible_prototype
+    run_allowed: true
+    implementation_status: implemented_exploratory
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [IEF, BIL]
+    rule_source: predeclared profit exploration fixed rule
+    expected_profit_mechanism: bond trend participation with BIL fallback
+    main_risk: low upside and rate whipsaw
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [tune_sma_length, tune_parameters, promote_to_real_money, add_broker_integration]
+    notes: New isolated profit experiment, not paper-forward.
+
+  - experiment_id: SPY_GLD_dual_momentum_v1
+    display_name: SPY GLD Dual Momentum
+    experiment_type: strategy_variant
+    family_group: multi_asset_etf
+    strategy_family: dual_momentum
+    evidence_tier: tier2_credible_prototype
+    run_allowed: true
+    implementation_status: implemented_exploratory
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [SPY, GLD, BIL]
+    rule_source: predeclared 126-day return and 200-day SMA filter
+    expected_profit_mechanism: rotate between equity and gold momentum
+    main_risk: regime whipsaw and single-asset concentration
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [tune_lookback, tune_sma_length, grid_search, promote_to_real_money]
+    notes: Monthly rebalance, top asset only, no leverage.
+
+  - experiment_id: SPY_GLD_IEF_dual_momentum_v1
+    display_name: SPY GLD IEF Dual Momentum
+    experiment_type: strategy_variant
+    family_group: multi_asset_etf
+    strategy_family: dual_momentum
+    evidence_tier: tier2_credible_prototype
+    run_allowed: true
+    implementation_status: implemented_exploratory
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [SPY, GLD, IEF, BIL]
+    rule_source: predeclared 126-day return and 200-day SMA filter
+    expected_profit_mechanism: rotate to strongest liquid ETF family
+    main_risk: whipsaw and defensive drag
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [tune_lookback, tune_sma_length, grid_search, promote_to_real_money]
+    notes: Monthly rebalance, top asset only, no leverage.
+
+  - experiment_id: multi_asset_top2_momentum_v1
+    display_name: Multi-Asset Top 2 Momentum
+    experiment_type: strategy_variant
+    family_group: multi_asset_etf
+    strategy_family: cross_asset_momentum
+    evidence_tier: tier2_credible_prototype
+    run_allowed: true
+    implementation_status: implemented_exploratory
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [SPY, GLD, IEF, BIL]
+    rule_source: predeclared top-2 126-day return and 200-day SMA filter
+    expected_profit_mechanism: diversify between top positive ETF trends
+    main_risk: diluted upside and trend whipsaw
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [tune_lookback, tune_number_of_assets, tune_sma_length, grid_search, promote_to_real_money]
+    notes: Monthly rebalance, top 2 equally if valid, unused weight to BIL.
+
+  - experiment_id: GLD_SPY_rotation_v1
+    display_name: GLD SPY Rotation
+    experiment_type: strategy_variant
+    family_group: multi_asset_etf
+    strategy_family: relative_momentum_rotation
+    evidence_tier: tier2_credible_prototype
+    run_allowed: true
+    implementation_status: implemented_exploratory
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [GLD, SPY, BIL]
+    rule_source: predeclared GLD versus SPY 126-day return with 200-day SMA filter
+    expected_profit_mechanism: rotate between gold and equity regimes
+    main_risk: whipsaw and concentration
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [tune_lookback, tune_sma_length, grid_search, promote_to_real_money]
+    notes: Monthly rebalance, no leverage.
+
+  - experiment_id: combo_SPY200d_GLD_50_50_v1
+    display_name: Combo SPY200d GLD 50/50
+    experiment_type: fixed_combination
+    family_group: fixed_combination_etf
+    strategy_family: fixed_weight_combination
+    evidence_tier: tier2_credible_prototype
+    run_allowed: true
+    implementation_status: implemented_exploratory
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [SPY_200d_trend_model, GLD_buy_hold]
+    rule_source: predeclared 50/50 monthly combination
+    expected_profit_mechanism: combine equity trend and gold upside
+    main_risk: combination may dilute upside or inherit GLD drawdown
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [tune_weights, promote_to_real_money, add_broker_integration, modify_paper_forward_rules]
+    notes: Independent experiment account, not allocation advice.
+
+  - experiment_id: combo_SPY200d_GLD_BIL_60_30_10_v1
+    display_name: Combo SPY200d GLD BIL 60/30/10
+    experiment_type: fixed_combination
+    family_group: fixed_combination_etf
+    strategy_family: fixed_weight_combination
+    evidence_tier: tier2_credible_prototype
+    run_allowed: true
+    implementation_status: implemented_exploratory
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [SPY_200d_trend_model, GLD_buy_hold, BIL_cash_proxy]
+    rule_source: predeclared 60/30/10 monthly combination
+    expected_profit_mechanism: combine equity trend, gold upside, and cash ballast
+    main_risk: too slow if cash dilutes upside
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [tune_weights, promote_to_real_money, add_broker_integration, modify_paper_forward_rules]
+    notes: Independent experiment account, not allocation advice.
+
+  - experiment_id: combo_SPY200d_crypto_tsmom_90_10_v1
+    display_name: Combo SPY200d Crypto TSMOM 90/10
+    experiment_type: fixed_combination
+    family_group: fixed_combination_crypto_satellite
+    strategy_family: fixed_weight_combination
+    evidence_tier: tier1_exploratory
+    run_allowed: true_only_with_include_crypto_exploratory
+    implementation_status: implemented_exploratory
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [SPY_200d_trend_model, crypto_time_series_momentum]
+    rule_source: predeclared 90/10 exploratory combination
+    expected_profit_mechanism: small crypto momentum satellite plus ETF trend core
+    main_risk: crypto evidence is Tier 1 and not candidate-grade
+    allowed_next_action: run_profit_exploration
+    forbidden_next_actions: [tune_crypto_weight, promote_to_real_money, treat_as_validated, add_broker_integration]
+    notes: Crypto-containing row is Tier 1 only and excluded by default.
+
+  - experiment_id: crypto_time_series_momentum
+    display_name: Crypto Time Series Momentum
+    experiment_type: exploratory_family
+    family_group: crypto_spot_momentum
+    strategy_family: time_series_momentum
+    evidence_tier: tier1_exploratory
+    run_allowed: true_only_with_include_crypto_exploratory
+    implementation_status: implemented_exploratory
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [existing crypto exploratory lane]
+    rule_source: existing crypto exploratory evidence only
+    expected_profit_mechanism: high-volatility crypto trend continuation
+    main_risk: Tier 1 non-final evidence, execution/data limitations
+    allowed_next_action: audit_harden
+    forbidden_next_actions: [promote_to_real_money, treat_as_validated, add_broker_integration, crypto_leverage]
+    notes: Optional cache-only import from existing exploratory evidence.
+
+  - experiment_id: crypto_buy_hold_equal_weight
+    display_name: Crypto Buy Hold Equal Weight
+    experiment_type: exploratory_family
+    family_group: crypto_spot_buy_hold
+    strategy_family: buy_and_hold
+    evidence_tier: tier1_exploratory
+    run_allowed: true_only_with_include_crypto_exploratory
+    implementation_status: implemented_exploratory
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: [existing crypto exploratory lane]
+    rule_source: existing crypto exploratory evidence only
+    expected_profit_mechanism: high-volatility crypto beta
+    main_risk: Tier 1 non-final evidence, large drawdown and stop risk
+    allowed_next_action: audit_harden
+    forbidden_next_actions: [promote_to_real_money, treat_as_validated, add_broker_integration, crypto_leverage]
+    notes: Optional cache-only import from existing exploratory evidence.
+
+  - experiment_id: crypto_spot_tsmom_top1_cash_filter_v1
+    display_name: Crypto Spot TSMOM Top1 Cash Filter v1
+    experiment_type: crypto_spot_risk_control_exploratory
+    family_group: crypto_spot_tier2
+    strategy_family: crypto_spot_time_series_momentum
+    evidence_tier: tier2_exploratory
+    run_allowed: research_sample_only
+    required_label: crypto_spot_tier2_exploratory,public_or_cached_crypto_data,not_validated,not_paper_forward,not_real_money
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    paper_forward_active: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_margin: false
+    uses_shorting: false
+    uses_futures_contracts: false
+    uses_perpetuals: false
+    uses_options: false
+    requires_network: false
+    required_symbols: [BTC-USD, ETH-USD, BIL]
+    underlying_components: [BTC-USD, ETH-USD, BIL_cash_proxy]
+    rule_source: predeclared BTC/ETH spot top1 126-day momentum with 200-day SMA filter and 50% BIL cash sleeve
+    expected_profit_mechanism: BTC/ETH spot trend participation with cash scaling
+    main_risk: crypto volatility may still breach stop/drawdown budget or target power may dilute
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [observe_as_paper_forward, promote_to_real_money, add_broker_integration, place_live_orders, use_futures_contract_logic, use_perpetuals, use_margin, use_leverage, tune_parameters, add_crypto_assets_without_review]
+    notes: Tier 2 exploratory only; no exchange execution, leverage, margin, shorting, futures, perpetuals, or options.
+    canonical_rule:
+      asset_universe: [BTC-USD, ETH-USD, BIL]
+      ranked_assets: [BTC-USD, ETH-USD]
+      rebalance_frequency: monthly
+      ranking_lookback_trading_days: 126
+      trend_filter: close_gt_200_day_sma
+      absolute_filter: selected_crypto_126d_return_gt_0
+      selected_assets: 1
+      selected_crypto_allocation: 0.50
+      bil_cash_allocation_when_selected: 0.50
+      fallback: BIL
+      fallback_allocation_when_none_qualify: 1.00
+      max_crypto_exposure: 0.50
+      no_leverage: true
+      no_margin: true
+      no_shorting: true
+      no_futures_contracts: true
+      no_perpetuals: true
+      no_options: true
+      execution_timing: next_trading_day_after_monthly_signal
+
+  - experiment_id: crypto_spot_equal_weight_200d_filter_v1
+    display_name: Crypto Spot Equal Weight 200d Filter v1
+    experiment_type: crypto_spot_risk_control_exploratory
+    family_group: crypto_spot_tier2
+    strategy_family: crypto_spot_time_series_momentum
+    evidence_tier: tier2_exploratory
+    run_allowed: research_sample_only
+    required_label: crypto_spot_tier2_exploratory,public_or_cached_crypto_data,not_validated,not_paper_forward,not_real_money
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    paper_forward_active: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_margin: false
+    uses_shorting: false
+    uses_futures_contracts: false
+    uses_perpetuals: false
+    uses_options: false
+    requires_network: false
+    required_symbols: [BTC-USD, ETH-USD, BIL]
+    underlying_components: [BTC-USD, ETH-USD, BIL_cash_proxy]
+    rule_source: predeclared BTC/ETH spot equal-weight 126-day positive return and 200-day SMA eligibility screen
+    expected_profit_mechanism: diversified BTC/ETH half-exposure with cash scaling
+    main_risk: crypto beta may remain too high or the half-exposure may be too slow
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [observe_as_paper_forward, promote_to_real_money, add_broker_integration, place_live_orders, use_futures_contract_logic, use_perpetuals, use_margin, use_leverage, tune_parameters, add_crypto_assets_without_review]
+    notes: Tier 2 exploratory only; no exchange execution, leverage, margin, shorting, futures, perpetuals, or options.
+    canonical_rule:
+      asset_universe: [BTC-USD, ETH-USD, BIL]
+      ranked_assets: [BTC-USD, ETH-USD]
+      rebalance_frequency: monthly
+      ranking_lookback_trading_days: 126
+      trend_filter: close_gt_200_day_sma
+      absolute_filter: each_crypto_126d_return_gt_0
+      btc_allocation_if_eligible: 0.25
+      eth_allocation_if_eligible: 0.25
+      unused_weight_goes_to: BIL
+      fallback: BIL
+      fallback_allocation_when_none_qualify: 1.00
+      max_crypto_exposure: 0.50
+      no_leverage: true
+      no_margin: true
+      no_shorting: true
+      no_futures_contracts: true
+      no_perpetuals: true
+      no_options: true
+      execution_timing: next_trading_day_after_monthly_signal
+
+  - experiment_id: combo_plus_crypto_spot_tsmom_90_10_v1
+    display_name: Combo Plus Crypto Spot TSMOM 90/10 v1
+    experiment_type: crypto_spot_risk_control_exploratory
+    family_group: crypto_spot_tier2
+    strategy_family: fixed_weight_combination
+    evidence_tier: tier2_exploratory
+    run_allowed: research_sample_only
+    required_label: crypto_spot_tier2_exploratory,public_or_cached_crypto_data,not_validated,not_paper_forward,not_real_money
+    implementation_status: implemented_research_sample
+    independent_account: true
+    starting_equity: 3000
+    paper_forward_active: false
+    real_money_recommendation: false
+    uses_leverage: false
+    uses_margin: false
+    uses_shorting: false
+    uses_futures_contracts: false
+    uses_perpetuals: false
+    uses_options: false
+    requires_network: false
+    required_symbols: [SPY, GLD, BIL, BTC-USD, ETH-USD]
+    underlying_components: [combo_SPY200d_GLD_50_50_v1, crypto_spot_tsmom_top1_cash_filter_v1]
+    rule_source: predeclared fixed 90% combo_SPY200d_GLD_50_50_v1 and 10% crypto_spot_tsmom_top1_cash_filter_v1 blend
+    expected_profit_mechanism: small BTC/ETH trend sleeve may add incremental target windows to the combo core
+    main_risk: 10% crypto sleeve may be too small to matter or add sharp drawdown noise
+    allowed_next_action: research_sample_review
+    forbidden_next_actions: [observe_as_paper_forward, promote_to_real_money, add_broker_integration, place_live_orders, use_futures_contract_logic, use_perpetuals, use_margin, use_leverage, tune_parameters, add_crypto_assets_without_review]
+    notes: Historical-only combo row; it does not change the active combo paper/demo observation.
+    canonical_rule:
+      components: [combo_SPY200d_GLD_50_50_v1, crypto_spot_tsmom_top1_cash_filter_v1]
+      fixed_weights:
+        combo_SPY200d_GLD_50_50_v1: 0.90
+        crypto_spot_tsmom_top1_cash_filter_v1: 0.10
+      rebalance_frequency: monthly
+      no_dynamic_tuning: true
+      active_combo_paper_forward_rule_changed: false
+      spy200d_replaced: false
+      no_leverage: true
+      no_margin: true
+      no_shorting: true
+      no_futures_contracts: true
+      no_perpetuals: true
+      no_options: true
+
+  - experiment_id: individual_stock_momentum
+    display_name: Individual Stock Momentum
+    experiment_type: blocked_family
+    family_group: individual_stock_momentum
+    strategy_family: momentum
+    evidence_tier: blocked
+    run_allowed: false
+    implementation_status: blocked_by_gate
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: []
+    rule_source: gate memo only
+    expected_profit_mechanism: unknown until gate approved
+    main_risk: no survivorship-free data or delisting treatment
+    blocked_reason: Gate 1A continue_defer; no survivorship-free data/delisting treatment.
+    allowed_next_action: continue_vendor_review
+    forbidden_next_actions: [implement_strategy, run_backtest, download_data, promote_to_real_money]
+    notes: Reported but not run.
+
+  - experiment_id: options_directional
+    display_name: Options Directional
+    experiment_type: blocked_family
+    family_group: options_directional
+    strategy_family: options_directional
+    evidence_tier: blocked
+    run_allowed: false
+    implementation_status: blocked_by_gate
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: []
+    rule_source: gate memo only
+    expected_profit_mechanism: unknown until gate approved
+    main_risk: missing option-chain, bid/ask, IV, exercise/assignment, margin, and fill model
+    blocked_reason: No option-chain, bid/ask, IV, Greeks, assignment/exercise, margin, or spread-fill model.
+    allowed_next_action: create_gate0_memo
+    forbidden_next_actions: [implement_strategy, run_backtest, download_data, promote_to_real_money]
+    notes: Reported but not run.
+
+  - experiment_id: options_premium
+    display_name: Options Premium
+    experiment_type: blocked_family
+    family_group: options_premium
+    strategy_family: options_premium
+    evidence_tier: blocked
+    run_allowed: false
+    implementation_status: blocked_by_gate
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: []
+    rule_source: gate memo only
+    expected_profit_mechanism: unknown until gate approved
+    main_risk: missing option-chain, margin, assignment, tail-risk, and realistic fills
+    blocked_reason: No option-chain, margin, assignment, tail-risk, or realistic fill model.
+    allowed_next_action: create_gate0_memo
+    forbidden_next_actions: [implement_strategy, run_backtest, download_data, promote_to_real_money]
+    notes: Reported but not run.
+
+  - experiment_id: futures_trend_following
+    display_name: Futures Trend Following
+    experiment_type: blocked_family
+    family_group: futures_trend_following
+    strategy_family: trend_following
+    evidence_tier: blocked
+    run_allowed: false
+    implementation_status: blocked_by_gate
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: []
+    rule_source: gate memo only
+    expected_profit_mechanism: unknown until gate approved
+    main_risk: no continuous contract, roll, margin, leverage, or gap model
+    blocked_reason: No continuous contract, roll, margin, leverage, or gap model.
+    allowed_next_action: create_gate0_memo
+    forbidden_next_actions: [implement_strategy, run_backtest, download_data, promote_to_real_money]
+    notes: Reported but not run.
+
+  - experiment_id: forex_momentum_carry
+    display_name: Forex Momentum Carry
+    experiment_type: blocked_family
+    family_group: forex_momentum_carry
+    strategy_family: momentum_carry
+    evidence_tier: blocked
+    run_allowed: false
+    implementation_status: blocked_by_gate
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: []
+    rule_source: gate memo only
+    expected_profit_mechanism: unknown until gate approved
+    main_risk: no spread, financing, leverage, or broker execution model
+    blocked_reason: No spread, financing, leverage, or broker execution model.
+    allowed_next_action: create_gate0_memo
+    forbidden_next_actions: [implement_strategy, run_backtest, download_data, promote_to_real_money]
+    notes: Reported but not run.
+
+  - experiment_id: intraday_orb
+    display_name: Intraday ORB
+    experiment_type: blocked_family
+    family_group: intraday_opening_range_breakout
+    strategy_family: opening_range_breakout
+    evidence_tier: blocked
+    run_allowed: false
+    implementation_status: blocked_by_gate
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: []
+    rule_source: gate memo only
+    expected_profit_mechanism: unknown until gate approved
+    main_risk: daily bars cannot model intraday fills, spreads, queue, or stops
+    blocked_reason: Current daily bars cannot model intraday fills, spreads, queue, or stop behavior.
+    allowed_next_action: create_gate0_memo
+    forbidden_next_actions: [implement_strategy, run_backtest, download_data, promote_to_real_money]
+    notes: Reported but not run.
+
+  - experiment_id: volatility_products
+    display_name: Volatility Products
+    experiment_type: blocked_family
+    family_group: volatility_products
+    strategy_family: volatility_products
+    evidence_tier: blocked
+    run_allowed: false
+    implementation_status: blocked_by_gate
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: []
+    rule_source: gate memo only
+    expected_profit_mechanism: unknown until gate approved
+    main_risk: no product mechanics, decay, roll-yield, path-dependency, or event-risk model
+    blocked_reason: No product mechanics, decay, roll-yield, path-dependency, or event-risk model.
+    allowed_next_action: create_gate0_memo
+    forbidden_next_actions: [implement_strategy, run_backtest, download_data, promote_to_real_money]
+    notes: Reported but not run.
+
+  - experiment_id: event_news_momentum
+    display_name: Event News Momentum
+    experiment_type: blocked_family
+    family_group: event_news_momentum
+    strategy_family: event_news_momentum
+    evidence_tier: blocked
+    run_allowed: false
+    implementation_status: blocked_by_gate
+    independent_account: true
+    starting_equity: 3000
+    underlying_components: []
+    rule_source: gate memo only
+    expected_profit_mechanism: unknown until gate approved
+    main_risk: no point-in-time event timestamps or reliable historical event data
+    blocked_reason: No point-in-time event timestamps or reliable historical event data.
+    allowed_next_action: create_gate0_memo
+    forbidden_next_actions: [implement_strategy, run_backtest, download_data, promote_to_real_money]
+    notes: Reported but not run.

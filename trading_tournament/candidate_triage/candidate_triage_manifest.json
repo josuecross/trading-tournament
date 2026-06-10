@@ -1,0 +1,18 @@
+{
+  "advisor_top_level_zip_requested": false,
+  "backtest_run": false,
+  "broker_integration": false,
+  "candidate_exhaustive_run": false,
+  "created_date": "2026-06-05",
+  "data_downloaded": false,
+  "decision": "triage_complete_no_new_candidate_exhaustive_additions",
+  "evidence_source": "evidence/profit_exploration/latest/",
+  "latest_folder_file_count": 9,
+  "live_orders": false,
+  "new_strategy_implemented": false,
+  "paper_forward_rule_changed": false,
+  "real_money_recommendation": false,
+  "review_type": "candidate_testing_triage_and_diversification_audit",
+  "subject_id": "recent_profit_exploration_research_sample_candidates"
+}
+

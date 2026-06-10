@@ -1,0 +1,36 @@
+batch_id: crypto_spot_tier2_risk_control_batch1
+research_only: true
+run_allowed: research_sample_only
+candidate_exhaustive_allowed: false
+paper_forward_allowed: false
+real_money_recommendation: false
+allowed_crypto_symbols:
+  - BTC-USD
+  - ETH-USD
+fallback: BIL
+fixed_candidates:
+  - experiment_id: crypto_spot_tsmom_top1_cash_filter_v1
+    rule: top1_126d_return_positive_and_close_gt_200d_sma
+    selected_crypto_allocation: 0.50
+    bil_cash_allocation_when_selected: 0.50
+    fallback_if_none_qualify: 1.00 BIL
+  - experiment_id: crypto_spot_equal_weight_200d_filter_v1
+    rule: each_BTC_ETH_gets_25pct_if_126d_return_positive_and_close_gt_200d_sma
+    max_crypto_exposure: 0.50
+    unused_weight_goes_to: BIL
+  - experiment_id: combo_plus_crypto_spot_tsmom_90_10_v1
+    rule: fixed_90pct_combo_SPY200d_GLD_50_50_10pct_crypto_top1_cash_filter
+    active_combo_rule_changed: false
+forbidden:
+  - candidate_exhaustive
+  - paper_forward_activation
+  - leverage
+  - margin
+  - shorting
+  - futures
+  - perpetuals
+  - options
+  - broker_integration
+  - exchange_execution
+  - live_orders
+  - real_money_recommendation

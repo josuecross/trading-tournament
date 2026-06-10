@@ -1,0 +1,4 @@
+rank_overall,rank_stop_aware_practical,rank_profit_seeking,rank_drawdown_control,experiment_id,verdict,run_status,balanced_drawdown_aware_score_v2,profit_seeking_score,drawdown_control_score,deserves_candidate_exhaustive,notes
+6,8,5,8,commodity_basket_tsmom_top2_200d_filter_v1,research_sample_candidate_risk_budget_breach,completed,-192.85799197291118,56.02876444366137,-142.26798613008418,False,commodity risk-control row remains high-upside/high-risk watchlist; no candidate_exhaustive queue
+8,7,9,7,commodity_basket_tsmom_top2_half_bil_v1,research_sample_candidate,completed,-149.8713764279506,-134.97575886584573,-20.22939664795598,False,commodity risk-control row deserves research_sample review only
+9,5,8,6,combo_plus_commodity_basket_80_20_v1,research_sample_candidate,completed,-103.00894101667066,-93.55360570426177,-2.6150511210150853,False,commodity risk-control row deserves research_sample review only

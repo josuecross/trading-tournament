@@ -1,0 +1,26 @@
+{
+  "api_key_or_secret_written": false,
+  "backtest_run": false,
+  "broker_integration": false,
+  "data_downloaded_or_refreshed": true,
+  "keyed_provider_used": false,
+  "latest_common_cached_date": "2026-06-05",
+  "latest_folder_file_count": 8,
+  "live_orders": false,
+  "order_placement": false,
+  "paper_forward_rule_changed": false,
+  "profit_exploration_run": false,
+  "quality_counts": {
+    "fail": 0,
+    "pass": 3,
+    "warning": 0
+  },
+  "raw_ohlcv_included": false,
+  "real_money_recommendation": false,
+  "requested_activation_date": "2026-06-05",
+  "requested_activation_date_supported": true,
+  "run_id": "20260606_040551",
+  "strategy_implemented": false,
+  "timestamp": "2026-06-06T04:05:55Z",
+  "yfinance_compatible_provider_call": true
+}

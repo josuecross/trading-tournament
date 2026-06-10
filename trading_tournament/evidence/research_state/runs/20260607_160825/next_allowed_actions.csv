@@ -1,0 +1,10 @@
+action,allowed_now,lane,notes
+commodity_data_acquisition_review,true,commodity_basket_etf_momentum,"Future controlled data-acquisition review only; no commodity implementation, data download, backtest, Profit Exploration, or paper-forward approval."
+create_commodity_basket_etf_momentum_review,true,historical_research_queue_reprioritization,Completed as commodity product/data review; superseded by commodity_data_acquisition_review as the next gate.
+create_combination_design_implementation_review,true,historical_research,Preferred next historical strategy path; review only before coding.
+improve_correlation_and_co_movement_diagnostics,true,diagnostics,Plan/design or reporting-only work; no strategy rules changed.
+use_attribution_diagnostics_before_future_combination_candidate_exhaustive_review,true,diagnostics,Attribution diagnostics should be reviewed before any future combination candidate_exhaustive prompt.
+select_sharadar_package_and_terms_review,true,individual_stock_momentum_gate1f,"Select Sharadar/Nasdaq package and terms/security path only; no provider call, API key, stock loader, or data download."
+judge_combo_forward_observation,false,paper_forward,Not before 30 trading days; current status is inconclusive_too_early.
+tune_active_combo,false,paper_forward,Active combo rules are frozen.
+replace_spy200d,false,paper_forward_governance,SPY_200d remains frozen control.

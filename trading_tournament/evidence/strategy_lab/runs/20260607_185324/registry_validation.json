@@ -1,0 +1,11 @@
+{
+  "active_paper_forward_count": 5,
+  "blocked_count": 24,
+  "errors": [
+    "row 82 (commodity_basket_etf_momentum_v1) candidate queue allowed_next_action must stay gate/review only"
+  ],
+  "exploratory_count": 22,
+  "passed": false,
+  "row_count": 87,
+  "warnings": []
+}

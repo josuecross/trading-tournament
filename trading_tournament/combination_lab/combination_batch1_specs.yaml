@@ -1,0 +1,55 @@
+batch_id: historical_combination_research_sample_batch1
+mode: research_sample_only
+independent_account_starting_equity: 3000
+fixed_predeclared_weights_only: true
+optimization_allowed: false
+dynamic_weights_allowed: false
+new_filters_allowed: false
+leverage_allowed: false
+margin_allowed: false
+shorting_allowed: false
+broker_integration: false
+live_orders: false
+order_placement: false
+real_money_recommendation: false
+candidate_exhaustive_allowed: false
+data_download_allowed: false
+active_combo_paper_forward_rule_change_allowed: false
+spy200d_replacement_allowed: false
+combinations:
+  - combination_id: combo_plus_top2_50_50_v1
+    components:
+      - combo_SPY200d_GLD_50_50_v1
+      - asset_class_tsmom_top2_v1
+    fixed_weights:
+      combo_SPY200d_GLD_50_50_v1: 0.50
+      asset_class_tsmom_top2_v1: 0.50
+    hypothesis: Blend drawdown-aware combo with stronger asset-class momentum target potential.
+    main_risk: Duplicate SPY/GLD/trend exposure; may not improve stop-aware profit/risk.
+    research_sample_allowed_now: true
+    candidate_exhaustive_allowed_now: false
+  - combination_id: combo_plus_managed_futures_80_20_v1
+    components:
+      - combo_SPY200d_GLD_50_50_v1
+      - managed_futures_proxy_etf_trend_v1
+    fixed_weights:
+      combo_SPY200d_GLD_50_50_v1: 0.80
+      managed_futures_proxy_etf_trend_v1: 0.20
+    hypothesis: Add a different fund-wrapper proxy return driver to reduce drawdown or improve stress behavior.
+    main_risk: Managed-futures proxy was too slow as standalone and has short-history fund-wrapper limitations.
+    required_label: fund_wrapper_proxy_short_history_limited_inception_research_sample_only
+    research_sample_allowed_now: true
+    candidate_exhaustive_allowed_now: false
+  - combination_id: top2_plus_managed_futures_80_20_v1
+    components:
+      - asset_class_tsmom_top2_v1
+      - managed_futures_proxy_etf_trend_v1
+    fixed_weights:
+      asset_class_tsmom_top2_v1: 0.80
+      managed_futures_proxy_etf_trend_v1: 0.20
+    hypothesis: Reduce top2 drawdown-budget usage while retaining target potential.
+    main_risk: Target dilution; short-history managed-futures proxy evidence.
+    required_label: fund_wrapper_proxy_short_history_limited_inception_research_sample_only
+    research_sample_allowed_now: true
+    candidate_exhaustive_allowed_now: false
+

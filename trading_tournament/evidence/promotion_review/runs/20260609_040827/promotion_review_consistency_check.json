@@ -1,0 +1,14 @@
+{
+  "active_observation_rules_changed": false,
+  "broker_integration_added": false,
+  "candidate_exhaustive_run": false,
+  "consistency_status": "passed",
+  "error_count": 0,
+  "errors": [],
+  "frozen_controls_changed": false,
+  "live_orders_added": false,
+  "paper_forward_activated": false,
+  "real_money_recommendation_added": false,
+  "warning_count": 0,
+  "warnings": []
+}

@@ -1,0 +1,64 @@
+batch_id: commodity_risk_control_batch1
+research_only: true
+mode_allowed: research_sample_only
+candidate_exhaustive_run: false
+data_downloaded: false
+new_symbols_added: false
+allowed_symbols:
+  - DBC
+  - PDBC
+  - COMT
+  - GSG
+  - USCI
+  - BIL
+active_combo_rule_changed: false
+spy200d_replaced: false
+required_label: commodity_wrapper_evidence_research_sample_only
+candidates:
+  - experiment_id: commodity_basket_tsmom_top2_200d_filter_v1
+    rule:
+      universe: [DBC, PDBC, COMT, GSG, USCI]
+      fallback: BIL
+      rebalance: monthly
+      rank_by: 126_trading_day_return
+      eligibility:
+        - 126_day_return_gt_0
+        - close_gt_200_day_sma
+      selection: top_2_equal_weight
+      unused_weight: BIL
+      no_leverage: true
+      no_margin: true
+      no_shorting: true
+      no_futures_contract_logic: true
+    hypothesis: A simple absolute trend filter may reduce drawdown-budget breaches.
+    risk: May become too slow and reduce target rates.
+  - experiment_id: commodity_basket_tsmom_top2_half_bil_v1
+    rule:
+      components:
+        commodity_basket_tsmom_top2_v1: 0.50
+        BIL_cash_proxy: 0.50
+      rebalance: monthly
+      fixed_allocation: true
+      no_dynamic_tuning: true
+      no_leverage: true
+      no_margin: true
+      no_shorting: true
+      no_futures_contract_logic: true
+    hypothesis: Fixed defensive scaling may preserve some commodity upside while reducing drawdown.
+    risk: Target dilution and too-slow behavior.
+  - experiment_id: combo_plus_commodity_basket_80_20_v1
+    rule:
+      components:
+        combo_SPY200d_GLD_50_50_v1: 0.80
+        commodity_basket_tsmom_top2_v1: 0.20
+      rebalance: monthly
+      fixed_allocation: true
+      no_dynamic_tuning: true
+      no_leverage: true
+      no_margin: true
+      no_shorting: true
+      no_futures_contract_logic: true
+      active_combo_paper_forward_rule_changed: false
+    hypothesis: Commodity basket exposure may add upside/regime diversification to the historical combo while keeping drawdown controlled.
+    risk: May duplicate GLD/commodity exposure, add wrapper risk, or fail to improve target windows.
+

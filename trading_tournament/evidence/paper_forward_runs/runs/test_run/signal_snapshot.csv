@@ -1,0 +1,6 @@
+as_of_date,strategy,role,symbol,close,sma_200,above_sma_200,signal,target_weight,reason,data_quality_flag
+2024-12-27,SPY_200d_trend_model,primary_watchlist_candidate,SPY,151.8,131.9,True,risk_on,1.0,SPY close > 200-day SMA,ok
+2024-12-27,SPY_200d_trend_model,primary_watchlist_candidate,BIL,100.0,,,not_selected,0.0,BIL receives weight when SPY is below/at SMA200 or SPY SMA is unavailable.,ok
+2024-12-27,SPY_buy_hold,aggressive_benchmark,SPY,151.8,,,hold_spy,1.0,Fixed benchmark holding.,ok
+2024-12-27,BIL_cash_proxy,defensive_benchmark,BIL,100.0,,,hold_bil,1.0,Fixed benchmark holding.,ok
+2024-12-27,current_no_cash_proxy_alpha_AB,strategy_control,,,,,unavailable,,test unavailable,signal_snapshot_unavailable

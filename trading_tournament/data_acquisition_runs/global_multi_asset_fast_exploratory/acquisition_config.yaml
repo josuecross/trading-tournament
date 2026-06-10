@@ -1,0 +1,57 @@
+subject_id: global_multi_asset_fast_exploratory
+provider: yfinance_compatible
+approved_symbols:
+  - SPY
+  - QQQ
+  - GLD
+  - IEF
+  - BIL
+  - DBC
+  - PDBC
+  - COMT
+  - GSG
+  - USCI
+  - IWM
+  - EFA
+  - EEM
+  - TLT
+strategy_universe_symbols:
+  - SPY
+  - QQQ
+  - IWM
+  - EFA
+  - EEM
+  - IEF
+  - TLT
+  - GLD
+  - PDBC
+  - COMT
+  - BIL
+provider_policy:
+  existing_cache_first: true
+  download_missing_approved_symbols_only: true
+  provider_id: yfinance_compatible
+cache:
+  target_root: data/cache
+request_settings:
+  start: "2006-01-01"
+  auto_adjust: false
+  actions: true
+  progress: false
+  multi_level_index: false
+  timeout: 30
+evidence:
+  raw_ohlcv_in_evidence: false
+  compact_metadata_only: true
+research_boundary:
+  research_sample_only: true
+  candidate_exhaustive_run: false
+  paper_forward_active: false
+  real_money_recommendation: false
+  futures_contract_logic: false
+  leverage: false
+  margin: false
+  shorting: false
+  options: false
+  forex: false
+  intraday: false

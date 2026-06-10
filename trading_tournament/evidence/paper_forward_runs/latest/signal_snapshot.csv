@@ -1,0 +1,9 @@
+as_of_date,strategy,role,symbol,close,sma_200,above_sma_200,signal,target_weight,reason,data_quality_flag
+2026-06-05,SPY_200d_trend_model,primary_watchlist_candidate,SPY,737.5499877929688,681.5646868896484,True,risk_on,1.0,SPY close > 200-day SMA,ok
+2026-06-05,SPY_200d_trend_model,primary_watchlist_candidate,BIL,91.4499969482422,,,not_selected,0.0,BIL receives weight when SPY is below/at SMA200 or SPY SMA is unavailable.,ok
+2026-06-05,SPY_buy_hold,aggressive_benchmark,SPY,737.5499877929688,,,hold_spy,1.0,Fixed benchmark holding.,ok
+2026-06-05,BIL_cash_proxy,defensive_benchmark,BIL,91.4499969482422,,,hold_bil,1.0,Fixed benchmark holding.,ok
+2026-06-05,current_no_cash_proxy_alpha_AB,strategy_control,,,,,unavailable,,"Existing A/B engine was replayed for equity, but it does not expose a compact latest-signal API here; no signal invented.",signal_snapshot_unavailable
+2026-06-05,combo_SPY200d_GLD_50_50_v1,parallel_observation_candidate,SPY,737.5499877929688,681.5646868896484,True,spy_sleeve_risk_on,0.5,SPY_200d sleeve: SPY close > 200-day SMA,ok
+2026-06-05,combo_SPY200d_GLD_50_50_v1,parallel_observation_candidate,GLD,396.239990234375,,,gld_buy_hold_sleeve,0.5,Combo target weight from fixed 50/50 SPY_200d and GLD sleeves.,ok
+2026-06-05,combo_SPY200d_GLD_50_50_v1,parallel_observation_candidate,BIL,91.4499969482422,,,not_selected,0.0,Combo target weight from fixed 50/50 SPY_200d and GLD sleeves.,ok

@@ -1,0 +1,4 @@
+combination_id,status,verdict,reason,candidate_exhaustive_run,paper_forward_active,real_money_recommendation
+combo_plus_top2_50_50_v1,completed,too_slow,combination batch row did not improve +300/+400 target rates versus combo/top2,False,False,False
+combo_plus_managed_futures_80_20_v1,completed,too_slow,combination batch row did not improve +300/+400 target rates versus combo/top2,False,False,False
+top2_plus_managed_futures_80_20_v1,completed,too_slow,combination batch row did not improve +300/+400 target rates versus combo/top2,False,False,False

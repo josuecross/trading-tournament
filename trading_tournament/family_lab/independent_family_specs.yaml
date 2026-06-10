@@ -1,0 +1,154 @@
+family_lab:
+  schema_version: 1
+  research_only: true
+  real_money_recommendation: false
+  broker_integration: false
+  live_orders: false
+  independent_account_per_family: true
+  starting_equity_per_family: 3000
+  shared_capital_across_families: false
+  portfolio_mix: false
+  parameter_optimization: false
+  grid_search: false
+  no_leverage: true
+  no_shorting: true
+  no_margin: true
+
+families:
+  - family_id: family_broad_etf_spy200d_v1
+    family_group: broad_etf_trend
+    implementation_status: implemented
+    credibility_tier: tier3_candidate_validation
+    underlying_strategy: SPY_200d_trend_model
+    run_allowed: true
+    role: leading_practical_etf_candidate
+
+  - family_id: family_broad_etf_spy_buy_hold_v1
+    family_group: broad_etf_buy_hold
+    implementation_status: implemented
+    credibility_tier: benchmark
+    underlying_strategy: SPY_buy_hold
+    run_allowed: true
+    role: aggressive_equity_benchmark
+
+  - family_id: family_cash_treasury_bil_v1
+    family_group: cash_treasury_proxy
+    implementation_status: implemented
+    credibility_tier: benchmark
+    underlying_strategy: BIL_cash_proxy
+    run_allowed: true
+    role: defensive_benchmark
+
+  - family_id: family_bond_treasury_ief_v1
+    family_group: bond_treasury_etf
+    implementation_status: implemented_if_data_available
+    credibility_tier: benchmark
+    underlying_strategy: IEF_buy_hold
+    symbol: IEF
+    run_allowed: true_if_data_available
+    role: bond_defensive_benchmark
+
+  - family_id: family_gold_gld_v1
+    family_group: gold_commodity_etf
+    implementation_status: implemented_if_data_available
+    credibility_tier: benchmark
+    underlying_strategy: GLD_buy_hold
+    symbol: GLD
+    run_allowed: true_if_data_available
+    role: gold_defensive_benchmark
+
+  - family_id: family_etf_sector_momentum_A_v1
+    family_group: etf_sector_momentum
+    implementation_status: implemented_if_exact_stream_available
+    credibility_tier: tier2_credible_prototype
+    underlying_strategy: A_ETF_sector_momentum
+    run_allowed: true_if_exact_stream_available
+    role: ETF momentum family reference
+
+  - family_id: family_etf_ab_no_cash_v1
+    family_group: etf_ab_strategy
+    implementation_status: implemented_if_exact_stream_available
+    credibility_tier: tier3_candidate_validation_if_exhaustive
+    underlying_strategy: current_no_cash_proxy_alpha_AB
+    run_allowed: true_if_exact_stream_available
+    role: custom ETF strategy family control
+
+  - family_id: family_crypto_spot_time_series_momentum_v1
+    family_group: crypto_spot_momentum
+    implementation_status: implemented_exploratory
+    credibility_tier: tier1_exploratory
+    underlying_strategy: crypto_time_series_momentum
+    run_allowed: true_only_with_include_exploratory_crypto_families
+    role: high_volatility_exploratory_family
+
+  - family_id: family_crypto_spot_buy_hold_equal_weight_v1
+    family_group: crypto_spot_buy_hold
+    implementation_status: implemented_exploratory
+    credibility_tier: tier1_exploratory
+    underlying_strategy: crypto_buy_hold_equal_weight
+    run_allowed: true_only_with_include_exploratory_crypto_families
+    role: crypto_benchmark_family
+
+  - family_id: family_individual_stock_momentum_v1
+    family_group: individual_stock_momentum
+    implementation_status: blocked_by_gate
+    credibility_tier: blocked
+    run_allowed: false
+    blocked_reason: Gate 1A continue_defer; no survivorship-free data/delisting treatment.
+    role: blocked_research_family
+
+  - family_id: family_options_directional_v1
+    family_group: options_directional
+    implementation_status: blocked_by_gate
+    credibility_tier: blocked
+    run_allowed: false
+    blocked_reason: No option-chain, bid/ask, IV, Greeks, assignment/exercise, margin, or spread-fill model.
+    role: blocked_research_family
+
+  - family_id: family_options_premium_v1
+    family_group: options_premium
+    implementation_status: blocked_by_gate
+    credibility_tier: blocked
+    run_allowed: false
+    blocked_reason: No option-chain, margin, assignment, tail-risk, or realistic fill model.
+    role: blocked_research_family
+
+  - family_id: family_futures_trend_following_v1
+    family_group: futures_trend_following
+    implementation_status: blocked_by_gate
+    credibility_tier: blocked
+    run_allowed: false
+    blocked_reason: No continuous contract, roll, margin, leverage, or gap model.
+    role: blocked_research_family
+
+  - family_id: family_forex_momentum_carry_v1
+    family_group: forex_momentum_carry
+    implementation_status: blocked_by_gate
+    credibility_tier: blocked
+    run_allowed: false
+    blocked_reason: No spread, financing, leverage, or broker execution model.
+    role: blocked_research_family
+
+  - family_id: family_intraday_orb_v1
+    family_group: intraday_opening_range_breakout
+    implementation_status: blocked_by_gate
+    credibility_tier: blocked
+    run_allowed: false
+    blocked_reason: Current daily bars cannot model intraday fills, spreads, queue, or stop behavior.
+    role: blocked_research_family
+
+  - family_id: family_volatility_products_v1
+    family_group: volatility_products
+    implementation_status: blocked_by_gate
+    credibility_tier: blocked
+    run_allowed: false
+    blocked_reason: No product mechanics, decay, roll-yield, path-dependency, or event-risk model.
+    role: blocked_research_family
+
+  - family_id: family_event_news_momentum_v1
+    family_group: event_news_momentum
+    implementation_status: blocked_by_gate
+    credibility_tier: blocked
+    run_allowed: false
+    blocked_reason: No point-in-time event timestamps or reliable historical event data.
+    role: blocked_research_family

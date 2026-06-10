@@ -1,0 +1,33 @@
+# Warnings And Limitations
+
+- Research-only; no real-money recommendation.
+- No broker integration.
+- No live orders.
+- No exchange trading.
+- Individual stocks, options, futures, forex, intraday, and event/news strategies remain excluded.
+- Candidate exhaustive was limited to the selected ETF finalist and ETF benchmarks.
+- Crypto was intentionally excluded from this focused run.
+- Simulated leverage was intentionally excluded from this focused run.
+- Simulated ETF exposure scaling is approximate and uses pre-specified exposure levels, not optimized parameters.
+- No real margin model, liquidation model, or leveraged ETF path-dependency model is included for exposure frontier rows.
+- Exposure frontier rows are diagnostic only and cannot be paper-forward ready or real-money recommendations.
+- Improved target-hit rates in exposure frontier rows may simply reflect increased risk.
+- Finalist all_possible validation completed for the focused compact rows, but this is still not real-money validation.
+- yfinance/Yahoo data limitations still apply to the ETF lane.
+- ETF lane and crypto lane have different credibility levels.
+- Crypto yfinance data is Tier 1 exploratory.
+- Crypto has no bid/ask, order book, outage, custody, delisting, or exchange-specific execution modeling.
+- Leverage is approximate simulated leverage only.
+- No actual margin, liquidation, or funding model is implemented unless explicitly stated.
+- Sampled rolling windows are non-final.
+- Sampled rolling windows are non-final unless candidate_exhaustive completes with all_possible windows.
+- ETF benchmark rows are required for fair ETF comparison.
+- Approximate stop-enforced values should not drive final decisions.
+- Stop-enforced equity is more relevant than unconditional final equity.
+- Taxes are ignored.
+- Cash yield is simplified.
+- Live execution may differ materially.
+- Excluded instruments are not tested.
+- No strategy here is validated, guaranteed, proven, reliable, paper-forward ready, or real-money suitable.
+- Risk Framework v1 treats +$300 as the primary challenge target, +$400 as aggressive, -10% as warning, -15% as review, and -20%/-$600 as hard stop.
+- Exposure above 1.00x is diagnostic only and is not paper-forward eligible under the active risk framework.

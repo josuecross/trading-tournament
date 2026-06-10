@@ -1,0 +1,4 @@
+variant_name,slippage_label,final_equity,total_return,max_drawdown_dollars,max_drawdown_pct,target_300_before_any_stop,target_400_before_any_stop,any_project_stop_hit,number_of_trades,profit_factor,stress_delta_if_available,passed_gate,gate_status,gate_failure_reasons
+current_no_cash_proxy_alpha_AB,standard,3392.201266116984,0.130733755372328,-609.8106389975896,-0.15237601822679525,True,True,True,190,1.1377958604258875,,True,pass,
+evidence_dual_momentum_taa,standard,3087.1352203814986,0.02904507346049945,-638.9696644646519,-0.17148461576143603,True,True,True,295,1.0171191893723737,,True,pass,
+original_full_tournament,standard,3508.173544919093,0.16939118163969757,-600.7231427340985,-0.17617515395148697,True,True,True,368,1.1380626257652056,,True,reference_only,legacy full tournament is retained as reference only

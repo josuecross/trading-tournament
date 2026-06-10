@@ -1,0 +1,3 @@
+symbol,duplicate_date_count,missing_adjusted_close_count,missing_close_count,missing_volume_count,max_calendar_gap_days_gt_4,gap_notes
+DBMF,0,0,0,0,0,calendar gaps over weekends/holidays are expected; max only flags long gaps
+KMLM,0,0,0,0,0,calendar gaps over weekends/holidays are expected; max only flags long gaps

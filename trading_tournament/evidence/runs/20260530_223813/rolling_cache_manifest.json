@@ -1,0 +1,28 @@
+{
+  "entries": [
+    {
+      "cache_file": "/Users/jcruzlopez/trading/trading_tournament/evidence/cache/rolling/942f7b0e150bc7de24f0f84b54854f303928e54889bac39679fb234aa0e0eae1.csv",
+      "cache_hit": false,
+      "cache_key": "942f7b0e150bc7de24f0f84b54854f303928e54889bac39679fb234aa0e0eae1",
+      "horizon_trading_days": 90,
+      "rolling_method": "deterministic_stratified_sample",
+      "rows_loaded": 0,
+      "rows_written": 24,
+      "slippage_label": "standard",
+      "validation_mode": "smoke",
+      "variant_name": "current_no_cash_proxy_alpha_AB"
+    },
+    {
+      "cache_file": "/Users/jcruzlopez/trading/trading_tournament/evidence/cache/rolling/dec29fa3ffa4a2df41bdbc175c955d762db2b5c702eb199aa7cacbcf69f35fb8.csv",
+      "cache_hit": false,
+      "cache_key": "dec29fa3ffa4a2df41bdbc175c955d762db2b5c702eb199aa7cacbcf69f35fb8",
+      "horizon_trading_days": 90,
+      "rolling_method": "deterministic_stratified_sample",
+      "rows_loaded": 0,
+      "rows_written": 24,
+      "slippage_label": "standard",
+      "validation_mode": "smoke",
+      "variant_name": "evidence_dual_momentum_taa"
+    }
+  ]
+}

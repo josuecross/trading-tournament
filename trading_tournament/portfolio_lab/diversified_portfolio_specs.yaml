@@ -1,0 +1,91 @@
+portfolio_lab:
+  schema_version: 1
+  research_only: true
+  real_money_recommendation: false
+  broker_integration: false
+  live_orders: false
+  rebalance_frequency: monthly
+  fixed_weights: true
+  parameter_optimization: false
+  grid_search: false
+  no_leverage: true
+  no_shorting: true
+  no_margin: true
+
+portfolios:
+  - id: portfolio_spy200d_100_v1
+    role: baseline_candidate
+    tier: tier3_candidate_validation_if_exhaustive
+    sleeves:
+      SPY_200d_trend_model: 1.00
+
+  - id: portfolio_spy200d_80_bil_20_v1
+    role: defensive_mix
+    tier: tier2_credible_prototype
+    sleeves:
+      SPY_200d_trend_model: 0.80
+      BIL_cash_proxy: 0.20
+
+  - id: portfolio_spy200d_70_bil_30_v1
+    role: defensive_mix
+    tier: tier2_credible_prototype
+    sleeves:
+      SPY_200d_trend_model: 0.70
+      BIL_cash_proxy: 0.30
+
+  - id: portfolio_spy200d_60_ief_20_bil_20_v1
+    role: bond_defensive_mix
+    tier: tier2_credible_prototype
+    sleeves:
+      SPY_200d_trend_model: 0.60
+      IEF_buy_hold: 0.20
+      BIL_cash_proxy: 0.20
+
+  - id: portfolio_spy200d_70_gld_15_bil_15_v1
+    role: gold_defensive_mix
+    tier: tier2_credible_prototype
+    sleeves:
+      SPY_200d_trend_model: 0.70
+      GLD_buy_hold: 0.15
+      BIL_cash_proxy: 0.15
+
+  - id: portfolio_spy200d_60_ief_20_gld_10_bil_10_v1
+    role: multi_asset_defensive_mix
+    tier: tier2_credible_prototype
+    sleeves:
+      SPY_200d_trend_model: 0.60
+      IEF_buy_hold: 0.20
+      GLD_buy_hold: 0.10
+      BIL_cash_proxy: 0.10
+
+  - id: portfolio_spy200d_80_ab_20_v1
+    role: strategy_diversification_mix
+    tier: tier2_credible_prototype
+    sleeves:
+      SPY_200d_trend_model: 0.80
+      current_no_cash_proxy_alpha_AB: 0.20
+
+  - id: portfolio_spy200d_70_ab_20_bil_10_v1
+    role: strategy_diversification_mix
+    tier: tier2_credible_prototype
+    sleeves:
+      SPY_200d_trend_model: 0.70
+      current_no_cash_proxy_alpha_AB: 0.20
+      BIL_cash_proxy: 0.10
+
+  - id: portfolio_spy200d_80_crypto_tsmom_10_bil_10_v1
+    role: exploratory_crypto_satellite_mix
+    tier: tier1_exploratory
+    sleeves:
+      SPY_200d_trend_model: 0.80
+      crypto_time_series_momentum: 0.10
+      BIL_cash_proxy: 0.10
+
+  - id: portfolio_spy200d_70_crypto_tsmom_10_ief_10_bil_10_v1
+    role: exploratory_crypto_satellite_mix
+    tier: tier1_exploratory
+    sleeves:
+      SPY_200d_trend_model: 0.70
+      crypto_time_series_momentum: 0.10
+      IEF_buy_hold: 0.10
+      BIL_cash_proxy: 0.10

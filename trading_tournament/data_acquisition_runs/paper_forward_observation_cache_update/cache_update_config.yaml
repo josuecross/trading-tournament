@@ -1,0 +1,32 @@
+subject_id: combo_SPY200d_GLD_50_50_v1_observation_activation
+provider: yfinance_compatible
+download_purpose: paper_forward_observation_cache_freshness_only
+strategy_implementation_allowed: false
+backtest_allowed: false
+profit_exploration_allowed: false
+paper_forward_observation_allowed_after_cache_update: true
+broker_integration: false
+live_orders: false
+order_placement: false
+real_money_recommendation: false
+raw_data_in_advisor_packet: false
+
+allowed_symbols:
+  - SPY
+  - GLD
+  - BIL
+
+requested_activation_date: 2026-06-05
+canonical_rule_hash: 6695f0d3ec403e2f377d99f3f63d1fc57a66f45f2c27a9072ab8c0a60a19ee67
+strategy_id: combo_SPY200d_GLD_50_50_v1
+comparison_control: SPY_200d_trend_model
+
+request_settings:
+  start: 2007-01-01
+  auto_adjust: false
+  actions: true
+  progress: false
+  multi_level_index: false
+
+cache:
+  target_root: data/cache

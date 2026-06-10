@@ -1,0 +1,26 @@
+research_only: true
+real_money_recommendation: false
+broker_integration: false
+live_orders: false
+mode: research_sample
+starting_equity: 3000.0
+targets:
+  '300': 3300.0
+  '400': 3400.0
+  '600': 3600.0
+  '900': 3900.0
+  '1200': 4200.0
+absolute_stop_equity: 2400.0
+trailing_drawdown_dollars: 600.0
+project_stop_mode: both
+standard_and_stress_costs:
+  standard: 0.0005
+  stress: 0.001
+include_fixed_combinations: true
+include_crypto_exploratory: false
+include_blocked: true
+raw_data_in_evidence: false
+parameter_optimization: false
+grid_search: false
+notes: Profit exploration uses fixed predeclared experiments with independent $3,000
+  paper/demo accounts.

@@ -1,0 +1,26 @@
+# Warnings And Limitations
+
+- Research-only paper/demo evidence.
+- No real-money recommendation.
+- No broker integration, live orders, exchange trading, or order placement.
+- Profit exploration is not paper-forward and does not alter frozen paper-forward rules.
+- +$300/+400 are hurdles, not proof of reliability.
+- Stop-aware profit matters more than raw final equity.
+- Crypto rows, if included, remain Tier 1 exploratory only.
+- Blocked families are reported but not run.
+- Incomplete rows are not approximated from summary metrics.
+- Fixed combinations are independent experiment accounts, not allocation advice.
+- No raw OHLCV is copied into this compact evidence packet.
+- Profit League rankings are invalid if accounting integrity fails.
+- Fresh $3,000 rebasing is required for every rolling window.
+- Full-period equity slices cannot be used as rolling-window equity.
+- Duplicate canonical rule hashes are skipped and not counted as independent evidence.
+- Candidate Exhaustive Queue entries are research_sample leads only, not validation or paper-forward approval.
+- Reduced validation packets can be exact for selected horizons while remaining non-final across omitted horizons.
+- A 90/180 reduced validation packet is not full 30/60/90/180 candidate validation.
+- Score v2 changes ranking interpretation only.
+- Score v2 does not change strategy results.
+- Reduced 90/180 validation remains non-final.
+- Full 30/60/90/180 candidate_exhaustive is still needed before promotion.
+- No paper-forward rule changes.
+- No real-money recommendation.

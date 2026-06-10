@@ -1,0 +1,40 @@
+promotion:
+  challenge_targets:
+    starting_equity: 3000
+    target_300_equity: 3300
+    target_400_equity: 3400
+    max_loss_budget_dollars: 600
+  minimum_candidate_exhaustive_requirements:
+    min_90d_target_300_before_stop_rate: 0.1
+    min_90d_target_400_before_stop_rate: 0.03
+    max_90d_stop_hit_rate: 0.1
+    max_worst_drawdown_dollars: 600
+    require_no_real_money_claim: true
+    require_not_paper_forward_active_by_default: true
+    require_no_broker_integration: true
+    require_not_duplicate_of_existing_leader: true
+  alternative_promotion_path:
+    allow_lower_target_rate_if_drawdown_improves_materially: true
+    min_target_300_rate_ratio_vs_leader: 0.75
+    required_drawdown_improvement_vs_leader: 0.25
+  duplicate_detection:
+    max_target_window_overlap_with_existing_leader: 0.75
+    max_drawdown_window_overlap_with_existing_leader: 0.75
+    max_correlation_with_existing_leader: 0.85
+  risk_budget:
+    max_drawdown_budget_dollars: 600
+    max_drawdown_budget_pct: 0.2
+    require_absolute_and_trailing_stop_review: true
+  promotion_decisions:
+    allowed:
+    - promote_to_candidate_exhaustive_queue
+    - promotion_review_required
+    - keep_watchlist
+    - keep_active_observation
+    - keep_frozen_control
+    - mark_historical_leader
+    - mark_duplicate_or_near_duplicate
+    - mark_too_risky
+    - mark_too_slow
+    - blocked
+    - reject

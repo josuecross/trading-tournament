@@ -1,0 +1,124 @@
+research_only: true
+real_money_recommendation: false
+risk_framework:
+  name: balanced_speculative_research_v1
+  primary_challenge_target: 3300.0
+  aggressive_challenge_target: 3400.0
+  warning_drawdown_dollars: 300
+  review_drawdown_dollars: 450
+  hard_stop_drawdown_dollars: 600.0
+  exposure_above_1x: diagnostic_only
+account:
+  starting_equity: 3000.0
+  target_300_equity: 3300.0
+  target_400_equity: 3400.0
+  absolute_stop_equity: 2400.0
+  trailing_drawdown_dollars: 600.0
+  project_stop_mode: both
+  independent_account_per_row: true
+validation:
+  mode: candidate_exhaustive
+  finalists:
+  - SPY_200d_trend_model
+  rolling_method_default: all_possible for focused candidate_exhaustive where computable;
+    deterministic research_sample otherwise
+  sampled_results_are_final: false
+  exhaustive_validation: true
+  final_validation_completed: false
+  incomplete_reason: Focused candidate_exhaustive is incomplete because selected ETF
+    finalist all_possible rolling is unavailable from compact evidence or runtime
+    budget was exceeded.
+costs:
+  etf_standard_slippage_per_side: 0.0005
+  etf_stress_slippage_per_side: 0.001
+  crypto_standard_fee_slippage_per_side: 0.001
+  crypto_stress_fee_slippage_per_side: 0.003
+leverage:
+  included: false
+  model: approximate_simulated_leverage only
+  multipliers:
+  - 1.0
+  financing_annualized:
+    1.0: 0.0
+    1.5: 0.05
+    2.0: 0.08
+  no_margin_account: true
+  no_liquidation_engine: true
+simulated_etf_leverage:
+  enabled: false
+  model: approximate_return_multiplier
+  multipliers: []
+  financing_cost_annualized:
+    '1.25': 0.05
+    '1.5': 0.08
+  cost_model_quality: approximate
+  real_margin_model: false
+  liquidation_model: false
+  real_money_recommendation: false
+  notes: Diagnostic only. Not a real leverage product, margin model, or trading recommendation.
+simulated_etf_exposure_frontier:
+  enabled: false
+  model: approximate_return_multiplier
+  exposure_multipliers: []
+  financing_cost_annualized:
+    '1.00': 0.0
+    '1.05': 0.04
+    '1.10': 0.05
+    '1.15': 0.06
+    '1.20': 0.07
+    '1.25': 0.08
+  cost_model_quality: approximate
+  real_margin_model: false
+  liquidation_model: false
+  real_money_recommendation: false
+  notes: Diagnostic only. Not a real leverage product, margin model, or trading recommendation.
+etf_volatility_control_diagnostic:
+  enabled: false
+  target_vol_annualized: 0.12
+  realized_vol_window_trading_days: 60
+  exposure_caps: []
+  cap_1_00:
+    financing_cost_annualized: 0.0
+    real_margin_model: false
+  cap_1_10:
+    financing_cost_annualized: 0.05
+    financing_applies_only_above_1x: true
+    cost_model_quality: approximate
+    real_margin_model: false
+    liquidation_model: false
+  parameter_optimization: false
+  grid_search: false
+  paper_forward_allowed: false
+  real_money_recommendation: false
+  notes: Predeclared Tier 1 diagnostic only. Not a paper-forward strategy and not
+    a real-money recommendation.
+diversified_portfolio_challenge:
+  enabled: true
+  include_exploratory_crypto_portfolios: false
+  portfolio_specs_path: portfolio_lab/diversified_portfolio_specs.yaml
+  rebalance_frequency: monthly
+  fixed_weights: true
+  parameter_optimization: false
+  grid_search: false
+  no_leverage: true
+  no_shorting: true
+  no_margin: true
+  raw_data_in_evidence: false
+  standard_and_stress_costs: true
+  unavailable_sleeve_policy: allocate_to_bil_or_cash_and_flag
+  paper_forward_allowed: false
+  real_money_recommendation: false
+  notes: Fixed predeclared portfolio diagnostics only. Not a paper-forward change.
+lanes:
+  include_etf: true
+  include_crypto: false
+  include_benchmarks: true
+  include_diversified_portfolios: true
+  include_exploratory_crypto_portfolios: false
+caveats:
+- No raw vendor data in evidence.
+- Focused candidate_exhaustive ETF finalist and benchmark stop-enforced values are
+  exact; other compact ETF evidence rows may be approximated when equity curves are
+  unavailable.
+- Crypto is Tier 1 exploratory and non-final.
+- No broker, exchange, live order, or real-money workflow.

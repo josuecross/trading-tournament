@@ -1,0 +1,4 @@
+rank_stop_aware_practical,rank_profit_seeking,rank_drawdown_control,combination_id,verdict,run_status,balanced_drawdown_aware_score_v2,profit_seeking_score,drawdown_control_score,deserves_candidate_exhaustive,notes
+1,2,2,combo_plus_managed_futures_80_20_v1,too_slow,completed,218.54205748211135,246.79550079390705,273.850726448607,False,research-sample-only fixed combination; historical result is too slow or dilutive versus current leaders
+2,4,3,top2_plus_managed_futures_80_20_v1,too_slow,completed,203.70400544992145,229.5854734178743,271.0538696196106,False,research-sample-only fixed combination; historical result is too slow or dilutive versus current leaders
+3,6,5,combo_plus_top2_50_50_v1,too_slow,completed,100.46829624972654,166.02050569099276,224.98323124225087,False,research-sample-only fixed combination; historical result is too slow or dilutive versus current leaders

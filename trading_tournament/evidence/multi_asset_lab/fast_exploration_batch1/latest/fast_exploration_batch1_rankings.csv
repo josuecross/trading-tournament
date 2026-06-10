@@ -1,0 +1,4 @@
+rank_overall,rank_stop_aware_practical,rank_profit_seeking,rank_drawdown_control,experiment_id,verdict,run_status,balanced_drawdown_aware_score_v2,profit_seeking_score,drawdown_control_score,deserves_candidate_exhaustive,notes
+6,5,5,8,global_multi_asset_tsmom_top2_v1,research_sample_candidate_risk_budget_breach,completed,-61.49733924949899,109.93436928794131,-77.79486433947622,False,global multi-asset row remains high-upside/high-risk watchlist; no candidate_exhaustive queue
+8,8,8,6,global_multi_asset_tsmom_top2_defensive_50_v1,watchlist,completed,-198.7602651665232,-177.52268509234256,-23.98821402745682,False,global multi-asset row is watchlist only; not validated and not paper-forward ready
+7,7,7,7,combo_plus_global_multi_asset_80_20_v1,watchlist,completed,-119.0432346165984,-58.91758956069239,-51.18801082313746,False,global multi-asset row is watchlist only; not validated and not paper-forward ready

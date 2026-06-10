@@ -1,0 +1,20 @@
+{
+  "packet_name": "qqq_spy_gld_ief_dual_momentum_v1_implementation_review",
+  "created_date": "2026-06-04",
+  "research_only": true,
+  "decision": "approve_research_sample_implementation",
+  "candidate_id": "qqq_spy_gld_ief_dual_momentum_v1",
+  "implementation_created": false,
+  "backtests_run": false,
+  "data_downloaded": false,
+  "qqq_cached": true,
+  "qqq_rows": 4882,
+  "common_overlap_rows": 4781,
+  "paper_forward_active": false,
+  "strategy_rules_changed": false,
+  "broker_integration": false,
+  "live_orders": false,
+  "real_money_recommendation": false,
+  "notes": "Implementation review only. Future research_sample prompt may be created, but no code is approved here."
+}
+

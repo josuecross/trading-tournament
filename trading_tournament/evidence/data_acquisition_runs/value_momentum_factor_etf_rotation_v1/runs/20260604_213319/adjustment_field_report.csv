@@ -1,0 +1,7 @@
+symbol,adjusted_close_available,raw_close_available,dividends_available,splits_available,adjusted_ohlc_constructible,adjustment_notes
+MTUM,True,True,True,True,True,adjusted OHLC constructed from raw OHLC and adjusted close
+VLUE,True,True,True,True,True,adjusted OHLC constructed from raw OHLC and adjusted close
+VTV,True,True,True,True,True,adjusted OHLC constructed from raw OHLC and adjusted close
+QUAL,True,True,True,True,True,adjusted OHLC constructed from raw OHLC and adjusted close
+USMV,True,True,True,True,True,adjusted OHLC constructed from raw OHLC and adjusted close
+SPLV,True,True,True,True,True,adjusted OHLC constructed from raw OHLC and adjusted close

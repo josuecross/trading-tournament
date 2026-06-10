@@ -1,0 +1,34 @@
+{
+  "broker_integration": false,
+  "cache_target_root": "data/cache",
+  "live_orders": false,
+  "order_placement": false,
+  "package_versions": {
+    "PyYAML": "6.0.3",
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "yfinance": "1.4.1"
+  },
+  "provider": "yfinance_compatible",
+  "provider_id": "yfinance_compatible",
+  "python_version": "3.14.4",
+  "raw_ohlcv_in_evidence": false,
+  "real_money_recommendation": false,
+  "request_settings": {
+    "actions": true,
+    "auto_adjust": false,
+    "multi_level_index": false,
+    "progress": false,
+    "start": "2006-01-01",
+    "timeout": 30
+  },
+  "run_id": "20260607_184938",
+  "symbols": [
+    "DBC",
+    "PDBC",
+    "COMT",
+    "GSG",
+    "USCI"
+  ],
+  "timestamp": "2026-06-07T18:49:47.034522+00:00"
+}

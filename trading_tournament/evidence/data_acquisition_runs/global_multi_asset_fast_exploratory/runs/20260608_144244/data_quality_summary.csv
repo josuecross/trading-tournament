@@ -1,0 +1,15 @@
+symbol,cached_or_downloaded,cache_written,row_count,first_date,last_date,duplicate_date_count,missing_adjusted_close_count,missing_close_count,missing_volume_count,adjusted_close_available,raw_close_available,volume_available,enough_rows_for_126d_momentum,enough_rows_for_200d_sma,enough_rows_for_180d_after_warmup,quality_status,notes
+SPY,True,True,4887,2007-01-03,2026-06-05,0,0,0,0,True,True,True,True,True,True,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+QQQ,True,True,4882,2007-01-03,2026-05-29,0,0,0,0,True,True,True,True,True,True,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+GLD,True,True,4887,2007-01-03,2026-06-05,0,0,0,0,True,True,True,True,True,True,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+IEF,True,True,4882,2007-01-03,2026-05-29,0,0,0,0,True,True,True,True,True,True,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+BIL,True,True,4786,2007-05-30,2026-06-05,0,0,0,0,True,True,True,True,True,True,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+DBC,True,True,5115,2006-02-06,2026-06-05,0,0,0,0,True,True,True,True,True,True,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+PDBC,True,True,2910,2014-11-07,2026-06-05,0,0,0,0,True,True,True,True,True,True,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+COMT,True,True,2926,2014-10-16,2026-06-05,0,0,0,0,True,True,True,True,True,True,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+GSG,True,True,5000,2006-07-21,2026-06-05,0,0,0,0,True,True,True,True,True,True,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+USCI,True,True,3980,2010-08-10,2026-06-05,0,0,0,0,True,True,True,True,True,True,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+IWM,True,True,4882,2007-01-03,2026-05-29,0,0,0,0,True,True,True,True,True,True,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+EFA,True,True,5139,2006-01-03,2026-06-08,0,0,0,0,True,True,True,True,True,True,pass,missing approved symbol downloaded and cached; exploratory ETF/fund wrapper QA passed
+EEM,True,True,5139,2006-01-03,2026-06-08,0,0,0,0,True,True,True,True,True,True,pass,missing approved symbol downloaded and cached; exploratory ETF/fund wrapper QA passed
+TLT,True,True,4882,2007-01-03,2026-05-29,0,0,0,0,True,True,True,True,True,True,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed

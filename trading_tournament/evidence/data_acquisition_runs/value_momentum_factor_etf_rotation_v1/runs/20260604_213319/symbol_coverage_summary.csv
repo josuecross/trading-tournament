@@ -1,0 +1,7 @@
+symbol,downloaded,cache_written,row_count,first_date,last_date,common_overlap_with_cached_SPY_BIL,common_overlap_row_count,coverage_notes
+MTUM,True,True,3303,2013-04-18,2026-06-04,2013-04-18 to 2026-05-29,3299,pass
+VLUE,True,True,3303,2013-04-18,2026-06-04,2013-04-18 to 2026-05-29,3299,pass
+VTV,True,True,4886,2007-01-03,2026-06-04,2007-05-30 to 2026-05-29,4781,pass
+QUAL,True,True,3240,2013-07-18,2026-06-04,2013-07-18 to 2026-05-29,3236,pass
+USMV,True,True,3676,2011-10-20,2026-06-04,2011-10-20 to 2026-05-29,3672,pass
+SPLV,True,True,3793,2011-05-05,2026-06-04,2011-05-05 to 2026-05-29,3789,pass

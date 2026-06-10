@@ -1,0 +1,15 @@
+symbol,cached_or_downloaded,cache_written,source_status,row_count,first_date,last_date,coverage_status,notes
+SPY,True,True,cache_confirmed,4887,2007-01-03,2026-06-05,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+QQQ,True,True,cache_confirmed,4882,2007-01-03,2026-05-29,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+GLD,True,True,cache_confirmed,4887,2007-01-03,2026-06-05,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+IEF,True,True,cache_confirmed,4882,2007-01-03,2026-05-29,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+BIL,True,True,cache_confirmed,4786,2007-05-30,2026-06-05,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+DBC,True,True,cache_confirmed,5115,2006-02-06,2026-06-05,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+PDBC,True,True,cache_confirmed,2910,2014-11-07,2026-06-05,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+COMT,True,True,cache_confirmed,2926,2014-10-16,2026-06-05,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+GSG,True,True,cache_confirmed,5000,2006-07-21,2026-06-05,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+USCI,True,True,cache_confirmed,3980,2010-08-10,2026-06-05,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+IWM,True,True,cache_confirmed,4882,2007-01-03,2026-05-29,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed
+EFA,True,True,downloaded_yfinance_compatible,5139,2006-01-03,2026-06-08,pass,missing approved symbol downloaded and cached; exploratory ETF/fund wrapper QA passed
+EEM,True,True,downloaded_yfinance_compatible,5139,2006-01-03,2026-06-08,pass,missing approved symbol downloaded and cached; exploratory ETF/fund wrapper QA passed
+TLT,True,True,cache_confirmed,4882,2007-01-03,2026-05-29,pass,existing local cache confirmed; exploratory ETF/fund wrapper QA passed

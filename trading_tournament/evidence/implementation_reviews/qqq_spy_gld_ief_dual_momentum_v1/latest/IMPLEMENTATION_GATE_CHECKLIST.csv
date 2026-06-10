@@ -1,0 +1,11 @@
+gate_name,status,evidence,blocker,required_next_action
+evidence_gate,conditional,"Queue prior plus full finalist validation context","No project evidence yet for QQQ strategy","Implement only as research_sample after prompt approval"
+data_gate,pass,"QQQ cache metadata: 4,882 rows; common overlap 4,781 rows","None found in cache review","Use cache only; no download"
+execution_realism_gate,pass,"Daily ETF adjusted-price engine can model ETF rotation","Must preserve no-lookahead and next-day weights","Reuse existing ETF timing conventions"
+risk_model_gate,conditional,"Equity beta and drawdown risks identified","QQQ may raise drawdown/stop risk","Report stop, drawdown, risk-budget, stress metrics"
+benchmark_gate,pass,"Primary and secondary benchmarks defined","None","Compare to top2, combo, SPY_200d, SPY, GLD, BIL"
+diversification_gate,conditional,"QQQ diversification value uncertain","May duplicate equity momentum","Report QQQ/SPY allocation concentration"
+complexity_gate,pass,"Single fixed ETF rotation candidate","No parameter grid allowed","One fixed rule only"
+target_potential_gate,conditional,"QQQ growth exposure may improve upside","Target gain may be beta-driven","Require stop-aware improvement"
+anti_overfitting_gate,pass,"No tuning approved","Any lookback/SMA tuning would fail","Use fixed predeclared parameters only"
+

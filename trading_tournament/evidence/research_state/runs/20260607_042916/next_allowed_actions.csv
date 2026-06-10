@@ -1,0 +1,8 @@
+action,allowed_now,lane,notes
+create_combination_design_implementation_review,true,historical_research,Preferred next historical strategy path; review only before coding.
+improve_correlation_and_co_movement_diagnostics,true,diagnostics,Plan/design or reporting-only work; no strategy rules changed.
+use_attribution_diagnostics_before_future_combination_candidate_exhaustive_review,true,diagnostics,Attribution diagnostics should be reviewed before any future combination candidate_exhaustive prompt.
+provider_cost_review_for_individual_stock_momentum_gate1b,true,individual_stock_momentum_gate1b,Provider/cost/access review only; no stock implementation or data download.
+judge_combo_forward_observation,false,paper_forward,Not before 30 trading days; current status is inconclusive_too_early.
+tune_active_combo,false,paper_forward,Active combo rules are frozen.
+replace_spy200d,false,paper_forward_governance,SPY_200d remains frozen control.

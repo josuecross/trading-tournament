@@ -1,0 +1,4 @@
+symbol,cache_path,rows_written,sha256,write_status
+SPY,data/cache/SPY.csv,4887,7ba676562aafa7795874ba04db63241c45d7a61e4db29f800f9cbbe7871b4cfc,written_merged_refresh
+GLD,data/cache/GLD.csv,4887,86bfcbb950182721de08580449e0bc17ba33a38b3498a1854a201ff1cb95594c,written_merged_refresh
+BIL,data/cache/BIL.csv,4786,1945812df681efae2fb4645313d96506f3f87bf7f578f3bd59a105e464e5db19,written_merged_refresh

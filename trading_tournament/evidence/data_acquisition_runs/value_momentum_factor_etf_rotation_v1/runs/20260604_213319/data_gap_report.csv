@@ -1,0 +1,7 @@
+symbol,duplicate_date_count,missing_adjusted_close_count,missing_close_count,missing_volume_count,max_calendar_gap_days_gt_4,gap_notes
+MTUM,0,0,0,0,0,calendar gaps over weekends/holidays are expected; max only flags long gaps
+VLUE,0,0,0,0,0,calendar gaps over weekends/holidays are expected; max only flags long gaps
+VTV,0,0,0,0,5,calendar gaps over weekends/holidays are expected; max only flags long gaps
+QUAL,0,0,0,0,0,calendar gaps over weekends/holidays are expected; max only flags long gaps
+USMV,0,0,0,0,5,calendar gaps over weekends/holidays are expected; max only flags long gaps
+SPLV,0,0,0,0,5,calendar gaps over weekends/holidays are expected; max only flags long gaps

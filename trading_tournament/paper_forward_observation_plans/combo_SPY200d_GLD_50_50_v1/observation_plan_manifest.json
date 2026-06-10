@@ -1,0 +1,20 @@
+{
+  "backtest_run": false,
+  "broker_integration": false,
+  "created_date": "2026-06-05",
+  "data_downloaded": false,
+  "decision": "approve_future_paper_forward_observation_activation_prompt",
+  "latest_folder_file_count": 10,
+  "live_orders": false,
+  "observation_activated": false,
+  "observation_id": "combo_SPY200d_GLD_50_50_v1_observation_plan_v1",
+  "paper_forward_active_set_true": false,
+  "paper_forward_rule_changed": false,
+  "profit_exploration_run": false,
+  "real_money_recommendation": false,
+  "review_type": "paper_forward_observation_plan_review",
+  "spy200d_replaced": false,
+  "strategy_id": "combo_SPY200d_GLD_50_50_v1",
+  "strategy_implemented": false
+}
+

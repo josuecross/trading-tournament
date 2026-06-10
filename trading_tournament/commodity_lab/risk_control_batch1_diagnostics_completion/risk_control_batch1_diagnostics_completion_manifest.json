@@ -1,0 +1,32 @@
+{
+  "active_combo_rule_changed": false,
+  "audited_candidate": "combo_plus_commodity_basket_80_20_v1",
+  "backtest_run": false,
+  "broker_integration": false,
+  "candidate_exhaustive_review_recommended": false,
+  "candidate_exhaustive_run": false,
+  "commodity_80_20_incremental_value_label": "possible_incremental_target_value;mostly_combo_with_small_commodity_tilt",
+  "component_contribution_status": "partial_available_final_equity_window_contribution",
+  "data_downloaded": false,
+  "decision": "diagnostics_support_watchlist_only_for_combo_plus_commodity_80_20",
+  "diagnostics_detail_file": "commodity_risk_control_diagnostics_detail.csv",
+  "diagnostics_only_profit_exploration_run": true,
+  "direct_futures_contract_logic": false,
+  "drawdown_overlap_status": "available",
+  "filter_effectiveness_status": "filter_bound_but_not_risk_reducing",
+  "latest_folder_file_count": 10,
+  "live_orders": false,
+  "new_commodity_variants_added": false,
+  "new_symbols_added": false,
+  "order_placement": false,
+  "paper_forward_rule_changed": false,
+  "profit_exploration_latest_rewritten": false,
+  "real_money_recommendation": false,
+  "row_count": 471,
+  "spy200d_replaced": false,
+  "strategy_implemented": false,
+  "strategy_lab_status_changes": {
+    "combo_plus_commodity_basket_80_20_v1": "watchlist"
+  },
+  "target_window_comovement_status": "available"
+}

@@ -1,0 +1,70 @@
+framework:
+  name: profit_exploration_league_v1
+  research_only: true
+  real_money_recommendation: false
+  broker_integration: false
+  live_orders: false
+
+account:
+  starting_equity: 3000
+  target_300_equity: 3300
+  target_400_equity: 3400
+  target_600_equity: 3600
+  target_900_equity: 3900
+  target_1200_equity: 4200
+  absolute_stop_equity: 2400
+  trailing_drawdown_dollars: 600
+  project_stop_mode: both
+
+interpretation:
+  target_300: minimum_success_hurdle
+  target_400: strong_success_hurdle
+  target_600: exceeds_expectation
+  target_900: high_outperformance
+  target_1200: extreme_outperformance
+
+primary_objective:
+  - maximize_stop_enforced_final_equity
+  - maximize_median_rolling_final_equity
+  - maximize_upside_tail_without_unacceptable_stop_risk
+  - pass_300_and_400_hurdles_often_enough
+
+secondary_objective:
+  - minimize_stop_hit_rate
+  - minimize_worst_drawdown
+  - survive_stress_costs
+  - beat_simple_benchmarks
+
+disallowed_interpretations:
+  - one_target_hit_is_proof
+  - full_period_equity_is_enough
+  - exploratory_result_is_validated
+  - high_profit_with_high_stop_rate_is_automatically_good
+  - real_money_recommendation
+
+ranking_metrics:
+  essential:
+    - p_target_300_before_stop
+    - p_target_400_before_stop
+    - p_target_600_before_stop
+    - median_stop_enforced_final_equity
+    - mean_stop_enforced_final_equity
+    - p_any_project_stop_hit
+    - worst_rolling_drawdown
+    - stress_degradation
+  upside:
+    - p_target_900_before_stop
+    - p_target_1200_before_stop
+    - p95_stop_enforced_final_equity
+    - max_stop_enforced_final_equity
+  risk:
+    - stop_hit_rate
+    - worst_drawdown
+    - median_drawdown
+    - risk_band
+    - stop_overshoot
+  finality:
+    - evidence_tier
+    - sampled_or_exact
+    - final_validation_completed
+    - data_quality_flag

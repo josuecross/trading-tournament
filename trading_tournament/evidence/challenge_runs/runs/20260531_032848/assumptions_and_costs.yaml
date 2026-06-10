@@ -1,0 +1,43 @@
+research_only: true
+real_money_recommendation: false
+account:
+  starting_equity: 3000.0
+  target_300_equity: 3300.0
+  target_400_equity: 3400.0
+  absolute_stop_equity: 2400.0
+  trailing_drawdown_dollars: 600.0
+  project_stop_mode: both
+  independent_account_per_row: true
+validation:
+  mode: research_sample
+  rolling_method_default: deterministic research_sample unless source evidence says
+    otherwise
+  sampled_results_are_final: false
+  exhaustive_validation: false
+costs:
+  etf_standard_slippage_per_side: 0.0005
+  etf_stress_slippage_per_side: 0.001
+  crypto_standard_fee_slippage_per_side: 0.001
+  crypto_stress_fee_slippage_per_side: 0.003
+leverage:
+  included: true
+  model: approximate_simulated_leverage only
+  multipliers:
+  - 1.0
+  - 1.5
+  - 2.0
+  financing_annualized:
+    1.0: 0.0
+    1.5: 0.05
+    2.0: 0.08
+  no_margin_account: true
+  no_liquidation_engine: true
+lanes:
+  include_etf: true
+  include_crypto: true
+caveats:
+- No raw vendor data in evidence.
+- ETF compact stop-enforced values may be approximated from summary evidence when
+  equity curves are unavailable.
+- Crypto is Tier 1 exploratory and non-final.
+- No broker, exchange, live order, or real-money workflow.

@@ -1,0 +1,4 @@
+symbol,downloaded_or_refreshed,cache_written,row_count,first_date,last_date,duplicate_date_count,missing_adjusted_close_count,missing_close_count,missing_volume_count,adjusted_close_available,raw_close_available,dividends_available,splits_available,adjusted_ohlc_constructible,supports_requested_activation_date,quality_status,quality_notes
+SPY,True,True,4887,2007-01-03,2026-06-05,0,0,0,0,True,True,True,True,True,True,pass,pass
+GLD,True,True,4887,2007-01-03,2026-06-05,0,0,0,0,True,True,True,True,True,True,pass,pass
+BIL,True,True,4786,2007-05-30,2026-06-05,0,0,0,0,True,True,True,True,True,True,pass,pass

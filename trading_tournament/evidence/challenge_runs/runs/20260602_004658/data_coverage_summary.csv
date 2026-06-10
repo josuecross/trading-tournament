@@ -1,0 +1,2 @@
+lane,data_source,symbols,start_date,end_date,row_count,missing_data_notes,adjusted_or_unadjusted,raw_data_included_in_evidence,major_limitations
+independent_family_challenge,data/cache adjusted ETF prices plus blocked-family memo specs,"BIL,GLD,IEF,SPY",2007-01-03,2026-05-29,19427,Exact A/B and ETF sector momentum streams use existing Backtester adapters when available; blocked families are reported but not run.,adjusted close for runnable ETF benchmark-like families,False,"Family rows are independent $3,000 accounts and are not a blended portfolio allocation."

@@ -1,0 +1,10 @@
+check,passed,notes
+framework_loads,True,
+research_only_boundary,True,
+no_real_money_recommendation,True,
+targets_defined,True,
+risk_bands_defined,True,
+exposure_policy_defined,True,
+instrument_budgets_defined,True,
+promotion_blocks_defined,True,
+validation_passed,True,

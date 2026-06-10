@@ -1,0 +1,10 @@
+gate_name,status,evidence,blocker,required_next_action
+evidence_gate,conditional,"Momentum and sector dispersion are plausible, but project-specific sector evidence remains blocked by the A fresh-window stream issue.","No direct research_sample evidence for this clean rule exists.","Create a future fixed-rule implementation prompt only after universe policy is explicit."
+data_gate,pass,"Core nine sector ETFs are cached from 2007-01-03 to 2026-05-29, and the first-rule policy excludes late-inception XLC and missing XLRE.","None for the fixed core-nine first implementation.","Use only core-nine sectors plus BIL fallback."
+execution_realism_gate,pass,"Daily ETF cache with monthly rebalance is compatible with the project engine in principle.","None for the clean minimal ETF version.","Keep daily ETF, no leverage, no shorting, no margin."
+risk_model_gate,pass,"The current $3,000 target ladder and -$600 stop budget can evaluate sector ETF windows.","None identified for the clean minimal version.","Preserve fresh-window accounting checks."
+benchmark_gate,pass,"Primary benchmark is combo_SPY200d_GLD_50_50_v1; secondary benchmarks include top2, SPY_200d, SPY/BIL, A if exact stream exists, QQQ, and value/momentum.","None.","Use these benchmarks in any future research_sample report."
+diversification_gate,conditional,"Sector dispersion may add target probability, but the candidate may mostly express U.S. equity beta.","Duplicate/equity-beta risk remains unresolved.","Require correlation and concentration diagnostics."
+complexity_gate,pass,"A clean minimal top-2 sector rule can be fixed and explainable without modifying A.","Future prompt must avoid variants and parameter grids.","Implement one fixed rule only if approved later."
+target_potential_gate,conditional,"Sector dispersion can plausibly improve +300/+400 rates, but no project result exists for the clean rule.","No research_sample evidence yet.","Run research_sample only if future prompt is approved."
+anti_overfitting_gate,pass,"The review rejects grids, variants, and after-results tuning.","None if the future prompt remains one fixed rule.","Use one predeclared rule and rule hash."

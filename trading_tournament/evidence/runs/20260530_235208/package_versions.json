@@ -1,0 +1,8 @@
+{
+  "matplotlib": "3.10.9",
+  "numpy": "2.4.6",
+  "pandas": "3.0.3",
+  "pytest": "9.0.3",
+  "pyyaml": "6.0.3",
+  "yfinance": "1.4.1"
+}

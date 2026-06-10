@@ -1,0 +1,429 @@
+queue:
+  schema_version: 1
+  project: trading_tournament
+  research_only: true
+  real_money_recommendation: false
+  broker_integration: false
+  live_orders: false
+  purpose: candidate_discovery_only
+  current_context:
+    frozen_paper_forward_candidate: SPY_200d_trend_model
+    strongest_practical_challenger_after_score_v2: combo_SPY200d_GLD_50_50_v1
+    serious_challenger: asset_class_tsmom_top2_v1
+    reduced_validation_status: non_final_90_180_only
+  allowed_statuses:
+    - implement_next_after_current_validation
+    - research_queue
+    - data_gated
+    - execution_gated
+    - complexity_gated
+    - duplicate_or_near_duplicate
+    - defer
+    - reject_for_now
+  allowed_evidence_tiers:
+    - tier0_research_idea
+    - tier1_research_queue
+    - tier2_credible_prototype_candidate
+    - tier3_candidate_validation_candidate
+    - blocked_by_gate
+
+candidates:
+  - candidate_id: qqq_spy_gld_ief_dual_momentum_v1
+    display_name: QQQ/SPY/GLD/IEF Dual Momentum
+    version: v1
+    strategy_family: dual_momentum
+    instrument_family: ETF
+    return_driver: relative_momentum_plus_absolute_trend
+    source_prior: momentum and trend-following literature; ETF-testable extension
+    evidence_quality: moderate
+    evidence_tier: tier1_research_queue
+    current_status: research_queue
+    recommended_next_action: evaluate_after_current_finalists
+    implementation_allowed_now: false
+    paper_forward_allowed_now: false
+    paper_forward_active: false
+    real_money_recommendation: false
+    broker_integration_required: false
+    live_orders_required: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    requires_new_data: maybe
+    required_symbols_or_data: QQQ, SPY, GLD, IEF, BIL
+    current_engine_can_test: yes_if_cached_data_available
+    expected_correlation_with_current_finalists: medium_high
+    diversification_value: medium
+    target_potential: medium_high
+    stop_risk: medium_high
+    data_gate_status: needs_cache_check
+    execution_gate_status: pass_for_daily_etf_if_cached
+    risk_model_gate_status: needs_pre_implementation_review
+    benchmark_gate_status: compare_to_SPY_200d_combo_top2_GLD_BIL
+    complexity_gate_status: pass_if_single_fixed_rule
+    anti_overfitting_risk: medium
+    primary_benchmark: combo_SPY200d_GLD_50_50_v1
+    failure_mode: duplicates equity momentum and increases risk-on exposure
+    reason_to_test: adds growth/equity momentum exposure through QQQ while retaining GLD/IEF/BIL defensive assets
+    reason_to_reject_or_defer: may mostly duplicate equity momentum and increase risk-on exposure
+    promotion_requirements: must beat SPY_200d and combo_SPY200d_GLD_50_50 after stress and rolling windows
+    notes: Highest ETF implementation-review candidate only after current finalist validation; no code in this task.
+
+  - candidate_id: value_momentum_factor_etf_rotation_v1
+    display_name: Value/Momentum Factor ETF Rotation
+    version: v1
+    strategy_family: factor_rotation
+    instrument_family: ETF
+    return_driver: value_momentum_factor_premia
+    source_prior: value and momentum research across markets
+    evidence_quality: moderate_to_strong_prior_but_etf_proxy_uncertain
+    evidence_tier: tier1_research_queue
+    current_status: research_queue
+    recommended_next_action: symbol_availability_and_proxy_review
+    implementation_allowed_now: false
+    paper_forward_allowed_now: false
+    paper_forward_active: false
+    real_money_recommendation: false
+    broker_integration_required: false
+    live_orders_required: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    requires_new_data: likely
+    required_symbols_or_data: MTUM, VLUE or VTV, QUAL, USMV, SPY, BIL
+    current_engine_can_test: yes_if_symbols_cached_or_later_download_allowed
+    expected_correlation_with_current_finalists: medium
+    diversification_value: medium
+    target_potential: medium
+    stop_risk: medium
+    data_gate_status: needs_symbol_history_review
+    execution_gate_status: pass_for_daily_etf_if_data_valid
+    risk_model_gate_status: needs_factor_proxy_review
+    benchmark_gate_status: compare_to_SPY_200d_combo_top2_factor_benchmarks
+    complexity_gate_status: pass_if_small_fixed_universe
+    anti_overfitting_risk: medium_high
+    primary_benchmark: SPY_200d_trend_model
+    failure_mode: ETF proxy history and fund construction may not match academic factor returns
+    reason_to_test: value plus momentum has broad research priors and may diversify SPY/GLD trend exposure
+    reason_to_reject_or_defer: ETF factor proxies may have short histories, fund construction effects, and may not reproduce academic factor returns
+    promotion_requirements: first verify ETF proxy history, inception dates, and benchmark relevance
+    notes: Queue-only factor rotation idea; no data download or implementation in this task.
+
+  - candidate_id: low_vol_quality_defensive_rotation_v1
+    display_name: Low-Volatility / Quality Defensive Rotation
+    version: v1
+    strategy_family: defensive_factor_rotation
+    instrument_family: ETF
+    return_driver: low_volatility_quality_defensive_equity
+    source_prior: low-volatility / quality factor and defensive-equity literature
+    evidence_quality: moderate
+    evidence_tier: tier1_research_queue
+    current_status: research_queue
+    recommended_next_action: proxy_and_target_fit_review
+    implementation_allowed_now: false
+    paper_forward_allowed_now: false
+    paper_forward_active: false
+    real_money_recommendation: false
+    broker_integration_required: false
+    live_orders_required: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    requires_new_data: likely
+    required_symbols_or_data: USMV, SPLV, QUAL, SPY, BIL
+    current_engine_can_test: yes_if_symbols_cached_or_later_download_allowed
+    expected_correlation_with_current_finalists: medium
+    diversification_value: medium
+    target_potential: low_to_medium
+    stop_risk: low_to_medium
+    data_gate_status: needs_symbol_history_review
+    execution_gate_status: pass_for_daily_etf_if_data_valid
+    risk_model_gate_status: needs_too_slow_review
+    benchmark_gate_status: compare_to_BIL_IEF_combo_SPY_200d
+    complexity_gate_status: pass_if_small_fixed_universe
+    anti_overfitting_risk: medium
+    primary_benchmark: BIL_cash_proxy
+    failure_mode: drawdown improves but target probability collapses
+    reason_to_test: may reduce drawdown while preserving some equity upside
+    reason_to_reject_or_defer: may be too slow for +300/+400 and may not improve over combo or SPY_200d
+    promotion_requirements: must show better stop-aware profit than BIL/IEF defensive alternatives and avoid being too slow
+    notes: Defensive candidate only; not a paper-forward replacement.
+
+  - candidate_id: sector_top2_momentum_simple_v1
+    display_name: Simple Sector ETF Top-2 Momentum
+    version: v1
+    strategy_family: sector_momentum
+    instrument_family: sector_ETF
+    return_driver: cross_sectional_sector_momentum
+    source_prior: momentum and sector dispersion
+    evidence_quality: moderate
+    evidence_tier: tier1_research_queue
+    current_status: research_queue
+    recommended_next_action: exact_stream_or_clean_implementation_review
+    implementation_allowed_now: false
+    paper_forward_allowed_now: false
+    paper_forward_active: false
+    real_money_recommendation: false
+    broker_integration_required: false
+    live_orders_required: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    requires_new_data: no_if_existing_sector_cache_available
+    required_symbols_or_data: sector ETF universe already used by A_ETF_sector_momentum if available
+    current_engine_can_test: yes_but_exact_fresh_window_stream_issue_exists
+    expected_correlation_with_current_finalists: high
+    diversification_value: low_to_medium
+    target_potential: medium_high
+    stop_risk: medium
+    data_gate_status: needs_exact_stream_or_cached_sector_review
+    execution_gate_status: pass_for_daily_etf_if_stream_exposed
+    risk_model_gate_status: needs_fresh_window_integrity
+    benchmark_gate_status: compare_to_A_ETF_sector_momentum_and_SPY_200d
+    complexity_gate_status: pass_if_clean_minimal_version
+    anti_overfitting_risk: medium_high
+    primary_benchmark: SPY_200d_trend_model
+    failure_mode: duplicates or approximates existing A-sector evidence without exact rolling stream
+    reason_to_test: sector dispersion can improve target probability versus broad SPY
+    reason_to_reject_or_defer: existing A-sector family stream is incomplete in compact/family/profit comparisons
+    promotion_requirements: expose exact fresh-window stream or implement clean minimal version without modifying A
+    notes: Do not approximate from summaries; no implementation in this task.
+
+  - candidate_id: managed_futures_proxy_etf_trend_v1
+    display_name: Managed-Futures Proxy ETF Trend
+    version: v1
+    strategy_family: managed_futures_style_trend
+    instrument_family: ETF_or_fund_proxy
+    return_driver: diversified_trend_following_proxy
+    source_prior: managed futures and trend-following literature
+    evidence_quality: moderate_prior_but_proxy_data_uncertain
+    evidence_tier: tier1_research_queue
+    current_status: data_gated
+    recommended_next_action: data_availability_and_inception_review
+    implementation_allowed_now: false
+    paper_forward_allowed_now: false
+    paper_forward_active: false
+    real_money_recommendation: false
+    broker_integration_required: false
+    live_orders_required: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    requires_new_data: likely
+    required_symbols_or_data: DBMF, KMLM, CTA, or other managed-futures ETF/fund proxies
+    current_engine_can_test: only_if_symbols_available_and_history_sufficient
+    expected_correlation_with_current_finalists: low_to_medium
+    diversification_value: high_if_data_usable
+    target_potential: medium
+    stop_risk: medium
+    data_gate_status: data_gated_short_history_risk
+    execution_gate_status: pass_for_daily_fund_proxy_only
+    risk_model_gate_status: needs_proxy_methodology_review
+    benchmark_gate_status: compare_to_BIL_IEF_GLD_combo
+    complexity_gate_status: medium_proxy_complexity
+    anti_overfitting_risk: medium_high
+    primary_benchmark: combo_SPY200d_GLD_50_50_v1
+    failure_mode: short fund history creates false confidence
+    reason_to_test: may add a return driver different from SPY/GLD/BIL and improve crisis diversification
+    reason_to_reject_or_defer: many ETFs have short history, fund methodology differences, and may not represent long-term managed futures research
+    promotion_requirements: must pass inception/date coverage review and avoid short-history bias
+    notes: Data-gated only; no futures implementation.
+
+  - candidate_id: treasury_duration_trend_rotation_v1
+    display_name: Treasury Duration Trend Rotation
+    version: v1
+    strategy_family: bond_trend_rotation
+    instrument_family: Treasury_ETF
+    return_driver: duration_trend_and_rate_regime
+    source_prior: bond trend/rate regime behavior
+    evidence_quality: moderate
+    evidence_tier: tier1_research_queue
+    current_status: research_queue
+    recommended_next_action: symbol_availability_review
+    implementation_allowed_now: false
+    paper_forward_allowed_now: false
+    paper_forward_active: false
+    real_money_recommendation: false
+    broker_integration_required: false
+    live_orders_required: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    requires_new_data: maybe
+    required_symbols_or_data: SHY, IEF, TLT, BIL
+    current_engine_can_test: yes_if_symbols_cached
+    expected_correlation_with_current_finalists: low_to_medium
+    diversification_value: medium
+    target_potential: low_to_medium
+    stop_risk: low_to_medium
+    data_gate_status: needs_cache_check
+    execution_gate_status: pass_for_daily_etf_if_cached
+    risk_model_gate_status: needs_too_slow_review
+    benchmark_gate_status: compare_to_IEF_BIL_combo
+    complexity_gate_status: pass_if_fixed_duration_universe
+    anti_overfitting_risk: medium
+    primary_benchmark: IEF_buy_hold
+    failure_mode: improves drawdown but destroys target probability
+    reason_to_test: may improve defensive behavior and rate-regime adaptation
+    reason_to_reject_or_defer: likely too slow for +300/+400 unless paired with higher-return assets
+    promotion_requirements: must show it improves combo/top2 drawdown without destroying target probability
+    notes: Defensive ETF research queue only.
+
+  - candidate_id: commodity_basket_etf_momentum_v1
+    display_name: Commodity Basket ETF Momentum
+    version: v1
+    strategy_family: commodity_momentum
+    instrument_family: commodity_ETF
+    return_driver: commodity_trend_and_inflation_regime
+    source_prior: trend-following and commodity momentum literature
+    evidence_quality: moderate_prior_but_proxy_uncertain
+    evidence_tier: tier1_research_queue
+    current_status: data_gated
+    recommended_next_action: data_availability_and_proxy_review
+    implementation_allowed_now: false
+    paper_forward_allowed_now: false
+    paper_forward_active: false
+    real_money_recommendation: false
+    broker_integration_required: false
+    live_orders_required: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    requires_new_data: likely
+    required_symbols_or_data: DBC, GSG, GLD, BIL
+    current_engine_can_test: yes_if_symbols_cached_or_later_download_allowed
+    expected_correlation_with_current_finalists: low_to_medium
+    diversification_value: medium_to_high
+    target_potential: medium
+    stop_risk: medium_high
+    data_gate_status: data_gated_proxy_structure_review
+    execution_gate_status: pass_for_daily_etf_if_proxy_approved
+    risk_model_gate_status: needs_roll_yield_product_review
+    benchmark_gate_status: compare_to_GLD_and_combo
+    complexity_gate_status: medium_product_structure_complexity
+    anti_overfitting_risk: medium_high
+    primary_benchmark: GLD_buy_hold
+    failure_mode: commodity ETF roll yield or structure distorts results
+    reason_to_test: may diversify beyond equity/gold/bond and perform in inflationary regimes
+    reason_to_reject_or_defer: commodity ETF structure, roll yield, and product history can distort results
+    promotion_requirements: must pass product-structure and inception-date review
+    notes: Data-gated commodity proxy candidate.
+
+  - candidate_id: crypto_spot_tsmom_tier2_review_v1
+    display_name: Crypto Spot TSMOM Tier-2 Review Candidate
+    version: v1
+    strategy_family: crypto_spot_trend
+    instrument_family: crypto_spot
+    return_driver: high_volatility_trend
+    source_prior: exploratory project evidence only, not final
+    evidence_quality: weak_to_moderate_exploratory
+    evidence_tier: tier1_research_queue
+    current_status: data_gated
+    recommended_next_action: tier2_data_execution_memo
+    implementation_allowed_now: false
+    paper_forward_allowed_now: false
+    paper_forward_active: false
+    real_money_recommendation: false
+    broker_integration_required: false
+    live_orders_required: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    requires_new_data: yes_for_tier2
+    required_symbols_or_data: exchange-specific BTC/ETH spot OHLCV, fees, spreads, 24/7 handling
+    current_engine_can_test: exploratory_only
+    expected_correlation_with_current_finalists: low_to_medium
+    diversification_value: high_but_unproven
+    target_potential: high
+    stop_risk: very_high
+    data_gate_status: data_gated_exchange_specific
+    execution_gate_status: execution_gated_fees_spreads_24_7
+    risk_model_gate_status: risk_gated_high_volatility
+    benchmark_gate_status: needs_crypto_benchmark_policy
+    complexity_gate_status: high
+    anti_overfitting_risk: high
+    primary_benchmark: crypto_buy_hold_equal_weight
+    failure_mode: Tier 1 data overstates tradability or ignores execution friction
+    reason_to_test: high target potential seen in Tier 1 exploratory rows
+    reason_to_reject_or_defer: yfinance crypto data is Tier 1 only, exchange/friction risks unresolved
+    promotion_requirements: dedicated Tier 2 memo with exchange-specific data and fee/spread assumptions
+    notes: Research queue only; no crypto changes in this task.
+
+  - candidate_id: individual_stock_momentum_gate1b_v1
+    display_name: Individual Stock Momentum Gate 1B Cost/Data Review
+    version: v1
+    strategy_family: individual_stock_momentum
+    instrument_family: individual_stocks
+    return_driver: cross_sectional_stock_momentum
+    source_prior: documented stock momentum prior, not project-validated
+    evidence_quality: moderate_prior_but_project_blocked
+    evidence_tier: blocked_by_gate
+    current_status: data_gated
+    recommended_next_action: gate1b_cost_access_review
+    implementation_allowed_now: false
+    paper_forward_allowed_now: false
+    paper_forward_active: false
+    real_money_recommendation: false
+    broker_integration_required: false
+    live_orders_required: false
+    uses_leverage: false
+    uses_shorting: false
+    uses_margin: false
+    requires_new_data: yes
+    required_symbols_or_data: survivorship-free active and delisted stock universe, delisting returns, corporate actions, point-in-time universe, earnings policy
+    current_engine_can_test: no
+    expected_correlation_with_current_finalists: medium
+    diversification_value: medium_to_high_if_data_valid
+    target_potential: high
+    stop_risk: high
+    data_gate_status: blocked_until_survivorship_free_data_review
+    execution_gate_status: execution_gated_single_name_costs
+    risk_model_gate_status: risk_gated_single_name_dispersion
+    benchmark_gate_status: needs_stock_momentum_benchmark_policy
+    complexity_gate_status: high
+    anti_overfitting_risk: high
+    primary_benchmark: SPY_200d_trend_model
+    failure_mode: survivorship bias and current-ticker toy evidence
+    reason_to_test: single-name dispersion may improve target probability
+    reason_to_reject_or_defer: Gate 1 decision remains defer; yfinance/current tickers are toy-only; serious data unresolved
+    promotion_requirements: verified survivorship-free data, delisting treatment, point-in-time universe, execution model, benchmarks, cost/runtime
+    notes: Research-only Gate 1B review candidate; no stock loader or strategy implementation.
+
+  - candidate_id: options_futures_forex_intraday_blocked_reference_v1
+    display_name: High-Complexity Instrument Blocked Reference
+    version: v1
+    strategy_family: multi_blocked_reference
+    instrument_family: options_futures_forex_intraday_volatility
+    return_driver: various
+    source_prior: mixed
+    evidence_quality: not_implementable_now
+    evidence_tier: blocked_by_gate
+    current_status: reject_for_now
+    recommended_next_action: no_code_until_gate0_gate1
+    implementation_allowed_now: false
+    paper_forward_allowed_now: false
+    paper_forward_active: false
+    real_money_recommendation: false
+    broker_integration_required: false
+    live_orders_required: false
+    uses_leverage: often
+    uses_shorting: often
+    uses_margin: often
+    requires_new_data: yes
+    required_symbols_or_data: options chains, futures continuous contracts, forex financing/spreads, intraday data, volatility product mechanics
+    current_engine_can_test: no
+    expected_correlation_with_current_finalists: unknown
+    diversification_value: unknown
+    target_potential: high_in_theory
+    stop_risk: very_high
+    data_gate_status: blocked_by_gate
+    execution_gate_status: blocked_by_gate
+    risk_model_gate_status: blocked_by_gate
+    benchmark_gate_status: missing
+    complexity_gate_status: blocked_by_complexity
+    anti_overfitting_risk: very_high
+    primary_benchmark: none
+    failure_mode: missing execution, margin, spread, chain, roll, and timestamp models
+    reason_to_test: may hit targets in theory
+    reason_to_reject_or_defer: current project lacks execution, margin, spread, chain, roll, and timestamp models
+    promotion_requirements: full Gate 0 and Gate 1 before any code
+    notes: Blocked reference row only; no options, futures, forex, intraday, or volatility-product implementation.

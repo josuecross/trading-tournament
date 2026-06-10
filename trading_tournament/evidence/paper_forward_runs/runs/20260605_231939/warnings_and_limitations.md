@@ -1,0 +1,26 @@
+# Warnings And Limitations
+
+- Research-only paper/demo statement.
+- No real-money recommendation.
+- No broker integration.
+- No live orders.
+- This is paper-forward observation, not live trading.
+- It does not validate a strategy.
+- It observes fixed rules only.
+- combo_SPY200d_GLD_50_50_v1, if included, is a separate paper/demo observation candidate and does not replace SPY_200d.
+- Combo activation remains blocked when canonical_rule_hash is missing; blocked rows are not trading signals.
+- It should not trigger real trades.
+- yfinance/Yahoo data limitations apply.
+- Paper fills and simplified accounting are used.
+- Taxes ignored.
+- Cash yield simplified.
+- Signals may differ from broker charts.
+- current_no_cash_proxy_alpha_AB signal extraction may be limited if not available exactly.
+- SPY_200d is a simple benchmark-like strategy, not a guaranteed edge.
+- Hitting +300 or +400 once is not proof of reliability.
+- Stopping out is valid evidence, not a reason to tune rules.
+- Monthly checkpoints are decision aids, not trading signals.
+- A checkpoint stop is evidence, not permission to redesign the rules.
+- Exposure frontier and volatility-control diagnostics are not part of paper-forward observation.
+- Risk Framework v1 applies +$300 as the primary challenge target, +$400 as aggressive, -10% as warning, -15% as review, and -20%/-$600 as hard stop.
+- Paper-forward rows remain frozen and should not be changed in response to warning or review bands.

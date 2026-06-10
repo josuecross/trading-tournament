@@ -1,0 +1,40 @@
+# Warnings And Limitations
+
+- Research-only paper/demo evidence.
+- No real-money recommendation.
+- No broker integration, live orders, exchange trading, or order placement.
+- Profit exploration is not paper-forward and does not alter frozen paper-forward rules.
+- +$300/+400 are hurdles, not proof of reliability.
+- Stop-aware profit matters more than raw final equity.
+- Crypto rows, if included, remain Tier 1 exploratory only.
+- Blocked families are reported but not run.
+- Incomplete rows are not approximated from summary metrics.
+- Fixed combinations are independent experiment accounts, not allocation advice.
+- No raw OHLCV is copied into this compact evidence packet.
+- Profit League rankings are invalid if accounting integrity fails.
+- Fresh $3,000 rebasing is required for every rolling window.
+- Full-period equity slices cannot be used as rolling-window equity.
+- Duplicate canonical rule hashes are skipped and not counted as independent evidence.
+- Candidate Exhaustive Queue entries are research leads or promotion-review reminders only, not paper-forward approval.
+- Reduced validation packets can be exact for selected horizons while remaining non-final across omitted horizons.
+- A 90/180 reduced validation packet is not full 30/60/90/180 candidate validation.
+- Score v2 changes ranking interpretation only.
+- Score v2 does not change strategy results.
+- Full 30/60/90/180 candidate_exhaustive, when completed, is still research validation and not paper-forward approval.
+- Separate promotion review is required before any paper-forward change.
+- QQQ dual momentum is research_sample only; it is not candidate-exhaustive or paper-forward active from this packet.
+- QQQ allocation concentration and equity-beta duplicate warnings must be reviewed before any future overnight validation.
+- Value/momentum factor ETF rotation is research_sample only; it is not candidate-exhaustive or paper-forward active from this packet.
+- Value/momentum factor ETF rotation uses only MTUM, VTV, QUAL, USMV, SPY, and BIL; VLUE and SPLV were reviewed but not used in the first rule.
+- Value/momentum allocation concentration and equity-beta duplicate warnings must be reviewed before any future overnight validation.
+- Sector top2 momentum is research_sample only; it is not candidate-exhaustive or paper-forward active from this packet.
+- Sector top2 momentum uses only XLB, XLE, XLF, XLI, XLK, XLP, XLU, XLV, XLY, and BIL; XLC and XLRE are excluded from the first rule.
+- Sector top2 momentum does not modify or approximate A_ETF_sector_momentum.
+- Sector top2 allocation concentration and equity-beta duplicate warnings must be reviewed before any future overnight validation.
+- Managed-futures proxy is research_sample only; it is not candidate-exhaustive or paper-forward active from this packet.
+- Managed-futures proxy uses only DBMF, KMLM, and BIL; CTA, FMF, and WTMF are excluded from the first rule.
+- Managed-futures proxy uses ETF/fund wrapper adjusted price series only and does not add futures contract logic.
+- Managed-futures proxy evidence must carry the fund_wrapper_proxy_short_history_limited_inception_research_sample_only label.
+- Managed-futures proxy wrapper modeling hides internal futures, rolls, collateral, notional exposure, fees, and methodology mechanics.
+- No paper-forward rule changes.
+- No real-money recommendation.

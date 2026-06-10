@@ -1,0 +1,33 @@
+{
+  "broker_integration": false,
+  "cache_target_root": "data/cache",
+  "canonical_combo_rule_hash": "6695f0d3ec403e2f377d99f3f63d1fc57a66f45f2c27a9072ab8c0a60a19ee67",
+  "live_orders": false,
+  "order_placement": false,
+  "package_versions": {
+    "PyYAML": "6.0.3",
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "yfinance": "1.4.1"
+  },
+  "provider": "yfinance_compatible",
+  "provider_id": "yfinance_compatible",
+  "python_version": "3.14.4",
+  "real_money_recommendation": false,
+  "request_settings": {
+    "actions": true,
+    "auto_adjust": false,
+    "multi_level_index": false,
+    "progress": false,
+    "start": "2007-01-01"
+  },
+  "requested_activation_date": "2026-06-05",
+  "run_id": "20260606_040551",
+  "symbols": [
+    "SPY",
+    "GLD",
+    "BIL"
+  ],
+  "timestamp": "2026-06-06T04:05:55Z",
+  "yfinance_version": "1.4.1"
+}

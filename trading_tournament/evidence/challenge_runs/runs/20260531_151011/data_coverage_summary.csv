@@ -1,0 +1,3 @@
+lane,data_source,symbols,start_date,end_date,row_count,missing_data_notes,adjusted_or_unadjusted,raw_data_included_in_evidence,major_limitations
+etf_validated_lane,existing_yfinance_adjusted_ohlc_evidence,"SPY,QQQ,IWM,XLK,XLF,XLE,XLV,XLY,XLP,XLU,XLI,XLB,XLC,SMH,IEF,TLT,GLD,SHY,BIL",2007-01-03,2026-05-29,89772,See detailed evidence/latest/data_quality_summary.csv.,adjusted OHLC per ETF evidence lane,False,Loaded as summary evidence only; compact challenge does not include raw ETF data.
+etf_benchmark,data/cache adjusted OHLCV,"BIL,SPY",2007-01-03,2026-05-29,9663,,adjusted close from existing ETF cache,False,"Benchmarks are exact from cached adjusted close, but compact challenge evidence does not include raw OHLCV."

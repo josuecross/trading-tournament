@@ -1,0 +1,84 @@
+packets:
+  00_ADVISOR_INDEX:
+    required: true
+    sources:
+      - generated summaries and indexes
+
+  01_CHALLENGE_AND_FAMILY_AUDIT:
+    required: true
+    sources:
+      - evidence/challenge_runs/latest/
+
+  02_PAPER_FORWARD_AUDIT:
+    required: true
+    sources:
+      - evidence/paper_forward_runs/latest/
+      - evidence/paper_forward_runs/paper_forward_checkpoints.csv
+      - evidence/paper_forward_runs/monthly_decision_checkpoints.csv
+
+  03_RISK_AND_STRATEGY_GOVERNANCE:
+    required: true
+    sources:
+      - evidence/risk_framework/latest/
+      - evidence/strategy_lab/latest/
+      - risk_framework/risk_framework.yaml
+      - strategy_lab/strategy_registry.yaml
+      - strategy_lab/policies/
+
+  04_RESEARCH_DIRECTION_AND_GATES:
+    required: true
+    sources:
+      - docs/research_direction/
+      - family_lab/
+      - portfolio_lab/
+      - docs/research_memos/
+
+  05_EXPLORATORY_LANES:
+    required: false
+    sources:
+      - exploratory/crypto_spot_momentum/
+      - evidence/exploratory/crypto_spot_momentum/latest/
+
+  06_REPRO_DEBUG:
+    required: false
+    exclude_large_or_raw: true
+    sources:
+      - results/latest/
+      - evidence/latest/
+
+  07_PROFIT_EXPLORATION:
+    required: false
+    sources:
+      - evidence/profit_exploration/latest/
+
+  08_STRATEGY_CANDIDATE_QUEUE:
+    required: false
+    sources:
+      - evidence/strategy_candidate_queue/latest/
+
+rules:
+  research_only: true
+  real_money_recommendation: false
+  broker_integration: false
+  live_orders: false
+  no_backtests: true
+  no_data_downloads: true
+  no_nested_zips_by_default: true
+  max_top_level_files: 10
+  preferred_zip_count: 7
+  include_suffixes:
+    - .md
+    - .csv
+    - .json
+    - .yaml
+    - .yml
+    - .png
+    - .txt
+  exclude_paths:
+    - data/cache
+    - data/raw
+    - .venv
+    - __pycache__
+    - .pytest_cache
+  exclude_file_types:
+    - .zip

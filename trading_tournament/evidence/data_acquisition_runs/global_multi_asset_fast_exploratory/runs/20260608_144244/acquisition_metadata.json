@@ -1,0 +1,57 @@
+{
+  "approved_symbols": [
+    "SPY",
+    "QQQ",
+    "GLD",
+    "IEF",
+    "BIL",
+    "DBC",
+    "PDBC",
+    "COMT",
+    "GSG",
+    "USCI",
+    "IWM",
+    "EFA",
+    "EEM",
+    "TLT"
+  ],
+  "broker_integration": false,
+  "cache_target_root": "data/cache",
+  "existing_cache_first": true,
+  "live_orders": false,
+  "order_placement": false,
+  "package_versions": {
+    "PyYAML": "6.0.3",
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "yfinance": "1.4.1"
+  },
+  "provider": "yfinance_compatible",
+  "provider_id": "yfinance_compatible",
+  "python_version": "3.14.4",
+  "raw_ohlcv_in_evidence": false,
+  "real_money_recommendation": false,
+  "request_settings": {
+    "actions": true,
+    "auto_adjust": false,
+    "multi_level_index": false,
+    "progress": false,
+    "start": "2006-01-01",
+    "timeout": 30
+  },
+  "run_id": "20260608_144244",
+  "strategy_universe_symbols": [
+    "SPY",
+    "QQQ",
+    "IWM",
+    "EFA",
+    "EEM",
+    "IEF",
+    "TLT",
+    "GLD",
+    "PDBC",
+    "COMT",
+    "BIL"
+  ],
+  "timestamp": "2026-06-08T14:42:49.245718+00:00"
+}

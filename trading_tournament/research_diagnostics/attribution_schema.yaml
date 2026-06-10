@@ -1,0 +1,78 @@
+schema_id: attribution_diagnostics_schema_v1
+research_only: true
+broker_integration: false
+live_orders: false
+order_placement: false
+real_money_recommendation: false
+output_families:
+  target_window_attribution:
+    fields:
+      - experiment_id
+      - horizon
+      - cost_mode
+      - window_start
+      - window_end
+      - target_300_hit
+      - target_400_hit
+      - target_600_hit
+      - target_900_hit
+      - target_1200_hit
+      - benchmark_combo_target_300_hit
+      - benchmark_combo_target_400_hit
+      - benchmark_top2_target_300_hit
+      - benchmark_top2_target_400_hit
+      - incremental_300_vs_combo
+      - incremental_400_vs_combo
+      - incremental_300_vs_top2
+      - incremental_400_vs_top2
+  component_contribution:
+    fields:
+      - experiment_id
+      - horizon
+      - window_start
+      - window_end
+      - component_id
+      - component_weight
+      - component_return_contribution
+      - component_final_equity_contribution
+      - component_drawdown_contribution
+      - component_recovery_contribution
+      - contribution_status
+  drawdown_attribution:
+    fields:
+      - experiment_id
+      - horizon
+      - window_start
+      - window_end
+      - worst_drawdown
+      - worst_drawdown_start
+      - worst_drawdown_end
+      - component_id
+      - component_drawdown_contribution
+      - benchmark_drawdown_overlap
+      - drawdown_overlap_status
+  recovery_attribution:
+    fields:
+      - experiment_id
+      - horizon
+      - window_start
+      - window_end
+      - recovery_start
+      - recovery_end
+      - recovery_amount
+      - component_id
+      - component_recovery_contribution
+  worst_n_drawdown_windows:
+    fields:
+      - experiment_id
+      - horizon
+      - rank
+      - window_start
+      - window_end
+      - worst_drawdown
+      - stop_hit
+      - target_hit_before_stop
+      - overlap_with_combo
+      - overlap_with_top2
+      - overlap_with_spy200d
+

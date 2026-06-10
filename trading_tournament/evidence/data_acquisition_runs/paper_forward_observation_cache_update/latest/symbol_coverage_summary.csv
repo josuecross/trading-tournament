@@ -1,0 +1,4 @@
+symbol,downloaded_or_refreshed,cache_written,row_count,first_date,last_date,supports_requested_activation_date,coverage_notes
+SPY,True,True,4887,2007-01-03,2026-06-05,True,pass
+GLD,True,True,4887,2007-01-03,2026-06-05,True,pass
+BIL,True,True,4786,2007-05-30,2026-06-05,True,pass

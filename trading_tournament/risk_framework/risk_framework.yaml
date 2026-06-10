@@ -1,0 +1,159 @@
+framework:
+  name: balanced_speculative_research_v1
+  research_only: true
+  real_money_recommendation: false
+  broker_integration: false
+  live_orders: false
+  description: "Balanced speculative paper/demo research framework."
+
+account:
+  starting_equity: 3000
+  target_300_equity: 3300
+  target_400_equity: 3400
+  absolute_stop_equity: 2400
+  hard_stop_drawdown_pct: 0.20
+  trailing_drawdown_dollars: 600
+  project_stop_mode: both
+
+targets:
+  target_300:
+    label: primary_challenge_target
+    profit_dollars: 300
+    return_pct: 0.10
+    interpretation: "Useful challenge metric, not income proof."
+  target_400:
+    label: aggressive_challenge_target
+    profit_dollars: 400
+    return_pct: 0.1333333333
+    interpretation: "Aggressive target, lower reliability expected."
+
+risk_bands:
+  normal:
+    drawdown_pct_lt: 0.10
+    interpretation: "Normal research fluctuation."
+  warning:
+    drawdown_pct_gte: 0.10
+    drawdown_dollars_gte: 300
+    interpretation: "-10% warning band. Review risk, do not tune rules."
+  review:
+    drawdown_pct_gte: 0.15
+    drawdown_dollars_gte: 450
+    interpretation: "-15% review band. Continue only if still inside rules."
+  hard_stop:
+    drawdown_pct_gte: 0.20
+    drawdown_dollars_gte: 600
+    interpretation: "-20% hard stop / fail boundary."
+
+success_metrics:
+  primary:
+    - rolling_90d_target_300_before_stop
+    - stress_slippage_survival
+    - benchmark_relative_result
+    - stop_hit_rate
+    - worst_rolling_drawdown
+  secondary:
+    - rolling_90d_target_400_before_stop
+    - rolling_180d_target_300_before_stop
+    - median_stop_enforced_equity
+    - time_to_target
+    - strategy_contribution
+  de_emphasized:
+    - full_period_final_equity
+    - win_rate_alone
+    - raw_cagr
+    - raw_r_multiple_without_risk_quality
+
+exposure_policy:
+  "1.00":
+    status: paper_forward_eligible_if_candidate_validated
+    interpretation: "Core exposure level."
+  "1.05":
+    status: diagnostic_only
+    interpretation: "Small exposure diagnostic only; not paper-forward."
+  "1.10":
+    status: diagnostic_only
+    interpretation: "Upper end of modest diagnostic exposure."
+  "1.15":
+    status: too_risky_by_default
+    interpretation: "Generally exceeds risk comfort unless later evidence changes framework."
+  "1.20":
+    status: too_risky_by_default
+    interpretation: "Too risky for current framework."
+  "1.25":
+    status: too_risky_by_default
+    interpretation: "Too risky for current framework."
+  "1.50":
+    status: stress_diagnostic_only
+    interpretation: "Stress diagnostic only, not candidate."
+
+instrument_risk_budgets:
+  broad_etf:
+    role: core
+    max_exposure: 1.0
+    paper_forward_allowed: true
+    notes: "Primary implemented lane."
+  sector_etf:
+    role: satellite
+    max_exposure: 1.0
+    paper_forward_allowed: only_if_validated
+    notes: "Needs correlation and concentration controls."
+  cash_treasury_proxy:
+    role: defensive_benchmark
+    max_exposure: 1.0
+    paper_forward_allowed: true
+    notes: "Benchmark/defensive only."
+  crypto_spot:
+    role: exploratory
+    max_exposure: 1.0
+    paper_forward_allowed: false
+    notes: "Tier 1 exploratory only until stronger data/execution modeling."
+  simulated_leverage:
+    role: diagnostic
+    max_exposure: 1.10
+    paper_forward_allowed: false
+    notes: "Diagnostic only. No real leverage or margin model."
+  individual_stocks:
+    role: blocked_until_gate
+    paper_forward_allowed: false
+    notes: "Blocked until survivorship-free data and delisting treatment are solved."
+  options:
+    role: blocked
+    paper_forward_allowed: false
+    notes: "Blocked until option-chain, spreads, IV, margin, exercise/assignment model exist."
+  futures:
+    role: blocked
+    paper_forward_allowed: false
+    notes: "Blocked until continuous contract, roll, margin, and gap model exist."
+  forex:
+    role: blocked
+    paper_forward_allowed: false
+    notes: "Blocked until spreads, financing, leverage, and broker assumptions exist."
+  intraday:
+    role: blocked
+    paper_forward_allowed: false
+    notes: "Blocked until intraday data and fill model exist."
+
+promotion_rules:
+  practical_candidate:
+    required:
+      - tier3_candidate_validation_or_higher
+      - exact_or_finalist_rolling
+      - benchmark_comparison_available
+      - stress_result_available
+      - no_real_money_claim
+    disallowed_if:
+      - tier1_exploratory
+      - exposure_multiplier_gt_1
+      - stop_enforced_metric_quality_approximate
+      - final_validation_completed_false
+  paper_forward:
+    required:
+      - fixed_rules
+      - no_mid_test_changes
+      - tier3_candidate_validation
+      - strategy_lab_allowed
+    disallowed_if:
+      - leverage_or_exposure_diagnostic
+      - crypto_tier1
+      - blocked_by_gate
+      - real_money_claim

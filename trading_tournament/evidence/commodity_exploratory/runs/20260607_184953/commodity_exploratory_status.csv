@@ -1,0 +1,2 @@
+experiment_id,status,verdict,candidate_exhaustive_review_justified,paper_forward_active,real_money_recommendation,reason
+commodity_basket_tsmom_top2_v1,completed,research_sample_candidate,False,False,False,commodity wrapper row is exploratory only; product identity and wrapper review required before stronger validation

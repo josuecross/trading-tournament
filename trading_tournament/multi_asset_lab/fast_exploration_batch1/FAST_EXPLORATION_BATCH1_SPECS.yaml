@@ -1,0 +1,60 @@
+batch_id: global_multi_asset_fast_exploration_batch1
+run_allowed: research_sample_only
+evidence_tier: tier1_or_tier2_exploratory
+required_label:
+  - exploratory_public_data
+  - etf_fund_wrapper_evidence_research_sample_only
+  - not_validated
+  - not_paper_forward
+  - not_real_money
+approved_acquisition_symbols:
+  - SPY
+  - QQQ
+  - GLD
+  - IEF
+  - BIL
+  - DBC
+  - PDBC
+  - COMT
+  - GSG
+  - USCI
+  - IWM
+  - EFA
+  - EEM
+  - TLT
+strategy_universe:
+  - SPY
+  - QQQ
+  - IWM
+  - EFA
+  - EEM
+  - IEF
+  - TLT
+  - GLD
+  - PDBC
+  - COMT
+fallback: BIL
+candidates:
+  - experiment_id: global_multi_asset_tsmom_top2_v1
+    rule: monthly rebalance; rank approved strategy universe by 126-trading-day return; eligible only if 126d return is positive; hold top 2 equally; unused weight to BIL.
+    no_optimized_weights: true
+  - experiment_id: global_multi_asset_tsmom_top2_defensive_50_v1
+    rule: 50% global_multi_asset_tsmom_top2_v1 sleeve and 50% BIL, fixed monthly rebalance.
+    no_optimized_weights: true
+  - experiment_id: combo_plus_global_multi_asset_80_20_v1
+    rule: 80% historical combo_SPY200d_GLD_50_50_v1 component and 20% global_multi_asset_tsmom_top2_v1 sleeve, fixed monthly rebalance.
+    active_combo_paper_forward_rule_changed: false
+constraints:
+  candidate_count: 3
+  no_leverage: true
+  no_margin: true
+  no_shorting: true
+  no_futures_contract_logic: true
+  no_options: true
+  no_forex: true
+  no_intraday: true
+  no_tuning: true
+  no_grid_search: true
+  candidate_exhaustive_run: false
+  paper_forward_active: false
+  real_money_recommendation: false

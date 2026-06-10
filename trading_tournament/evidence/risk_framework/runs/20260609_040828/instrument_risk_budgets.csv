@@ -1,0 +1,11 @@
+instrument_family,role,max_exposure,paper_forward_allowed,notes
+broad_etf,core,1.0,True,Primary implemented lane.
+sector_etf,satellite,1.0,only_if_validated,Needs correlation and concentration controls.
+cash_treasury_proxy,defensive_benchmark,1.0,True,Benchmark/defensive only.
+crypto_spot,exploratory,1.0,False,Tier 1 exploratory only until stronger data/execution modeling.
+simulated_leverage,diagnostic,1.1,False,Diagnostic only. No real leverage or margin model.
+individual_stocks,blocked_until_gate,,False,Blocked until survivorship-free data and delisting treatment are solved.
+options,blocked,,False,"Blocked until option-chain, spreads, IV, margin, exercise/assignment model exist."
+futures,blocked,,False,"Blocked until continuous contract, roll, margin, and gap model exist."
+forex,blocked,,False,"Blocked until spreads, financing, leverage, and broker assumptions exist."
+intraday,blocked,,False,Blocked until intraday data and fill model exist.

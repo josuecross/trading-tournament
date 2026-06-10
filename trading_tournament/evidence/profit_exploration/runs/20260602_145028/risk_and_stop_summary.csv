@@ -1,0 +1,11 @@
+experiment_id,display_name,standard_or_stress,run_status,stop_enforced_final_equity,max_drawdown_dollars,max_drawdown_pct,any_project_stop_hit,first_project_stop_date,target_300_before_stop,target_400_before_stop,target_600_before_stop,risk_framework_verdict,profit_verdict,notes
+SPY_200d_trend_model,SPY 200-Day Trend Model,standard,completed,2966.663066194596,-2031.3188369707868,0.14066911712497124,True,2010-06-22,True,True,False,watchlist,too_risky,computed from cached adjusted SPY/BIL prices
+SPY_200d_trend_model,SPY 200-Day Trend Model,stress,completed,2903.4862307113303,-2043.994597379662,0.157320017616912,True,2010-06-22,True,True,False,watchlist,too_risky,computed from cached adjusted SPY/BIL prices
+GLD_buy_hold,GLD Buy And Hold,standard,completed,4131.341801422975,-4586.3133139167585,0.1920951409971819,True,2008-04-29,True,True,True,watchlist,too_risky,computed from cached adjusted GLD prices
+GLD_buy_hold,GLD Buy And Hold,stress,completed,4129.253966984177,-4583.995552921868,0.19209514099718225,True,2008-04-29,True,True,True,watchlist,too_risky,computed from cached adjusted GLD prices
+BIL_cash_proxy,BIL Cash Proxy,standard,completed,3870.8587865925588,-24.50801348259529,0.006331415025390067,False,,True,True,True,watchlist,watchlist,computed from cached adjusted BIL prices
+BIL_cash_proxy,BIL Cash Proxy,stress,completed,3868.922389000432,-24.495753345813227,0.006331415025397268,False,,True,True,True,watchlist,watchlist,computed from cached adjusted BIL prices
+A_ETF_sector_momentum,A ETF Sector Momentum,standard,incomplete_evidence,,,,,,,,,incomplete_evidence,incomplete_evidence,exact fresh-window stream is not exposed in compact profit exploration; no summary-metric approximation used
+combo_SPY200d_GLD_50_50_v1,Combo SPY200d GLD 50/50,standard,completed,3050.850792092773,-2536.0611080147864,0.1267293219607233,True,2008-11-12,True,True,True,diagnostic_only,too_risky,predeclared fixed monthly combination account
+combo_SPY200d_GLD_50_50_v1,Combo SPY200d GLD 50/50,stress,completed,3026.558867423219,-2414.7506611867357,0.12717114541516292,True,2008-11-12,True,True,True,diagnostic_only,too_risky,predeclared fixed monthly combination account
+individual_stock_momentum,Individual Stock Momentum,standard,blocked_by_gate,,,,,,,,,blocked_by_gate,blocked_by_gate,Gate 1A continue_defer; no survivorship-free data/delisting treatment.

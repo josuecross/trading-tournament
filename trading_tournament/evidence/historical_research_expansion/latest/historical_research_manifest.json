@@ -1,0 +1,17 @@
+{
+  "backtest_run": false,
+  "broker_integration": false,
+  "candidate_exhaustive_run": false,
+  "current_phase": "historical_research_expansion_parallel_to_paper_demo_observation",
+  "data_downloaded": false,
+  "historical_research_parallel_allowed": true,
+  "latest_folder_file_count": 10,
+  "live_orders": false,
+  "order_placement": false,
+  "paper_forward_rule_changed": false,
+  "profit_exploration_run": false,
+  "real_money_recommendation": false,
+  "strategy_implemented": false,
+  "strategy_rules_changed": false,
+  "subject_id": "historical_research_expansion"
+}

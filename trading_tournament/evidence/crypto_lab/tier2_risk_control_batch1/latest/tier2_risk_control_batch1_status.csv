@@ -1,0 +1,4 @@
+experiment_id,status,verdict,candidate_exhaustive_recommended,paper_forward_active,real_money_recommendation,reason
+crypto_spot_tsmom_top1_cash_filter_v1,completed,high_upside_high_risk_watchlist,False,False,False,crypto Tier 2 row still has excessive stop or drawdown risk for a strict candidate_exhaustive gate
+crypto_spot_equal_weight_200d_filter_v1,completed,high_upside_high_risk_watchlist,False,False,False,crypto Tier 2 row still has excessive stop or drawdown risk for a strict candidate_exhaustive gate
+combo_plus_crypto_spot_tsmom_90_10_v1,completed,research_sample_candidate,False,False,False,crypto Tier 2 row has exploratory target power but did not clear strict candidate_exhaustive review requirements

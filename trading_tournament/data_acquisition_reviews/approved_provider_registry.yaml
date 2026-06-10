@@ -1,0 +1,134 @@
+registry:
+  name: approved_provider_registry
+  purpose: provider candidates for research-only data acquisition review
+  created_date: '2026-06-04'
+  no_downloads_performed: true
+  no_api_keys_stored: true
+  raw_data_allowed_in_advisor_packet: false
+
+providers:
+  - provider_id: existing_local_cache
+    provider_name: Existing Local Cache
+    provider_type: local_cache
+    supports_etf_daily_history: true
+    supports_adjusted_close: true
+    supports_dividends_splits: unknown
+    supports_bulk_download: false
+    requires_api_key: false
+    cost_unknown_or_paid: false
+    rate_limit_risk: false
+    terms_review_required: false
+    allowed_now: true
+    allowed_for_research_cache: true
+    allowed_for_compact_evidence: metadata_only
+    raw_data_allowed_in_advisor_packet: false
+    current_status: available_in_local_cache
+    notes: Existing project cache only; no new acquisition.
+
+  - provider_id: yfinance
+    provider_name: yfinance
+    provider_type: public_library
+    supports_etf_daily_history: likely
+    supports_adjusted_close: likely
+    supports_dividends_splits: likely
+    supports_bulk_download: likely
+    requires_api_key: false
+    cost_unknown_or_paid: false
+    rate_limit_risk: true
+    terms_review_required: true
+    allowed_now: conditional
+    allowed_for_research_cache: conditional_explicit_approval_required
+    allowed_for_compact_evidence: metadata_only
+    raw_data_allowed_in_advisor_packet: false
+    current_status: provider_review_required
+    notes: Already used by project in other exploratory contexts, but future downloads must be explicit, documented, and followed by quality checks.
+
+  - provider_id: alpha_vantage
+    provider_name: Alpha Vantage
+    provider_type: public_api
+    supports_etf_daily_history: likely
+    supports_adjusted_close: requires_review
+    supports_dividends_splits: requires_review
+    supports_bulk_download: limited_or_unknown
+    requires_api_key: true_or_unknown
+    cost_unknown_or_paid: true
+    rate_limit_risk: true
+    terms_review_required: true
+    allowed_now: conditional
+    allowed_for_research_cache: conditional_terms_and_key_review_required
+    allowed_for_compact_evidence: metadata_only
+    raw_data_allowed_in_advisor_packet: false
+    current_status: provider_review_required
+    notes: Historical equity/ETF time series may be available, but rate limits, adjustment fields, and terms must be checked.
+
+  - provider_id: tiingo
+    provider_name: Tiingo
+    provider_type: public_api
+    supports_etf_daily_history: likely
+    supports_adjusted_close: likely
+    supports_dividends_splits: requires_review
+    supports_bulk_download: likely
+    requires_api_key: true
+    cost_unknown_or_paid: true
+    rate_limit_risk: true
+    terms_review_required: true
+    allowed_now: conditional
+    allowed_for_research_cache: conditional_terms_and_key_review_required
+    allowed_for_compact_evidence: metadata_only
+    raw_data_allowed_in_advisor_packet: false
+    current_status: provider_review_required
+    notes: EOD stock/ETF price data candidate; terms and adjustment fields must be checked.
+
+  - provider_id: nasdaq_data_link_sharadar
+    provider_name: Nasdaq Data Link / Sharadar
+    provider_type: paid_or_keyed_api
+    supports_etf_daily_history: likely
+    supports_adjusted_close: likely
+    supports_dividends_splits: likely
+    supports_bulk_download: likely
+    requires_api_key: true
+    cost_unknown_or_paid: true
+    rate_limit_risk: medium
+    terms_review_required: true
+    allowed_now: conditional
+    allowed_for_research_cache: conditional_terms_cost_and_key_review_required
+    allowed_for_compact_evidence: metadata_only
+    raw_data_allowed_in_advisor_packet: false
+    current_status: provider_review_required
+    notes: Better suited for serious equity research, but cost, access, and licensing must be reviewed.
+
+  - provider_id: polygon_or_massive
+    provider_name: Polygon or Massive
+    provider_type: public_or_paid_api
+    supports_etf_daily_history: likely
+    supports_adjusted_close: requires_review
+    supports_dividends_splits: requires_review
+    supports_bulk_download: likely
+    requires_api_key: true
+    cost_unknown_or_paid: true
+    rate_limit_risk: true
+    terms_review_required: true
+    allowed_now: conditional
+    allowed_for_research_cache: conditional_terms_cost_and_key_review_required
+    allowed_for_compact_evidence: metadata_only
+    raw_data_allowed_in_advisor_packet: false
+    current_status: provider_review_required
+    notes: Historical market data API candidate; pricing, coverage, terms, and adjustment handling must be reviewed.
+
+  - provider_id: stooq_or_other_public_csv
+    provider_name: Stooq or Other Public CSV
+    provider_type: public_csv_or_web_source
+    supports_etf_daily_history: possible
+    supports_adjusted_close: requires_review
+    supports_dividends_splits: requires_review
+    supports_bulk_download: possible
+    requires_api_key: false
+    cost_unknown_or_paid: false_or_unknown
+    rate_limit_risk: medium
+    terms_review_required: true
+    allowed_now: conditional
+    allowed_for_research_cache: conditional_terms_adjustment_and_reproducibility_review_required
+    allowed_for_compact_evidence: metadata_only
+    raw_data_allowed_in_advisor_packet: false
+    current_status: provider_review_required
+    notes: Use only if licensing, adjusted-price convention, and reproducibility are acceptable.

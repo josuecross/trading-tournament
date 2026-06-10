@@ -1,0 +1,27 @@
+paper_demo_only: true
+broker_integration: false
+live_orders: false
+real_money_recommendation: false
+observation_start_date: '2026-05-01'
+observation_end_date: '2026-05-29'
+starting_equity: 3000.0
+target_300_equity: 3300.0
+target_400_equity: 3400.0
+absolute_stop_equity: 2400.0
+trailing_drawdown_dollars: 600.0
+project_stop_mode: both
+strategies:
+  SPY_200d_trend_model: primary_watchlist_candidate
+  current_no_cash_proxy_alpha_AB: strategy_control
+  SPY_buy_hold: aggressive_benchmark
+  BIL_cash_proxy: defensive_benchmark
+data_source: existing adjusted ETF cache; optional yfinance refresh only when requested
+cache_usage: network disabled; existing ETF cache only
+network_disabled: true
+slippage_cost_assumption: 0.0005
+limitations:
+- Paper-forward observation only.
+- No broker, no orders, no real-money recommendation.
+- Yahoo/yfinance cache limitations apply.
+- current_no_cash_proxy_alpha_AB latest signal extraction is unavailable in compact
+  mode; equity is replayed with fixed rules.

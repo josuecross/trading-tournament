@@ -1,0 +1,64 @@
+rules:
+  benchmark_availability_contradiction:
+    severity: error
+    summary_phrases:
+      - ETF benchmark rolling rows are unavailable
+    exact_benchmark_strategies:
+      - SPY_buy_hold
+      - SPY_200d_trend_model
+      - BIL_cash_proxy
+
+  spy_buy_hold_unavailable_contradiction:
+    severity: error
+    summary_phrases:
+      - SPY_buy_hold row unavailable
+
+  run_level_vs_row_level_finality:
+    severity: error
+    required_summary_phrase: Run-level finality can be false while row-level exact evidence exists
+
+  blanket_unresolved_conclusion:
+    severity: error
+    forbidden_summary_phrases:
+      - +$300/+400 remain unresolved
+      - $300/$400 remain unresolved
+    required_narrow_phrase: A/B exact family comparison remains unresolved
+
+  incomplete_rows_with_metrics:
+    severity: error
+    run_statuses:
+      - incomplete_evidence
+      - blocked_by_gate
+
+  exact_rows_need_row_level_finality:
+    severity: warning
+
+  crypto_tier1_not_practical_candidate:
+    severity: error
+
+  real_money_boundary:
+    severity: error
+    forbidden_claims:
+      - recommended real trade
+      - real-money ready
+      - real money ready
+      - real-money suitable
+      - guaranteed profit
+      - guaranteed return
+      - proven reliable
+      - proven strategy
+
+  packet_file_counts:
+    severity: error
+    advisor_upload_latest_max_files: 10
+    challenge_latest_exact_files: 10
+
+  raw_data_exclusion:
+    severity: error
+    forbidden_zip_tokens:
+      - data/cache
+      - data/raw
+      - .venv
+      - __pycache__
+      - raw_ohlcv
+      - ohlcv

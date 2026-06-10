@@ -1,0 +1,37 @@
+subject_id: value_momentum_factor_etf_rotation_v1
+provider: yfinance_compatible
+approved_by_review: value_momentum_factor_etf_rotation_v1_provider_terms_security_review
+download_purpose: data_quality_review_only
+strategy_implementation_allowed: false
+backtest_allowed: false
+paper_forward_allowed: false
+broker_integration: false
+live_orders: false
+real_money_recommendation: false
+raw_data_in_advisor_packet: false
+
+allowed_symbols:
+  - MTUM
+  - VLUE
+  - VTV
+  - QUAL
+  - USMV
+  - SPLV
+
+excluded_default_refresh_symbols:
+  - SPY
+  - BIL
+
+allow_symbol_refresh: false
+
+cache:
+  target_root: data/cache
+
+request_settings:
+  start: '2007-01-01'
+  end:
+  auto_adjust: false
+  actions: true
+  progress: false
+  multi_level_index: false
+  timeout: 20

@@ -1,0 +1,2 @@
+"""Trading tournament backtesting package."""
+

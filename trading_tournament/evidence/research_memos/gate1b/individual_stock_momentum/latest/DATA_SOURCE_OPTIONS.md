@@ -1,0 +1,18 @@
+# Data Source Options
+
+No provider was called and no API was used. Every row requires future verification.
+
+| provider | likely_data_type | survivorship_free_possible | delisted_stocks_available | delisting_returns_available | point_in_time_universe_possible | adjusted_prices_available | corporate_actions_available | API_key_or_paid_access_required | cost_unknown_or_known | implementation_complexity | credibility_tier_possible | use_case | blocker |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|---|
+| Norgate Data | daily US equities with survivorship-free tooling | likely | likely | requires verification | likely | likely | likely | paid access likely | cost requires verification | medium/high | Tier 2/Tier 3 possible | credible historical stock universe review | local platform/access and license verification |
+| CRSP | institutional research database | yes | yes | likely/standard in CRSP workflows | yes | likely | likely | paid/institutional access | high/unknown | high | Tier 3 possible | strongest academic-style validation | access/cost and integration burden |
+| Nasdaq Data Link / Sharadar | fundamentals/prices/actions dataset | possible | likely for some packages | requires verification | possible with ticker/event fields | likely | likely | paid API key likely | paid/unknown | medium/high | Tier 2 possible, Tier 3 if fields verify | credible prototype if delisting/universe fields are sufficient | package coverage and delisting-return verification |
+| Polygon/Massive | API market data | unknown | requires verification | unknown | unknown | likely prices/actions | likely actions | API key/paid likely | paid/unknown | medium/high | Tier 1/Tier 2 only if delisting fields verify | liquid current/delisted coverage research if verified | survivorship and historical universe unclear |
+| Tiingo | EOD equity data API | unknown | requires verification | unknown | unknown | likely adjusted prices | likely actions | API key/paid likely | paid/unknown | medium | Tier 1/Tier 2 only if delisted coverage verifies | API prototype and quality review | survivorship-free status unclear |
+| EODHD | EOD equities API | possible/unknown | requires verification | unknown | unknown | likely | likely | API key/paid likely | paid/unknown | medium | Tier 1/Tier 2 only if delisted coverage verifies | broad EOD prototype | delisting returns and PIT universe unclear |
+| Alpaca | brokerage/data API | unlikely | unknown | unknown | no/unknown | likely current equities | limited/unknown | API key/account required | paid/free tiers unknown | medium | Tier 1 only | not preferred for historical survivorship-free research | broker-adjacent and PIT/survivorship gaps |
+| Interactive Brokers (IBKR) | broker/data access | unlikely | unknown | unknown | no/unknown | likely current tradable data | limited/unknown | account/API required | paid/unknown | high | Tier 1 only | execution reference only, not historical validation | broker integration boundary and historical survivorship gaps |
+| yfinance/current-ticker lists | public current-ticker prices | no | no | no | no | likely adjusted close | partial actions | no key but network use | free/terms unclear | low | Tier 1 toy only | code-path toy demonstration | rejected for serious evidence due to survivorship bias |
+| Stooq/public CSV sources | public EOD CSV data | unknown/no | unknown | unknown | no/unknown | possibly adjusted | limited | no/unknown | free/unknown | low/medium | Tier 1 toy only unless verified | rough public-data exploration | survivorship/PIT/action coverage uncertain |
+
+Conservative conclusion: provider/cost/access verification is required before any credible implementation prompt. Current-ticker-only sources are toy only.

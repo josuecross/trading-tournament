@@ -1,0 +1,96 @@
+project:
+  starting_equity: 3000
+  target_300_equity: 3300
+  target_400_equity: 3400
+  project_stop_equity: 2400
+  trailing_drawdown_dollars: 600
+  project_stop_mode: both
+  credibility_tier: tier1_exploratory
+  final_validation: false
+  candidate_validation: false
+  paper_forward_ready: false
+  real_money_recommendation: false
+
+data:
+  primary_source: yfinance
+  optional_source: ccxt
+  allow_network_download: true
+  cache_dir: data/exploratory/crypto_spot_momentum/cache
+  start_date: "2018-01-01"
+  end_date: latest
+  timeframe: "1d"
+  yfinance_symbols:
+    - BTC-USD
+    - ETH-USD
+  ccxt_exchange: coinbase
+  ccxt_symbols:
+    - BTC/USD
+    - ETH/USD
+  max_history_days: null
+  include_raw_data_in_evidence: false
+
+costs:
+  standard_fee_slippage_per_side: 0.001
+  stress_fee_slippage_per_side: 0.003
+  notes: "Tier 1 exploratory cost assumptions. Not final execution evidence."
+
+strategies:
+  enabled:
+    - crypto_buy_hold_equal_weight
+    - crypto_time_series_momentum
+    - crypto_cross_sectional_momentum
+    - crypto_dual_momentum_cash_filter
+
+  crypto_buy_hold_equal_weight:
+    role: benchmark
+    rebalance_frequency: monthly
+    assets:
+      - BTC-USD
+      - ETH-USD
+
+  crypto_time_series_momentum:
+    role: exploratory_strategy
+    trend_sma_days: 200
+    momentum_lookback_days: 90
+    rebalance_frequency: weekly
+    rule: "Hold each asset only if close > SMA200 and 90-day return > 0."
+
+  crypto_cross_sectional_momentum:
+    role: exploratory_strategy
+    momentum_lookback_days: 90
+    rebalance_frequency: weekly
+    top_n: 1
+    rule: "Hold top asset by 90-day return if positive; otherwise cash."
+
+  crypto_dual_momentum_cash_filter:
+    role: exploratory_strategy
+    momentum_lookback_days: 90
+    trend_sma_days: 200
+    rebalance_frequency: weekly
+    top_n: 1
+    rule: "Hold top asset only if return > 0 and close > SMA200; otherwise cash."
+
+validation:
+  default_mode: research_sample
+  modes:
+    smoke:
+      horizons: [90]
+      rolling_method: deterministic_sample
+      sample_size_per_group: 12
+      slippage_labels: [standard]
+    research_sample:
+      horizons: [30, 60, 90, 180]
+      rolling_method: deterministic_stratified_sample
+      sample_size_per_group: 250
+      slippage_labels: [standard, stress]
+    candidate_exhaustive:
+      horizons: [30, 60, 90, 180]
+      rolling_method: all_possible
+      slippage_labels: [standard, stress]
+      allowed_only_if_promoted: true
+
+benchmarks:
+  - crypto_buy_hold_equal_weight
+  - cash_flat
+  - BTC_buy_hold
+  - ETH_buy_hold

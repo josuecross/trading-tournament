@@ -1,0 +1,21 @@
+# Anti-Overfitting Log
+
+- No parameter optimization was run.
+- No grid search was run.
+- Validation mode used: research_sample.
+- Strategy parameters were pre-specified in `config_used.yaml`.
+- Existing C/D/E strategies were not tuned to improve results.
+- New strategy families N1-N4 were tested using fixed daily ETF rules.
+- All weak results are retained in `strategy_variant_results.csv` and `independent_rolling_window_summary.csv`.
+- All possible rolling windows used: False.
+- Rolling window methods observed: ['deterministic_stratified_sample'].
+- Rolling validation final: False.
+- Rolling method used: deterministic_stratified_sample.
+- Sampled results are final: False.
+- Rolling results are deterministic research samples or partial results; they are non-final.
+- Candidate gate excluded or shadowed these rows before rolling validation:
+  - evidence_dual_momentum_taa / stress: fail (profit factor below 1.0; stress slippage materially degraded final equity)
+  - evidence_absolute_trend_taa / standard: fail (profit factor below 1.0)
+  - evidence_absolute_trend_taa / stress: fail (profit factor below 1.0)
+- If any sampled windows appear in a run, treat that run as non-final validation.
+- No broker integration, no live orders, no AI trading gate, and no real-money recommendation.

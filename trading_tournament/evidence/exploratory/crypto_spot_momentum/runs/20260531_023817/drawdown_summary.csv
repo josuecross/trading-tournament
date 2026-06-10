@@ -1,0 +1,8 @@
+strategy,slippage_label,max_drawdown_dollars,max_drawdown_pct
+crypto_time_series_momentum,standard,-19215.844050936976,-0.6424906679166283
+crypto_cross_sectional_momentum,standard,-48034.48746445817,-0.7822035090133699
+crypto_dual_momentum_cash_filter,standard,-36248.19842937118,-0.6405730186573843
+crypto_buy_hold_equal_weight,standard,-14868.296730511136,-0.8407066400473495
+cash_flat,standard,0.0,0.0
+BTC_buy_hold,standard,-13617.84323156678,-0.8153271113852913
+ETH_buy_hold,standard,-14813.276440707179,-0.9396254038538313

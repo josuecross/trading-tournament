@@ -1,0 +1,31 @@
+# Warnings And Limitations
+
+- Research-only; no real-money recommendation.
+- No broker integration.
+- No live orders.
+- No exchange trading.
+- Individual stocks, options, futures, forex, intraday, and event/news strategies remain excluded.
+- Candidate exhaustive was limited to the selected ETF finalist and ETF benchmarks.
+- Crypto was intentionally excluded from this focused run.
+- Simulated leverage was intentionally excluded from this focused run.
+- Simulated ETF leverage diagnostics are approximate return-multiplier scenarios only.
+- No real margin, liquidation, financing, or leveraged ETF path-dependency model is included.
+- ETF leverage diagnostic rows are Tier 1 exploratory, cannot be paper-forward ready, and cannot be real-money recommendations.
+- Improved target-hit rates in leverage diagnostics may simply reflect increased risk.
+- Finalist all_possible validation completed for the focused compact rows, but this is still not real-money validation.
+- yfinance/Yahoo data limitations still apply to the ETF lane.
+- ETF lane and crypto lane have different credibility levels.
+- Crypto yfinance data is Tier 1 exploratory.
+- Crypto has no bid/ask, order book, outage, custody, delisting, or exchange-specific execution modeling.
+- Leverage is approximate simulated leverage only.
+- No actual margin, liquidation, or funding model is implemented unless explicitly stated.
+- Sampled rolling windows are non-final.
+- Sampled rolling windows are non-final unless candidate_exhaustive completes with all_possible windows.
+- ETF benchmark rows are required for fair ETF comparison.
+- Approximate stop-enforced values should not drive final decisions.
+- Stop-enforced equity is more relevant than unconditional final equity.
+- Taxes are ignored.
+- Cash yield is simplified.
+- Live execution may differ materially.
+- Excluded instruments are not tested.
+- No strategy here is validated, guaranteed, proven, reliable, paper-forward ready, or real-money suitable.

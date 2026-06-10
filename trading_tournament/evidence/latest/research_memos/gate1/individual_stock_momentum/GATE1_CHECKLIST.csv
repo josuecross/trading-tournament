@@ -1,0 +1,18 @@
+item,status,evidence_or_note,blocks_gate2,owner_or_next_action
+survivorship_free_data_identified,unresolved,"No vendor selected or verified.",true,"Research CRSP/Norgate/Sharadar-type candidates."
+delisted_stocks_available,unresolved,"Delisted coverage not verified.",true,"Verify with candidate vendors."
+delisting_returns_available,unresolved,"Delisting returns or terminal value treatment not verified.",true,"Require data proof or conservative fallback."
+corporate_actions_handled,unresolved,"Splits/dividends/symbol changes need vendor review.",true,"Document vendor corporate action fields."
+point_in_time_universe_available,unresolved,"Historical membership/investable universe not verified.",true,"Define point-in-time universe source."
+earnings_data_available,unresolved,"Point-in-time earnings dates not verified.",false,"Prefer entry block near earnings if data is credible."
+universe_rules_defined,partial,"Preliminary conservative rules drafted.",true,"Finalize before any test."
+liquidity_filters_defined,partial,"Preliminary price and dollar-volume filters drafted.",true,"Finalize thresholds before testing."
+benchmark_universe_defined,partial,"Benchmark list drafted; stock universe benchmark depends on data.",true,"Define unbiased stock benchmark."
+slippage_model_defined,partial,"Preliminary model concepts drafted.",true,"Quantify standard/stress assumptions."
+risk_model_defined,partial,"Preliminary risk model drafted.",true,"Finalize exposure and kill criteria."
+validation_plan_defined,partial,"Validation plan drafted.",true,"Convert to Gate 2 protocol if approved."
+cost_access_acceptable,unresolved,"Cost/access not verified.",true,"Check vendor pricing/licensing."
+runtime_storage_acceptable,unresolved,"Runtime/storage not estimated.",true,"Estimate symbol count and rolling cost."
+implementation_isolated_plan_defined,unresolved,"No isolated prototype design yet.",true,"Write Gate 2 implementation boundary if ever allowed."
+no_real_money_boundary_confirmed,complete,"Memo is research-only; no broker/live trading.",false,"Keep boundary in all future memos."
+
