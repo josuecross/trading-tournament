@@ -1,0 +1,8 @@
+benchmark_id,reason,comparison_metric,required
+SPY_200d_trend_model,Frozen control and primary trend benchmark.,"target-before-stop, drawdown, stop-hit, overlap, score delta",true
+profit_combo_SPY200d_GLD_50_50_v1,Current active combo historical row if available; must remain separate from active paper/demo observation.,"target-before-stop, drawdown, stop-hit, duplicate/overlap diagnostics",true
+SPY_buy_hold,Equity beta baseline.,return target rates and drawdown budget behavior,true
+BIL_cash_proxy,Fallback and cash-dilution baseline.,target dilution and drawdown floor,true
+GLD_buy_hold,Relevant for combo comparisons and non-equity diversification checks.,target-window overlap and drawdown coincidence,false
+asset_class_tsmom_top2_v1,Historical leader and multi-asset comparison row.,stop-aware score and target-window independence,false
+sector_top2_momentum_simple_v1,Required only if sector volatility-scaled variant is used.,"sector target rate, drawdown, and duplicate behavior",false
