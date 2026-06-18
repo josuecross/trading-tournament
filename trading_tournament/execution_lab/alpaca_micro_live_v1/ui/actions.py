@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from trading_tournament.execution_lab.alpaca_micro_live_v1 import MODULE_ROOT
-from trading_tournament.execution_lab.alpaca_micro_live_v1.adapters.credentials import load_alpaca_credentials
-from trading_tournament.execution_lab.alpaca_micro_live_v1.execution.runtime_orchestrator import run_orchestrator
-from trading_tournament.execution_lab.alpaca_micro_live_v1.signals.generate_alpaca_signal import generate_signal
+from execution_lab.alpaca_micro_live_v1 import MODULE_ROOT
+from execution_lab.alpaca_micro_live_v1.adapters.credentials import load_alpaca_credentials
+from execution_lab.alpaca_micro_live_v1.execution.runtime_orchestrator import run_orchestrator
+from execution_lab.alpaca_micro_live_v1.signals.generate_alpaca_signal import generate_signal
 
 
 DEFAULT_CONFIG = MODULE_ROOT / "config" / "alpaca_paper.local.yaml"
@@ -55,3 +55,4 @@ def start_runtime_session(
         submit_paper_orders=submit_paper_orders,
         dry_run=not submit_paper_orders,
     )
+

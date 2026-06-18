@@ -5,8 +5,8 @@ from pathlib import Path
 
 import yaml
 
-from trading_tournament.execution_lab.alpaca_micro_live_v1.adapters.alpaca_client import AlpacaClient, AlpacaClientConfig
-from trading_tournament.execution_lab.alpaca_micro_live_v1.adapters.credentials import load_alpaca_credentials
+from execution_lab.alpaca_micro_live_v1.adapters.alpaca_client import AlpacaClient, AlpacaClientConfig
+from execution_lab.alpaca_micro_live_v1.adapters.credentials import load_alpaca_credentials
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -30,3 +30,4 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

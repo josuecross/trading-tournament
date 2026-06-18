@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from trading_tournament.execution_lab.alpaca_micro_live_v1.adapters.credentials import AlpacaCredentials
-from trading_tournament.execution_lab.alpaca_micro_live_v1.execution.models import ProposedOrder, RiskGateResult
+from execution_lab.alpaca_micro_live_v1.adapters.credentials import AlpacaCredentials
+from execution_lab.alpaca_micro_live_v1.execution.models import ProposedOrder, RiskGateResult
 
 
 def _float(value: Any, default: float = 0.0) -> float:
@@ -105,3 +105,4 @@ def evaluate_risk_gate(
         errors.append("insufficient_cash_after_buffer")
 
     return RiskGateResult(allowed=not errors, errors=errors, warnings=warnings)
+

@@ -7,3 +7,4 @@ from dataclasses import dataclass
 class RuntimeUiState:
     emergency_stop: bool = False
     last_session_dir: str | None = None
+

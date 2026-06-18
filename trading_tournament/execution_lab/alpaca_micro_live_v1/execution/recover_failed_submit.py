@@ -7,3 +7,4 @@ def recovery_instructions(client_order_id: str) -> dict[str, str]:
         "action": "manual_review_required",
         "note": "Order submission failed or was ambiguous. Check Alpaca orders before any manual retry.",
     }
+

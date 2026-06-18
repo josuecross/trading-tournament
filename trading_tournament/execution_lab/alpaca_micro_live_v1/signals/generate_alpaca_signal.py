@@ -7,12 +7,12 @@ from typing import Any
 
 import yaml
 
-from trading_tournament.execution_lab.alpaca_micro_live_v1 import MODULE_ROOT
-from trading_tournament.execution_lab.alpaca_micro_live_v1.adapters.alpaca_client import AlpacaClient, AlpacaClientConfig
-from trading_tournament.execution_lab.alpaca_micro_live_v1.adapters.credentials import load_alpaca_credentials
-from trading_tournament.execution_lab.alpaca_micro_live_v1.data.alpaca_historical_bars import fetch_daily_bars
-from trading_tournament.execution_lab.alpaca_micro_live_v1.execution.models import RuntimeSignal
-from trading_tournament.execution_lab.alpaca_micro_live_v1.runtime_strategies.vm_quality_lowvol_proxy_v1 import (
+from execution_lab.alpaca_micro_live_v1 import MODULE_ROOT
+from execution_lab.alpaca_micro_live_v1.adapters.alpaca_client import AlpacaClient, AlpacaClientConfig
+from execution_lab.alpaca_micro_live_v1.adapters.credentials import load_alpaca_credentials
+from execution_lab.alpaca_micro_live_v1.data.alpaca_historical_bars import fetch_daily_bars
+from execution_lab.alpaca_micro_live_v1.execution.models import RuntimeSignal
+from execution_lab.alpaca_micro_live_v1.runtime_strategies.vm_quality_lowvol_proxy_v1 import (
     generate_signal_from_bars,
     load_strategy_spec,
 )
@@ -138,3 +138,4 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

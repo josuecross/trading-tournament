@@ -46,3 +46,4 @@ def broker_error_from_response(response: requests.Response, message: str | None 
         status_code=response.status_code,
         response_text=response.text,
     )
+

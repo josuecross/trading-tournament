@@ -7,9 +7,9 @@ import numpy as np
 import pandas as pd
 import yaml
 
-from trading_tournament.execution_lab.alpaca_micro_live_v1 import MODULE_ROOT
-from trading_tournament.execution_lab.alpaca_micro_live_v1.execution.models import RuntimeSignal
-from trading_tournament.execution_lab.alpaca_micro_live_v1.execution.logging_utils import utc_timestamp
+from execution_lab.alpaca_micro_live_v1 import MODULE_ROOT
+from execution_lab.alpaca_micro_live_v1.execution.models import RuntimeSignal
+from execution_lab.alpaca_micro_live_v1.execution.logging_utils import utc_timestamp
 
 
 SPEC_PATH = MODULE_ROOT / "runtime_strategies" / "vm_quality_lowvol_proxy_v1.yaml"
@@ -130,3 +130,4 @@ def generate_signal_from_bars(
         missing_data=missing_data,
         approximations=[],
     )
+

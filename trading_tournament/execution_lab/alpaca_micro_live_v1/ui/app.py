@@ -4,18 +4,18 @@ from pathlib import Path
 
 import streamlit as st
 
-from trading_tournament.execution_lab.alpaca_micro_live_v1 import MODULE_ROOT
-from trading_tournament.execution_lab.alpaca_micro_live_v1.adapters.alpaca_client import AlpacaClient, AlpacaClientConfig
-from trading_tournament.execution_lab.alpaca_micro_live_v1.adapters.credentials import load_alpaca_credentials
-from trading_tournament.execution_lab.alpaca_micro_live_v1.ui.actions import (
+from execution_lab.alpaca_micro_live_v1 import MODULE_ROOT
+from execution_lab.alpaca_micro_live_v1.adapters.alpaca_client import AlpacaClient, AlpacaClientConfig
+from execution_lab.alpaca_micro_live_v1.adapters.credentials import load_alpaca_credentials
+from execution_lab.alpaca_micro_live_v1.ui.actions import (
     DEFAULT_CONFIG,
     DEFAULT_RISK,
     credential_summary,
     generate_ui_signal,
     start_runtime_session,
 )
-from trading_tournament.execution_lab.alpaca_micro_live_v1.ui.components import status_label
-from trading_tournament.execution_lab.alpaca_micro_live_v1.ui.log_viewer import read_tail
+from execution_lab.alpaca_micro_live_v1.ui.components import status_label
+from execution_lab.alpaca_micro_live_v1.ui.log_viewer import read_tail
 
 
 st.set_page_config(page_title="Alpaca Micro Runtime", layout="wide")
@@ -91,3 +91,4 @@ with tabs[3]:
         stop_file.parent.mkdir(parents=True, exist_ok=True)
         stop_file.write_text("local emergency stop requested\n", encoding="utf-8")
         st.warning("Local emergency stop flag written. No liquidation or automatic cancel was submitted.")
+

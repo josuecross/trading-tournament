@@ -3,18 +3,15 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-import yaml
-
-from trading_tournament.execution_lab.alpaca_micro_live_v1.adapters.alpaca_client import AlpacaClient, AlpacaClientConfig
-from trading_tournament.execution_lab.alpaca_micro_live_v1.adapters.credentials import load_alpaca_credentials
-from trading_tournament.execution_lab.alpaca_micro_live_v1.execution.broker_errors import BrokerError
+from execution_lab.alpaca_micro_live_v1.adapters.credentials import load_alpaca_credentials
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Check Alpaca paper credentials without printing secrets.")
     parser.add_argument("--environment", default="paper", choices=["paper"])
     parser.add_argument("--config", type=Path)
-    parser.add_argument("--no-network", action="store_true", help="Only verify local credential presence.")
+    parser.add_argument("--network", action="store_true", help="Opt in to a paper account connectivity check.")
+    parser.add_argument("--no-network", action="store_true", help="Deprecated no-op; local-only is the default.")
     return parser
 
 
@@ -27,11 +24,17 @@ def main(argv: list[str] | None = None) -> int:
     print(f"paper_secret_key: {credentials.masked_secret_key}")
     print(f"source: {credentials.source}")
     print(f"live_credentials_detected_but_disabled: {str(credentials.live_credentials_detected).lower()}")
-    if args.no_network or not credentials.present:
+    if not args.network or args.no_network or not credentials.present:
+        print("paper_connection_check: skipped_local_only")
         return 0 if credentials.present else 2
     config_data = {}
     if args.config and args.config.exists():
+        import yaml
+
         config_data = yaml.safe_load(args.config.read_text(encoding="utf-8")) or {}
+    from execution_lab.alpaca_micro_live_v1.adapters.alpaca_client import AlpacaClient, AlpacaClientConfig
+    from execution_lab.alpaca_micro_live_v1.execution.broker_errors import BrokerError
+
     client = AlpacaClient(
         credentials,
         AlpacaClientConfig(
@@ -52,3 +55,4 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

@@ -21,7 +21,7 @@ From the repository root:
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-pip install -r trading_tournament\requirements.txt
+pip install -r requirements.txt
 pip install pandas numpy pyyaml requests pytest streamlit
 ```
 
@@ -33,7 +33,7 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 
 ## Local Secrets
 
-Create `.env.local` in the repository root or in `trading_tournament\.env.local`.
+Create `.env.local` in the repository root.
 
 ```env
 ALPACA_PAPER_API_KEY=your_paper_key
@@ -54,8 +54,8 @@ Secrets are masked in output and must not be committed.
 Create local configs from examples:
 
 ```powershell
-Copy-Item trading_tournament\execution_lab\alpaca_micro_live_v1\config\alpaca_paper.example.yaml trading_tournament\execution_lab\alpaca_micro_live_v1\config\alpaca_paper.local.yaml
-Copy-Item trading_tournament\execution_lab\alpaca_micro_live_v1\config\risk_limits.example.yaml trading_tournament\execution_lab\alpaca_micro_live_v1\config\risk_limits.local.yaml
+Copy-Item execution_lab\alpaca_micro_live_v1\config\alpaca_paper.example.yaml execution_lab\alpaca_micro_live_v1\config\alpaca_paper.local.yaml
+Copy-Item execution_lab\alpaca_micro_live_v1\config\risk_limits.example.yaml execution_lab\alpaca_micro_live_v1\config\risk_limits.local.yaml
 ```
 
 Example/local config files are separated so local runtime choices are not committed.
@@ -63,30 +63,30 @@ Example/local config files are separated so local runtime choices are not commit
 ## Credential Check
 
 ```powershell
-python -m trading_tournament.execution_lab.alpaca_micro_live_v1.execution.check_credentials --environment paper
+python -m execution_lab.alpaca_micro_live_v1.execution.check_credentials --environment paper
 ```
 
-Local-only credential presence check:
+Connectivity requires explicit opt-in; the default command is local-only and does not call Alpaca:
 
 ```powershell
-python -m trading_tournament.execution_lab.alpaca_micro_live_v1.execution.check_credentials --environment paper --no-network
+python -m execution_lab.alpaca_micro_live_v1.execution.check_credentials --environment paper --network
 ```
 
 ## Market Clock
 
 ```powershell
-python -m trading_tournament.execution_lab.alpaca_micro_live_v1.execution.market_clock_check `
-  --config trading_tournament\execution_lab\alpaca_micro_live_v1\config\alpaca_paper.local.yaml
+python -m execution_lab.alpaca_micro_live_v1.execution.market_clock_check `
+  --config execution_lab\alpaca_micro_live_v1\config\alpaca_paper.local.yaml
 ```
 
 ## Signal Generation
 
 ```powershell
-python -m trading_tournament.execution_lab.alpaca_micro_live_v1.signals.generate_alpaca_signal `
+python -m execution_lab.alpaca_micro_live_v1.signals.generate_alpaca_signal `
   --strategy-id vm_quality_lowvol_proxy_v1 `
-  --config trading_tournament\execution_lab\alpaca_micro_live_v1\config\alpaca_paper.local.yaml `
-  --risk-limits trading_tournament\execution_lab\alpaca_micro_live_v1\config\risk_limits.local.yaml `
-  --output trading_tournament\execution_lab\alpaca_micro_live_v1\evidence\alpaca_signals\vm_quality_lowvol_proxy_v1.alpaca.target.yaml
+  --config execution_lab\alpaca_micro_live_v1\config\alpaca_paper.local.yaml `
+  --risk-limits execution_lab\alpaca_micro_live_v1\config\risk_limits.local.yaml `
+  --output execution_lab\alpaca_micro_live_v1\evidence\alpaca_signals\vm_quality_lowvol_proxy_v1.alpaca.target.yaml
 ```
 
 The target source is `alpaca_runtime`, and the signal uses Alpaca daily bars, not tournament cache.
@@ -96,10 +96,10 @@ The target source is `alpaca_runtime`, and the signal uses Alpaca daily bars, no
 Dry-run is the default and submits nothing:
 
 ```powershell
-python -m trading_tournament.execution_lab.alpaca_micro_live_v1.execution.runtime_orchestrator `
-  --config trading_tournament\execution_lab\alpaca_micro_live_v1\config\alpaca_paper.local.yaml `
-  --risk-limits trading_tournament\execution_lab\alpaca_micro_live_v1\config\risk_limits.local.yaml `
-  --runtime-registry trading_tournament\execution_lab\alpaca_micro_live_v1\runtime_strategies\runtime_strategy_registry.yaml `
+python -m execution_lab.alpaca_micro_live_v1.execution.runtime_orchestrator `
+  --config execution_lab\alpaca_micro_live_v1\config\alpaca_paper.local.yaml `
+  --risk-limits execution_lab\alpaca_micro_live_v1\config\risk_limits.local.yaml `
+  --runtime-registry execution_lab\alpaca_micro_live_v1\runtime_strategies\runtime_strategy_registry.yaml `
   --strategies vm_quality_lowvol_proxy_v1 `
   --mode paper `
   --interval-seconds 60 `
@@ -112,10 +112,10 @@ python -m trading_tournament.execution_lab.alpaca_micro_live_v1.execution.runtim
 Paper submit requires an explicit flag. There is no live submit command.
 
 ```powershell
-python -m trading_tournament.execution_lab.alpaca_micro_live_v1.execution.runtime_orchestrator `
-  --config trading_tournament\execution_lab\alpaca_micro_live_v1\config\alpaca_paper.local.yaml `
-  --risk-limits trading_tournament\execution_lab\alpaca_micro_live_v1\config\risk_limits.local.yaml `
-  --runtime-registry trading_tournament\execution_lab\alpaca_micro_live_v1\runtime_strategies\runtime_strategy_registry.yaml `
+python -m execution_lab.alpaca_micro_live_v1.execution.runtime_orchestrator `
+  --config execution_lab\alpaca_micro_live_v1\config\alpaca_paper.local.yaml `
+  --risk-limits execution_lab\alpaca_micro_live_v1\config\risk_limits.local.yaml `
+  --runtime-registry execution_lab\alpaca_micro_live_v1\runtime_strategies\runtime_strategy_registry.yaml `
   --strategies vm_quality_lowvol_proxy_v1 `
   --mode paper `
   --interval-seconds 60 `
@@ -128,7 +128,7 @@ The loop can wake every minute, but the strategy signal is based on daily comple
 ## GUI
 
 ```powershell
-streamlit run trading_tournament\execution_lab\alpaca_micro_live_v1\ui\app.py --server.address 127.0.0.1
+streamlit run execution_lab\alpaca_micro_live_v1\ui\app.py --server.address 127.0.0.1
 ```
 
 GUI paper submit requires the exact phrase:
@@ -144,7 +144,7 @@ There is no live start button.
 Runtime evidence is written under:
 
 ```text
-trading_tournament/execution_lab/alpaca_micro_live_v1/evidence/
+execution_lab/alpaca_micro_live_v1/evidence/
 ```
 
 Session folders include state, loop events, signals, proposed orders, submitted orders, rejects, broker errors, summaries, and a session report.
@@ -166,3 +166,4 @@ python -m pytest tests/test_alpaca_micro_live_*.py
 ```
 
 The tests use fake Alpaca responses and make no real network calls.
+

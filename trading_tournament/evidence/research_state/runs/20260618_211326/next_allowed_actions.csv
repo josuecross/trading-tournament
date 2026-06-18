@@ -1,0 +1,18 @@
+action,allowed_now,lane,notes
+create_candidate_exhaustive_prompt_for_gror_balanced_momentum_60_40_v1,true,global_risk_on_risk_off_etf,Next allowed recovered action is to create the prompt only; do not run GROR candidate_exhaustive during recovery.
+global_multi_asset_batch1_research_sample_review,true,global_multi_asset_fast_exploration_batch1,"Review Global Multi-Asset ETF Fast Exploration Batch 1; no candidate_exhaustive, paper-forward, broker, live-order, leverage, margin, shorting, futures, options, forex, intraday, or real-money action."
+crypto_tier2_risk_control_research_sample_review,true,crypto_spot_tier2_risk_control_batch1,"Review BTC/ETH spot-only Tier 2 risk-control results; no candidate_exhaustive, paper-forward, exchange, broker, leverage, margin, futures, perpetuals, options, live-order, or real-money action."
+commodity_risk_control_research_sample_review,true,commodity_risk_control_batch1,"Review Batch 1 risk-control results; no candidate_exhaustive, paper-forward, broker, or real-money action."
+commodity_risk_control_verdict_diagnostics_review,true,commodity_risk_control_batch1_verdict_audit,Verdict audit completed and was superseded by diagnostics completion; no commodity candidate_exhaustive run.
+commodity_risk_control_watchlist_review,true,commodity_risk_control_batch1_diagnostics_completion,Diagnostics completion supports watchlist-only for combo_plus_commodity_basket_80_20_v1; no candidate_exhaustive was run or recommended.
+research_sample_review,true,commodity_basket_fast_exploratory,"Review the fast exploratory commodity wrapper screen; no candidate_exhaustive, paper-forward, broker, or real-money action."
+product_identity_terms_review,true,commodity_basket_etf_momentum,Still required later if the fast exploratory commodity screen is promising; no paper-forward approval.
+commodity_data_acquisition_review,true,commodity_basket_etf_momentum,Completed as review; superseded by product_identity_terms_review because no symbols are approved for download yet.
+create_commodity_basket_etf_momentum_review,true,historical_research_queue_reprioritization,Completed as commodity product/data review; superseded by commodity_data_acquisition_review as the next gate.
+create_combination_design_implementation_review,true,historical_research,Preferred next historical strategy path; review only before coding.
+improve_correlation_and_co_movement_diagnostics,true,diagnostics,Plan/design or reporting-only work; no strategy rules changed.
+use_attribution_diagnostics_before_future_combination_candidate_exhaustive_review,true,diagnostics,Attribution diagnostics should be reviewed before any future combination candidate_exhaustive prompt.
+select_sharadar_package_and_terms_review,true,individual_stock_momentum_gate1f,"Select Sharadar/Nasdaq package and terms/security path only; no provider call, API key, stock loader, or data download."
+judge_combo_forward_observation,false,paper_forward,Not before 30 trading days; current status is inconclusive_too_early.
+tune_active_combo,false,paper_forward,Active combo rules are frozen.
+replace_spy200d,false,paper_forward_governance,SPY_200d remains frozen control.

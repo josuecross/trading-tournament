@@ -9,24 +9,16 @@ from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
-import yaml
+from execution_lab.alpaca_micro_live_v1 import MODULE_ROOT
+from execution_lab.alpaca_micro_live_v1.execution.logging_utils import append_jsonl, utc_timestamp, write_json
 
-from trading_tournament.execution_lab.alpaca_micro_live_v1 import MODULE_ROOT
-from trading_tournament.execution_lab.alpaca_micro_live_v1.adapters.alpaca_client import AlpacaClient, AlpacaClientConfig
-from trading_tournament.execution_lab.alpaca_micro_live_v1.adapters.credentials import load_alpaca_credentials
-from trading_tournament.execution_lab.alpaca_micro_live_v1.data.alpaca_historical_bars import fetch_daily_bars
-from trading_tournament.execution_lab.alpaca_micro_live_v1.execution.broker_errors import BrokerError
-from trading_tournament.execution_lab.alpaca_micro_live_v1.execution.logging_utils import append_jsonl, utc_timestamp, write_json
-from trading_tournament.execution_lab.alpaca_micro_live_v1.execution.order_sizing import build_delta_orders
-from trading_tournament.execution_lab.alpaca_micro_live_v1.execution.risk_gate import evaluate_risk_gate
-from trading_tournament.execution_lab.alpaca_micro_live_v1.runtime_strategies.vm_quality_lowvol_proxy_v1 import (
-    generate_signal_from_bars,
-    load_strategy_spec,
-)
-from trading_tournament.execution_lab.alpaca_micro_live_v1.signals.generate_alpaca_signal import signal_to_target_dict
+load_alpaca_credentials = None
+fetch_daily_bars = None
 
 
 def load_yaml(path: Path) -> dict[str, Any]:
+    import yaml
+
     return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
 
 
@@ -63,8 +55,23 @@ def run_orchestrator(
     run_until_stopped: bool = False,
     submit_paper_orders: bool = False,
     dry_run: bool = True,
-    client: AlpacaClient | None = None,
+    client: Any | None = None,
 ) -> dict[str, Any]:
+    from execution_lab.alpaca_micro_live_v1.adapters.alpaca_client import AlpacaClient, AlpacaClientConfig
+    from execution_lab.alpaca_micro_live_v1.adapters.credentials import load_alpaca_credentials as imported_load_credentials
+    from execution_lab.alpaca_micro_live_v1.data.alpaca_historical_bars import fetch_daily_bars as imported_fetch_daily_bars
+    from execution_lab.alpaca_micro_live_v1.execution.broker_errors import BrokerError
+    from execution_lab.alpaca_micro_live_v1.execution.order_sizing import build_delta_orders
+    from execution_lab.alpaca_micro_live_v1.execution.risk_gate import evaluate_risk_gate
+    from execution_lab.alpaca_micro_live_v1.runtime_strategies.vm_quality_lowvol_proxy_v1 import (
+        generate_signal_from_bars,
+        load_strategy_spec,
+    )
+    from execution_lab.alpaca_micro_live_v1.signals.generate_alpaca_signal import signal_to_target_dict
+
+    credentials_loader = load_alpaca_credentials or imported_load_credentials
+    bars_fetcher = fetch_daily_bars or imported_fetch_daily_bars
+
     if mode != "paper":
         raise ValueError("Live mode is out of scope and not supported.")
     if max_loops is None and not run_until_stopped:
@@ -75,7 +82,7 @@ def run_orchestrator(
     config = load_yaml(config_path)
     risk_limits = load_yaml(risk_limits_path)
     registry = load_yaml(runtime_registry_path)
-    credentials = load_alpaca_credentials("paper")
+    credentials = credentials_loader("paper")
     client = client or AlpacaClient(
         credentials,
         AlpacaClientConfig(
@@ -128,7 +135,7 @@ def run_orchestrator(
                 continue
             spec = load_strategy_spec()
             symbols = spec["universe"]["risk_assets"] + spec["universe"]["cash_or_fallback"]
-            bars = fetch_daily_bars(
+            bars = bars_fetcher(
                 client,
                 symbols=symbols,
                 start=(date.today() - timedelta(days=420)).isoformat(),
@@ -297,3 +304,4 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

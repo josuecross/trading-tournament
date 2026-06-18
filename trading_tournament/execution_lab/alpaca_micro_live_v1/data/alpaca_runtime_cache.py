@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from trading_tournament.execution_lab.alpaca_micro_live_v1 import MODULE_ROOT
+from execution_lab.alpaca_micro_live_v1 import MODULE_ROOT
 
 
 DEFAULT_CACHE_DIR = MODULE_ROOT / "evidence" / "alpaca_runtime_data" / "cache"
@@ -30,3 +30,4 @@ def read_symbol_bars(symbol: str, cache_dir: Path | None = None) -> pd.DataFrame
     if "date" in frame.columns:
         frame["date"] = pd.to_datetime(frame["date"]).dt.date.astype(str)
     return frame
+

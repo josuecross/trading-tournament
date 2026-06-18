@@ -7,8 +7,8 @@ from typing import Any
 
 import requests
 
-from trading_tournament.execution_lab.alpaca_micro_live_v1.adapters.credentials import AlpacaCredentials
-from trading_tournament.execution_lab.alpaca_micro_live_v1.execution.broker_errors import (
+from execution_lab.alpaca_micro_live_v1.adapters.credentials import AlpacaCredentials
+from execution_lab.alpaca_micro_live_v1.execution.broker_errors import (
     BrokerError,
     broker_error_from_response,
     classify_exception,
@@ -171,3 +171,4 @@ class AlpacaClient:
         if page_token:
             params["page_token"] = page_token
         return self._request("GET", self.config.data_base_url, "/v2/stocks/bars", params=params)
+

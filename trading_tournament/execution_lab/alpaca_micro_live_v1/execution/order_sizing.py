@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from trading_tournament.execution_lab.alpaca_micro_live_v1.execution.models import ProposedOrder
+from execution_lab.alpaca_micro_live_v1.execution.models import ProposedOrder
 
 
 def _float(value: Any, default: float = 0.0) -> float:
@@ -68,3 +68,4 @@ def build_delta_orders(
             )
         )
     return proposed, skipped
+

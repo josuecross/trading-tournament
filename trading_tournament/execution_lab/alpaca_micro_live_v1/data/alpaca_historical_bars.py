@@ -6,8 +6,8 @@ from typing import Any
 
 import pandas as pd
 
-from trading_tournament.execution_lab.alpaca_micro_live_v1.adapters.alpaca_client import AlpacaClient
-from trading_tournament.execution_lab.alpaca_micro_live_v1.data.alpaca_runtime_cache import write_symbol_bars
+from execution_lab.alpaca_micro_live_v1.adapters.alpaca_client import AlpacaClient
+from execution_lab.alpaca_micro_live_v1.data.alpaca_runtime_cache import write_symbol_bars
 
 
 ALLOWED_SYMBOLS = {"SPLV", "USMV", "QUAL", "SPY", "BIL"}
@@ -87,3 +87,4 @@ def fetch_daily_bars(
             raise ValueError(f"{symbol} has insufficient Alpaca history: {len(frame)} rows")
         write_symbol_bars(symbol, frame, cache_dir)
     return parsed
+

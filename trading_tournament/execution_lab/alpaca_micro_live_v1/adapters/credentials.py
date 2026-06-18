@@ -4,7 +4,7 @@ import os
 from dataclasses import dataclass
 from pathlib import Path
 
-from trading_tournament.execution_lab.alpaca_micro_live_v1 import PACKAGE_ROOT, WORKSPACE_ROOT
+from execution_lab.alpaca_micro_live_v1 import PACKAGE_ROOT, WORKSPACE_ROOT
 
 
 PAPER_KEY = "ALPACA_PAPER_API_KEY"
@@ -109,3 +109,4 @@ def load_alpaca_credentials(environment: str = "paper", env_paths: list[Path] | 
         source=source,
         live_credentials_detected=live_detected,
     )
+

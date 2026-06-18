@@ -8,3 +8,4 @@ def read_tail(path: Path, max_lines: int = 200) -> str:
         return ""
     lines = path.read_text(encoding="utf-8").splitlines()
     return "\n".join(lines[-max_lines:])
+
