@@ -108,3 +108,4 @@ managed_futures_etf_wrapper,v1,,profit_exploration,managed_futures_etf_wrapper,r
 commodity_wrapper,v1,,profit_exploration,commodity_wrapper,deferred,True,"Recovered state row; no broker integration, live orders, or real-money recommendation."
 crypto_spot,v1,,profit_exploration,crypto_spot,deferred,True,"Recovered state row; no broker integration, live orders, or real-money recommendation."
 individual_stock_momentum,v1,,profit_exploration,individual_stock_momentum,deferred,True,"Recovered state row; no broker integration, live orders, or real-money recommendation."
+dsr_sector_top2_momentum_200d_bil_v1,v1,,profit_exploration,defensive_sector_rotation_etf,promotion_review_candidate,True,"Recovered state row; no broker integration, live orders, or real-money recommendation."

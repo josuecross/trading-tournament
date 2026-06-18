@@ -305,6 +305,7 @@ ALLOWED_NEXT = {
     "candidate_exhaustive_review",
     "candidate_exhaustive_review_short_history_gate",
     "create_candidate_exhaustive_prompt_for_gror_balanced_momentum_60_40_v1",
+    "create_promotion_review_for_dsr_sector_top2_momentum_200d_bil_v1",
 }
 QUEUE_ACTIONS = {
     "improve_as_new_version",
@@ -370,6 +371,7 @@ QUEUE_ACTIONS = {
     "candidate_exhaustive_review",
     "candidate_exhaustive_review_short_history_gate",
     "create_candidate_exhaustive_prompt_for_gror_balanced_momentum_60_40_v1",
+    "create_promotion_review_for_dsr_sector_top2_momentum_200d_bil_v1",
 }
 
 

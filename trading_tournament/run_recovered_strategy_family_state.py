@@ -91,7 +91,7 @@ FAMILY_SUMMARY_ROWS = [
     {
         "family": "defensive_sector_rotation_etf",
         "status": "active_observation_running",
-        "winner_or_state": "dsr_sector_equal_weight_defensive_filter_v1 active/frozen; DSR Top3 queued/deferred",
+        "winner_or_state": "dsr_sector_equal_weight_defensive_filter_v1 active/frozen; DSR Top3 queued/deferred; DSR Top2 future promotion review",
         "evidence_source": "conversation_recovered",
     },
     {
@@ -302,6 +302,7 @@ Reconstructed in this pass:
 - conversation-recovered activation packets for both active rows
 - recovered family/status summaries for volatility-managed ETF, defensive sector rotation ETF, quality/momentum ETF proxy, global risk-on/risk-off ETF, and the profit-family discovery audit
 - registry rows for active/frozen, queued/deferred, watchlist, and family-state records
+- future-review row for `dsr_sector_top2_momentum_200d_bil_v1` with `metrics: missing_or_unavailable`
 - minimum fixed-rule helpers and focused tests
 - runner stubs for recovered review/sample/promotion/activation packet creation
 
@@ -318,6 +319,7 @@ Missing evidence:
 - original exact ZIP packet bytes
 - original full run logs
 - exact local-cache recomputation outputs for the recovered metrics
+- exact metrics for `dsr_sector_top2_momentum_200d_bil_v1`
 - GROR candidate_exhaustive results, because that run had not occurred before the loss and was not run during recovery
 
 Recovered/frozen active observations:
@@ -469,6 +471,42 @@ def update_registry() -> None:
             promotion_decision="promote_to_candidate_exhaustive_queue",
             risk_budget_status="queued_deferred",
             evidence_needed="candidate_exhaustive only if later explicitly approved",
+        ),
+        registry_row(
+            "dsr_sector_top2_momentum_200d_bil_v1",
+            display_name="DSR Sector Top2 Momentum 200d BIL v1",
+            strategy_family="defensive_sector_rotation_etf",
+            family="defensive_sector_rotation_etf",
+            status="promotion_review_candidate",
+            implementation_status="not_implemented",
+            latest_evidence_path="evidence/future_reviews/dsr_sector_top2_momentum_200d_bil_v1/latest/",
+            latest_known_result_summary=(
+                "Conversation-recovered future-review row: strong DSR research-sample candidate deserving a separate "
+                "promotion review. It was not activated, did not receive candidate_exhaustive, and must not supersede "
+                "the active DSR equal-weight observation."
+            ),
+            allowed_next_action="create_promotion_review_for_dsr_sector_top2_momentum_200d_bil_v1",
+            allowed_next_actions=["create_promotion_review_for_dsr_sector_top2_momentum_200d_bil_v1"],
+            forbidden_next_actions=[
+                "paper_forward_activation",
+                "real_money_recommendation",
+                "broker_integration",
+                "live_orders",
+                "order_placement",
+                "promote_to_real_money",
+                "add_broker_integration",
+                "place_live_orders",
+                "tune_parameters",
+            ],
+            candidate_exhaustive_run=False,
+            candidate_exhaustive_recommended=False,
+            promotion_review_required=True,
+            promotion_decision="future_promotion_review",
+            primary_failure_mode="not_assessed_in_registry",
+            duplication_risk="same_family_as_active_dsr_equal_weight_observation",
+            risk_budget_status="future_review_only",
+            evidence_needed="future promotion review; exact metrics unavailable in recovered artifacts",
+            metrics="missing_or_unavailable",
         ),
         registry_row(
             "gror_balanced_momentum_60_40_v1",

@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 import yaml
 
+import run_research_state_dashboard as dashboard
 from run_strategy_lab import load_registry, validate_registry_data
 from strategy_lab.recovered_strategy_rules import (
     FORBIDDEN_MECHANICS,
@@ -103,6 +104,14 @@ def test_recovered_registry_status_matrix() -> None:
         assert row["real_money_recommendation"] is False
     assert rows["dsr_sector_top3_momentum_defensive_cash_v1"]["status"] == "deferred_candidate_queue"
     assert rows["dsr_sector_top3_momentum_defensive_cash_v1"]["candidate_exhaustive_run"] is False
+    top2 = rows["dsr_sector_top2_momentum_200d_bil_v1"]
+    assert top2["status"] == "promotion_review_candidate"
+    assert top2["paper_forward_active"] is False
+    assert top2["candidate_exhaustive_run"] is False
+    assert top2["real_money_recommendation"] is False
+    assert top2["evidence_source"] == "conversation_recovered"
+    assert top2["metrics"] == "missing_or_unavailable"
+    assert "create_promotion_review_for_dsr_sector_top2_momentum_200d_bil_v1" in top2["allowed_next_actions"]
     assert rows["gror_balanced_momentum_60_40_v1"]["status"] == "candidate_exhaustive_queue"
     assert rows["gror_balanced_momentum_60_40_v1"]["candidate_exhaustive_run"] is False
     assert rows["quality_momentum_etf_proxy"]["status"] == "watchlist_family"
@@ -126,3 +135,17 @@ def test_recovery_note_and_profit_family_audit_exist() -> None:
     assert (latest / "consistency_check.json").exists()
     rows = (latest / "recovered_rows.csv").read_text(encoding="utf-8")
     assert "global_risk_on_risk_off_etf" in rows
+
+
+def test_dashboard_exports_recovered_active_observations_and_next_action() -> None:
+    latest = dashboard.build_dashboard()
+    active_text = (latest / "active_observations.csv").read_text(encoding="utf-8")
+    candidates_text = (latest / "candidate_status_matrix.csv").read_text(encoding="utf-8")
+    actions_text = (latest / "next_allowed_actions.csv").read_text(encoding="utf-8")
+    assert "paper_forward_vm_quality_lowvol_proxy_v1" in active_text
+    assert "paper_forward_dsr_sector_equal_weight_defensive_filter_v1" in active_text
+    assert "gror_balanced_momentum_60_40_v1" in candidates_text
+    assert "dsr_sector_top3_momentum_defensive_cash_v1" in candidates_text
+    assert "dsr_sector_top2_momentum_200d_bil_v1" in candidates_text
+    assert "quality_momentum_etf_proxy" in candidates_text
+    assert "create_candidate_exhaustive_prompt_for_gror_balanced_momentum_60_40_v1" in actions_text

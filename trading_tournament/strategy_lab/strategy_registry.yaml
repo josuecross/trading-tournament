@@ -5,7 +5,7 @@ registry:
   real_money_recommendation: false
   broker_integration: false
   live_orders: false
-  last_updated_utc: '2026-06-18T18:10:42.848143+00:00'
+  last_updated_utc: '2026-06-18T21:11:56.977242+00:00'
 risk_framework:
   active_framework: balanced_speculative_research_v1
   framework_path: risk_framework/risk_framework.yaml
@@ -5609,3 +5609,59 @@ strategies:
   evidence_needed: recomputed or promotion-gate evidence
   duplicate_of: ''
   blocked_reason: ''
+- id: dsr_sector_top2_momentum_200d_bil_v1
+  display_name: DSR Sector Top2 Momentum 200d BIL v1
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: defensive_sector_rotation_etf
+  version: v1
+  parent_id: ''
+  credibility_tier: tier2_exploratory
+  status: promotion_review_candidate
+  role: recovered_strategy_state
+  rules_frozen: true
+  paper_forward_active: false
+  implementation_status: not_implemented
+  data_source: existing_adjusted_etf_cache_or_missing
+  evidence_source: conversation_recovered
+  latest_evidence_path: evidence/future_reviews/dsr_sector_top2_momentum_200d_bil_v1/latest/
+  latest_known_result_summary: 'Conversation-recovered future-review row: strong DSR research-sample candidate deserving a
+    separate promotion review. It was not activated, did not receive candidate_exhaustive, and must not supersede the active
+    DSR equal-weight observation.'
+  allowed_next_action: create_promotion_review_for_dsr_sector_top2_momentum_200d_bil_v1
+  forbidden_next_actions:
+  - paper_forward_activation
+  - real_money_recommendation
+  - broker_integration
+  - live_orders
+  - order_placement
+  - promote_to_real_money
+  - add_broker_integration
+  - place_live_orders
+  - tune_parameters
+  risk_framework_status: research_only_recovered
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  promotion_blockers: conversation_recovered_only;not_recomputed
+  promotion_requirements: Manual review and appropriate validation gate before any promotion.
+  demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation.
+  strategy_id: dsr_sector_top2_momentum_200d_bil_v1
+  family: defensive_sector_rotation_etf
+  instrument_lane: ETF
+  evidence_tier: tier2_exploratory
+  current_status: promotion_review_candidate
+  allowed_next_actions:
+  - create_promotion_review_for_dsr_sector_top2_momentum_200d_bil_v1
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: true
+  promotion_decision: future_promotion_review
+  promotion_reason: Conversation-recovered state only.
+  primary_failure_mode: not_assessed_in_registry
+  duplication_risk: same_family_as_active_dsr_equal_weight_observation
+  risk_budget_status: future_review_only
+  evidence_needed: future promotion review; exact metrics unavailable in recovered artifacts
+  duplicate_of: ''
+  blocked_reason: ''
+  metrics: missing_or_unavailable

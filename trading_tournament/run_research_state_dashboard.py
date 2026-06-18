@@ -235,6 +235,22 @@ def build_dashboard() -> Path:
                     "notes": "paper/demo observation only; not a trading signal",
                 }
             )
+    for row in registry.get("strategies", []):
+        row_id = str(row.get("id", ""))
+        if row_id.startswith("paper_forward_") and row.get("paper_forward_active") is True:
+            if row_id not in {active_row.get("strategy") for active_row in active_rows}:
+                active_rows.append(
+                    {
+                        "strategy": row_id,
+                        "role": row.get("role", "active_recovered_paper_demo_observation"),
+                        "status": row.get("status", "active_paper_demo_observation"),
+                        "current_equity": "",
+                        "decision_status": "recovered_frozen_too_early",
+                        "signal_state": "recovered_active_observation",
+                        "paper_forward_active": True,
+                        "notes": "conversation-recovered frozen paper/demo observation only; not a trading signal",
+                    }
+                )
 
     historical_leaders = [
         {
@@ -270,6 +286,28 @@ def build_dashboard() -> Path:
                 "paper_forward_active": row.get("paper_forward_active", ""),
             }
         )
+    recovered_candidate_ids = {
+        "dsr_sector_top3_momentum_defensive_cash_v1",
+        "dsr_sector_top2_momentum_200d_bil_v1",
+        "gror_balanced_momentum_60_40_v1",
+        "quality_momentum_etf_proxy",
+        "quality_momentum_etf_proxy_risk_control_batch_1",
+    }
+    existing_candidates = {row.get("candidate_id") for row in candidate_rows}
+    for row in registry.get("strategies", []):
+        row_id = str(row.get("id", ""))
+        if row_id in recovered_candidate_ids and row_id not in existing_candidates:
+            candidate_rows.append(
+                {
+                    "candidate_id": row_id,
+                    "latest_verdict": row.get("status", ""),
+                    "deserves_candidate_exhaustive": str(bool(row.get("candidate_exhaustive_recommended", False))).lower(),
+                    "recommended_next_action": row.get("allowed_next_action", ""),
+                    "risk_label": row.get("risk_budget_status", ""),
+                    "duplicate_label": row.get("duplication_risk", ""),
+                    "paper_forward_active": row.get("paper_forward_active", False),
+                }
+            )
 
     blocked_rows = []
     for row in historical_queue:
@@ -298,6 +336,12 @@ def build_dashboard() -> Path:
         )
 
     next_actions = [
+        {
+            "action": "create_candidate_exhaustive_prompt_for_gror_balanced_momentum_60_40_v1",
+            "allowed_now": "true",
+            "lane": "global_risk_on_risk_off_etf",
+            "notes": "Next allowed recovered action is to create the prompt only; do not run GROR candidate_exhaustive during recovery.",
+        },
         {
             "action": "global_multi_asset_batch1_research_sample_review",
             "allowed_now": "true",

@@ -1,0 +1,16 @@
+{
+  "active_successful_strategies_restored": true,
+  "vm_quality_restored": true,
+  "dsr_equal_weight_restored": true,
+  "spy_200d_preserved": true,
+  "gror_balanced_queued": true,
+  "dsr_top3_deferred": true,
+  "dsr_top2_future_review_present": true,
+  "quality_momentum_watchlist_present": true,
+  "evidence_sources_labeled": true,
+  "no_recomputed_metrics_claimed": true,
+  "no_real_money_path": true,
+  "no_broker_path": true,
+  "no_live_order_path": true,
+  "ready_for_recovery_commit": true
+}

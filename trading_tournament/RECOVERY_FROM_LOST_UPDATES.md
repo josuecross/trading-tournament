@@ -8,6 +8,7 @@ Reconstructed in this pass:
 - conversation-recovered activation packets for both active rows
 - recovered family/status summaries for volatility-managed ETF, defensive sector rotation ETF, quality/momentum ETF proxy, global risk-on/risk-off ETF, and the profit-family discovery audit
 - registry rows for active/frozen, queued/deferred, watchlist, and family-state records
+- future-review row for `dsr_sector_top2_momentum_200d_bil_v1` with `metrics: missing_or_unavailable`
 - minimum fixed-rule helpers and focused tests
 - runner stubs for recovered review/sample/promotion/activation packet creation
 
@@ -24,6 +25,7 @@ Missing evidence:
 - original exact ZIP packet bytes
 - original full run logs
 - exact local-cache recomputation outputs for the recovered metrics
+- exact metrics for `dsr_sector_top2_momentum_200d_bil_v1`
 - GROR candidate_exhaustive results, because that run had not occurred before the loss and was not run during recovery
 
 Recovered/frozen active observations:

@@ -1,4 +1,5 @@
 action,allowed_now,lane,notes
+create_candidate_exhaustive_prompt_for_gror_balanced_momentum_60_40_v1,true,global_risk_on_risk_off_etf,Next allowed recovered action is to create the prompt only; do not run GROR candidate_exhaustive during recovery.
 global_multi_asset_batch1_research_sample_review,true,global_multi_asset_fast_exploration_batch1,"Review Global Multi-Asset ETF Fast Exploration Batch 1; no candidate_exhaustive, paper-forward, broker, live-order, leverage, margin, shorting, futures, options, forex, intraday, or real-money action."
 crypto_tier2_risk_control_research_sample_review,true,crypto_spot_tier2_risk_control_batch1,"Review BTC/ETH spot-only Tier 2 risk-control results; no candidate_exhaustive, paper-forward, exchange, broker, leverage, margin, futures, perpetuals, options, live-order, or real-money action."
 commodity_risk_control_research_sample_review,true,commodity_risk_control_batch1,"Review Batch 1 risk-control results; no candidate_exhaustive, paper-forward, broker, or real-money action."

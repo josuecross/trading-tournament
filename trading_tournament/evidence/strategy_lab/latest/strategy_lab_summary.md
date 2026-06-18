@@ -6,8 +6,8 @@ This registry is a project-control layer only. It does not validate strategies, 
 
 ## Run Identity
 
-- run_id: 20260618_182824
-- registry rows: 109
+- run_id: 20260618_211426
+- registry rows: 110
 - validation_passed: True
 
 ## Active Paper-Forward Candidate
