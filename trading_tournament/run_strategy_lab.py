@@ -109,6 +109,7 @@ ALLOWED_TIERS = {
 ALLOWED_STATUSES = {
     "active_observation",
     "active_paper_demo_observation",
+    "active_observation_running",
     "candidate_exhaustive_completed",
     "implement_next_after_current_validation",
     "implemented_research_sample",
@@ -195,6 +196,9 @@ ALLOWED_STATUSES = {
     "too_slow_defensive_watchlist",
     "watchlist_high_upside_high_drawdown",
     "candidate_exhaustive_queue",
+    "deferred_candidate_queue",
+    "promotion_candidate_found",
+    "watchlist_family",
     "candidate_exhaustive_queue_short_history_labeled",
     "watchlist",
     "watchlist_diagnostic",
@@ -300,6 +304,7 @@ ALLOWED_NEXT = {
     "research_sample_review",
     "candidate_exhaustive_review",
     "candidate_exhaustive_review_short_history_gate",
+    "create_candidate_exhaustive_prompt_for_gror_balanced_momentum_60_40_v1",
 }
 QUEUE_ACTIONS = {
     "improve_as_new_version",
@@ -364,6 +369,7 @@ QUEUE_ACTIONS = {
     "research_sample_review",
     "candidate_exhaustive_review",
     "candidate_exhaustive_review_short_history_gate",
+    "create_candidate_exhaustive_prompt_for_gror_balanced_momentum_60_40_v1",
 }
 
 

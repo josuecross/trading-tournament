@@ -1,0 +1,45 @@
+observation_id: paper_forward_vm_quality_lowvol_proxy_v1
+base_strategy_id: vm_quality_lowvol_proxy_v1
+family: volatility_managed_equity_etf
+status: active_paper_demo_observation
+account_type: simulated_paper_demo_only
+evidence_source: conversation_recovered
+frozen: true
+rules_frozen: true
+paper_forward_active: true
+real_money_recommendation: false
+broker_integration: false
+live_orders: false
+order_placement: false
+leverage: false
+margin: false
+shorting: false
+options: false
+futures: false
+forex: false
+crypto: false
+intraday: false
+minimum_days_before_judgment: 30
+current_checkpoint_status: too_early_recovered_no_checkpoint_conclusion
+rule_summary:
+- Monthly rebalance.
+- 'Eligibility: close > 200-day SMA.'
+- 'Ranking: 126-day return / 60-day realized volatility.'
+- Hold top 2 eligible assets equally; if one eligible hold it 100%; if none hold 100%
+  BIL.
+universe:
+- SPLV
+- USMV
+- QUAL
+- SPY
+- BIL
+conversation_recovered_metrics:
+  median_equity_180d: about $3,247.09
+  target_300_before_stop_180d: about 53.85%
+  target_400_before_stop_180d: about 36.48%
+  worst_drawdown_180d: about -$549.41
+  stop_hit_rate: 0.0%
+  stress_10bps_median_equity: about $3,243.14
+  stress_worst_drawdown: about -$557.47
+  correlation_vs_active_combo: about 0.551
+  correlation_vs_SPY_200d: about 0.8465

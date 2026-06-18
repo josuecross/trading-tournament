@@ -1,0 +1,42 @@
+{
+  "run_id": "test_run",
+  "lane_id": "volatility_managed_equity_etf",
+  "lane_status": "research_review_only",
+  "decision": "approve_future_research_sample_prompt",
+  "exact_next_allowed_action": "create_volatility_managed_equity_etf_research_sample_prompt",
+  "existing_input_files": [
+    "strategy_lab\\PROMOTION_POLICY.md",
+    "strategy_lab\\policies\\EVIDENCE_TIER_POLICY.md",
+    "strategy_lab\\policies\\EXPERIMENT_LANE_POLICY.md",
+    "strategy_lab\\policies\\PAPER_FORWARD_FREEZE_POLICY.md",
+    "strategy_lab\\promotion_thresholds.yaml",
+    "strategy_lab\\strategy_registry.yaml",
+    "evidence\\promotion_gap\\latest\\promotion_gap_summary.md",
+    "evidence\\promotion_gap\\latest\\next_research_lane_recommendation.md",
+    "evidence\\promotion_gap\\latest\\next_allowed_action.md",
+    "evidence\\promotion_gap\\latest\\failure_mode_summary.csv",
+    "evidence\\promotion_gap\\latest\\closest_to_promotion.csv",
+    "evidence\\promotion_gap\\latest\\research_lane_ranking.csv",
+    "evidence\\promotion_review\\latest\\promotion_decisions.csv",
+    "evidence\\strategy_lab\\latest\\warnings_and_limitations.md"
+  ],
+  "missing_input_files": [
+    "evidence\\strategy_lab\\latest\\current_state_summary.md",
+    "evidence\\strategy_lab\\latest\\candidate_status_matrix.csv",
+    "evidence\\strategy_lab\\latest\\historical_leaders.csv",
+    "evidence\\strategy_lab\\latest\\active_observations.csv"
+  ],
+  "candidate_variant_count": 5,
+  "backtest_run": false,
+  "profit_exploration_run": false,
+  "data_downloaded": false,
+  "provider_api_called": false,
+  "candidate_exhaustive_run": false,
+  "paper_forward_activated": false,
+  "active_observation_mutated": false,
+  "frozen_control_changed": false,
+  "broker_integration": false,
+  "live_orders": false,
+  "order_placement": false,
+  "real_money_recommendation": false
+}

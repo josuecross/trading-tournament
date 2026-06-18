@@ -1,0 +1,6 @@
+strategy,role,status,current_equity,decision_status,signal_state,paper_forward_active,notes
+SPY_200d_trend_model,primary_watchlist_candidate,active_observation,2998.5,inconclusive_too_early,risk_on,True,paper/demo observation only; not a trading signal
+SPY_buy_hold,aggressive_benchmark,active_observation,2998.5,inconclusive_too_early,hold_spy,False,paper/demo observation only; not a trading signal
+BIL_cash_proxy,defensive_benchmark,active_observation,2998.5,inconclusive_too_early,hold_bil,False,paper/demo observation only; not a trading signal
+current_no_cash_proxy_alpha_AB,strategy_control,active_observation,3000.0,inconclusive_too_early,engine_replayed_signal_snapshot_unavailable,False,paper/demo observation only; not a trading signal
+combo_SPY200d_GLD_50_50_v1,parallel_observation_candidate,active_paper_demo_observation,2998.5,inconclusive_too_early,active_combo_observation,True,paper/demo observation only; not a trading signal

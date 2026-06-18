@@ -1,0 +1,11 @@
+{
+  "broker_integration": false,
+  "candidate_exhaustive_run": false,
+  "evidence_source": "conversation_recovered",
+  "live_orders": false,
+  "paper_forward_activation_run": false,
+  "real_money_recommendation": false,
+  "run_id": "recovered_20260618",
+  "stage": "promotion_reviews",
+  "subject": "gror_balanced_momentum_60_40_v1"
+}

@@ -5,7 +5,7 @@ registry:
   real_money_recommendation: false
   broker_integration: false
   live_orders: false
-  last_updated_utc: auto_or_placeholder
+  last_updated_utc: '2026-06-18T18:10:42.848143+00:00'
 risk_framework:
   active_framework: balanced_speculative_research_v1
   framework_path: risk_framework/risk_framework.yaml
@@ -4920,3 +4920,692 @@ strategies:
   evidence_needed: new isolated version and fresh evidence required to reopen
   duplicate_of: ''
   blocked_reason: queue_only;execution_model_missing;data_model_missing;risk_model_missing;not_implemented
+- id: paper_forward_vm_quality_lowvol_proxy_v1
+  display_name: Paper Forward VM Quality Lowvol Proxy v1
+  lane: paper_forward
+  instrument_family: ETF
+  strategy_family: volatility_managed_equity_etf
+  version: v1
+  parent_id: ''
+  credibility_tier: tier4_paper_forward
+  status: active_paper_demo_observation
+  role: active_recovered_paper_demo_observation
+  rules_frozen: true
+  paper_forward_active: true
+  implementation_status: implemented
+  data_source: existing_adjusted_etf_cache_or_missing
+  evidence_source: conversation_recovered
+  latest_evidence_path: evidence/paper_forward_activations/vm_quality_lowvol_proxy_v1/latest/
+  latest_known_result_summary: Active/frozen recovered paper-demo observation; 180d median equity about $3,247.09 and stop-hit
+    rate 0.0% from conversation-recovered evidence.
+  allowed_next_action: observe_only
+  forbidden_next_actions:
+  - change_rules
+  - tune_parameters
+  - promote_to_real_money
+  - add_broker_integration
+  - place_orders
+  - place_live_orders
+  risk_framework_status: paper_forward_allowed_recovered
+  paper_forward_allowed_by_risk_framework: true
+  real_money_recommendation: false
+  promotion_blockers: no_real_money_promotion;rules_frozen_observe_only;conversation_recovered_evidence
+  promotion_requirements: Manual review and appropriate validation gate before any promotion.
+  demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation.
+  strategy_id: paper_forward_vm_quality_lowvol_proxy_v1
+  family: volatility_managed_equity_etf
+  instrument_lane: ETF
+  evidence_tier: tier4_paper_forward
+  current_status: active_paper_demo_observation
+  allowed_next_actions:
+  - observe_only
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: paper_forward_activation_recovered
+  promotion_reason: Conversation-recovered state only.
+  primary_failure_mode: not_assessed_in_registry
+  duplication_risk: not_flagged
+  risk_budget_status: active_observation
+  evidence_needed: paper/demo observation only; no real-money conclusion
+  duplicate_of: ''
+  blocked_reason: ''
+  frozen: true
+- id: paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+  display_name: Paper Forward DSR Sector Equal Weight Defensive Filter v1
+  lane: paper_forward
+  instrument_family: ETF
+  strategy_family: defensive_sector_rotation_etf
+  version: v1
+  parent_id: ''
+  credibility_tier: tier4_paper_forward
+  status: active_paper_demo_observation
+  role: active_recovered_paper_demo_observation
+  rules_frozen: true
+  paper_forward_active: true
+  implementation_status: implemented
+  data_source: existing_adjusted_etf_cache_or_missing
+  evidence_source: conversation_recovered
+  latest_evidence_path: evidence/paper_forward_activations/dsr_sector_equal_weight_defensive_filter_v1/latest/
+  latest_known_result_summary: Active/frozen recovered paper-demo observation; 180d median equity about $3,302.75 and stop-hit
+    rate 0.0% from conversation-recovered evidence.
+  allowed_next_action: observe_only
+  forbidden_next_actions:
+  - change_rules
+  - tune_parameters
+  - promote_to_real_money
+  - add_broker_integration
+  - place_orders
+  - place_live_orders
+  risk_framework_status: paper_forward_allowed_recovered
+  paper_forward_allowed_by_risk_framework: true
+  real_money_recommendation: false
+  promotion_blockers: no_real_money_promotion;rules_frozen_observe_only;conversation_recovered_evidence
+  promotion_requirements: Manual review and appropriate validation gate before any promotion.
+  demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation.
+  strategy_id: paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+  family: defensive_sector_rotation_etf
+  instrument_lane: ETF
+  evidence_tier: tier4_paper_forward
+  current_status: active_paper_demo_observation
+  allowed_next_actions:
+  - observe_only
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: paper_forward_activation_recovered
+  promotion_reason: Conversation-recovered state only.
+  primary_failure_mode: not_assessed_in_registry
+  duplication_risk: not_flagged
+  risk_budget_status: active_observation
+  evidence_needed: paper/demo observation only; no real-money conclusion
+  duplicate_of: ''
+  blocked_reason: ''
+  frozen: true
+- id: dsr_sector_top3_momentum_defensive_cash_v1
+  display_name: Dsr Sector Top3 Momentum Defensive Cash V1
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: defensive_sector_rotation_etf
+  version: v1
+  parent_id: ''
+  credibility_tier: tier2_exploratory
+  status: deferred_candidate_queue
+  role: recovered_strategy_state
+  rules_frozen: true
+  paper_forward_active: false
+  implementation_status: implemented_research_sample
+  data_source: existing_adjusted_etf_cache_or_missing
+  evidence_source: conversation_recovered
+  latest_evidence_path: evidence/promotion_reviews/dsr_sector_top3_momentum_defensive_cash_v1/latest/
+  latest_known_result_summary: Promotion review passed and candidate_exhaustive was recommended, but deferred because same
+    family as active DSR row.
+  allowed_next_action: candidate_exhaustive_review
+  forbidden_next_actions:
+  - observe_as_paper_forward
+  - promote_to_real_money
+  - add_broker_integration
+  - place_live_orders
+  - use_futures_contract_logic
+  - use_leverage
+  - use_margin
+  - use_shorting
+  - tune_parameters
+  risk_framework_status: research_only_recovered
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  promotion_blockers: conversation_recovered_only;not_recomputed
+  promotion_requirements: Manual review and appropriate validation gate before any promotion.
+  demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation.
+  strategy_id: dsr_sector_top3_momentum_defensive_cash_v1
+  family: defensive_sector_rotation_etf
+  instrument_lane: ETF
+  evidence_tier: tier2_exploratory
+  current_status: deferred_candidate_queue
+  allowed_next_actions:
+  - candidate_exhaustive_review
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: true
+  promotion_review_required: false
+  promotion_decision: promote_to_candidate_exhaustive_queue
+  promotion_reason: Conversation-recovered state only.
+  primary_failure_mode: not_assessed_in_registry
+  duplication_risk: not_flagged
+  risk_budget_status: queued_deferred
+  evidence_needed: candidate_exhaustive only if later explicitly approved
+  duplicate_of: ''
+  blocked_reason: ''
+- id: gror_balanced_momentum_60_40_v1
+  display_name: Gror Balanced Momentum 60 40 V1
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: global_risk_on_risk_off_etf
+  version: v1
+  parent_id: ''
+  credibility_tier: tier2_exploratory
+  status: candidate_exhaustive_queue
+  role: recovered_strategy_state
+  rules_frozen: true
+  paper_forward_active: false
+  implementation_status: implemented_research_sample
+  data_source: existing_adjusted_etf_cache_or_missing
+  evidence_source: conversation_recovered
+  latest_evidence_path: evidence/promotion_reviews/gror_balanced_momentum_60_40_v1/latest/
+  latest_known_result_summary: Promotion review recovered as promote_to_candidate_exhaustive_queue; candidate_exhaustive not
+    run.
+  allowed_next_action: create_candidate_exhaustive_prompt_for_gror_balanced_momentum_60_40_v1
+  forbidden_next_actions:
+  - observe_as_paper_forward
+  - promote_to_real_money
+  - add_broker_integration
+  - place_live_orders
+  - use_futures_contract_logic
+  - use_leverage
+  - use_margin
+  - use_shorting
+  - tune_parameters
+  risk_framework_status: research_only_recovered
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  promotion_blockers: conversation_recovered_only;not_recomputed
+  promotion_requirements: Manual review and appropriate validation gate before any promotion.
+  demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation.
+  strategy_id: gror_balanced_momentum_60_40_v1
+  family: global_risk_on_risk_off_etf
+  instrument_lane: ETF
+  evidence_tier: tier2_exploratory
+  current_status: candidate_exhaustive_queue
+  allowed_next_actions:
+  - create_candidate_exhaustive_prompt_for_gror_balanced_momentum_60_40_v1
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: true
+  promotion_review_required: false
+  promotion_decision: promote_to_candidate_exhaustive_queue
+  promotion_reason: Conversation-recovered state only.
+  primary_failure_mode: not_assessed_in_registry
+  duplication_risk: not_flagged
+  risk_budget_status: candidate_exhaustive_queue
+  evidence_needed: candidate_exhaustive prompt may be created later; do not run during recovery
+  duplicate_of: ''
+  blocked_reason: ''
+- id: quality_momentum_etf_proxy
+  display_name: Quality Momentum Etf Proxy
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: quality_momentum_etf_proxy
+  version: v1
+  parent_id: ''
+  credibility_tier: tier2_exploratory
+  status: watchlist_family
+  role: recovered_strategy_state
+  rules_frozen: true
+  paper_forward_active: false
+  implementation_status: not_implemented
+  data_source: existing_adjusted_etf_cache_or_missing
+  evidence_source: conversation_recovered
+  latest_evidence_path: evidence/research_samples/quality_momentum_etf_proxy/latest/
+  latest_known_result_summary: Watchlist family; no promotion candidate. Profit power existed but failed risk/duplicate gates.
+  allowed_next_action: research_sample_review
+  forbidden_next_actions:
+  - observe_as_paper_forward
+  - promote_to_real_money
+  - add_broker_integration
+  - place_live_orders
+  - use_futures_contract_logic
+  - use_leverage
+  - use_margin
+  - use_shorting
+  - tune_parameters
+  risk_framework_status: research_only_recovered
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  promotion_blockers: conversation_recovered_only;not_recomputed
+  promotion_requirements: Manual review and appropriate validation gate before any promotion.
+  demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation.
+  strategy_id: quality_momentum_etf_proxy
+  family: quality_momentum_etf_proxy
+  instrument_lane: ETF
+  evidence_tier: tier2_exploratory
+  current_status: watchlist_family
+  allowed_next_actions:
+  - research_sample_review
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: keep_watchlist
+  promotion_reason: Conversation-recovered state only.
+  primary_failure_mode: not_assessed_in_registry
+  duplication_risk: not_flagged
+  risk_budget_status: not_assessed_in_registry
+  evidence_needed: recomputed or promotion-gate evidence
+  duplicate_of: ''
+  blocked_reason: ''
+- id: quality_momentum_etf_proxy_risk_control_batch_1
+  display_name: Quality Momentum Etf Proxy Risk Control Batch 1
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: quality_momentum_etf_proxy
+  version: v1
+  parent_id: ''
+  credibility_tier: tier2_exploratory
+  status: watchlist_family
+  role: recovered_strategy_state
+  rules_frozen: true
+  paper_forward_active: false
+  implementation_status: not_implemented
+  data_source: existing_adjusted_etf_cache_or_missing
+  evidence_source: conversation_recovered
+  latest_evidence_path: evidence/research_samples/quality_momentum_etf_proxy_risk_control_batch_1/latest/
+  latest_known_result_summary: Risk-control batch stayed watchlist/duplicate; no further rescue approved now.
+  allowed_next_action: research_sample_review
+  forbidden_next_actions:
+  - observe_as_paper_forward
+  - promote_to_real_money
+  - add_broker_integration
+  - place_live_orders
+  - use_futures_contract_logic
+  - use_leverage
+  - use_margin
+  - use_shorting
+  - tune_parameters
+  risk_framework_status: research_only_recovered
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  promotion_blockers: conversation_recovered_only;not_recomputed
+  promotion_requirements: Manual review and appropriate validation gate before any promotion.
+  demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation.
+  strategy_id: quality_momentum_etf_proxy_risk_control_batch_1
+  family: quality_momentum_etf_proxy
+  instrument_lane: ETF
+  evidence_tier: tier2_exploratory
+  current_status: watchlist_family
+  allowed_next_actions:
+  - research_sample_review
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: keep_watchlist
+  promotion_reason: Conversation-recovered state only.
+  primary_failure_mode: not_assessed_in_registry
+  duplication_risk: not_flagged
+  risk_budget_status: not_assessed_in_registry
+  evidence_needed: recomputed or promotion-gate evidence
+  duplicate_of: ''
+  blocked_reason: ''
+- id: volatility_managed_equity_etf
+  display_name: Volatility Managed Equity Etf
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: volatility_managed_equity_etf
+  version: v1
+  parent_id: ''
+  credibility_tier: tier2_exploratory
+  status: active_observation_running
+  role: recovered_strategy_state
+  rules_frozen: true
+  paper_forward_active: false
+  implementation_status: not_implemented
+  data_source: existing_adjusted_etf_cache_or_missing
+  evidence_source: conversation_recovered
+  latest_evidence_path: evidence/recovery/latest/
+  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as recomputed.
+  allowed_next_action: research_sample_review
+  forbidden_next_actions:
+  - observe_as_paper_forward
+  - promote_to_real_money
+  - add_broker_integration
+  - place_live_orders
+  - use_futures_contract_logic
+  - use_leverage
+  - use_margin
+  - use_shorting
+  - tune_parameters
+  risk_framework_status: research_only_recovered
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  promotion_blockers: conversation_recovered_only;not_recomputed
+  promotion_requirements: Manual review and appropriate validation gate before any promotion.
+  demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation.
+  strategy_id: volatility_managed_equity_etf
+  family: volatility_managed_equity_etf
+  instrument_lane: ETF
+  evidence_tier: tier2_exploratory
+  current_status: active_observation_running
+  allowed_next_actions:
+  - research_sample_review
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: keep_watchlist
+  promotion_reason: Conversation-recovered state only.
+  primary_failure_mode: not_assessed_in_registry
+  duplication_risk: not_flagged
+  risk_budget_status: not_assessed_in_registry
+  evidence_needed: recomputed or promotion-gate evidence
+  duplicate_of: ''
+  blocked_reason: ''
+- id: defensive_sector_rotation_etf
+  display_name: Defensive Sector Rotation Etf
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: defensive_sector_rotation_etf
+  version: v1
+  parent_id: ''
+  credibility_tier: tier2_exploratory
+  status: active_observation_running
+  role: recovered_strategy_state
+  rules_frozen: true
+  paper_forward_active: false
+  implementation_status: not_implemented
+  data_source: existing_adjusted_etf_cache_or_missing
+  evidence_source: conversation_recovered
+  latest_evidence_path: evidence/recovery/latest/
+  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as recomputed.
+  allowed_next_action: research_sample_review
+  forbidden_next_actions:
+  - observe_as_paper_forward
+  - promote_to_real_money
+  - add_broker_integration
+  - place_live_orders
+  - use_futures_contract_logic
+  - use_leverage
+  - use_margin
+  - use_shorting
+  - tune_parameters
+  risk_framework_status: research_only_recovered
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  promotion_blockers: conversation_recovered_only;not_recomputed
+  promotion_requirements: Manual review and appropriate validation gate before any promotion.
+  demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation.
+  strategy_id: defensive_sector_rotation_etf
+  family: defensive_sector_rotation_etf
+  instrument_lane: ETF
+  evidence_tier: tier2_exploratory
+  current_status: active_observation_running
+  allowed_next_actions:
+  - research_sample_review
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: keep_watchlist
+  promotion_reason: Conversation-recovered state only.
+  primary_failure_mode: not_assessed_in_registry
+  duplication_risk: not_flagged
+  risk_budget_status: not_assessed_in_registry
+  evidence_needed: recomputed or promotion-gate evidence
+  duplicate_of: ''
+  blocked_reason: ''
+- id: global_risk_on_risk_off_etf
+  display_name: Global Risk On Risk Off Etf
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: global_risk_on_risk_off_etf
+  version: v1
+  parent_id: ''
+  credibility_tier: tier2_exploratory
+  status: promotion_candidate_found
+  role: recovered_strategy_state
+  rules_frozen: true
+  paper_forward_active: false
+  implementation_status: not_implemented
+  data_source: existing_adjusted_etf_cache_or_missing
+  evidence_source: conversation_recovered
+  latest_evidence_path: evidence/recovery/latest/
+  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as recomputed.
+  allowed_next_action: research_sample_review
+  forbidden_next_actions:
+  - observe_as_paper_forward
+  - promote_to_real_money
+  - add_broker_integration
+  - place_live_orders
+  - use_futures_contract_logic
+  - use_leverage
+  - use_margin
+  - use_shorting
+  - tune_parameters
+  risk_framework_status: research_only_recovered
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  promotion_blockers: conversation_recovered_only;not_recomputed
+  promotion_requirements: Manual review and appropriate validation gate before any promotion.
+  demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation.
+  strategy_id: global_risk_on_risk_off_etf
+  family: global_risk_on_risk_off_etf
+  instrument_lane: ETF
+  evidence_tier: tier2_exploratory
+  current_status: promotion_candidate_found
+  allowed_next_actions:
+  - research_sample_review
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: keep_watchlist
+  promotion_reason: Conversation-recovered state only.
+  primary_failure_mode: not_assessed_in_registry
+  duplication_risk: not_flagged
+  risk_budget_status: not_assessed_in_registry
+  evidence_needed: recomputed or promotion-gate evidence
+  duplicate_of: ''
+  blocked_reason: ''
+- id: managed_futures_etf_wrapper
+  display_name: Managed Futures Etf Wrapper
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: managed_futures_etf_wrapper
+  version: v1
+  parent_id: ''
+  credibility_tier: tier2_exploratory
+  status: research_queue
+  role: recovered_strategy_state
+  rules_frozen: true
+  paper_forward_active: false
+  implementation_status: not_implemented
+  data_source: existing_adjusted_etf_cache_or_missing
+  evidence_source: conversation_recovered
+  latest_evidence_path: evidence/recovery/latest/
+  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as recomputed.
+  allowed_next_action: research_sample_review
+  forbidden_next_actions:
+  - observe_as_paper_forward
+  - promote_to_real_money
+  - add_broker_integration
+  - place_live_orders
+  - use_futures_contract_logic
+  - use_leverage
+  - use_margin
+  - use_shorting
+  - tune_parameters
+  risk_framework_status: research_only_recovered
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  promotion_blockers: conversation_recovered_only;not_recomputed
+  promotion_requirements: Manual review and appropriate validation gate before any promotion.
+  demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation.
+  strategy_id: managed_futures_etf_wrapper
+  family: managed_futures_etf_wrapper
+  instrument_lane: ETF
+  evidence_tier: tier2_exploratory
+  current_status: research_queue
+  allowed_next_actions:
+  - research_sample_review
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: keep_watchlist
+  promotion_reason: Conversation-recovered state only.
+  primary_failure_mode: not_assessed_in_registry
+  duplication_risk: not_flagged
+  risk_budget_status: not_assessed_in_registry
+  evidence_needed: recomputed or promotion-gate evidence
+  duplicate_of: ''
+  blocked_reason: ''
+- id: commodity_wrapper
+  display_name: Commodity Wrapper
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: commodity_wrapper
+  version: v1
+  parent_id: ''
+  credibility_tier: tier2_exploratory
+  status: deferred
+  role: recovered_strategy_state
+  rules_frozen: true
+  paper_forward_active: false
+  implementation_status: not_implemented
+  data_source: existing_adjusted_etf_cache_or_missing
+  evidence_source: conversation_recovered
+  latest_evidence_path: evidence/recovery/latest/
+  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as recomputed.
+  allowed_next_action: research_sample_review
+  forbidden_next_actions:
+  - observe_as_paper_forward
+  - promote_to_real_money
+  - add_broker_integration
+  - place_live_orders
+  - use_futures_contract_logic
+  - use_leverage
+  - use_margin
+  - use_shorting
+  - tune_parameters
+  risk_framework_status: research_only_recovered
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  promotion_blockers: conversation_recovered_only;not_recomputed
+  promotion_requirements: Manual review and appropriate validation gate before any promotion.
+  demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation.
+  strategy_id: commodity_wrapper
+  family: commodity_wrapper
+  instrument_lane: ETF
+  evidence_tier: tier2_exploratory
+  current_status: deferred
+  allowed_next_actions:
+  - research_sample_review
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: keep_watchlist
+  promotion_reason: Conversation-recovered state only.
+  primary_failure_mode: not_assessed_in_registry
+  duplication_risk: not_flagged
+  risk_budget_status: not_assessed_in_registry
+  evidence_needed: recomputed or promotion-gate evidence
+  duplicate_of: ''
+  blocked_reason: ''
+- id: crypto_spot
+  display_name: Crypto Spot
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: crypto_spot
+  version: v1
+  parent_id: ''
+  credibility_tier: tier2_exploratory
+  status: deferred
+  role: recovered_strategy_state
+  rules_frozen: true
+  paper_forward_active: false
+  implementation_status: not_implemented
+  data_source: existing_adjusted_etf_cache_or_missing
+  evidence_source: conversation_recovered
+  latest_evidence_path: evidence/recovery/latest/
+  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as recomputed.
+  allowed_next_action: research_sample_review
+  forbidden_next_actions:
+  - observe_as_paper_forward
+  - promote_to_real_money
+  - add_broker_integration
+  - place_live_orders
+  - use_futures_contract_logic
+  - use_leverage
+  - use_margin
+  - use_shorting
+  - tune_parameters
+  risk_framework_status: research_only_recovered
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  promotion_blockers: conversation_recovered_only;not_recomputed
+  promotion_requirements: Manual review and appropriate validation gate before any promotion.
+  demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation.
+  strategy_id: crypto_spot
+  family: crypto_spot
+  instrument_lane: ETF
+  evidence_tier: tier2_exploratory
+  current_status: deferred
+  allowed_next_actions:
+  - research_sample_review
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: keep_watchlist
+  promotion_reason: Conversation-recovered state only.
+  primary_failure_mode: not_assessed_in_registry
+  duplication_risk: not_flagged
+  risk_budget_status: not_assessed_in_registry
+  evidence_needed: recomputed or promotion-gate evidence
+  duplicate_of: ''
+  blocked_reason: ''
+- id: individual_stock_momentum
+  display_name: Individual Stock Momentum
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: individual_stock_momentum
+  version: v1
+  parent_id: ''
+  credibility_tier: tier2_exploratory
+  status: deferred
+  role: recovered_strategy_state
+  rules_frozen: true
+  paper_forward_active: false
+  implementation_status: not_implemented
+  data_source: existing_adjusted_etf_cache_or_missing
+  evidence_source: conversation_recovered
+  latest_evidence_path: evidence/recovery/latest/
+  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as recomputed.
+  allowed_next_action: research_sample_review
+  forbidden_next_actions:
+  - observe_as_paper_forward
+  - promote_to_real_money
+  - add_broker_integration
+  - place_live_orders
+  - use_futures_contract_logic
+  - use_leverage
+  - use_margin
+  - use_shorting
+  - tune_parameters
+  risk_framework_status: research_only_recovered
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  promotion_blockers: conversation_recovered_only;not_recomputed
+  promotion_requirements: Manual review and appropriate validation gate before any promotion.
+  demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation.
+  strategy_id: individual_stock_momentum
+  family: individual_stock_momentum
+  instrument_lane: ETF
+  evidence_tier: tier2_exploratory
+  current_status: deferred
+  allowed_next_actions:
+  - research_sample_review
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: keep_watchlist
+  promotion_reason: Conversation-recovered state only.
+  primary_failure_mode: not_assessed_in_registry
+  duplication_risk: not_flagged
+  risk_budget_status: not_assessed_in_registry
+  evidence_needed: recomputed or promotion-gate evidence
+  duplicate_of: ''
+  blocked_reason: ''

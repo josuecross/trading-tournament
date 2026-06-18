@@ -1,0 +1,68 @@
+observation_id: paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+base_strategy_id: dsr_sector_equal_weight_defensive_filter_v1
+family: defensive_sector_rotation_etf
+status: active_paper_demo_observation
+account_type: simulated_paper_demo_only
+evidence_source: conversation_recovered
+frozen: true
+rules_frozen: true
+paper_forward_active: true
+real_money_recommendation: false
+broker_integration: false
+live_orders: false
+order_placement: false
+leverage: false
+margin: false
+shorting: false
+options: false
+futures: false
+forex: false
+crypto: false
+intraday: false
+minimum_days_before_judgment: 30
+current_checkpoint_status: too_early_recovered_no_checkpoint_conclusion
+rule_summary:
+- Monthly rebalance.
+- 'Qualifying sector ETFs: close > 200-day SMA.'
+- Equal-weight qualifying sectors.
+- If only one or two qualify, allocate one-third to each qualifying sector and remainder
+  to BIL.
+- If none qualify, hold 100% BIL.
+universe:
+- XLK
+- XLF
+- XLE
+- XLV
+- XLY
+- XLP
+- XLU
+- XLI
+- XLB
+- XLC
+- BIL
+conversation_recovered_metrics:
+  median_equity_180d: about $3,302.75
+  mean_equity_180d: about $3,301.91
+  p75_equity_180d: about $3,511.36
+  p90_equity_180d: about $3,760.79
+  best_equity_180d: about $4,071.04
+  worst_equity_180d: about $2,578.70
+  target_300_before_stop_180d: about 66.51%
+  target_400_before_stop_180d: about 45.71%
+  median_drawdown_180d: about -$273.41
+  worst_drawdown_180d: about -$580.65
+  stop_hit_rate: 0.0%
+  stress_median_equity_180d: about $3,297.76
+  stress_degradation: about -$4.98
+  stress_target_300_before_stop: about 65.96%
+  stress_target_400_before_stop: about 44.96%
+  stress_worst_drawdown: about -$582.84
+  delta_vs_SPY_200d: about +$72.37
+  delta_vs_vm_quality: about +$49.64
+  delta_vs_active_combo: about -$36.79
+  active_combo_correlation: about 0.549
+  SPY_200d_correlation: about 0.759
+  vm_quality_correlation: about 0.848
+  equal_weight_sector_benchmark_correlation: about 0.855
+  sector_benchmark_duplicate_label: likely_duplicate
+  drawdown_improvement_vs_raw_equal_weight_sector_basket: about +$590.10

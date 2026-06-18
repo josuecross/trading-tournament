@@ -3,13 +3,17 @@
   "consistency_errors_count": 0,
   "consistency_status": "passed",
   "consistency_warnings_count": 0,
-  "created_timestamp_utc": "2026-06-10T05:16:08Z",
+  "created_timestamp_utc": "2026-06-18T18:28:34Z",
   "live_orders": false,
-  "missing_files": {},
+  "missing_files": {
+    "06_REPRO_DEBUG": [
+      "C:/Users/te3442/Documents/GitHub/trading-tournament/trading_tournament/results/latest"
+    ]
+  },
   "notes": "Advisor upload packet generated from existing evidence only; no backtests or downloads were run.",
   "raw_data_included": false,
   "real_money_recommendation": false,
-  "repo_path": "/Users/jcruzlopez/trading/trading_tournament",
+  "repo_path": "C:\\Users\\te3442\\Documents\\GitHub\\trading-tournament\\trading_tournament",
   "top_level_file_count": 10,
   "zip_files": [
     "00_ADVISOR_INDEX.zip",
