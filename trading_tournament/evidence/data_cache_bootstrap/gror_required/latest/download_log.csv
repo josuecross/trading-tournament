@@ -1,0 +1,6 @@
+symbol,status,provider_api_called,detail
+SPY,downloaded,True,downloaded and normalized adjusted cache passed QA
+QQQ,downloaded,True,downloaded and normalized adjusted cache passed QA
+GLD,downloaded,True,downloaded and normalized adjusted cache passed QA
+IEF,downloaded,True,downloaded and normalized adjusted cache passed QA
+BIL,downloaded,True,downloaded and normalized adjusted cache passed QA

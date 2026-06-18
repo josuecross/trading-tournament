@@ -335,12 +335,22 @@ def build_dashboard() -> Path:
             }
         )
 
+    gror_row = registry_strategy(registry, "gror_balanced_momentum_60_40_v1")
+    gror_next_action = gror_row.get(
+        "allowed_next_action",
+        "create_candidate_exhaustive_prompt_for_gror_balanced_momentum_60_40_v1",
+    )
+    gror_next_notes = (
+        "GROR candidate validation has run; follow the evidence-bound next action only."
+        if gror_row.get("candidate_exhaustive_run") is True
+        else "Next allowed recovered action is to create the prompt only; do not run GROR candidate_exhaustive during recovery."
+    )
     next_actions = [
         {
-            "action": "create_candidate_exhaustive_prompt_for_gror_balanced_momentum_60_40_v1",
+            "action": gror_next_action,
             "allowed_now": "true",
             "lane": "global_risk_on_risk_off_etf",
-            "notes": "Next allowed recovered action is to create the prompt only; do not run GROR candidate_exhaustive during recovery.",
+            "notes": gror_next_notes,
         },
         {
             "action": "global_multi_asset_batch1_research_sample_review",

@@ -1,0 +1,6 @@
+symbol,first_date,last_date,row_count,adjusted_close_availability,missing_values,duplicate_dates,impossible_ohlc_values,warmup_sufficiency,inclusion_decision,reason_for_exclusion
+SPY,,,0,False,,,not_checked_cache_missing,False,exclude,required adjusted cache missing
+QQQ,,,0,False,,,not_checked_cache_missing,False,exclude,required adjusted cache missing
+GLD,,,0,False,,,not_checked_cache_missing,False,exclude,required adjusted cache missing
+IEF,,,0,False,,,not_checked_cache_missing,False,exclude,required adjusted cache missing
+BIL,,,0,False,,,not_checked_cache_missing,False,exclude,required adjusted cache missing

@@ -1,0 +1,5 @@
+criterion,passed,notes
+validation_completed,True,
+only_target_row_validated,True,gror_balanced_momentum_60_40_v1
+no_forbidden_mechanics,True,all forbidden flags false
+final_decision_assigned,True,candidate_exhaustive_watchlist

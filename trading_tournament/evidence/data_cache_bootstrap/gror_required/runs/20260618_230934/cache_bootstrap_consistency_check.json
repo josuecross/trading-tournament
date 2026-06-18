@@ -1,0 +1,15 @@
+{
+  "all_required_symbols_passed_qa": true,
+  "approved_symbols_only": true,
+  "consistency_passed": true,
+  "no_broker_or_live_order_path": true,
+  "no_forbidden_asset_classes_or_mechanics": true,
+  "no_forbidden_symbols": true,
+  "no_optimization_or_grid_search": true,
+  "no_paper_forward_activation": true,
+  "no_paper_forward_checkpoint": true,
+  "no_real_money_recommendation": true,
+  "required_outputs_exist": true,
+  "run_id": "20260618_230934",
+  "strategy_validation_run": false
+}

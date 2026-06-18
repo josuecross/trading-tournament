@@ -112,8 +112,23 @@ def test_recovered_registry_status_matrix() -> None:
     assert top2["evidence_source"] == "conversation_recovered"
     assert top2["metrics"] == "missing_or_unavailable"
     assert "create_promotion_review_for_dsr_sector_top2_momentum_200d_bil_v1" in top2["allowed_next_actions"]
-    assert rows["gror_balanced_momentum_60_40_v1"]["status"] == "candidate_exhaustive_queue"
-    assert rows["gror_balanced_momentum_60_40_v1"]["candidate_exhaustive_run"] is False
+    gror = rows["gror_balanced_momentum_60_40_v1"]
+    assert gror["status"] in {"candidate_exhaustive_queue", "candidate_exhaustive_completed"}
+    if gror["status"] == "candidate_exhaustive_completed":
+        assert gror["candidate_exhaustive_run"] is True
+        assert gror["candidate_exhaustive_decision"] in {
+            "candidate_exhaustive_pass",
+            "candidate_exhaustive_watchlist",
+            "candidate_exhaustive_duplicate",
+            "candidate_exhaustive_too_slow",
+            "candidate_exhaustive_too_risky",
+            "candidate_exhaustive_evidence_incomplete",
+            "candidate_exhaustive_fail",
+        }
+        assert gror["paper_forward_active"] is False
+        assert gror["real_money_recommendation"] is False
+    else:
+        assert gror["candidate_exhaustive_run"] is False
     assert rows["quality_momentum_etf_proxy"]["status"] == "watchlist_family"
     assert rows["quality_momentum_etf_proxy"]["paper_forward_active"] is False
 
@@ -148,4 +163,7 @@ def test_dashboard_exports_recovered_active_observations_and_next_action() -> No
     assert "dsr_sector_top3_momentum_defensive_cash_v1" in candidates_text
     assert "dsr_sector_top2_momentum_200d_bil_v1" in candidates_text
     assert "quality_momentum_etf_proxy" in candidates_text
-    assert "create_candidate_exhaustive_prompt_for_gror_balanced_momentum_60_40_v1" in actions_text
+    assert (
+        "create_candidate_exhaustive_prompt_for_gror_balanced_momentum_60_40_v1" in actions_text
+        or "keep_gror_balanced_momentum_60_40_v1_candidate_watchlist_choose_next_lane" in actions_text
+    )

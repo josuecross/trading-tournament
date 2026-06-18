@@ -1,0 +1,5 @@
+criterion,passed,notes
+validation_completed,False,"missing required adjusted cache for: SPY, QQQ, GLD, IEF, BIL"
+only_target_row_validated,True,gror_balanced_momentum_60_40_v1
+no_forbidden_mechanics,True,all forbidden flags false
+final_decision_assigned,True,candidate_exhaustive_evidence_incomplete
