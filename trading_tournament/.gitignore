@@ -2,8 +2,15 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.env
+.env.*
+*.local.yaml
+*.local.env
 
 data/cache/*.csv
 data/**/cache/*.csv
 results/runs/
 results/latest/
+execution_lab/alpaca_micro_live_v1/config/*.local.yaml
+execution_lab/alpaca_micro_live_v1/evidence/
+!execution_lab/alpaca_micro_live_v1/evidence/.gitkeep

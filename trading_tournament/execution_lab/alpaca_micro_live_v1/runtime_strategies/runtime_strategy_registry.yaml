@@ -1,0 +1,23 @@
+version: 1
+
+strategies:
+  vm_quality_lowvol_proxy_v1:
+    enabled: true
+    runtime_ready: true
+    runtime_spec: runtime_strategies/vm_quality_lowvol_proxy_v1.yaml
+    runtime_module: runtime_strategies/vm_quality_lowvol_proxy_v1.py
+    target_source: alpaca_runtime
+    data_timeframe: 1Day
+    signal_cadence: daily_completed_bar
+    rebalance_policy: target_change_or_drift
+    paper_trading_allowed: true
+    live_trading_allowed: false
+    capital_sleeve_notional: 25.00
+    max_order_notional: 5.00
+    rebalance_tolerance_notional: 1.00
+    allowed_symbols:
+      - SPLV
+      - USMV
+      - QUAL
+      - SPY
+      - BIL

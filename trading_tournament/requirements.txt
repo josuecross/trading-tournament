@@ -4,3 +4,5 @@ yfinance
 matplotlib
 pyyaml
 pytest
+requests
+streamlit

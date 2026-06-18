@@ -2,4 +2,11 @@
 *.py[cod]
 __pycache__/
 .pytest_cache/
+.env
+.env.*
+*.local.yaml
+*.local.env
+trading_tournament/execution_lab/alpaca_micro_live_v1/config/*.local.yaml
+trading_tournament/execution_lab/alpaca_micro_live_v1/evidence/
+!trading_tournament/execution_lab/alpaca_micro_live_v1/evidence/.gitkeep
 

@@ -1,0 +1,7 @@
+version: 1
+broker: alpaca
+environment: paper
+paper_base_url: "https://paper-api.alpaca.markets"
+data_base_url: "https://data.alpaca.markets"
+data_feed: "iex"
+data_adjustment: "all"

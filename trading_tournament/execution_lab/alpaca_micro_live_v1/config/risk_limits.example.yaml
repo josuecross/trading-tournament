@@ -1,0 +1,29 @@
+version: 1
+
+default_mode: paper
+paper_trading_allowed: true
+live_trading_allowed: false
+
+capital_sleeve_notional: 25.00
+max_total_notional_per_run: 25.00
+max_order_notional: 5.00
+min_order_notional: 1.00
+rebalance_tolerance_notional: 1.00
+cash_buffer_pct: 0.05
+max_orders_per_loop: 10
+
+require_market_open: true
+allow_queued_paper_orders: false
+
+allow_shorts: false
+allow_margin: false
+allow_options: false
+allow_crypto: false
+allow_futures: false
+
+allow_paper_reduce_only_sells: false
+
+broker_read_retry_max_attempts: 3
+broker_read_retry_backoff_seconds:
+  - 1
+  - 3

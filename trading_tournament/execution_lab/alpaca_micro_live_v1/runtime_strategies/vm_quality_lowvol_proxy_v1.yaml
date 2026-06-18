@@ -1,0 +1,38 @@
+strategy_id: vm_quality_lowvol_proxy_v1
+source: trading_tournament_promoted_candidate
+runtime_version: alpaca_runtime_v1
+
+universe:
+  risk_assets:
+    - SPLV
+    - USMV
+    - QUAL
+    - SPY
+  cash_or_fallback:
+    - BIL
+
+eligibility:
+  sma_window: 200
+  rule: close_above_sma_200
+
+ranking:
+  return_window: 126
+  volatility_window: 60
+  score: return_126d / realized_vol_60d
+
+portfolio:
+  hold_top_n: 2
+  weighting: equal
+  fallback: BIL
+
+rebalance:
+  signal_cadence: daily_completed_bar
+  execution_cadence: operator_controlled_loop
+  rebalance_policy: target_change_or_drift
+
+constraints:
+  long_only: true
+  no_leverage: true
+  no_shorting: true
+  no_options: true
+  no_crypto: true
