@@ -1,8 +1,10 @@
 {
   "active_observations_unchanged": true,
   "approved_symbols_only": true,
+  "combined_benchmark_delta_export_created": true,
   "combined_leaderboard_created": true,
   "consistency_passed": true,
+  "exploratory_gate_label_update_created": true,
   "exploratory_non_final": true,
   "family_outputs_isolated": true,
   "next_action_explicit": true,

@@ -1,0 +1,7 @@
+family_id,intended_family_concept,chosen_etf_universe,symbols_appropriate,missing_important_etf_wrapper,included_wrong_etf,history_length_enough,common_history_rows,likely_issue
+managed_futures_etf_wrapper,Managed-futures mutual/ETF wrapper trend proxy,DBMF;KMLM;CTA;FMF;WTMF,yes,no_current_allowed_set_contains_core_wrappers,no,yes,1075,Histories are short; wrappers are reasonable but may deserve needs_more_data/diversifier labels.
+dual_momentum_paa_etf_wrapper,Global dual momentum / protective allocation proxy,SPY;QQQ;EFA;EEM;IWM;GLD;IEF;BIL,yes,no,no,yes,4795,"Universe is reasonable; aggressive variants failed risk, balanced/PAA variants remained watchlist."
+gtaa_faber_style_benchmark_lane,GTAA benchmark/sanity-check lane,SPY;QQQ;EFA;EEM;IWM;GLD;IEF;BIL,yes,no,no,yes,4795,Good enough for benchmark lane; unfair to expect many promotion candidates from a simple broad tactical benchmark.
+low_beta_defensive_equity_etf,Defensive equity low-volatility proxy,USMV;SPLV;SPY;BIL,partial,no,no,yes,3686,Mostly duplicates existing VM quality/low-volatility exposure by design.
+dividend_quality_yield_etf,Dividend quality/yield equity proxy,SCHD;VIG;DGRO;SPY;BIL,yes,no,no,yes,3023,Likely too slow for +300/+400 profit target without adding leverage or concentrated equity risk.
+carry_yield_etf_proxy,Credit/carry ETF proxy,HYG;LQD;EMB;IEF;BIL,partial,no,no,yes,4653,Likely too slow; risk controls are appropriate but credit beta can correlate with equities.

@@ -1,17 +1,17 @@
 symbol,status,provider_api_called,detail
 BIL,used_existing_cache,False,cache passed QA
-DGRO,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data
+DGRO,used_existing_cache,False,cache passed QA
 EEM,used_existing_cache,False,cache passed QA
 EFA,used_existing_cache,False,cache passed QA
-EMB,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data
+EMB,used_existing_cache,False,cache passed QA
 GLD,used_existing_cache,False,cache passed QA
-HYG,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data
+HYG,used_existing_cache,False,cache passed QA
 IEF,used_existing_cache,False,cache passed QA
 IWM,used_existing_cache,False,cache passed QA
-LQD,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data
+LQD,used_existing_cache,False,cache passed QA
 QQQ,used_existing_cache,False,cache passed QA
-SCHD,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data
-SPLV,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data
+SCHD,used_existing_cache,False,cache passed QA
+SPLV,used_existing_cache,False,cache passed QA
 SPY,used_existing_cache,False,cache passed QA
-USMV,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data
-VIG,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data
+USMV,used_existing_cache,False,cache passed QA
+VIG,used_existing_cache,False,cache passed QA

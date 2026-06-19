@@ -1,0 +1,17 @@
+{
+  "active_observations_unchanged": true,
+  "best_row_is_watchlist": true,
+  "consistency_passed": true,
+  "next_action_explicit": true,
+  "no_backtest_run": true,
+  "no_broker_path_added": true,
+  "no_candidate_exhaustive_run": true,
+  "no_data_download": true,
+  "no_live_order_path_added": true,
+  "no_new_research_run": true,
+  "no_paper_forward_activation": true,
+  "no_promotion_candidates_confirmed": true,
+  "no_provider_api_call": true,
+  "no_real_money_recommendation": true,
+  "post_parallel_audit_completed": true
+}

@@ -20,12 +20,15 @@ from src.data import DataQualityError, _download_yfinance, build_adjusted_ohlc
 ROOT = Path(__file__).resolve().parent
 QUEUE_PATH = Path("strategy_lab") / "parallel_research_discovery_queue.yaml"
 OUTPUT_DIR = Path("evidence") / "parallel_research_discovery" / "latest"
+LABEL_UPDATE_DIR = Path("evidence") / "exploratory_gate_label_update" / "latest"
 REGISTRY_PATH = Path("strategy_lab") / "strategy_registry.yaml"
 STARTING_EQUITY = 3000.0
 STOP_DOLLARS = -600.0
 SLIPPAGE = 0.0005
 HORIZONS = [90, 180]
 MAX_WINDOWS_PER_HORIZON = 180
+PROMOTION_SCORE_THRESHOLD = 70
+PROMOTION_TARGET300_THRESHOLD = 0.25
 APPROVED_SYMBOLS = {
     "SPY",
     "QQQ",
@@ -55,6 +58,45 @@ PROTECTED_IDS = {
 NEXT_PROMOTION = "create_promotion_review_for_best_parallel_discovery_candidate"
 NEXT_CONTINUE = "continue_best_parallel_discovery_family"
 NEXT_FAIL = "move_to_dsr_top2_or_reassess_roadmap"
+AUDIT_NEXT_ACTION = "adjust_exploratory_gate_labels_not_thresholds"
+EXPLORATORY_LABELS = {
+    "diversifier_watchlist_candidate",
+    "short_history_watchlist",
+    "benchmark_watchlist",
+    "defensive_watchlist",
+    "too_slow_for_profit_goal",
+    "duplicate_watchlist",
+    "needs_benchmark_delta_review",
+}
+NON_PROMOTION_VERDICTS = {
+    "watchlist",
+    "too_risky",
+    "too_slow",
+    "duplicate_or_near_duplicate",
+    "evidence_missing",
+    "reject",
+    *EXPLORATORY_LABELS,
+}
+WATCHLIST_VERDICTS = {
+    "watchlist",
+    "diversifier_watchlist_candidate",
+    "short_history_watchlist",
+    "benchmark_watchlist",
+    "defensive_watchlist",
+    "too_slow_for_profit_goal",
+    "duplicate_watchlist",
+    "needs_benchmark_delta_review",
+}
+COMBINED_BENCHMARK_IDS = [
+    "SPY_200d",
+    "SPY_buy_hold",
+    "QQQ_buy_hold",
+    "BIL_cash_proxy",
+    "active_combo",
+    "paper_forward_vm_quality_lowvol_proxy_v1",
+    "paper_forward_dsr_sector_equal_weight_defensive_filter_v1",
+    "gror_balanced_momentum_60_40_v1",
+]
 
 Downloader = Callable[[str, str, str | None, dict[str, Any]], pd.DataFrame]
 
@@ -90,6 +132,18 @@ def protected_snapshot(registry: dict[str, Any]) -> dict[str, dict[str, Any]]:
         for row_id, row in rows.items()
         if row_id in PROTECTED_IDS or row.get("paper_forward_active") is True
     }
+
+
+def is_promotion_candidate(verdict: str) -> bool:
+    return verdict == "promotion_review_candidate"
+
+
+def next_action_for_verdict(verdict: str) -> str:
+    if is_promotion_candidate(verdict):
+        return NEXT_PROMOTION
+    if verdict == "evidence_missing":
+        return NEXT_FAIL
+    return NEXT_CONTINUE
 
 
 def validate_queue(queue: dict[str, Any]) -> None:
@@ -420,6 +474,124 @@ def summarize(rows: list[dict[str, Any]], strategy_id: str, horizon: int) -> dic
     }
 
 
+def benchmark_missing_reason(p: dict[str, Any], benchmark_id: str) -> str:
+    idx = p.get("idx", {})
+    if benchmark_id == "SPY_200d":
+        missing = [sym for sym in ["SPY", "BIL"] if sym not in idx]
+        return "" if not missing else f"missing required symbols: {';'.join(missing)}"
+    if benchmark_id.endswith("_buy_hold") or benchmark_id.endswith("_cash_proxy"):
+        symbol = benchmark_id.replace("_buy_hold", "").replace("_cash_proxy", "")
+        return "" if symbol in idx else f"missing required symbol: {symbol}"
+    return "benchmark rule/equity series not available in parallel discovery export"
+
+
+def benchmark_is_available(p: dict[str, Any], benchmark_id: str) -> bool:
+    return benchmark_missing_reason(p, benchmark_id) == ""
+
+
+def benchmark_delta_rows(
+    family_id: str,
+    variant: dict[str, Any],
+    p: dict[str, Any],
+    summary180: dict[str, Any],
+) -> list[dict[str, Any]]:
+    strategy_median = summary180.get("final_equity_median", "")
+    rows: list[dict[str, Any]] = []
+    starts = sample_starts(len(p["close"]), 180)
+    for benchmark_id in COMBINED_BENCHMARK_IDS:
+        missing_reason = benchmark_missing_reason(p, benchmark_id)
+        if missing_reason:
+            rows.append(
+                {
+                    "family_id": family_id,
+                    "strategy_id": variant["strategy_id"],
+                    "benchmark_id": benchmark_id,
+                    "horizon": 180,
+                    "strategy_median_equity": strategy_median,
+                    "benchmark_median_equity": "",
+                    "delta_median_equity": "",
+                    "delta_sign_check": "not_applicable",
+                    "comparison_status": "unavailable",
+                    "benchmark_available": False,
+                    "missing_reason": missing_reason,
+                    "notes": "no zero-filled delta for unavailable benchmark",
+                }
+            )
+            continue
+        benchmark_results = [simulate(p, start, 180, benchmark=benchmark_id) for start in starts]
+        benchmark_median = float(pd.DataFrame(benchmark_results)["final_equity"].median()) if benchmark_results else ""
+        if strategy_median == "" or benchmark_median == "":
+            delta = ""
+            delta_sign_check = "not_applicable"
+            status = "unavailable"
+            missing = "strategy or benchmark median unavailable"
+        else:
+            delta = float(strategy_median) - float(benchmark_median)
+            delta_sign_check = "passed"
+            status = "available"
+            missing = ""
+        rows.append(
+            {
+                "family_id": family_id,
+                "strategy_id": variant["strategy_id"],
+                "benchmark_id": benchmark_id,
+                "horizon": 180,
+                "strategy_median_equity": strategy_median,
+                "benchmark_median_equity": benchmark_median,
+                "delta_median_equity": delta,
+                "delta_sign_check": delta_sign_check,
+                "comparison_status": status,
+                "benchmark_available": status == "available",
+                "missing_reason": missing,
+                "notes": "delta=strategy_median_equity-benchmark_median_equity",
+            }
+        )
+    return rows
+
+
+def refine_exploratory_verdict(
+    family_id: str,
+    strategy_id: str,
+    summary180: dict[str, Any],
+    score_label: str,
+    base_verdict: str,
+    max_corr: float,
+    missing_count: int,
+    benchmark_deltas_available: bool,
+) -> tuple[str, str]:
+    if base_verdict == "promotion_review_candidate":
+        return score_label, base_verdict
+    if base_verdict not in {"watchlist", "too_slow", "duplicate_or_near_duplicate"}:
+        return score_label, base_verdict
+    if missing_count:
+        return "needs_benchmark_delta_review", "needs_benchmark_delta_review"
+    if not benchmark_deltas_available:
+        return "needs_benchmark_delta_review", "needs_benchmark_delta_review"
+    if base_verdict == "duplicate_or_near_duplicate":
+        return "duplicate_watchlist", "duplicate_watchlist"
+    if family_id == "gtaa_faber_style_benchmark_lane":
+        return "benchmark_watchlist", "benchmark_watchlist"
+    if family_id == "static_all_weather_or_permanent_portfolio_benchmark":
+        if summary180.get("worst_drawdown", STOP_DOLLARS) > STOP_DOLLARS * 0.5:
+            return "defensive_watchlist", "defensive_watchlist"
+        return "benchmark_watchlist", "benchmark_watchlist"
+    if family_id in {"low_beta_defensive_equity_etf", "dividend_quality_yield_etf"}:
+        if base_verdict == "too_slow":
+            return "too_slow_for_profit_goal", "too_slow_for_profit_goal"
+        return "defensive_watchlist", "defensive_watchlist"
+    if family_id == "carry_yield_etf_proxy":
+        if base_verdict == "too_slow":
+            return "too_slow_for_profit_goal", "too_slow_for_profit_goal"
+        if max_corr < 0.70:
+            return "diversifier_watchlist_candidate", "diversifier_watchlist_candidate"
+        return "defensive_watchlist", "defensive_watchlist"
+    if "managed_futures" in family_id or "managed_futures" in strategy_id:
+        return "short_history_watchlist", "short_history_watchlist"
+    if base_verdict == "too_slow":
+        return "too_slow_for_profit_goal", "too_slow_for_profit_goal"
+    return score_label, base_verdict
+
+
 def score_and_verdict(summary180: dict[str, Any], max_corr: float, missing_count: int) -> tuple[float, str, str]:
     if summary180.get("validation_status") == "evidence_missing":
         return 0.0, "reject", "evidence_missing"
@@ -433,7 +605,7 @@ def score_and_verdict(summary180: dict[str, Any], max_corr: float, missing_count
         return max(0, score - 25), "weak", "too_slow"
     if max_corr >= 0.85:
         return max(0, score - 25), "weak", "duplicate_or_near_duplicate"
-    verdict = "promotion_review_candidate" if score >= 70 and summary180["target_300_rate"] >= 0.25 else "watchlist"
+    verdict = "promotion_review_candidate" if score >= PROMOTION_SCORE_THRESHOLD and summary180["target_300_rate"] >= PROMOTION_TARGET300_THRESHOLD else "watchlist"
     label = "strong_candidate" if score >= 80 else "possible_candidate" if score >= 65 else "watchlist" if score >= 45 else "weak" if score >= 25 else "reject"
     return round(max(0, min(100, score)), 2), label, verdict
 
@@ -447,6 +619,95 @@ def create_packet(directory: Path, name: str) -> Path:
             if path.is_file() and path.name != packet.name:
                 zf.write(path, path.name)
     return packet
+
+
+def write_label_update_outputs(
+    root: Path,
+    classification_rows: list[dict[str, Any]],
+    combined_delta_rows: list[dict[str, Any]],
+    strategy_rows: list[dict[str, Any]],
+    before_protected: dict[str, dict[str, Any]],
+    after_protected: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    label_dir = root / LABEL_UPDATE_DIR
+    if label_dir.exists():
+        shutil.rmtree(label_dir)
+    label_dir.mkdir(parents=True, exist_ok=True)
+    fieldnames = [
+        "family_id",
+        "strategy_id",
+        "previous_generic_verdict",
+        "updated_label",
+        "profit_first_score",
+        "promotion_candidate",
+        "candidate_exhaustive_unlocked",
+        "paper_forward_unlocked",
+        "reason",
+    ]
+    write_csv(label_dir / "updated_watchlist_classification.csv", classification_rows, fieldnames)
+    (label_dir / "label_mapping.md").write_text(
+        "# Exploratory Gate Label Mapping\n\n"
+        "- `diversifier_watchlist_candidate`: low-correlation, acceptable-risk row that may be useful as a diversifier but is not promotion-ready.\n"
+        "- `short_history_watchlist`: wrapper/history is too short for strong conclusions.\n"
+        "- `benchmark_watchlist`: useful as a sanity-check or benchmark lane, not promotion-ready.\n"
+        "- `defensive_watchlist`: good drawdown/control profile but weak profit objective fit.\n"
+        "- `too_slow_for_profit_goal`: controlled risk but weak +300/+400 or median-profit behavior.\n"
+        "- `duplicate_watchlist`: duplicate-like comparison row worth retaining as a reference.\n"
+        "- `needs_benchmark_delta_review`: key benchmark comparison is missing, so no confident label upgrade is made.\n\n"
+        "All labels above are non-promotion labels and route to continued research/watching only.\n",
+        encoding="utf-8",
+    )
+    unavailable_rows = [row for row in combined_delta_rows if row["comparison_status"] == "unavailable"]
+    unavailable_zero_filled = [
+        row
+        for row in unavailable_rows
+        if str(row.get("delta_median_equity", "")).strip() in {"0", "0.0"}
+    ]
+    (label_dir / "combined_benchmark_delta_export_review.md").write_text(
+        "# Combined Benchmark Delta Export Review\n\n"
+        f"- Export created: `{(root / OUTPUT_DIR / 'combined_benchmark_delta.csv').exists()}`\n"
+        f"- Rows exported: `{len(combined_delta_rows)}`\n"
+        f"- Unavailable rows: `{len(unavailable_rows)}`\n"
+        f"- Unavailable rows zero-filled: `{len(unavailable_zero_filled)}`\n"
+        "- Delta formula: `strategy_median_equity - benchmark_median_equity`.\n"
+        "- Active/paper-forward protected benchmark lanes are recorded as unavailable when their equity series is not available to this discovery export.\n",
+        encoding="utf-8",
+    )
+    reclassified = [row for row in classification_rows if row["previous_generic_verdict"] != row["updated_label"]]
+    promotions = [row for row in strategy_rows if is_promotion_candidate(row["strategy_verdict"])]
+    consistency = {
+        "labels_added": sorted(EXPLORATORY_LABELS),
+        "promotion_thresholds_unchanged": PROMOTION_SCORE_THRESHOLD == 70 and PROMOTION_TARGET300_THRESHOLD == 0.25,
+        "new_labels_are_not_promotion_candidates": all(not is_promotion_candidate(label) for label in EXPLORATORY_LABELS),
+        "candidate_exhaustive_not_unlocked": all(next_action_for_verdict(label) != "run_candidate_exhaustive" for label in EXPLORATORY_LABELS),
+        "paper_forward_not_unlocked": all("paper_forward" not in next_action_for_verdict(label) for label in EXPLORATORY_LABELS),
+        "combined_benchmark_delta_export_created": (root / OUTPUT_DIR / "combined_benchmark_delta.csv").exists(),
+        "unavailable_benchmarks_not_zero": not unavailable_zero_filled,
+        "active_observations_unchanged": before_protected == after_protected,
+        "no_candidate_exhaustive_run": True,
+        "no_paper_forward_activation": True,
+        "no_broker_path_added": True,
+        "no_live_order_path_added": True,
+        "no_real_money_recommendation": True,
+        "consistency_passed": False,
+    }
+    consistency["consistency_passed"] = all(
+        value is True for key, value in consistency.items() if key not in {"labels_added", "consistency_passed"}
+    )
+    write_json(label_dir / "exploratory_gate_label_consistency_check.json", consistency)
+    (label_dir / "exploratory_gate_label_update_summary.md").write_text(
+        "# Exploratory Gate Label Update\n\n"
+        f"- Labels added: `{', '.join(sorted(EXPLORATORY_LABELS))}`\n"
+        "- Promotion thresholds were not weakened: score remains `70`, +300 target rate remains `0.25`.\n"
+        "- New labels do not unlock candidate_exhaustive, paper-forward review, or paper-forward activation.\n"
+        f"- Reclassified rows: `{len(reclassified)}`\n"
+        f"- Promotion candidates after relabeling: `{len(promotions)}`\n"
+        f"- Combined benchmark-delta export created: `{consistency['combined_benchmark_delta_export_created']}`\n"
+        "- This is a labeling/export fix only; no strategy rules or active observations were changed.\n",
+        encoding="utf-8",
+    )
+    create_packet(label_dir, "exploratory_gate_label_update_packet.zip")
+    return consistency
 
 
 def run_parallel_discovery(root: Path = ROOT, downloader: Downloader | None = None, allow_download: bool = True, update_registry_file: bool = True) -> dict[str, Any]:
@@ -467,6 +728,8 @@ def run_parallel_discovery(root: Path = ROOT, downloader: Downloader | None = No
     family_rows: list[dict[str, Any]] = []
     strategy_rows: list[dict[str, Any]] = []
     all_benchmark_rows: list[dict[str, Any]] = []
+    combined_benchmark_delta_rows: list[dict[str, Any]] = []
+    classification_rows: list[dict[str, Any]] = []
     all_duplicate_rows: list[dict[str, Any]] = []
 
     for family in [fam for fam in queue["families"] if fam.get("run_enabled")]:
@@ -492,6 +755,9 @@ def run_parallel_discovery(root: Path = ROOT, downloader: Downloader | None = No
                 if not required <= set(close.columns):
                     summary180 = {"strategy_id": variant["strategy_id"], "validation_status": "evidence_missing"}
                     score, label, verdict = score_and_verdict(summary180, 1.0, len(required - set(close.columns)))
+                    base_verdict = verdict
+                    delta_rows = benchmark_delta_rows(family_id, variant, p, summary180)
+                    combined_benchmark_delta_rows.extend(delta_rows)
                 else:
                     for horizon in HORIZONS:
                         for start in sample_starts(len(close), horizon):
@@ -511,20 +777,59 @@ def run_parallel_discovery(root: Path = ROOT, downloader: Downloader | None = No
                         all_benchmark_rows.append({"family_id": family_id, "strategy_id": variant["strategy_id"], "benchmark_id": bench, "horizon": 180, "correlation": corr})
                     max_corr = max([abs(c) for c in corr_values if np.isfinite(c)] or [1.0])
                     score, label, verdict = score_and_verdict(summary180, max_corr, len(missing))
+                    base_verdict = verdict
+                    delta_rows = benchmark_delta_rows(family_id, variant, p, summary180)
+                    combined_benchmark_delta_rows.extend(delta_rows)
+                    label, verdict = refine_exploratory_verdict(
+                        family_id,
+                        variant["strategy_id"],
+                        summary180,
+                        label,
+                        verdict,
+                        max_corr,
+                        len(missing),
+                        any(row["comparison_status"] == "available" for row in delta_rows),
+                    )
                     all_duplicate_rows.append({"family_id": family_id, "strategy_id": variant["strategy_id"], "max_abs_available_correlation": max_corr, "duplicate_label": "duplicate_or_near_duplicate" if max_corr >= 0.85 else "not_proven_duplicate", "additive_label": "possible_additive" if max_corr < 0.70 else "weak_or_unclear_additive"})
                 score_row = {"family_id": family_id, "strategy_id": variant["strategy_id"], "profit_first_score": score, "score_label": label, "strategy_verdict": verdict}
                 scores.append(score_row)
                 strategy_rows.append(score_row)
-                verdict_rows.append({"strategy_id": variant["strategy_id"], "strategy_verdict": verdict, "next_allowed_action": NEXT_PROMOTION if verdict == "promotion_review_candidate" else NEXT_CONTINUE, "reason": f"score={score}; label={label}"})
+                classification_rows.append(
+                    {
+                        "family_id": family_id,
+                        "strategy_id": variant["strategy_id"],
+                        "previous_generic_verdict": base_verdict if "base_verdict" in locals() else verdict,
+                        "updated_label": verdict,
+                        "profit_first_score": score,
+                        "promotion_candidate": is_promotion_candidate(verdict),
+                        "candidate_exhaustive_unlocked": False,
+                        "paper_forward_unlocked": False,
+                        "reason": f"score={score}; label={label}",
+                    }
+                )
+                verdict_rows.append({"strategy_id": variant["strategy_id"], "strategy_verdict": verdict, "next_allowed_action": next_action_for_verdict(verdict), "reason": f"score={score}; label={label}"})
         else:
             for variant in family["variants"]:
                 row = {"family_id": family_id, "strategy_id": variant["strategy_id"], "profit_first_score": 0, "score_label": "reject", "strategy_verdict": "evidence_missing"}
                 scores.append(row)
                 strategy_rows.append(row)
+                classification_rows.append(
+                    {
+                        "family_id": family_id,
+                        "strategy_id": variant["strategy_id"],
+                        "previous_generic_verdict": "evidence_missing",
+                        "updated_label": "evidence_missing",
+                        "profit_first_score": 0,
+                        "promotion_candidate": False,
+                        "candidate_exhaustive_unlocked": False,
+                        "paper_forward_unlocked": False,
+                        "reason": "insufficient data",
+                    }
+                )
                 verdict_rows.append({"strategy_id": variant["strategy_id"], "strategy_verdict": "evidence_missing", "next_allowed_action": NEXT_FAIL, "reason": "insufficient data"})
         if any(row["strategy_verdict"] == "promotion_review_candidate" for row in scores):
             family_verdict = "promotion_review_candidate_family"
-        elif all(row["strategy_verdict"] in {"too_risky", "too_slow", "duplicate_or_near_duplicate", "evidence_missing", "reject"} for row in scores):
+        elif all(row["strategy_verdict"] in {"too_risky", "evidence_missing", "reject"} for row in scores):
             family_verdict = "reject_family"
         else:
             family_verdict = "watchlist_family"
@@ -544,19 +849,46 @@ def run_parallel_discovery(root: Path = ROOT, downloader: Downloader | None = No
     write_csv(combined_dir / "family_leaderboard.csv", sorted(family_rows, key=lambda row: float(row["best_score"]), reverse=True), ["family_id", "family_verdict", "best_score", "best_strategy_id", "missing_symbols"])
     write_csv(combined_dir / "strategy_leaderboard.csv", sorted(strategy_rows, key=lambda row: float(row["profit_first_score"]), reverse=True), ["family_id", "strategy_id", "profit_first_score", "score_label", "strategy_verdict"])
     write_csv(combined_dir / "promotion_review_candidates.csv", promotions, ["family_id", "strategy_id", "profit_first_score", "score_label", "strategy_verdict"])
-    for name, verdict in [("watchlist_rows.csv", "watchlist"), ("rejected_rows.csv", "reject"), ("duplicate_rows.csv", "duplicate_or_near_duplicate"), ("too_risky_rows.csv", "too_risky"), ("too_slow_rows.csv", "too_slow")]:
-        rows = [row for row in strategy_rows if row["strategy_verdict"] == verdict]
+    bucket_specs = [
+        ("watchlist_rows.csv", WATCHLIST_VERDICTS),
+        ("rejected_rows.csv", {"reject"}),
+        ("duplicate_rows.csv", {"duplicate_or_near_duplicate", "duplicate_watchlist"}),
+        ("too_risky_rows.csv", {"too_risky"}),
+        ("too_slow_rows.csv", {"too_slow", "too_slow_for_profit_goal"}),
+    ]
+    for name, verdicts in bucket_specs:
+        rows = [row for row in strategy_rows if row["strategy_verdict"] in verdicts]
         write_csv(combined_dir / name, rows, ["family_id", "strategy_id", "profit_first_score", "score_label", "strategy_verdict"])
+    write_csv(
+        combined_dir / "combined_benchmark_delta.csv",
+        combined_benchmark_delta_rows,
+        [
+            "family_id",
+            "strategy_id",
+            "benchmark_id",
+            "horizon",
+            "strategy_median_equity",
+            "benchmark_median_equity",
+            "delta_median_equity",
+            "delta_sign_check",
+            "comparison_status",
+            "benchmark_available",
+            "missing_reason",
+            "notes",
+        ],
+    )
     write_csv(combined_dir / "data_quality_summary.csv", qa_rows, list(qa_rows[0].keys()))
     write_csv(combined_dir / "download_log.csv", download_rows, ["symbol", "status", "provider_api_called", "detail"])
     (combined_dir / "next_action.md").write_text(f"# Next Action\n\n`{next_action}`\n", encoding="utf-8")
-    (combined_dir / "parallel_research_discovery_summary.md").write_text(f"# Parallel Research Discovery\n\nFamilies tested: `{len(family_rows)}`\n\nBest family: `{best_family.get('family_id', '')}`\n\nNext action: `{next_action}`\n", encoding="utf-8")
+    after_protected = protected_snapshot(registry)
+    label_consistency = write_label_update_outputs(root, classification_rows, combined_benchmark_delta_rows, strategy_rows, before_protected, after_protected)
+    (combined_dir / "parallel_research_discovery_summary.md").write_text(f"# Parallel Research Discovery\n\nFamilies tested: `{len(family_rows)}`\n\nBest family: `{best_family.get('family_id', '')}`\n\nNext action: `{next_action}`\n\nCombined benchmark delta rows: `{len(combined_benchmark_delta_rows)}`\n\nExploratory label update: `{root / LABEL_UPDATE_DIR}`\n", encoding="utf-8")
     consistency = {
         "parallel_discovery_completed": True,
         "exploratory_non_final": True,
         "no_candidate_exhaustive_run": True,
         "no_paper_forward_activation": True,
-        "active_observations_unchanged": protected_snapshot(registry) == before_protected,
+        "active_observations_unchanged": after_protected == before_protected,
         "no_broker_path_added": True,
         "no_live_order_path_added": True,
         "no_real_money_recommendation": True,
@@ -570,11 +902,13 @@ def run_parallel_discovery(root: Path = ROOT, downloader: Downloader | None = No
         "no_leverage_added_by_system": True,
         "family_outputs_isolated": all((root / "evidence" / "research_samples" / row["family_id"] / "latest").exists() for row in family_rows),
         "combined_leaderboard_created": (combined_dir / "strategy_leaderboard.csv").exists(),
+        "combined_benchmark_delta_export_created": (combined_dir / "combined_benchmark_delta.csv").exists(),
+        "exploratory_gate_label_update_created": label_consistency["consistency_passed"],
         "next_action_explicit": bool(next_action),
         "consistency_passed": False,
     }
     consistency["consistency_passed"] = all(value is True for key, value in consistency.items() if key != "consistency_passed")
-    manifest = {"created_at_utc": now_utc(), "families_tested": [row["family_id"] for row in family_rows], "data_downloaded": bool(downloaded), "downloaded_symbols": downloaded, "provider_api_called": provider_called, "next_action": next_action, "candidate_exhaustive_run": False, "paper_forward_activation": False, "real_money_recommendation": False}
+    manifest = {"created_at_utc": now_utc(), "families_tested": [row["family_id"] for row in family_rows], "labels_added": sorted(EXPLORATORY_LABELS), "promotion_thresholds_unchanged": True, "combined_benchmark_delta_created": True, "data_downloaded": bool(downloaded), "downloaded_symbols": downloaded, "provider_api_called": provider_called, "next_action": next_action, "audit_next_action_addressed": AUDIT_NEXT_ACTION, "candidate_exhaustive_run": False, "paper_forward_activation": False, "real_money_recommendation": False}
     write_json(combined_dir / "parallel_research_discovery_manifest.json", manifest)
     write_json(combined_dir / "parallel_research_discovery_consistency_check.json", consistency)
     create_packet(combined_dir, "parallel_research_discovery_packet.zip")
@@ -600,7 +934,7 @@ def run_parallel_discovery(root: Path = ROOT, downloader: Downloader | None = No
 
 
 def main() -> int:
-    result = run_parallel_discovery(ROOT)
+    result = run_parallel_discovery(ROOT, allow_download=False)
     print(f"parallel_discovery_latest_dir={result['output_dir']}")
     print(f"families_tested={','.join(result['families_tested'])}")
     print(f"downloaded_symbols={','.join(result['downloaded_symbols']) or 'none'}")

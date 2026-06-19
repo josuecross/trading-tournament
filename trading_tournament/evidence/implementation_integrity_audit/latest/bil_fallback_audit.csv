@@ -1,0 +1,18 @@
+strategy_id,BIL_included_in_universe,BIL_role,unused_allocation_to_BIL,no_qualifiers_100pct_BIL,weights_sum_to_1_after_fallback,missing_allocation_detected,notes
+mf_wrapper_top1_trend_v1,True,fallback_or_cash_proxy,True,True,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+mf_wrapper_top2_risk_adjusted_v1,True,fallback_or_cash_proxy,True,True,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+mf_wrapper_plus_spy_70_30_v1,True,fallback_or_cash_proxy,True,True,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+mf_wrapper_defensive_cash_switch_v1,True,fallback_or_cash_proxy,True,True,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+dm_global_dual_momentum_top1_v1,True,fallback_or_cash_proxy,True,True,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+dm_multi_asset_top2_absolute_momentum_v1,True,fallback_or_cash_proxy,True,True,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+dm_protective_canary_bil_v1,True,fallback_or_cash_proxy,True,True,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+dm_balanced_offensive_defensive_v1,True,fallback_or_cash_proxy,True,True,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+dm_paa_breadth_protection_v1,True,fallback_or_cash_proxy,True,True,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+gtaa_top3_trend_filter_v1,True,fallback_or_cash_proxy,True,True,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+gtaa_equal_weight_trend_filter_v1,True,fallback_or_cash_proxy,True,True,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+gtaa_top2_risk_adjusted_v1,True,fallback_or_cash_proxy,True,True,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+gtaa_spy_gld_ief_static_trend_v1,True,fallback_or_cash_proxy,True,True,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+gtaa_breadth_defensive_v1,True,fallback_or_cash_proxy,True,True,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+vm_quality_lowvol_proxy_v1,True,reference_row,False,False,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+dsr_sector_equal_weight_defensive_filter_v1,True,reference_row,False,False,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
+gror_balanced_momentum_60_40_v1,True,fallback_or_cash_proxy,True,False,True,False,GROR can be 60/40 split with one sleeve in BIL; all audited implemented rules normalize to 1.0.
