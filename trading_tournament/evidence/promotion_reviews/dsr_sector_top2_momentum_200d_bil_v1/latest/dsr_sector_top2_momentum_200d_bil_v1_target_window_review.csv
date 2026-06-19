@@ -1,0 +1,2 @@
+metric,value,evidence_source,notes
+target_300_window_overlap_vs_dsr_equal_weight,0.6,promotion_review_diagnostic_cached_etf_data,

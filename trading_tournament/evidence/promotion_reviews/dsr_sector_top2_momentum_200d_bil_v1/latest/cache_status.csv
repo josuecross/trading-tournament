@@ -1,0 +1,13 @@
+symbol,required,cache_available,cache_path,qa_status,first_date,last_date,row_count,warmup_sufficiency,missing_reason
+XLK,True,True,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\XLK.csv,passed,2007-01-03,2026-06-18,4896,True,
+XLF,True,True,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\XLF.csv,passed,2007-01-03,2026-06-18,4896,True,
+XLE,True,True,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\XLE.csv,passed,2007-01-03,2026-06-18,4896,True,
+XLV,True,True,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\XLV.csv,passed,2007-01-03,2026-06-18,4896,True,
+XLY,True,True,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\XLY.csv,passed,2007-01-03,2026-06-18,4896,True,
+XLP,True,True,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\XLP.csv,passed,2007-01-03,2026-06-18,4896,True,
+XLU,True,True,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\XLU.csv,passed,2007-01-03,2026-06-18,4896,True,
+XLI,True,True,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\XLI.csv,passed,2007-01-03,2026-06-18,4896,True,
+XLB,True,True,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\XLB.csv,passed,2007-01-03,2026-06-18,4896,True,
+XLC,True,True,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\XLC.csv,passed,2018-06-19,2026-06-18,2011,True,
+BIL,True,True,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\BIL.csv,passed,2007-05-30,2026-06-18,4795,True,
+SPY,False,True,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\SPY.csv,passed,2007-01-03,2026-06-18,4896,True,

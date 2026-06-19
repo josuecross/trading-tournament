@@ -1,0 +1,16 @@
+criterion,value,reference_or_threshold,verdict,notes
+evidence_available,True,cached DSR sector ETFs QA-passed,pass,
+evidence_source,promotion_review_diagnostic_cached_etf_data,labeled source,pass,"Bounded review only, not candidate_exhaustive."
+metrics_available,True,90d and 180d metrics,pass,
+target_300_before_stop,0.6,>=0.25 for promotion consideration,pass,
+target_400_before_stop,0.2,>=0.15 for promotion consideration,pass,
+median_final_equity,3170.2893,>=3300 for promotion consideration,weak_pass,
+worst_drawdown,-488.0685,> -600,pass,
+stop_hit_rate,0.0,0 preferred,pass,
+drawdown_buffer,111.9315,positive,pass,
+delta_vs_dsr_equal_weight,-232.7302,positive and material,fail,
+duplicate_risk_vs_dsr_equal_weight,0.8984,<0.85 preferred,fail,Same-family overlap matters.
+concentration_risk,top2_sector_concentration,must be offset by profit/additive value,weak_pass,Top2 is more concentrated than equal-weight DSR.
+policy_compliance,research_only_review,no forbidden path,pass,
+no_forbidden_mechanics,True,true,pass,
+no_real_money_path,True,true,pass,

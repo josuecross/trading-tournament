@@ -1,0 +1,13 @@
+family,required_symbols,present_symbols,missing_symbols,optional_missing_symbols,readiness_status
+volatility_managed_equity_etf,SPY;SPLV;USMV;QUAL;BIL,SPY;SPLV;USMV;QUAL;BIL,,,conversation_recovered_only
+defensive_sector_rotation_etf,XLK;XLF;XLE;XLV;XLY;XLP;XLU;XLI;XLB;XLC;BIL,XLK;XLF;XLE;XLV;XLY;XLP;XLU;XLI;XLB;XLC;BIL,,,conversation_recovered_only
+global_risk_on_risk_off_etf,SPY;QQQ;GLD;IEF;BIL,SPY;QQQ;GLD;IEF;BIL,,,ready
+quality_momentum_etf_proxy,MTUM;VLUE;VTV;QUAL;USMV;SPLV;SPY;BIL,MTUM;VLUE;VTV;QUAL;USMV;SPLV;SPY;BIL,,,ready
+quality_momentum_etf_proxy_risk_control_batch_1,MTUM;VLUE;VTV;QUAL;USMV;SPLV;SPY;BIL,MTUM;VLUE;VTV;QUAL;USMV;SPLV;SPY;BIL,,,ready
+managed_futures_etf_wrapper,DBMF;KMLM;CTA;FMF;WTMF;SPY;BIL,DBMF;KMLM;CTA;FMF;WTMF;SPY;BIL,,,ready
+dual_momentum_paa_etf_wrapper,SPY;QQQ;EFA;EEM;IWM;GLD;IEF;BIL,SPY;QQQ;EFA;EEM;IWM;GLD;IEF;BIL,,,ready
+gtaa_faber_style_benchmark_lane,SPY;QQQ;EFA;EEM;IWM;GLD;IEF;BIL,SPY;QQQ;EFA;EEM;IWM;GLD;IEF;BIL,,,ready
+static_all_weather_or_permanent_portfolio_benchmark,SPY;GLD;IEF;BIL,SPY;GLD;IEF;BIL,,,ready
+low_beta_defensive_equity_etf,USMV;SPLV;SPY;BIL,USMV;SPLV;SPY;BIL,,,ready
+dividend_quality_yield_etf,SCHD;VIG;DGRO;SPY;BIL,SCHD;VIG;DGRO;SPY;BIL,,,ready
+carry_yield_etf_proxy,HYG;LQD;EMB;IEF;BIL;SPY,HYG;LQD;EMB;IEF;BIL;SPY,,,ready

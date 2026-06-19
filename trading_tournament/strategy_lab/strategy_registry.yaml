@@ -5787,17 +5787,17 @@ strategies:
   version: v1
   parent_id: ''
   credibility_tier: tier2_exploratory
-  status: future_review_candidate
+  status: mark_duplicate_or_near_duplicate
   role: recovered_strategy_state
   rules_frozen: true
   paper_forward_active: false
   implementation_status: not_implemented
   data_source: existing_adjusted_etf_cache_or_missing
-  evidence_source: conversation_recovered
-  latest_evidence_path: evidence/research_roadmap/latest/
+  evidence_source: dsr_top2_promotion_review_cached_etf_diagnostic
+  latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\promotion_reviews\dsr_sector_top2_momentum_200d_bil_v1\latest
   latest_known_result_summary: 'Conversation-recovered future-review row: strong DSR research-sample candidate deserving a separate promotion
     review. It was not activated, did not receive candidate_exhaustive, and must not supersede the active DSR equal-weight observation.'
-  allowed_next_action: create_promotion_review_for_dsr_sector_top2_momentum_200d_bil_v1
+  allowed_next_action: archive_dsr_sector_top2_momentum_200d_bil_v1_as_dsr_duplicate_diagnostic
   forbidden_next_actions:
   - add_broker_integration
   - broker_integration
@@ -5808,6 +5808,7 @@ strategies:
   - order_placement
   - paper_forward_activation
   - paper_forward_checkpoint
+  - paper_forward_review
   - place_live_orders
   - promote_to_real_money
   - real_money_recommendation
@@ -5838,18 +5839,18 @@ strategies:
   family: defensive_sector_rotation_etf
   instrument_lane: ETF
   evidence_tier: tier2_exploratory
-  current_status: future_review_candidate
+  current_status: mark_duplicate_or_near_duplicate
   allowed_next_actions:
-  - create_promotion_review_for_dsr_sector_top2_momentum_200d_bil_v1
+  - archive_dsr_sector_top2_momentum_200d_bil_v1_as_dsr_duplicate_diagnostic
   candidate_exhaustive_run: false
   candidate_exhaustive_recommended: false
   promotion_review_required: true
-  promotion_decision: future_promotion_review
-  promotion_reason: Conversation-recovered state only.
+  promotion_decision: mark_duplicate_or_near_duplicate
+  promotion_reason: 'Bounded promotion review decision: mark_duplicate_or_near_duplicate; next_action=archive_dsr_sector_top2_momentum_200d_bil_v1_as_dsr_duplicate_diagnostic'
   primary_failure_mode: not_assessed_in_registry
   duplication_risk: same_family_as_active_dsr_equal_weight_observation
   risk_budget_status: future_review_only
-  evidence_needed: future promotion review; exact metrics unavailable in recovered artifacts
+  evidence_needed: watchlist/duplicate/risk follow-up only; no candidate run
   duplicate_of: ''
   blocked_reason: ''
   metrics: missing_or_unavailable
@@ -5857,7 +5858,10 @@ strategies:
   roadmap_status: future_review_candidate
   roadmap_reason: Promising DSR same-family row. Exact metrics are missing/unavailable after recovery, and active DSR equal-weight is already
     frozen, so this is lower priority than new family discovery.
-  next_allowed_action: create_promotion_review_for_dsr_sector_top2_momentum_200d_bil_v1
+  next_allowed_action: archive_dsr_sector_top2_momentum_200d_bil_v1_as_dsr_duplicate_diagnostic
+  promotion_review_completed: true
+  latest_promotion_review_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\promotion_reviews\dsr_sector_top2_momentum_200d_bil_v1\latest
+  missing_evidence: ''
 - id: dual_momentum_paa_etf_wrapper
   display_name: Dual Momentum Paa Etf Wrapper
   lane: profit_exploration
