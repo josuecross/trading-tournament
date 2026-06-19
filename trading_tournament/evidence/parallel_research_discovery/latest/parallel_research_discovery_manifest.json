@@ -1,0 +1,26 @@
+{
+  "candidate_exhaustive_run": false,
+  "created_at_utc": "2026-06-19T02:33:50.140413+00:00",
+  "data_downloaded": true,
+  "downloaded_symbols": [
+    "DGRO",
+    "EMB",
+    "HYG",
+    "LQD",
+    "SCHD",
+    "SPLV",
+    "USMV",
+    "VIG"
+  ],
+  "families_tested": [
+    "gtaa_faber_style_benchmark_lane",
+    "static_all_weather_or_permanent_portfolio_benchmark",
+    "low_beta_defensive_equity_etf",
+    "dividend_quality_yield_etf",
+    "carry_yield_etf_proxy"
+  ],
+  "next_action": "continue_best_parallel_discovery_family",
+  "paper_forward_activation": false,
+  "provider_api_called": true,
+  "real_money_recommendation": false
+}

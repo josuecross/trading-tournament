@@ -1,0 +1,6 @@
+strategy_id,profit_first_score,score_label,strategy_verdict
+dm_global_dual_momentum_top1_v1,5.69,weak,too_risky
+dm_multi_asset_top2_absolute_momentum_v1,22.69,weak,too_risky
+dm_protective_canary_bil_v1,26.63,weak,too_risky
+dm_balanced_offensive_defensive_v1,50.14,watchlist,watchlist
+dm_paa_breadth_protection_v1,51.84,watchlist,watchlist

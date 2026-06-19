@@ -1,0 +1,12 @@
+symbol,role,allowed_for_future_review,data_checked_now,provider_api_called,notes
+SPY,core,True,False,False,ETF/fund-wrapper symbol allowed if future prompt authorizes data use.
+QQQ,core,True,False,False,ETF/fund-wrapper symbol allowed if future prompt authorizes data use.
+EFA,core,True,False,False,ETF/fund-wrapper symbol allowed if future prompt authorizes data use.
+EEM,core,True,False,False,ETF/fund-wrapper symbol allowed if future prompt authorizes data use.
+IWM,core,True,False,False,ETF/fund-wrapper symbol allowed if future prompt authorizes data use.
+GLD,core,True,False,False,ETF/fund-wrapper symbol allowed if future prompt authorizes data use.
+IEF,core,True,False,False,ETF/fund-wrapper symbol allowed if future prompt authorizes data use.
+BIL,core,True,False,False,ETF/fund-wrapper symbol allowed if future prompt authorizes data use.
+TLT,conditional_benchmark,True,False,False,ETF/fund-wrapper symbol allowed if future prompt authorizes data use.
+AGG,conditional_benchmark,True,False,False,ETF/fund-wrapper symbol allowed if future prompt authorizes data use.
+DBC,conditional_benchmark,False,False,False,Review only; no data download. DBC is benchmark-only unless explicitly approved later.

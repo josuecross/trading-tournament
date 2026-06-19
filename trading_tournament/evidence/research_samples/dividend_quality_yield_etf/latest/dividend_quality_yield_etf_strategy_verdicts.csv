@@ -1,0 +1,3 @@
+strategy_id,strategy_verdict,next_allowed_action,reason
+dividend_quality_top2_v1,too_risky,continue_best_parallel_discovery_family,score=21.86116981385647; label=weak
+dividend_quality_trend_equal_weight_v1,too_risky,continue_best_parallel_discovery_family,score=20.167464249105457; label=weak

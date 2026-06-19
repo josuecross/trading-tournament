@@ -1,0 +1,6 @@
+strategy_id,strategy_verdict,next_allowed_action,reason
+gtaa_equal_weight_trend_filter_v1,watchlist,continue_best_parallel_discovery_family,score=47.31; label=watchlist
+gtaa_top3_trend_filter_v1,watchlist,continue_best_parallel_discovery_family,score=56.76; label=watchlist
+gtaa_top2_risk_adjusted_v1,too_risky,continue_best_parallel_discovery_family,score=24.7917170996014; label=weak
+gtaa_spy_gld_ief_static_trend_v1,watchlist,continue_best_parallel_discovery_family,score=48.17; label=watchlist
+gtaa_breadth_defensive_v1,watchlist,continue_best_parallel_discovery_family,score=54.94; label=watchlist

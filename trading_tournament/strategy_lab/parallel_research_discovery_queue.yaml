@@ -1,0 +1,176 @@
+schema_version: 1
+project: trading_tournament
+research_only: true
+parallel_discovery_only: true
+default_run:
+  candidate_exhaustive: false
+  paper_forward_activation: false
+  broker_integration: false
+  real_money_recommendation: false
+approved_symbols:
+  - SPY
+  - QQQ
+  - EFA
+  - EEM
+  - IWM
+  - GLD
+  - IEF
+  - BIL
+  - TLT
+  - AGG
+  - USMV
+  - SPLV
+  - SCHD
+  - VIG
+  - DGRO
+  - HYG
+  - LQD
+  - EMB
+forbidden_mechanics:
+  - candidate_exhaustive
+  - paper_forward_review
+  - paper_forward_activation
+  - paper_forward_checkpoint
+  - broker_integration
+  - live_orders
+  - order_placement
+  - real_money_recommendation
+  - direct_futures_contracts
+  - options
+  - forex
+  - crypto
+  - intraday_logic
+  - leverage_created_by_system
+  - margin
+  - shorting
+  - individual_stock_strategy_logic
+  - parameter_optimization
+  - grid_search
+families:
+  - family_id: gtaa_faber_style_benchmark_lane
+    priority_rank: 1
+    run_enabled: true
+    stage: research_sample
+    evidence_tier: exploratory
+    approved_symbols: [SPY, QQQ, EFA, EEM, IWM, GLD, IEF, BIL]
+    max_variants: 5
+    status_before_run: future_benchmark_family
+    benchmark_requirements: [SPY_200d, SPY_buy_hold, QQQ_buy_hold, BIL_cash_proxy, active_VM, active_DSR, active_combo, GROR]
+    duplicate_check_targets: [SPY_200d, SPY, QQQ, BIL, GROR, active_combo]
+    forbidden_mechanics: [direct_futures_contracts, options, forex, crypto, intraday_logic, leverage_created_by_system, margin, shorting]
+    expected_failure_modes: [too_slow, duplicate_spy_200d, bil_heavy, low_profit_power]
+    variants:
+      - strategy_id: gtaa_equal_weight_trend_filter_v1
+        rule_type: gtaa_equal_weight_trend_filter
+        universe: [SPY, EFA, EEM, GLD, IEF, BIL]
+      - strategy_id: gtaa_top3_trend_filter_v1
+        rule_type: gtaa_top_n_return
+        universe: [SPY, QQQ, EFA, EEM, IWM, GLD, IEF, BIL]
+        top_n: 3
+      - strategy_id: gtaa_top2_risk_adjusted_v1
+        rule_type: gtaa_top_n_risk_adjusted
+        universe: [SPY, QQQ, EFA, EEM, IWM, GLD, IEF, BIL]
+        top_n: 2
+      - strategy_id: gtaa_spy_gld_ief_static_trend_v1
+        rule_type: static_trend_weights
+        universe: [SPY, GLD, IEF, BIL]
+        base_weights: {SPY: 0.5, GLD: 0.25, IEF: 0.25}
+      - strategy_id: gtaa_breadth_defensive_v1
+        rule_type: gtaa_breadth_defensive
+        universe: [SPY, QQQ, EFA, EEM, IWM, GLD, IEF, BIL]
+  - family_id: static_all_weather_or_permanent_portfolio_benchmark
+    priority_rank: 2
+    run_enabled: true
+    stage: research_sample
+    evidence_tier: exploratory
+    approved_symbols: [SPY, GLD, IEF, BIL]
+    max_variants: 3
+    status_before_run: future_benchmark_or_control
+    benchmark_requirements: [SPY_200d, SPY_buy_hold, GLD_buy_hold, BIL_cash_proxy, active_VM, active_DSR]
+    duplicate_check_targets: [SPY_200d, SPY, GLD, BIL]
+    forbidden_mechanics: [direct_futures_contracts, options, forex, crypto, intraday_logic, leverage_created_by_system, margin, shorting]
+    expected_failure_modes: [too_slow, duplicate_bil_or_gld, low_target_power]
+    variants:
+      - strategy_id: static_all_weather_equal_weight_v1
+        rule_type: static_equal_weight
+        universe: [SPY, GLD, IEF, BIL]
+      - strategy_id: static_permanent_portfolio_v1
+        rule_type: static_equal_weight
+        universe: [SPY, GLD, IEF, BIL]
+      - strategy_id: static_all_weather_trend_filtered_v1
+        rule_type: static_trend_weights
+        universe: [SPY, GLD, IEF, BIL]
+        base_weights: {SPY: 0.25, GLD: 0.25, IEF: 0.25, BIL: 0.25}
+  - family_id: low_beta_defensive_equity_etf
+    priority_rank: 3
+    run_enabled: true
+    stage: research_sample
+    evidence_tier: exploratory
+    approved_symbols: [USMV, SPLV, SPY, BIL]
+    max_variants: 2
+    status_before_run: research_queue
+    benchmark_requirements: [SPY_200d, SPY_buy_hold, active_VM, active_DSR, BIL_cash_proxy]
+    duplicate_check_targets: [active_VM, SPY_200d, SPY, BIL]
+    forbidden_mechanics: [direct_futures_contracts, options, forex, crypto, intraday_logic, leverage_created_by_system, margin, shorting]
+    expected_failure_modes: [duplicate_vm_quality, too_slow, low_target_power]
+    variants:
+      - strategy_id: low_beta_usmv_splv_top1_v1
+        rule_type: top1_risk_adjusted
+        universe: [USMV, SPLV, SPY, BIL]
+      - strategy_id: low_beta_usmv_splv_50_50_v1
+        rule_type: trend_equal_weight
+        universe: [USMV, SPLV, BIL]
+  - family_id: dividend_quality_yield_etf
+    priority_rank: 4
+    run_enabled: true
+    stage: research_sample
+    evidence_tier: exploratory
+    approved_symbols: [SCHD, VIG, DGRO, SPY, BIL]
+    max_variants: 2
+    status_before_run: research_queue
+    benchmark_requirements: [SPY_200d, SPY_buy_hold, QQQ_buy_hold, BIL_cash_proxy]
+    duplicate_check_targets: [SPY_200d, SPY, QQQ, BIL]
+    forbidden_mechanics: [direct_futures_contracts, options, forex, crypto, intraday_logic, leverage_created_by_system, margin, shorting]
+    expected_failure_modes: [too_slow, duplicate_spy, low_target_power]
+    variants:
+      - strategy_id: dividend_quality_top2_v1
+        rule_type: top2_risk_adjusted
+        universe: [SCHD, VIG, DGRO, SPY, BIL]
+      - strategy_id: dividend_quality_trend_equal_weight_v1
+        rule_type: trend_equal_weight
+        universe: [SCHD, VIG, DGRO, BIL]
+  - family_id: carry_yield_etf_proxy
+    priority_rank: 5
+    run_enabled: true
+    stage: research_sample
+    evidence_tier: exploratory
+    approved_symbols: [HYG, LQD, EMB, IEF, BIL, SPY]
+    max_variants: 2
+    status_before_run: research_queue
+    benchmark_requirements: [SPY_200d, SPY_buy_hold, BIL_cash_proxy, IEF_buy_hold]
+    duplicate_check_targets: [BIL, IEF, SPY_200d, SPY]
+    forbidden_mechanics: [direct_futures_contracts, options, forex, crypto, intraday_logic, leverage_created_by_system, margin, shorting]
+    expected_failure_modes: [too_slow, duplicate_bonds_or_bil, credit_risk]
+    variants:
+      - strategy_id: carry_yield_top2_v1
+        rule_type: top2_risk_adjusted
+        universe: [HYG, LQD, EMB, BIL]
+      - strategy_id: carry_yield_defensive_filter_v1
+        rule_type: carry_yield_defensive_filter
+        universe: [HYG, LQD, EMB, IEF, BIL, SPY]
+deferred_families:
+  - family_id: commodity_wrapper
+    run_enabled: false
+    reason: deferred outside default fast-discovery batch
+  - family_id: crypto_spot
+    run_enabled: false
+    reason: forbidden for this ETF-wrapper batch
+  - family_id: individual_stock_momentum
+    run_enabled: false
+    reason: blocked/deferred; individual-stock strategy logic forbidden
+  - family_id: dsr_sector_top2_momentum_200d_bil_v1
+    run_enabled: false
+    reason: future review candidate, not early-discovery batch
+  - family_id: dsr_sector_top3_momentum_defensive_cash_v1
+    run_enabled: false
+    reason: deferred candidate queue, not early-discovery batch

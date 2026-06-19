@@ -1,0 +1,17 @@
+symbol,status,provider_api_called,detail
+BIL,used_existing_cache,False,cache passed QA
+DGRO,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data
+EEM,used_existing_cache,False,cache passed QA
+EFA,used_existing_cache,False,cache passed QA
+EMB,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data
+GLD,used_existing_cache,False,cache passed QA
+HYG,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data
+IEF,used_existing_cache,False,cache passed QA
+IWM,used_existing_cache,False,cache passed QA
+LQD,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data
+QQQ,used_existing_cache,False,cache passed QA
+SCHD,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data
+SPLV,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data
+SPY,used_existing_cache,False,cache passed QA
+USMV,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data
+VIG,downloaded,True,downloaded approved ETF/fund-wrapper adjusted daily data

@@ -1,0 +1,5 @@
+symbol,first_date,last_date,row_count,adjusted_close_availability,missing_adjusted_close_count,duplicate_dates,impossible_ohlc_values,warmup_sufficiency,inclusion_decision,reason_for_exclusion,short_history_warning,cache_file_hash
+BIL,2007-05-30,2026-06-18,4795,True,0,0,0,True,include,,False,c88d0180a7c69d5980a59adc85f873856eefcb429d955e638ab52232546fdae2
+SPLV,2011-05-05,2026-06-18,3803,True,0,0,0,True,include,,False,c76816d56b0be1fb6f158ca4b6367308325f673011299f5fc996dc10ebc2c60a
+SPY,2007-01-03,2026-06-18,4896,True,0,0,0,True,include,,False,ddb9651fab7bfdb17c47b77c1b6fa51a57cf45daf086bad8d4790eee8d9ae492
+USMV,2011-10-20,2026-06-18,3686,True,0,0,0,True,include,,False,314524b9f90b871e243edebe963384756e1cf655b76816b1fbed9398084d60d4

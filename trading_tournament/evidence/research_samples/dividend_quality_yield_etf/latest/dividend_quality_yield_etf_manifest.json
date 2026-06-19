@@ -1,0 +1,8 @@
+{
+  "candidate_exhaustive_run": false,
+  "exploratory_non_final": true,
+  "family_id": "dividend_quality_yield_etf",
+  "family_verdict": "reject_family",
+  "paper_forward_activation": false,
+  "real_money_recommendation": false
+}

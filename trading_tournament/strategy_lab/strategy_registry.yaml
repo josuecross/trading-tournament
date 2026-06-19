@@ -5,7 +5,7 @@ registry:
   real_money_recommendation: false
   broker_integration: false
   live_orders: false
-  last_updated_utc: '2026-06-19T01:01:07.605507+00:00'
+  last_updated_utc: '2026-06-19T02:04:38.640450+00:00'
   research_roadmap_next_action: create_managed_futures_etf_wrapper_fast_exploration_review_prompt
 risk_framework:
   active_framework: balanced_speculative_research_v1
@@ -5866,33 +5866,50 @@ strategies:
   version: v1
   parent_id: ''
   credibility_tier: tier1_research_queue
-  status: future_family_review
+  status: watchlist_family
   role: research_roadmap_backlog
   rules_frozen: true
   paper_forward_active: false
   implementation_status: not_implemented
   data_source: not_applicable_planning_only
-  evidence_source: research_roadmap_planning_only
-  latest_evidence_path: evidence/research_roadmap/latest/
-  latest_known_result_summary: Roadmap planning row only; no strategy implementation, market data, or computation has been run.
-  allowed_next_action: create_dual_momentum_paa_etf_wrapper_fast_exploration_review_prompt
+  evidence_source: dual_momentum_paa_etf_wrapper_review
+  latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\research_samples\dual_momentum_paa_etf_wrapper\latest
+  latest_known_result_summary: Dual momentum / PAA ETF-wrapper design gate approved fixed variants for a future explicitly prompted research_sample.
+    No strategy/backtest/data download was run.
+  allowed_next_action: create_gtaa_faber_style_benchmark_lane_review_prompt
   forbidden_next_actions:
   - add_broker_integration
+  - backtest_execution
   - broker_integration
   - call_provider_api
+  - candidate_exhaustive
+  - crypto
+  - data_download_without_future_prompt
+  - direct_futures_contracts
   - download_data
+  - forex
   - grid_search
+  - individual_stock_strategy_logic
+  - intraday_logic
+  - leverage_created_by_system
   - live_orders
+  - margin
+  - options
   - order_placement
   - paper_forward_activation
   - paper_forward_checkpoint
+  - parameter_optimization
   - place_live_orders
+  - profit_exploration
   - promote_to_real_money
+  - provider_api_call_without_future_prompt
   - real_money_recommendation
+  - research_sample_without_future_prompt
   - run_backtest
   - run_candidate_exhaustive
   - run_profit_exploration
   - run_research_sample
+  - shorting
   - skip_gates
   - tune_parameters
   - use_crypto
@@ -5910,19 +5927,19 @@ strategies:
   promotion_blockers: planning_only;not_tested;no_real_money_path
   promotion_requirements: Must pass the proper review, sample, promotion, and candidate validation gates before any observation review.
   demotion_or_kill_criteria: Missing evidence, duplicate exposure, risk budget failure, or data/provider unsuitability.
-  notes: Research roadmap backlog row. ETF/fund-wrapper only where applicable. Roadmap priority recorded; planning-only, no new strategy test.
+  notes: ETF/fund-wrapper only. No direct futures, leverage, shorting, broker path, or real-money recommendation.
   strategy_id: dual_momentum_paa_etf_wrapper
   family: dual_momentum_paa_etf_wrapper
   instrument_lane: ETF
   evidence_tier: tier1_research_queue
-  current_status: future_family_review
+  current_status: watchlist_family
   allowed_next_actions:
-  - create_dual_momentum_paa_etf_wrapper_fast_exploration_review_prompt
+  - create_gtaa_faber_style_benchmark_lane_review_prompt
   candidate_exhaustive_run: false
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: not_reviewed
-  promotion_reason: Planning-only roadmap row.
+  promotion_reason: Design gate only.
   primary_failure_mode: not_tested
   duplication_risk: not_assessed
   risk_budget_status: not_assessed
@@ -5933,7 +5950,9 @@ strategies:
   roadmap_status: future_family_review
   roadmap_reason: Clean relative momentum plus absolute momentum / protective allocation style. Plausible, but must be checked carefully for duplication
     with GROR, SPY_200d, and active combo.
-  next_allowed_action: create_dual_momentum_paa_etf_wrapper_fast_exploration_review_prompt
+  next_allowed_action: create_gtaa_faber_style_benchmark_lane_review_prompt
+  lane_review_verdict: approve_future_research_sample_prompt
+  family_verdict: watchlist_family
 - id: gtaa_faber_style_benchmark_lane
   display_name: Gtaa Faber Style Benchmark Lane
   lane: profit_exploration
@@ -5942,16 +5961,16 @@ strategies:
   version: v1
   parent_id: ''
   credibility_tier: tier1_research_queue
-  status: future_benchmark_family
+  status: watchlist_family
   role: research_roadmap_backlog
   rules_frozen: true
   paper_forward_active: false
   implementation_status: not_implemented
   data_source: not_applicable_planning_only
   evidence_source: research_roadmap_planning_only
-  latest_evidence_path: evidence/research_roadmap/latest/
+  latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\research_samples\gtaa_faber_style_benchmark_lane\latest
   latest_known_result_summary: Roadmap planning row only; no strategy implementation, market data, or computation has been run.
-  allowed_next_action: create_gtaa_faber_style_benchmark_lane_review_prompt
+  allowed_next_action: continue_best_parallel_discovery_family
   forbidden_next_actions:
   - add_broker_integration
   - broker_integration
@@ -5991,9 +6010,9 @@ strategies:
   family: gtaa_faber_style_benchmark_lane
   instrument_lane: ETF
   evidence_tier: tier1_research_queue
-  current_status: future_benchmark_family
+  current_status: watchlist_family
   allowed_next_actions:
-  - create_gtaa_faber_style_benchmark_lane_review_prompt
+  - continue_best_parallel_discovery_family
   candidate_exhaustive_run: false
   candidate_exhaustive_recommended: false
   promotion_review_required: false
@@ -6009,7 +6028,8 @@ strategies:
   roadmap_status: future_benchmark_family
   roadmap_reason: Simple global tactical allocation / moving-average benchmark family. Useful as a benchmark and sanity check, but likely overlaps
     with SPY_200d, GROR, and active combo.
-  next_allowed_action: create_gtaa_faber_style_benchmark_lane_review_prompt
+  next_allowed_action: continue_best_parallel_discovery_family
+  family_verdict: watchlist_family
 - id: static_all_weather_or_permanent_portfolio_benchmark
   display_name: Static All Weather Or Permanent Portfolio Benchmark
   lane: profit_exploration
@@ -6018,16 +6038,16 @@ strategies:
   version: v1
   parent_id: ''
   credibility_tier: tier1_research_queue
-  status: future_benchmark_or_control
+  status: watchlist_family
   role: research_roadmap_backlog
   rules_frozen: true
   paper_forward_active: false
   implementation_status: not_implemented
   data_source: not_applicable_planning_only
   evidence_source: research_roadmap_planning_only
-  latest_evidence_path: evidence/research_roadmap/latest/
+  latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\research_samples\static_all_weather_or_permanent_portfolio_benchmark\latest
   latest_known_result_summary: Roadmap planning row only; no strategy implementation, market data, or computation has been run.
-  allowed_next_action: create_static_all_weather_benchmark_lane_review_prompt
+  allowed_next_action: continue_best_parallel_discovery_family
   forbidden_next_actions:
   - add_broker_integration
   - broker_integration
@@ -6067,9 +6087,9 @@ strategies:
   family: static_all_weather_or_permanent_portfolio_benchmark
   instrument_lane: ETF
   evidence_tier: tier1_research_queue
-  current_status: future_benchmark_or_control
+  current_status: watchlist_family
   allowed_next_actions:
-  - create_static_all_weather_benchmark_lane_review_prompt
+  - continue_best_parallel_discovery_family
   candidate_exhaustive_run: false
   candidate_exhaustive_recommended: false
   promotion_review_required: false
@@ -6085,7 +6105,8 @@ strategies:
   roadmap_status: future_benchmark_or_control
   roadmap_reason: Potentially useful benchmark/control family. Likely too defensive/slow for the profit-first objective unless it provides strong
     drawdown diversification.
-  next_allowed_action: create_static_all_weather_benchmark_lane_review_prompt
+  next_allowed_action: continue_best_parallel_discovery_family
+  family_verdict: watchlist_family
 - id: mf_wrapper_top1_trend_v1
   display_name: mf_wrapper_top1_trend_v1
   lane: profit_exploration
@@ -6356,3 +6377,273 @@ strategies:
   promotion_review_required: false
   promotion_decision: evidence_missing
   promotion_reason: protected active combo/VM/DSR benchmark series not safely inferable without mutation
+- id: dm_global_dual_momentum_top1_v1
+  display_name: dm_global_dual_momentum_top1_v1
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: dual_momentum_paa_etf_wrapper
+  version: v1
+  parent_id: dual_momentum_paa_etf_wrapper
+  credibility_tier: tier2_exploratory
+  role: dual_momentum_research_sample_row
+  rules_frozen: true
+  implementation_status: implemented_research_sample
+  data_source: yfinance_compatible_adjusted_daily_etf_wrapper_data
+  evidence_source: dual_momentum_paa_etf_wrapper_research_sample
+  promotion_requirements: promotion review required before any candidate validation
+  demotion_or_kill_criteria: risk breach, duplicate exposure, too slow, or insufficient evidence
+  notes: Exploratory non-final research_sample only.
+  strategy_id: dm_global_dual_momentum_top1_v1
+  family: dual_momentum_paa_etf_wrapper
+  instrument_lane: ETF
+  evidence_tier: research_sample
+  risk_framework_status: research_only
+  promotion_blockers: exploratory_non_final;no_real_money_path
+  evidence_needed: promotion review if candidate
+  duplicate_of: ''
+  blocked_reason: ''
+  status: too_risky
+  current_status: too_risky
+  strategy_verdict: too_risky
+  family_verdict: watchlist_family
+  latest_known_result_summary: 'Fast exploratory dual momentum/PAA ETF-wrapper research_sample verdict: too_risky. Exploratory non-final evidence
+    only.'
+  allowed_next_action: create_gtaa_faber_style_benchmark_lane_review_prompt
+  next_allowed_action: create_gtaa_faber_style_benchmark_lane_review_prompt
+  allowed_next_actions:
+  - create_gtaa_faber_style_benchmark_lane_review_prompt
+  latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\research_samples\dual_momentum_paa_etf_wrapper\latest
+  paper_forward_active: false
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: too_risky
+  promotion_reason: score=5.69; duplicate=not_proven_duplicate; bil_heavy=False
+  primary_failure_mode: duplicate_or_speed_or_bil_gate
+  duplication_risk: requires_review
+  risk_budget_status: research_sample_screened
+  forbidden_next_actions:
+  - broker_integration
+  - live_orders
+  - order_placement
+  - paper_forward_activation
+  - real_money_recommendation
+  - run_candidate_exhaustive_without_promotion_review
+- id: dm_multi_asset_top2_absolute_momentum_v1
+  display_name: dm_multi_asset_top2_absolute_momentum_v1
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: dual_momentum_paa_etf_wrapper
+  version: v1
+  parent_id: dual_momentum_paa_etf_wrapper
+  credibility_tier: tier2_exploratory
+  role: dual_momentum_research_sample_row
+  rules_frozen: true
+  implementation_status: implemented_research_sample
+  data_source: yfinance_compatible_adjusted_daily_etf_wrapper_data
+  evidence_source: dual_momentum_paa_etf_wrapper_research_sample
+  promotion_requirements: promotion review required before any candidate validation
+  demotion_or_kill_criteria: risk breach, duplicate exposure, too slow, or insufficient evidence
+  notes: Exploratory non-final research_sample only.
+  strategy_id: dm_multi_asset_top2_absolute_momentum_v1
+  family: dual_momentum_paa_etf_wrapper
+  instrument_lane: ETF
+  evidence_tier: research_sample
+  risk_framework_status: research_only
+  promotion_blockers: exploratory_non_final;no_real_money_path
+  evidence_needed: promotion review if candidate
+  duplicate_of: ''
+  blocked_reason: ''
+  status: too_risky
+  current_status: too_risky
+  strategy_verdict: too_risky
+  family_verdict: watchlist_family
+  latest_known_result_summary: 'Fast exploratory dual momentum/PAA ETF-wrapper research_sample verdict: too_risky. Exploratory non-final evidence
+    only.'
+  allowed_next_action: create_gtaa_faber_style_benchmark_lane_review_prompt
+  next_allowed_action: create_gtaa_faber_style_benchmark_lane_review_prompt
+  allowed_next_actions:
+  - create_gtaa_faber_style_benchmark_lane_review_prompt
+  latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\research_samples\dual_momentum_paa_etf_wrapper\latest
+  paper_forward_active: false
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: too_risky
+  promotion_reason: score=22.69; duplicate=not_proven_duplicate; bil_heavy=False
+  primary_failure_mode: duplicate_or_speed_or_bil_gate
+  duplication_risk: requires_review
+  risk_budget_status: research_sample_screened
+  forbidden_next_actions:
+  - broker_integration
+  - live_orders
+  - order_placement
+  - paper_forward_activation
+  - real_money_recommendation
+  - run_candidate_exhaustive_without_promotion_review
+- id: dm_protective_canary_bil_v1
+  display_name: dm_protective_canary_bil_v1
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: dual_momentum_paa_etf_wrapper
+  version: v1
+  parent_id: dual_momentum_paa_etf_wrapper
+  credibility_tier: tier2_exploratory
+  role: dual_momentum_research_sample_row
+  rules_frozen: true
+  implementation_status: implemented_research_sample
+  data_source: yfinance_compatible_adjusted_daily_etf_wrapper_data
+  evidence_source: dual_momentum_paa_etf_wrapper_research_sample
+  promotion_requirements: promotion review required before any candidate validation
+  demotion_or_kill_criteria: risk breach, duplicate exposure, too slow, or insufficient evidence
+  notes: Exploratory non-final research_sample only.
+  strategy_id: dm_protective_canary_bil_v1
+  family: dual_momentum_paa_etf_wrapper
+  instrument_lane: ETF
+  evidence_tier: research_sample
+  risk_framework_status: research_only
+  promotion_blockers: exploratory_non_final;no_real_money_path
+  evidence_needed: promotion review if candidate
+  duplicate_of: ''
+  blocked_reason: ''
+  status: too_risky
+  current_status: too_risky
+  strategy_verdict: too_risky
+  family_verdict: watchlist_family
+  latest_known_result_summary: 'Fast exploratory dual momentum/PAA ETF-wrapper research_sample verdict: too_risky. Exploratory non-final evidence
+    only.'
+  allowed_next_action: create_gtaa_faber_style_benchmark_lane_review_prompt
+  next_allowed_action: create_gtaa_faber_style_benchmark_lane_review_prompt
+  allowed_next_actions:
+  - create_gtaa_faber_style_benchmark_lane_review_prompt
+  latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\research_samples\dual_momentum_paa_etf_wrapper\latest
+  paper_forward_active: false
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: too_risky
+  promotion_reason: score=26.63; duplicate=not_proven_duplicate; bil_heavy=False
+  primary_failure_mode: duplicate_or_speed_or_bil_gate
+  duplication_risk: requires_review
+  risk_budget_status: research_sample_screened
+  forbidden_next_actions:
+  - broker_integration
+  - live_orders
+  - order_placement
+  - paper_forward_activation
+  - real_money_recommendation
+  - run_candidate_exhaustive_without_promotion_review
+- id: dm_balanced_offensive_defensive_v1
+  display_name: dm_balanced_offensive_defensive_v1
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: dual_momentum_paa_etf_wrapper
+  version: v1
+  parent_id: dual_momentum_paa_etf_wrapper
+  credibility_tier: tier2_exploratory
+  role: dual_momentum_research_sample_row
+  rules_frozen: true
+  implementation_status: implemented_research_sample
+  data_source: yfinance_compatible_adjusted_daily_etf_wrapper_data
+  evidence_source: dual_momentum_paa_etf_wrapper_research_sample
+  promotion_requirements: promotion review required before any candidate validation
+  demotion_or_kill_criteria: risk breach, duplicate exposure, too slow, or insufficient evidence
+  notes: Exploratory non-final research_sample only.
+  strategy_id: dm_balanced_offensive_defensive_v1
+  family: dual_momentum_paa_etf_wrapper
+  instrument_lane: ETF
+  evidence_tier: research_sample
+  risk_framework_status: research_only
+  promotion_blockers: exploratory_non_final;no_real_money_path
+  evidence_needed: promotion review if candidate
+  duplicate_of: ''
+  blocked_reason: ''
+  status: watchlist
+  current_status: watchlist
+  strategy_verdict: watchlist
+  family_verdict: watchlist_family
+  latest_known_result_summary: 'Fast exploratory dual momentum/PAA ETF-wrapper research_sample verdict: watchlist. Exploratory non-final evidence
+    only.'
+  allowed_next_action: create_gtaa_faber_style_benchmark_lane_review_prompt
+  next_allowed_action: create_gtaa_faber_style_benchmark_lane_review_prompt
+  allowed_next_actions:
+  - create_gtaa_faber_style_benchmark_lane_review_prompt
+  latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\research_samples\dual_momentum_paa_etf_wrapper\latest
+  paper_forward_active: false
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: watchlist
+  promotion_reason: score=50.14; duplicate=not_proven_duplicate; bil_heavy=False
+  primary_failure_mode: duplicate_or_speed_or_bil_gate
+  duplication_risk: requires_review
+  risk_budget_status: research_sample_screened
+  forbidden_next_actions:
+  - broker_integration
+  - live_orders
+  - order_placement
+  - paper_forward_activation
+  - real_money_recommendation
+  - run_candidate_exhaustive_without_promotion_review
+- id: dm_paa_breadth_protection_v1
+  display_name: dm_paa_breadth_protection_v1
+  lane: profit_exploration
+  instrument_family: ETF
+  strategy_family: dual_momentum_paa_etf_wrapper
+  version: v1
+  parent_id: dual_momentum_paa_etf_wrapper
+  credibility_tier: tier2_exploratory
+  role: dual_momentum_research_sample_row
+  rules_frozen: true
+  implementation_status: implemented_research_sample
+  data_source: yfinance_compatible_adjusted_daily_etf_wrapper_data
+  evidence_source: dual_momentum_paa_etf_wrapper_research_sample
+  promotion_requirements: promotion review required before any candidate validation
+  demotion_or_kill_criteria: risk breach, duplicate exposure, too slow, or insufficient evidence
+  notes: Exploratory non-final research_sample only.
+  strategy_id: dm_paa_breadth_protection_v1
+  family: dual_momentum_paa_etf_wrapper
+  instrument_lane: ETF
+  evidence_tier: research_sample
+  risk_framework_status: research_only
+  promotion_blockers: exploratory_non_final;no_real_money_path
+  evidence_needed: promotion review if candidate
+  duplicate_of: ''
+  blocked_reason: ''
+  status: watchlist
+  current_status: watchlist
+  strategy_verdict: watchlist
+  family_verdict: watchlist_family
+  latest_known_result_summary: 'Fast exploratory dual momentum/PAA ETF-wrapper research_sample verdict: watchlist. Exploratory non-final evidence
+    only.'
+  allowed_next_action: create_gtaa_faber_style_benchmark_lane_review_prompt
+  next_allowed_action: create_gtaa_faber_style_benchmark_lane_review_prompt
+  allowed_next_actions:
+  - create_gtaa_faber_style_benchmark_lane_review_prompt
+  latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\research_samples\dual_momentum_paa_etf_wrapper\latest
+  paper_forward_active: false
+  paper_forward_allowed_by_risk_framework: false
+  real_money_recommendation: false
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: watchlist
+  promotion_reason: score=51.84; duplicate=not_proven_duplicate; bil_heavy=False
+  primary_failure_mode: duplicate_or_speed_or_bil_gate
+  duplication_risk: requires_review
+  risk_budget_status: research_sample_screened
+  forbidden_next_actions:
+  - broker_integration
+  - live_orders
+  - order_placement
+  - paper_forward_activation
+  - real_money_recommendation
+  - run_candidate_exhaustive_without_promotion_review
