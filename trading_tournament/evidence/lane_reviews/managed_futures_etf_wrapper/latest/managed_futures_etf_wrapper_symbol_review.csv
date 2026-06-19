@@ -1,0 +1,13 @@
+symbol,role,allowed_for_future_review,data_checked_now,provider_api_called,notes
+DBMF,managed_futures_or_trend_following_wrapper,True,False,False,Allowed only if cache/data is already available or later explicitly bootstrapped.
+KMLM,managed_futures_or_trend_following_wrapper,True,False,False,Allowed only if cache/data is already available or later explicitly bootstrapped.
+CTA,managed_futures_or_trend_following_wrapper,True,False,False,Allowed only if cache/data is already available or later explicitly bootstrapped.
+FMF,managed_futures_or_trend_following_wrapper,True,False,False,Allowed only if cache/data is already available or later explicitly bootstrapped.
+WTMF,managed_futures_or_trend_following_wrapper,True,False,False,Allowed only if cache/data is already available or later explicitly bootstrapped.
+SPY,baseline_or_control,True,False,False,Baseline/control only.
+QQQ,baseline_or_control,True,False,False,Baseline/control only.
+BIL,baseline_or_control,True,False,False,Baseline/control only.
+GLD,baseline_or_control,True,False,False,Baseline/control only.
+IEF,baseline_or_control,True,False,False,Baseline/control only.
+TLT,baseline_or_control,True,False,False,Baseline/control only.
+AGG,baseline_or_control,True,False,False,Baseline/control only.

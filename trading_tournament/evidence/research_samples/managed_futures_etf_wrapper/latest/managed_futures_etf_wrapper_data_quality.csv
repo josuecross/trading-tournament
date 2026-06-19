@@ -1,0 +1,13 @@
+symbol,first_date,last_date,row_count,adjusted_close_availability,missing_adjusted_close_count,duplicate_dates,impossible_ohlc_values,warmup_sufficiency_200d_sma,warmup_sufficiency_126d_return,warmup_sufficiency_60d_volatility,inclusion_decision,reason_for_exclusion,short_history_warning,cache_file_hash
+DBMF,2019-05-08,2026-06-18,1789,True,0,0,0,True,True,True,include,,False,85f70fe487874ebb1e30bdaf211d298749ca9d926c5629e1bccae2ea5280f94f
+KMLM,2020-12-02,2026-06-18,1392,True,0,0,0,True,True,True,include,,False,39d45e102c864436356d8345840541fd9f2fe0cfce254ec48a6574b5bb3da137
+CTA,2022-03-08,2026-06-18,1075,True,0,0,0,True,True,True,include,,False,4b7fe6156e6f72fd49834b1aa8d1cf1bb3d26de66422b5bd3efa5da15312a964
+FMF,2013-08-02,2026-06-18,3239,True,0,0,0,True,True,True,include,,False,0e839f24285fd8c039cddd2b1e09acff6f2b2d1910a0c4314c4e1f3823f5980a
+WTMF,2011-01-05,2026-06-18,3886,True,0,0,0,True,True,True,include,,False,50a7801be7cba7a6c7f1f387fa2904b7b26ba15510fc09f02b3014f51852ec23
+SPY,2007-01-03,2026-06-18,4896,True,0,0,0,True,True,True,include,,False,ddb9651fab7bfdb17c47b77c1b6fa51a57cf45daf086bad8d4790eee8d9ae492
+QQQ,2007-01-03,2026-06-18,4896,True,0,0,0,True,True,True,include,,False,f70039fa090873e89eeff409d817c2f1310aa23cf0ed22b5fa77e4db06b4c0ba
+BIL,2007-05-30,2026-06-18,4795,True,0,0,0,True,True,True,include,,False,c88d0180a7c69d5980a59adc85f873856eefcb429d955e638ab52232546fdae2
+GLD,2007-01-03,2026-06-18,4896,True,0,0,0,True,True,True,include,,False,8f92f9bf4ead1f94308b5fd290ded3e14a2bfe6c2cfda8ef46174ea41ea524a1
+IEF,2007-01-03,2026-06-18,4896,True,0,0,0,True,True,True,include,,False,be5efaa6331dfb7eea0b6b1bc24cbbd81a69e23eb90897ee6128038323efdeb9
+TLT,2007-01-03,2026-06-18,4896,True,0,0,0,True,True,True,include,,False,fdeb5ed393595568489e55749c9aa6edbb11c361d8cfe7f8b78b3baf74fdcf58
+AGG,2007-01-03,2026-06-18,4896,True,0,0,0,True,True,True,include,,False,2ed75713c82efe0d25c128ce2c93169fe804089f99df0a42256833aa42187c5b
