@@ -11,8 +11,13 @@ from execution_lab.alpaca_micro_live_v1.ui.actions import (
     DEFAULT_CONFIG,
     DEFAULT_RISK,
     credential_summary,
+    freeze_ready_strategies,
     generate_ui_signal,
+    request_weekly_emergency_stop,
+    request_weekly_stop,
+    run_strategy_inventory,
     start_runtime_session,
+    start_weekly_demo,
 )
 from execution_lab.alpaca_micro_live_v1.ui.components import status_label
 from execution_lab.alpaca_micro_live_v1.ui.log_viewer import read_tail
@@ -21,7 +26,15 @@ from execution_lab.alpaca_micro_live_v1.ui.log_viewer import read_tail
 st.set_page_config(page_title="Alpaca Micro Runtime", layout="wide")
 st.title("Alpaca Micro Runtime")
 
-tabs = st.tabs(["Credentials", "Market Clock", "Strategy Signal", "Runtime Runner"])
+tabs = st.tabs([
+    "Credentials",
+    "Market Clock",
+    "Strategy Signal",
+    "Runtime Runner",
+    "Runtime Strategy Inventory",
+    "Freeze Successful Strategies",
+    "Weekly Demo Runner",
+])
 
 with tabs[0]:
     summary = credential_summary()
@@ -91,4 +104,61 @@ with tabs[3]:
         stop_file.parent.mkdir(parents=True, exist_ok=True)
         stop_file.write_text("local emergency stop requested\n", encoding="utf-8")
         st.warning("Local emergency stop flag written. No liquidation or automatic cancel was submitted.")
+
+with tabs[4]:
+    if st.button("Refresh Runtime Strategy Inventory"):
+        inventory = run_strategy_inventory()
+        st.json(inventory)
+    inventory_path = MODULE_ROOT / "evidence" / "runtime_onboarding" / "runtime_strategy_inventory.md"
+    if inventory_path.exists():
+        st.markdown(inventory_path.read_text(encoding="utf-8"))
+
+with tabs[5]:
+    if st.button("Run Inventory And Freeze Ready Strategies"):
+        registry = freeze_ready_strategies()
+        st.success("Runtime registry updated.")
+        st.json(registry)
+    st.caption("Blocked strategies are not marked runtime_ready. No tournament registries or promotion files are mutated.")
+
+with tabs[6]:
+    strategy_mode = st.radio("Strategies", ["all_runtime_ready", "specific"], horizontal=True)
+    specific = st.text_input("Specific strategy ids", "vm_quality_lowvol_proxy_v1")
+    interval = st.number_input("Weekly interval seconds", min_value=5, max_value=86400, value=300, step=5)
+    max_loops = st.number_input("Weekly max loops", min_value=1, max_value=1000, value=1, step=1)
+    run_until = st.text_input("Run until ISO timestamp", "")
+    resume_path = st.text_input("Resume session dir", "")
+    weekly_mode = st.radio("Weekly mode", ["Dry-run", "Paper submit"], horizontal=True)
+    weekly_confirm = st.text_input("Weekly paper submit confirmation")
+    weekly_submit = weekly_mode == "Paper submit"
+    if weekly_submit and weekly_confirm != "CONFIRM WEEKLY PAPER DEMO START":
+        st.warning("Paper submit requires exact weekly confirmation phrase.")
+    if st.button("Start Weekly Demo"):
+        if weekly_submit and weekly_confirm != "CONFIRM WEEKLY PAPER DEMO START":
+            st.error("Confirmation phrase does not match.")
+        else:
+            selected = ["all_runtime_ready"] if strategy_mode == "all_runtime_ready" else [item.strip() for item in specific.split(",") if item.strip()]
+            try:
+                summary = start_weekly_demo(
+                    strategies=selected,
+                    submit_paper_orders=weekly_submit,
+                    interval_seconds=int(interval),
+                    max_loops=int(max_loops),
+                    run_until=run_until or None,
+                    resume=Path(resume_path) if resume_path else None,
+                )
+                st.success(f"Weekly session: {summary['session_dir']}")
+                st.json(summary)
+                session_dir = Path(summary["session_dir"])
+                for name in ["weekly_summary.md", "broker_errors.jsonl", "submitted_orders.jsonl", "open_orders.jsonl"]:
+                    path = session_dir / name
+                    if path.exists():
+                        st.subheader(name)
+                        st.code(read_tail(path), language="json" if path.suffix == ".jsonl" else "markdown")
+            except Exception as exc:
+                st.error(f"Weekly demo failed: {type(exc).__name__}")
+    c1, c2 = st.columns(2)
+    if c1.button("Stop Weekly Demo"):
+        st.warning(f"Stop file written: {request_weekly_stop()}")
+    if c2.button("Emergency Stop Weekly Demo"):
+        st.warning(f"Emergency stop file written: {request_weekly_emergency_stop()}. No liquidation/cancel submitted.")
 

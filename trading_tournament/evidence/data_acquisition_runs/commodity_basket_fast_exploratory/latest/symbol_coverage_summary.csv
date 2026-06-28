@@ -1,6 +1,0 @@
-symbol,downloaded,cache_written,row_count,first_date,last_date,coverage_status,notes
-DBC,True,True,5115,2006-02-06,2026-06-05,pass,basic QA passed; product/tax/wrapper review remains deferred
-PDBC,True,True,2910,2014-11-07,2026-06-05,pass,basic QA passed; product/tax/wrapper review remains deferred
-COMT,True,True,2926,2014-10-16,2026-06-05,pass,basic QA passed; product/tax/wrapper review remains deferred
-GSG,True,True,5000,2006-07-21,2026-06-05,pass,basic QA passed; product/tax/wrapper review remains deferred
-USCI,True,True,3980,2010-08-10,2026-06-05,pass,basic QA passed; product/tax/wrapper review remains deferred

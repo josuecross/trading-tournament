@@ -1,0 +1,20 @@
+scorecard_version: 1
+fields:
+- return_engine_evidence
+- risk_control_evidence
+- diversification_value
+- benchmark_control_value
+- implementation_quality
+- data_quality
+- slippage_stress_survival
+- overfitting_risk
+- paper_demo_simplicity
+- research_value_verdict
+allowed_research_value_verdicts:
+- high_research_value_not_promotable
+- medium_research_value_not_promotable
+- benchmark_control_value_only
+- low_research_value_closed
+- methodology_or_data_blocked
+- promotion_review_candidate
+principle: Research value can be positive while promotion eligibility remains false.

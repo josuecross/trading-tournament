@@ -1,0 +1,38 @@
+family_id: dual_momentum_paa
+description: Protective asset allocation and dual-momentum ETF wrapper family.
+lane: macro_gld_duration_risk_off_lane
+role: profit_engine
+status: rejected_current_variants
+tested_variants:
+- dual_momentum_paa_clean_v1
+- rc_dual_momentum_paa_vol_scaled_v1
+accepted_variants: []
+rejected_variants:
+- dual_momentum_paa_clean_v1
+- rc_dual_momentum_paa_vol_scaled_v1
+benchmark_controls:
+- SPY
+- QQQ
+- GLD
+- IEF
+- BIL
+- static_all_weather_benchmark_v1
+- active_combo_vm_dsr_equal_weight_v1
+primary_failure_patterns:
+- too_risky
+- risk_buffer_too_thin
+- no_meaningful_improvement
+data_status: sufficient
+family_open_status: closed_exact_variants_future_hypothesis_only
+allowed_future_work:
+- audit_family_failures
+- pre_register_distinct_family_hypothesis_only
+forbidden_future_work:
+- reopen_exact_rejected_variant
+- post_result_parameter_tuning
+- candidate_exhaustive_without_promotion_review
+- paper_demo_without_candidate_exhaustive
+- broker_or_live_path
+- real_money_recommendation
+next_allowed_action: audit_family_failures
+notes: Risk-controlled follow-up did not produce a promotion-review candidate.

@@ -1,3 +1,0 @@
-symbol,adjusted_close_available,raw_close_available,dividends_available,splits_available,adjusted_ohlc_constructible,adjustment_notes
-DBMF,True,True,True,True,True,adjusted OHLC constructed from raw OHLC and adjusted close
-KMLM,True,True,True,True,True,adjusted OHLC constructed from raw OHLC and adjusted close

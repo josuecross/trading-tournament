@@ -1,3 +1,0 @@
-symbol,downloaded,cache_written,row_count,first_date,last_date,common_overlap_with_cached_SPY_BIL,common_overlap_row_count,coverage_notes
-DBMF,True,True,1780,2019-05-08,2026-06-05,2019-05-08 to 2026-05-29,1775,pass; issuer/fund methodology review still required
-KMLM,True,True,1383,2020-12-02,2026-06-05,2020-12-02 to 2026-05-29,1378,pass; issuer/fund methodology review still required

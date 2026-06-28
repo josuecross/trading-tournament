@@ -1,0 +1,18 @@
+signal_funnel_contract_version: 1
+required_fields:
+- candidate_id
+- raw_opportunity_count
+- data_available_count
+- signal_condition_count
+- risk_filter_pass_count
+- execution_filter_pass_count
+- final_entry_count
+- final_exit_count
+- skipped_count
+- blocked_reason_counts
+- zero_trade_expected
+- zero_trade_requires_audit
+- signal_funnel_status
+zero_trade_policy:
+  if_final_trades_zero_and_raw_opportunities_nonzero: implementation_audit_required
+  turn_of_month_lesson: zero-trade output must not be accepted without a funnel audit

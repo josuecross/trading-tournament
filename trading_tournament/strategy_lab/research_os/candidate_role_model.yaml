@@ -1,0 +1,12 @@
+candidate_role_model_version: 1
+roles:
+  profit_engine: Must show credible standalone or account-level profit edge after
+    risk and stress gates.
+  risk_reducer: Must improve drawdown/stop-risk behavior without destroying objective-fit.
+  diversifier: May be valuable through portfolio contribution even if standalone return
+    is slower.
+  benchmark_control: Used only for comparison, calibration, and same-window control.
+  execution_research_only: May study infrastructure and fills only after data/source
+    approval.
+  data_methodology_only: May study data contracts, terms, and QA without strategy
+    testing.

@@ -1,4 +1,0 @@
-experiment_id,status,verdict,candidate_exhaustive_recommended,paper_forward_active,real_money_recommendation,reason
-commodity_basket_tsmom_top2_200d_filter_v1,completed,research_sample_candidate_risk_budget_breach,False,False,False,commodity risk-control row retains upside but still breaches the -600 drawdown budget
-commodity_basket_tsmom_top2_half_bil_v1,completed,research_sample_candidate,False,False,False,commodity risk-control row improved the base commodity score but did not clear the full candidate_exhaustive review gate
-combo_plus_commodity_basket_80_20_v1,completed,research_sample_candidate,False,False,False,commodity risk-control row improved the base commodity score but did not clear the full candidate_exhaustive review gate

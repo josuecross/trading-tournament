@@ -1,0 +1,19 @@
+next_action_policy_version: 1
+allowed_next_action_types:
+- manual_review_refactored_research_os
+- pre_register_indicator_library_integration_audit
+- pre_register_next_family_archetype_review
+- pause_expansion_and_summarize_tournament_state
+- run_discovery_for_pre_registered_family
+- audit_family_failures
+- promotion_review_for_selected_candidates
+- data_source_review_required
+- intraday_paused_due_data_constraints
+disallowed_next_actions:
+- immediate_paper_forward_from_discovery
+- immediate_candidate_exhaustive_from_discovery
+- strategy_rescue_without_family_audit
+- intraday_discovery_while_data_source_blocked
+- provider_download_without_explicit_authorization
+- broker_live_path_activation
+current_recommended_next_action: manual_review_refactored_research_os

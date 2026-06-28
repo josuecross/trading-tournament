@@ -1,5 +1,0 @@
-failure_mode,where_expected,required_response
-too_slow_target_dilution,"All variants, especially defensive filters and combo overlay",Mark too_slow if +300/+400 rates are diluted below useful thresholds.
-duplicate_existing_leader,SPY trend filter and combo overlay variants,Mark duplicate_or_near_duplicate unless target-window independence is demonstrated.
-too_risky_drawdown_budget,Vol-scaled sector or equity variants if exposure reducer fails,Mark too_risky if -$600 budget is breached or stop behavior is unacceptable.
-evidence_missing,Low-vol/quality proxies if symbols or history are missing,Keep as review-only until symbol QA and history checks pass.

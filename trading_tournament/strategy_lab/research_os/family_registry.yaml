@@ -1,0 +1,486 @@
+family_registry_version: 1
+created_utc: '2026-06-28T21:55:45.685467+00:00'
+families:
+- family_id: volatility_managed_equity_etf
+  description: Long-only ETF wrapper using quality/low-volatility/proxy sleeves with
+    trend and volatility-aware ranking.
+  lane: moderate_tactical_etf_lane
+  role: profit_engine
+  status: active_accepted
+  tested_variants:
+  - paper_forward_vm_quality_lowvol_proxy_v1
+  - vm_quality_lowvol_proxy_v1
+  accepted_variants:
+  - paper_forward_vm_quality_lowvol_proxy_v1
+  rejected_variants: []
+  benchmark_controls:
+  - SPY
+  - QQQ
+  - BIL
+  - SPY_200d_trend_model
+  - active_combo_vm_dsr_equal_weight_v1
+  primary_failure_patterns:
+  - duplicate_or_near_duplicate
+  data_status: sufficient
+  family_open_status: protected_active_observation_no_rule_change
+  allowed_future_work:
+  - observe_active_frozen_row
+  - compare_as_reference
+  - family_level_audit_only
+  forbidden_future_work:
+  - change_active_observation_rules
+  - reopen_exact_rejected_variant
+  - post_result_parameter_tuning
+  - candidate_exhaustive_without_promotion_review
+  - paper_demo_without_candidate_exhaustive
+  - broker_or_live_path
+  - real_money_recommendation
+  next_allowed_action: manual_review_refactored_research_os
+  notes: Active VM state is preserved exactly; this refactor adds only governance
+    metadata.
+- family_id: defensive_sector_rotation
+  description: ETF sector rotation family with defensive/cash filters and active DSR
+    observation state.
+  lane: conservative_etf_allocation_lane
+  role: risk_reducer
+  status: active_accepted
+  tested_variants:
+  - paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+  - dsr_sector_top2_momentum_200d_bil_v1
+  - dsr_sector_top3_momentum_defensive_cash_v1
+  accepted_variants:
+  - paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+  rejected_variants:
+  - dsr_sector_top2_momentum_200d_bil_v1
+  benchmark_controls:
+  - SPY
+  - BIL
+  - SPY_200d_trend_model
+  - active_combo_vm_dsr_equal_weight_v1
+  - paper_forward_vm_quality_lowvol_proxy_v1
+  primary_failure_patterns:
+  - duplicate_or_near_duplicate
+  - risk_buffer_too_thin
+  data_status: sufficient
+  family_open_status: protected_active_observation_no_rule_change
+  allowed_future_work:
+  - observe_active_frozen_row
+  - same_family_audit_only
+  forbidden_future_work:
+  - change_active_observation_rules
+  - reopen_exact_rejected_variant
+  - post_result_parameter_tuning
+  - candidate_exhaustive_without_promotion_review
+  - paper_demo_without_candidate_exhaustive
+  - broker_or_live_path
+  - real_money_recommendation
+  next_allowed_action: manual_review_refactored_research_os
+  notes: Active DSR remains accepted/frozen; DSR recovered-best mismatch remains an
+    accepted caveat for manual review.
+- family_id: dual_momentum_paa
+  description: Protective asset allocation and dual-momentum ETF wrapper family.
+  lane: macro_gld_duration_risk_off_lane
+  role: profit_engine
+  status: rejected_current_variants
+  tested_variants:
+  - dual_momentum_paa_clean_v1
+  - rc_dual_momentum_paa_vol_scaled_v1
+  accepted_variants: []
+  rejected_variants:
+  - dual_momentum_paa_clean_v1
+  - rc_dual_momentum_paa_vol_scaled_v1
+  benchmark_controls:
+  - SPY
+  - QQQ
+  - GLD
+  - IEF
+  - BIL
+  - static_all_weather_benchmark_v1
+  - active_combo_vm_dsr_equal_weight_v1
+  primary_failure_patterns:
+  - too_risky
+  - risk_buffer_too_thin
+  - no_meaningful_improvement
+  data_status: sufficient
+  family_open_status: closed_exact_variants_future_hypothesis_only
+  allowed_future_work:
+  - audit_family_failures
+  - pre_register_distinct_family_hypothesis_only
+  forbidden_future_work: &id001
+  - reopen_exact_rejected_variant
+  - post_result_parameter_tuning
+  - candidate_exhaustive_without_promotion_review
+  - paper_demo_without_candidate_exhaustive
+  - broker_or_live_path
+  - real_money_recommendation
+  next_allowed_action: audit_family_failures
+  notes: Risk-controlled follow-up did not produce a promotion-review candidate.
+- family_id: donchian_breakout
+  description: Daily close ETF Donchian breakout family with ATR/risk-budget controls.
+  lane: moderate_tactical_etf_lane
+  role: profit_engine
+  status: rejected_current_variants
+  tested_variants:
+  - donchian_atr_breakout_etf_v1
+  - rc_donchian_breakout_risk_budget_v1
+  accepted_variants: []
+  rejected_variants:
+  - donchian_atr_breakout_etf_v1
+  - rc_donchian_breakout_risk_budget_v1
+  benchmark_controls:
+  - SPY
+  - QQQ
+  - BIL
+  - SPY_200d_trend_model
+  - active_combo_vm_dsr_equal_weight_v1
+  primary_failure_patterns:
+  - too_risky
+  - risk_buffer_too_thin
+  - parent_child_mismatch_risk
+  data_status: sufficient
+  family_open_status: closed_exact_variants_future_hypothesis_only
+  allowed_future_work:
+  - audit_family_failures
+  - parent_child_consistency_review
+  forbidden_future_work: *id001
+  next_allowed_action: audit_family_failures
+  notes: Prior 55-day language was invalidated; parent rule consistency is mandatory
+    before any follow-up.
+- family_id: gld_duration_macro_rotation
+  description: GLD/duration/risk-off macro rotation ETF wrapper family.
+  lane: macro_gld_duration_risk_off_lane
+  role: diversifier
+  status: rejected_current_variants
+  tested_variants:
+  - gld_gror_balanced_momentum_clean_v1
+  - gld_ief_spy_defensive_rotation_v1
+  accepted_variants: []
+  rejected_variants:
+  - gld_gror_balanced_momentum_clean_v1
+  - gld_ief_spy_defensive_rotation_v1
+  benchmark_controls:
+  - SPY
+  - GLD
+  - IEF
+  - BIL
+  - static_all_weather_benchmark_v1
+  primary_failure_patterns:
+  - too_slow_for_profit_goal
+  - weaker_than_active_references
+  data_status: sufficient
+  family_open_status: closed_exact_variants_future_hypothesis_only
+  allowed_future_work:
+  - diversifier_contribution_review_only
+  forbidden_future_work: *id001
+  next_allowed_action: audit_family_failures
+  notes: Useful as a macro/diversifier lesson, not as a standalone profit promotion
+    path.
+- family_id: managed_futures_etf_wrapper
+  description: Managed-futures-style ETF/fund-wrapper proxy, without direct futures
+    or derivatives.
+  lane: diversifier_contribution_lane
+  role: diversifier
+  status: rejected_current_variants
+  tested_variants:
+  - managed_futures_etf_trend_wrapper_v1
+  accepted_variants: []
+  rejected_variants:
+  - managed_futures_etf_trend_wrapper_v1
+  benchmark_controls:
+  - SPY
+  - BIL
+  - active_combo_vm_dsr_equal_weight_v1
+  - static_all_weather_benchmark_v1
+  primary_failure_patterns:
+  - weaker_than_active_references
+  - too_slow_for_profit_goal
+  data_status: sufficient
+  family_open_status: future_hypothesis_only
+  allowed_future_work:
+  - pre_register_next_family_archetype_review
+  forbidden_future_work:
+  - reopen_exact_rejected_variant
+  - post_result_parameter_tuning
+  - candidate_exhaustive_without_promotion_review
+  - paper_demo_without_candidate_exhaustive
+  - broker_or_live_path
+  - real_money_recommendation
+  - direct_futures
+  - options
+  - forex
+  - leverage
+  next_allowed_action: manual_review_refactored_research_os
+  notes: ETF/fund-wrapper only; no direct managed-futures execution path is authorized.
+- family_id: sector_relative_strength
+  description: Sector ETF relative-strength family using limited-history same-window
+    controls.
+  lane: moderate_tactical_etf_lane
+  role: profit_engine
+  status: rejected_current_variants
+  tested_variants:
+  - sector_rs_weekly_cash_filter_v1
+  accepted_variants: []
+  rejected_variants:
+  - sector_rs_weekly_cash_filter_v1
+  benchmark_controls:
+  - SPY
+  - BIL
+  - paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+  - active_combo_vm_dsr_equal_weight_v1
+  primary_failure_patterns:
+  - limited_history_same_window_required
+  - weaker_than_active_references
+  data_status: limited_history_same_window_required
+  family_open_status: closed_exact_variants_future_hypothesis_only
+  allowed_future_work:
+  - data_window_methodology_review
+  - audit_family_failures
+  forbidden_future_work: *id001
+  next_allowed_action: audit_family_failures
+  notes: XLRE history constraints require common-window labeling before any future
+    work.
+- family_id: turn_of_month_calendar
+  description: Calendar-effect ETF wrapper family centered on turn-of-month behavior.
+  lane: diversifier_contribution_lane
+  role: diversifier
+  status: rejected_after_bugfix_rerun
+  tested_variants:
+  - turn_of_month_spy_qqq_v1
+  accepted_variants: []
+  rejected_variants:
+  - turn_of_month_spy_qqq_v1
+  benchmark_controls:
+  - SPY
+  - QQQ
+  - BIL
+  - active_combo_vm_dsr_equal_weight_v1
+  primary_failure_patterns:
+  - signal_funnel_bug
+  - too_slow_for_profit_goal
+  - weaker_than_active_references
+  data_status: sufficient
+  family_open_status: closed_exact_variants_future_hypothesis_only
+  allowed_future_work:
+  - signal_funnel_regression_audit
+  forbidden_future_work: *id001
+  next_allowed_action: audit_family_failures
+  notes: Zero-trade bug led to mandatory signal-funnel diagnostics for future runners.
+- family_id: volatility_regime_equity
+  description: Equity allocation family controlled by volatility or risk-regime state.
+  lane: moderate_tactical_etf_lane
+  role: risk_reducer
+  status: rejected_current_variants
+  tested_variants:
+  - volatility_regime_spy_qqq_bil_v1
+  accepted_variants: []
+  rejected_variants:
+  - volatility_regime_spy_qqq_bil_v1
+  benchmark_controls:
+  - SPY
+  - QQQ
+  - BIL
+  - SPY_200d_trend_model
+  - active_combo_vm_dsr_equal_weight_v1
+  primary_failure_patterns:
+  - weaker_than_active_references
+  - too_slow_for_profit_goal
+  data_status: sufficient
+  family_open_status: closed_exact_variants_future_hypothesis_only
+  allowed_future_work:
+  - audit_family_failures
+  forbidden_future_work: *id001
+  next_allowed_action: audit_family_failures
+  notes: Risk controls remain useful for research value but did not clear promotion
+    standards.
+- family_id: static_all_weather_benchmark
+  description: Static all-weather/permanent-portfolio-style ETF benchmark/control.
+  lane: diversifier_contribution_lane
+  role: benchmark_control
+  status: benchmark_control_accepted
+  tested_variants:
+  - static_all_weather_benchmark_v1
+  accepted_variants: []
+  rejected_variants: []
+  benchmark_controls:
+  - static_all_weather_benchmark_v1
+  - SPY
+  - BIL
+  - active_combo_vm_dsr_equal_weight_v1
+  primary_failure_patterns:
+  - benchmark_watchlist
+  - too_slow_for_profit_goal
+  data_status: sufficient
+  family_open_status: benchmark_control_only_closed_to_promotion
+  allowed_future_work:
+  - same_window_benchmark_control
+  forbidden_future_work:
+  - reopen_exact_rejected_variant
+  - post_result_parameter_tuning
+  - candidate_exhaustive_without_promotion_review
+  - paper_demo_without_candidate_exhaustive
+  - broker_or_live_path
+  - real_money_recommendation
+  - promotion_review
+  - candidate_exhaustive
+  - paper_demo_activation
+  next_allowed_action: manual_review_refactored_research_os
+  notes: Accepted only as same-window benchmark/control; not a strategy candidate.
+- family_id: breadth_state_regime
+  description: Market breadth/state machine ETF wrapper lane, distinct from simple
+    top-N ranking.
+  lane: breadth_state_regime_lane
+  role: risk_reducer
+  status: no_candidate_archive_lane
+  tested_variants:
+  - bsr_breadth_state_top_assets_v1
+  - bsr_breadth_state_defensive_shift_v1
+  - bsr_breadth_state_lowvol_overlay_v1
+  - bsr_breadth_state_active_combo_overlay_v1
+  accepted_variants: []
+  rejected_variants:
+  - bsr_breadth_state_top_assets_v1
+  - bsr_breadth_state_defensive_shift_v1
+  - bsr_breadth_state_lowvol_overlay_v1
+  - bsr_breadth_state_active_combo_overlay_v1
+  benchmark_controls:
+  - SPY
+  - QQQ
+  - BIL
+  - SPY_200d_trend_model
+  - paper_forward_vm_quality_lowvol_proxy_v1
+  - paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+  - active_combo_vm_dsr_equal_weight_v1
+  primary_failure_patterns:
+  - no_meaningful_improvement
+  - weaker_than_active_references
+  data_status: sufficient
+  family_open_status: closed_after_final_lane_no_candidate
+  allowed_future_work:
+  - archive_or_manual_review_only
+  forbidden_future_work: *id001
+  next_allowed_action: manual_review_refactored_research_os
+  notes: Final structurally different ETF lane did not create a promotion-review candidate.
+- family_id: quality_momentum_proxy
+  description: Quality/value/momentum and low-volatility quality ETF proxy family.
+  lane: moderate_tactical_etf_lane
+  role: profit_engine
+  status: watchlist_closed_no_rescue_now
+  tested_variants:
+  - qvm_quality_value_momentum_top2_v1
+  - qvm_quality_value_momentum_risk_adjusted_top2_v1
+  - lvq_lowvol_quality_spy_regime_v1
+  accepted_variants: []
+  rejected_variants:
+  - qvm_quality_value_momentum_risk_adjusted_top2_v1
+  - lvq_lowvol_quality_spy_regime_v1
+  benchmark_controls:
+  - SPY
+  - QQQ
+  - BIL
+  - paper_forward_vm_quality_lowvol_proxy_v1
+  - active_combo_vm_dsr_equal_weight_v1
+  primary_failure_patterns:
+  - too_risky
+  - risk_buffer_too_thin
+  - weaker_than_active_references
+  data_status: sufficient
+  family_open_status: closed_exact_variants_future_hypothesis_only
+  allowed_future_work:
+  - watchlist_only
+  - audit_family_failures
+  forbidden_future_work: *id001
+  next_allowed_action: audit_family_failures
+  notes: High-upside versions failed risk buffer; safer versions lagged active references.
+- family_id: intraday_orb_research
+  description: Opening-range-breakout intraday research concept, blocked until source
+    terms and local cache are approved.
+  lane: intraday_research_only_lane
+  role: execution_research_only
+  status: paused_data_source_blocked
+  tested_variants: []
+  accepted_variants: []
+  rejected_variants: []
+  benchmark_controls:
+  - SPY
+  - QQQ
+  primary_failure_patterns:
+  - blocked_due_to_intraday_source
+  - manual_terms_required
+  data_status: blocked_due_to_intraday_source
+  family_open_status: paused_data_source_blocked
+  allowed_future_work:
+  - data_source_review_required
+  forbidden_future_work:
+  - reopen_exact_rejected_variant
+  - post_result_parameter_tuning
+  - candidate_exhaustive_without_promotion_review
+  - paper_demo_without_candidate_exhaustive
+  - broker_or_live_path
+  - real_money_recommendation
+  - intraday_discovery
+  - intraday_backtest
+  - provider_download_without_explicit_authorization
+  next_allowed_action: intraday_paused_due_data_constraints
+  notes: No intraday testing is authorized.
+- family_id: intraday_gap_fade_research
+  description: Intraday gap-fade research concept, blocked until source terms and
+    local cache are approved.
+  lane: intraday_research_only_lane
+  role: execution_research_only
+  status: paused_data_source_blocked
+  tested_variants: []
+  accepted_variants: []
+  rejected_variants: []
+  benchmark_controls:
+  - SPY
+  - QQQ
+  primary_failure_patterns:
+  - blocked_due_to_intraday_source
+  - manual_terms_required
+  data_status: blocked_due_to_intraday_source
+  family_open_status: paused_data_source_blocked
+  allowed_future_work:
+  - data_source_review_required
+  forbidden_future_work:
+  - reopen_exact_rejected_variant
+  - post_result_parameter_tuning
+  - candidate_exhaustive_without_promotion_review
+  - paper_demo_without_candidate_exhaustive
+  - broker_or_live_path
+  - real_money_recommendation
+  - intraday_discovery
+  - intraday_backtest
+  - provider_download_without_explicit_authorization
+  next_allowed_action: intraday_paused_due_data_constraints
+  notes: No intraday testing is authorized.
+- family_id: intraday_vwap_reversion_research
+  description: Intraday VWAP reversion research concept, blocked until source terms
+    and local cache are approved.
+  lane: intraday_research_only_lane
+  role: execution_research_only
+  status: paused_data_source_blocked
+  tested_variants: []
+  accepted_variants: []
+  rejected_variants: []
+  benchmark_controls:
+  - SPY
+  - QQQ
+  primary_failure_patterns:
+  - blocked_due_to_intraday_source
+  - manual_terms_required
+  data_status: blocked_due_to_intraday_source
+  family_open_status: paused_data_source_blocked
+  allowed_future_work:
+  - data_source_review_required
+  forbidden_future_work:
+  - reopen_exact_rejected_variant
+  - post_result_parameter_tuning
+  - candidate_exhaustive_without_promotion_review
+  - paper_demo_without_candidate_exhaustive
+  - broker_or_live_path
+  - real_money_recommendation
+  - intraday_discovery
+  - intraday_backtest
+  - provider_download_without_explicit_authorization
+  next_allowed_action: intraday_paused_due_data_constraints
+  notes: No intraday testing is authorized.

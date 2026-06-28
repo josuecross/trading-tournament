@@ -1,0 +1,41 @@
+ledger_version: 1
+required_fields:
+- parent_candidate_id
+- parent_status
+- parent_failure_reason
+- one_major_changed_dimension
+- unchanged_dimensions
+- family_trial_count
+- parameter_changes_result_driven
+- new_hypothesis_distinct
+- manual_review_required
+current_entries:
+- child_candidate_id: rc_dual_momentum_paa_vol_scaled_v1
+  parent_candidate_id: dual_momentum_paa_clean_v1
+  parent_status: discovery_reject
+  parent_failure_reason: high upside but failed drawdown/risk-buffer gates
+  one_major_changed_dimension: volatility_scaling
+  unchanged_dimensions:
+  - daily ETF wrapper
+  - dual momentum/PAA family
+  - long-only
+  - no leverage
+  family_trial_count: 2
+  parameter_changes_result_driven: false
+  new_hypothesis_distinct: true
+  manual_review_required: true
+- child_candidate_id: rc_donchian_breakout_risk_budget_v1
+  parent_candidate_id: donchian_atr_breakout_etf_v1
+  parent_status: discovery_reject
+  parent_failure_reason: return power failed drawdown, risk-buffer, benchmark, and
+    trade gates
+  one_major_changed_dimension: risk_budget_sizing
+  unchanged_dimensions:
+  - daily ETF wrapper
+  - Donchian breakout family
+  - ATR stop model
+  - long-only
+  family_trial_count: 2
+  parameter_changes_result_driven: false
+  new_hypothesis_distinct: true
+  manual_review_required: true

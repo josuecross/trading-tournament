@@ -1,0 +1,33 @@
+family_id: volatility_regime_equity
+description: Equity allocation family controlled by volatility or risk-regime state.
+lane: moderate_tactical_etf_lane
+role: risk_reducer
+status: rejected_current_variants
+tested_variants:
+- volatility_regime_spy_qqq_bil_v1
+accepted_variants: []
+rejected_variants:
+- volatility_regime_spy_qqq_bil_v1
+benchmark_controls:
+- SPY
+- QQQ
+- BIL
+- SPY_200d_trend_model
+- active_combo_vm_dsr_equal_weight_v1
+primary_failure_patterns:
+- weaker_than_active_references
+- too_slow_for_profit_goal
+data_status: sufficient
+family_open_status: closed_exact_variants_future_hypothesis_only
+allowed_future_work:
+- audit_family_failures
+forbidden_future_work:
+- reopen_exact_rejected_variant
+- post_result_parameter_tuning
+- candidate_exhaustive_without_promotion_review
+- paper_demo_without_candidate_exhaustive
+- broker_or_live_path
+- real_money_recommendation
+next_allowed_action: audit_family_failures
+notes: Risk controls remain useful for research value but did not clear promotion
+  standards.

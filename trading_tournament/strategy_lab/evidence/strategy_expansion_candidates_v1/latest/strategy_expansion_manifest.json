@@ -1,0 +1,41 @@
+{
+  "artifact": "strategy_expansion_candidates_v1",
+  "backtests_run": false,
+  "broker_path_touched": false,
+  "candidate_count": 12,
+  "candidate_exhaustive_run": false,
+  "candidate_registry_path": "C:\\Users\\te3442\\Documents\\GitHub\\trading-tournament\\trading_tournament\\strategy_lab\\strategy_expansion_candidates_v1.yaml",
+  "created_utc": "2026-06-27T21:05:16.117359+00:00",
+  "discovery_run": false,
+  "etf_wrapper_track_status": "archived_after_breadth_state_regime_no_candidate",
+  "forbidden_status_values_absent": true,
+  "intraday_demo_eligible": false,
+  "live_orders": false,
+  "next_action": "pre_register_first_expansion_discovery_batch",
+  "notes": [
+    "This packet is a saved candidate registry only.",
+    "No first expansion discovery batch was run.",
+    "No active observations or strategy_registry active state were changed."
+  ],
+  "output_dir": "C:\\Users\\te3442\\Documents\\GitHub\\trading-tournament\\trading_tournament\\strategy_lab\\evidence\\strategy_expansion_candidates_v1\\latest",
+  "paper_forward_activation": false,
+  "paper_forward_review": false,
+  "priority_order": [
+    "dmr_liquid_etf_oversold_rebound_v1",
+    "vm_spy_qqq_daily_vol_target_v1",
+    "sector_rs_weekly_cash_filter_v1",
+    "vol_compression_breakout_etf_v1",
+    "rs_pair_rotation_spy_qqq_xlk_xlu_v1",
+    "donchian_atr_breakout_etf_v1",
+    "turn_of_month_spy_qqq_v1",
+    "cash_pause_overlay_meta_v1",
+    "orb_spy_qqq_30m_research_v1",
+    "gap_down_fade_spy_qqq_research_v1",
+    "vwap_deviation_reversion_research_v1",
+    "post_earnings_drift_large_cap_later_v1"
+  ],
+  "provider_download": false,
+  "real_money_recommendation": false,
+  "roadmap_path": "C:\\Users\\te3442\\Documents\\GitHub\\trading-tournament\\trading_tournament\\strategy_lab\\STRATEGY_EXPANSION_ROADMAP.md",
+  "saved_candidates_only": true
+}

@@ -1,3 +1,0 @@
-scenario,score_threshold,target_300_threshold,recommended
-current,70,0.25,True
-do_not_weaken,unchanged,unchanged,True

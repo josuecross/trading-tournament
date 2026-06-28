@@ -1,0 +1,31 @@
+family_id: intraday_vwap_reversion_research
+description: Intraday VWAP reversion research concept, blocked until source terms
+  and local cache are approved.
+lane: intraday_research_only_lane
+role: execution_research_only
+status: paused_data_source_blocked
+tested_variants: []
+accepted_variants: []
+rejected_variants: []
+benchmark_controls:
+- SPY
+- QQQ
+primary_failure_patterns:
+- blocked_due_to_intraday_source
+- manual_terms_required
+data_status: blocked_due_to_intraday_source
+family_open_status: paused_data_source_blocked
+allowed_future_work:
+- data_source_review_required
+forbidden_future_work:
+- reopen_exact_rejected_variant
+- post_result_parameter_tuning
+- candidate_exhaustive_without_promotion_review
+- paper_demo_without_candidate_exhaustive
+- broker_or_live_path
+- real_money_recommendation
+- intraday_discovery
+- intraday_backtest
+- provider_download_without_explicit_authorization
+next_allowed_action: intraday_paused_due_data_constraints
+notes: No intraday testing is authorized.

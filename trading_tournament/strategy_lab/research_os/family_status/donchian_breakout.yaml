@@ -1,0 +1,37 @@
+family_id: donchian_breakout
+description: Daily close ETF Donchian breakout family with ATR/risk-budget controls.
+lane: moderate_tactical_etf_lane
+role: profit_engine
+status: rejected_current_variants
+tested_variants:
+- donchian_atr_breakout_etf_v1
+- rc_donchian_breakout_risk_budget_v1
+accepted_variants: []
+rejected_variants:
+- donchian_atr_breakout_etf_v1
+- rc_donchian_breakout_risk_budget_v1
+benchmark_controls:
+- SPY
+- QQQ
+- BIL
+- SPY_200d_trend_model
+- active_combo_vm_dsr_equal_weight_v1
+primary_failure_patterns:
+- too_risky
+- risk_buffer_too_thin
+- parent_child_mismatch_risk
+data_status: sufficient
+family_open_status: closed_exact_variants_future_hypothesis_only
+allowed_future_work:
+- audit_family_failures
+- parent_child_consistency_review
+forbidden_future_work:
+- reopen_exact_rejected_variant
+- post_result_parameter_tuning
+- candidate_exhaustive_without_promotion_review
+- paper_demo_without_candidate_exhaustive
+- broker_or_live_path
+- real_money_recommendation
+next_allowed_action: audit_family_failures
+notes: Prior 55-day language was invalidated; parent rule consistency is mandatory
+  before any follow-up.

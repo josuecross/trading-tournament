@@ -1,3 +1,0 @@
-family_id,strategy_id,profit_first_score,score_label,strategy_verdict
-dividend_quality_yield_etf,dividend_quality_top2_v1,21.86116981385647,weak,too_risky
-dividend_quality_yield_etf,dividend_quality_trend_equal_weight_v1,20.167464249105457,weak,too_risky

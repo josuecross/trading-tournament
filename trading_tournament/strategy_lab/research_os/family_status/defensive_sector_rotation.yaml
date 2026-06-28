@@ -1,0 +1,39 @@
+family_id: defensive_sector_rotation
+description: ETF sector rotation family with defensive/cash filters and active DSR
+  observation state.
+lane: conservative_etf_allocation_lane
+role: risk_reducer
+status: active_accepted
+tested_variants:
+- paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+- dsr_sector_top2_momentum_200d_bil_v1
+- dsr_sector_top3_momentum_defensive_cash_v1
+accepted_variants:
+- paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+rejected_variants:
+- dsr_sector_top2_momentum_200d_bil_v1
+benchmark_controls:
+- SPY
+- BIL
+- SPY_200d_trend_model
+- active_combo_vm_dsr_equal_weight_v1
+- paper_forward_vm_quality_lowvol_proxy_v1
+primary_failure_patterns:
+- duplicate_or_near_duplicate
+- risk_buffer_too_thin
+data_status: sufficient
+family_open_status: protected_active_observation_no_rule_change
+allowed_future_work:
+- observe_active_frozen_row
+- same_family_audit_only
+forbidden_future_work:
+- change_active_observation_rules
+- reopen_exact_rejected_variant
+- post_result_parameter_tuning
+- candidate_exhaustive_without_promotion_review
+- paper_demo_without_candidate_exhaustive
+- broker_or_live_path
+- real_money_recommendation
+next_allowed_action: manual_review_refactored_research_os
+notes: Active DSR remains accepted/frozen; DSR recovered-best mismatch remains an
+  accepted caveat for manual review.

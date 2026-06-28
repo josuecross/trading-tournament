@@ -1,0 +1,16 @@
+lineage_rules_version: 1
+required_fields:
+  parent_candidate_id: required
+  parent_status: required
+  parent_failure_reason: required
+  parent_rule_source: required
+  exact_parent_reopened: false
+  one_major_changed_dimension: required
+  unchanged_dimensions: required
+  child_hypothesis: required
+  why_not_post_result_tuning: required
+  parent_rule_consistency_check_required: true
+mismatch_policy:
+  if_parent_rule_mismatch_found: discovery_blocked_until_manual_review
+  example: Donchian follow-up language must match the parent 20-day breakout mechanics;
+    invalidated 55-day language cannot be used.

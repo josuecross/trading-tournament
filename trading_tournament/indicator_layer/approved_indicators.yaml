@@ -1,0 +1,27 @@
+approved_indicators_version: 1
+allowed_initial_categories:
+  trend:
+  - SMA
+  - EMA
+  - Donchian
+  momentum:
+  - ROC
+  - momentum
+  - RSI
+  volatility:
+  - ATR
+  - Bollinger z-score
+  - realized volatility
+  - ADX
+  volume_liquidity:
+  - volume SMA
+  - volume filter
+blocked_for_now:
+- large indicator combination searches
+- candlestick pattern mining
+- genetic search
+- AI-selected indicator formulas
+- broad parameter grids eligible for promotion
+- post-result indicator tuning
+- intraday indicators while intraday source is blocked
+new_dependency_added: false

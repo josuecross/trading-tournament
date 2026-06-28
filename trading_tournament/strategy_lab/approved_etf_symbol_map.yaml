@@ -8,232 +8,388 @@ default_bootstrap_policy:
   bootstrap_requires_explicit_flag: true
   raw_ohlcv_excluded_from_compact_evidence: true
 symbols:
-  - symbol: SPY
-    group: core_benchmarks
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Core equity benchmark and strategy input.
-  - symbol: QQQ
-    group: core_benchmarks
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Core growth/equity benchmark and strategy input.
-  - symbol: BIL
-    group: core_benchmarks
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Cash proxy/fallback.
-  - symbol: GLD
-    group: core_benchmarks
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Gold ETF benchmark and tactical input.
-  - symbol: IEF
-    group: core_benchmarks
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Intermediate Treasury ETF.
-  - symbol: TLT
-    group: core_benchmarks
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Long Treasury ETF.
-  - symbol: AGG
-    group: core_benchmarks
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Aggregate bond ETF.
-  - symbol: XLK
-    group: dsr_sector_etfs
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: DSR sector ETF.
-  - symbol: XLF
-    group: dsr_sector_etfs
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: DSR sector ETF.
-  - symbol: XLE
-    group: dsr_sector_etfs
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: DSR sector ETF.
-  - symbol: XLV
-    group: dsr_sector_etfs
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: DSR sector ETF.
-  - symbol: XLY
-    group: dsr_sector_etfs
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: DSR sector ETF.
-  - symbol: XLP
-    group: dsr_sector_etfs
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: DSR sector ETF.
-  - symbol: XLU
-    group: dsr_sector_etfs
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: DSR sector ETF.
-  - symbol: XLI
-    group: dsr_sector_etfs
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: DSR sector ETF.
-  - symbol: XLB
-    group: dsr_sector_etfs
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: DSR sector ETF.
-  - symbol: XLC
-    group: dsr_sector_etfs
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: DSR sector ETF with shorter history than legacy sectors.
-  - symbol: SPLV
-    group: vm_quality_low_vol
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Low-vol ETF.
-  - symbol: USMV
-    group: vm_quality_low_vol
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Minimum volatility ETF.
-  - symbol: QUAL
-    group: vm_quality_low_vol
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Quality factor ETF.
-  - symbol: MTUM
-    group: quality_momentum_etf_proxy
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Momentum factor ETF used by recovered quality/momentum proxy.
-  - symbol: VLUE
-    group: quality_momentum_etf_proxy
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Value factor ETF used by recovered quality/momentum proxy.
-  - symbol: VTV
-    group: quality_momentum_etf_proxy
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Value ETF used by recovered quality/momentum proxy.
-  - symbol: EFA
-    group: global_tactical
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Developed ex-US equity ETF.
-  - symbol: EEM
-    group: global_tactical
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Emerging-market equity ETF.
-  - symbol: IWM
-    group: global_tactical
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: US small-cap equity ETF.
-  - symbol: DBMF
-    group: managed_futures_wrappers
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Managed-futures-style ETF wrapper, not direct futures trading.
-  - symbol: KMLM
-    group: managed_futures_wrappers
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Managed-futures-style ETF wrapper, not direct futures trading.
-  - symbol: CTA
-    group: managed_futures_wrappers
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Managed-futures-style ETF wrapper, not direct futures trading.
-  - symbol: FMF
-    group: managed_futures_wrappers
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Managed-futures-style ETF wrapper, not direct futures trading.
-  - symbol: WTMF
-    group: managed_futures_wrappers
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Managed-futures-style ETF wrapper, not direct futures trading.
-  - symbol: SCHD
-    group: dividend_quality_yield
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Dividend/quality ETF.
-  - symbol: VIG
-    group: dividend_quality_yield
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Dividend/quality ETF.
-  - symbol: DGRO
-    group: dividend_quality_yield
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Dividend/quality ETF.
-  - symbol: HYG
-    group: carry_yield
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: High-yield bond ETF.
-  - symbol: LQD
-    group: carry_yield
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Investment-grade bond ETF.
-  - symbol: EMB
-    group: carry_yield
-    allowed_for_strategy: true
-    allowed_for_benchmark: true
-    requires_explicit_prompt: false
-    notes: Emerging-market bond ETF.
-  - symbol: DBC
-    group: optional_benchmark_only_commodity_etf
-    allowed_for_strategy: false
-    allowed_for_benchmark: true
-    requires_explicit_prompt: true
-    enabled_by_default: false
-    notes: Optional benchmark-only commodity ETF; disabled by default unless a later prompt/policy explicitly enables it.
+- symbol: SPY
+  group: core_benchmarks
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Core equity benchmark and strategy input.
+- symbol: QQQ
+  group: core_benchmarks
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Core growth/equity benchmark and strategy input.
+- symbol: BIL
+  group: core_benchmarks
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Cash proxy/fallback.
+- symbol: GLD
+  group: core_benchmarks
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Gold ETF benchmark and tactical input.
+- symbol: IEF
+  group: core_benchmarks
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Intermediate Treasury ETF.
+- symbol: TLT
+  group: core_benchmarks
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Long Treasury ETF.
+- symbol: AGG
+  group: core_benchmarks
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Aggregate bond ETF.
+- symbol: XLK
+  group: dsr_sector_etfs
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: DSR sector ETF.
+- symbol: XLF
+  group: dsr_sector_etfs
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: DSR sector ETF.
+- symbol: XLE
+  group: dsr_sector_etfs
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: DSR sector ETF.
+- symbol: XLV
+  group: dsr_sector_etfs
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: DSR sector ETF.
+- symbol: XLY
+  group: dsr_sector_etfs
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: DSR sector ETF.
+- symbol: XLP
+  group: dsr_sector_etfs
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: DSR sector ETF.
+- symbol: XLU
+  group: dsr_sector_etfs
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: DSR sector ETF.
+- symbol: XLI
+  group: dsr_sector_etfs
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: DSR sector ETF.
+- symbol: XLB
+  group: dsr_sector_etfs
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: DSR sector ETF.
+- symbol: XLC
+  group: dsr_sector_etfs
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: DSR sector ETF with shorter history than legacy sectors.
+- symbol: SPLV
+  group: vm_quality_low_vol
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Low-vol ETF.
+- symbol: USMV
+  group: vm_quality_low_vol
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Minimum volatility ETF.
+- symbol: QUAL
+  group: vm_quality_low_vol
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Quality factor ETF.
+- symbol: MTUM
+  group: quality_momentum_etf_proxy
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Momentum factor ETF used by recovered quality/momentum proxy.
+- symbol: VLUE
+  group: quality_momentum_etf_proxy
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Value factor ETF used by recovered quality/momentum proxy.
+- symbol: VTV
+  group: quality_momentum_etf_proxy
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Value ETF used by recovered quality/momentum proxy.
+- symbol: EFA
+  group: global_tactical
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Developed ex-US equity ETF.
+- symbol: EEM
+  group: global_tactical
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Emerging-market equity ETF.
+- symbol: IWM
+  group: global_tactical
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: US small-cap equity ETF.
+- symbol: DBMF
+  group: managed_futures_wrappers
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Managed-futures-style ETF wrapper, not direct futures trading.
+- symbol: KMLM
+  group: managed_futures_wrappers
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Managed-futures-style ETF wrapper, not direct futures trading.
+- symbol: CTA
+  group: managed_futures_wrappers
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Managed-futures-style ETF wrapper, not direct futures trading.
+- symbol: FMF
+  group: managed_futures_wrappers
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Managed-futures-style ETF wrapper, not direct futures trading.
+- symbol: WTMF
+  group: managed_futures_wrappers
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Managed-futures-style ETF wrapper, not direct futures trading.
+- symbol: SCHD
+  group: dividend_quality_yield
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Dividend/quality ETF.
+- symbol: VIG
+  group: dividend_quality_yield
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Dividend/quality ETF.
+- symbol: DGRO
+  group: dividend_quality_yield
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Dividend/quality ETF.
+- symbol: HYG
+  group: carry_yield
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: High-yield bond ETF.
+- symbol: LQD
+  group: carry_yield
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Investment-grade bond ETF.
+- symbol: EMB
+  group: carry_yield
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: false
+  notes: Emerging-market bond ETF.
+- symbol: DBC
+  group: optional_benchmark_only_commodity_etf
+  allowed_for_strategy: false
+  allowed_for_benchmark: true
+  requires_explicit_prompt: true
+  enabled_by_default: false
+  notes: Optional benchmark-only commodity ETF; disabled by default unless a later prompt/policy explicitly enables it.
+- symbol: EWJ
+  group: international_regional_expansion
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: true
+  approved_status: approved_cache_ready
+  approval_source: approved_symbol_expansion_review
+  notes: 'Approved expansion symbol; cache bootstrapped and QA-passed for exploratory research only. Expected lane: regional_international_momentum.'
+  cache_ready: true
+  latest_cache_bootstrap_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\approved_expansion_cache_bootstrap\latest
+  data_source: yfinance_compatible_adjusted_daily_etf_data
+  first_date: '2007-01-03'
+  last_date: '2026-06-18'
+  row_count: 4896
+  qa_status: passed
+- symbol: EWU
+  group: international_regional_expansion
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: true
+  approved_status: approved_cache_ready
+  approval_source: approved_symbol_expansion_review
+  notes: 'Approved expansion symbol; cache bootstrapped and QA-passed for exploratory research only. Expected lane: regional_international_momentum.'
+  cache_ready: true
+  latest_cache_bootstrap_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\approved_expansion_cache_bootstrap\latest
+  data_source: yfinance_compatible_adjusted_daily_etf_data
+  first_date: '2007-01-03'
+  last_date: '2026-06-18'
+  row_count: 4896
+  qa_status: passed
+- symbol: EWG
+  group: international_regional_expansion
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: true
+  approved_status: approved_cache_ready
+  approval_source: approved_symbol_expansion_review
+  notes: 'Approved expansion symbol; cache bootstrapped and QA-passed for exploratory research only. Expected lane: regional_international_momentum.'
+  cache_ready: true
+  latest_cache_bootstrap_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\approved_expansion_cache_bootstrap\latest
+  data_source: yfinance_compatible_adjusted_daily_etf_data
+  first_date: '2007-01-03'
+  last_date: '2026-06-18'
+  row_count: 4896
+  qa_status: passed
+- symbol: EWY
+  group: international_regional_expansion
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: true
+  approved_status: approved_cache_ready
+  approval_source: approved_symbol_expansion_review
+  notes: 'Approved expansion symbol; cache bootstrapped and QA-passed for exploratory research only. Expected lane: regional_international_momentum.'
+  cache_ready: true
+  latest_cache_bootstrap_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\approved_expansion_cache_bootstrap\latest
+  data_source: yfinance_compatible_adjusted_daily_etf_data
+  first_date: '2007-01-03'
+  last_date: '2026-06-18'
+  row_count: 4896
+  qa_status: passed
+- symbol: INDA
+  group: international_regional_expansion
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: true
+  approved_status: approved_cache_ready
+  approval_source: approved_symbol_expansion_review
+  notes: 'Approved expansion symbol; cache bootstrapped and QA-passed for exploratory research only. Expected lane: regional_international_momentum.'
+  cache_ready: true
+  latest_cache_bootstrap_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\approved_expansion_cache_bootstrap\latest
+  data_source: yfinance_compatible_adjusted_daily_etf_data
+  first_date: '2012-02-03'
+  last_date: '2026-06-18'
+  row_count: 3614
+  qa_status: passed
+- symbol: SCHG
+  group: us_factor_expansion
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: true
+  approved_status: approved_cache_ready
+  approval_source: approved_symbol_expansion_review
+  notes: 'Approved expansion symbol; cache bootstrapped and QA-passed for exploratory research only. Expected lane: us_style_confirmation.'
+  cache_ready: true
+  latest_cache_bootstrap_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\approved_expansion_cache_bootstrap\latest
+  data_source: yfinance_compatible_adjusted_daily_etf_data
+  first_date: '2010-01-04'
+  last_date: '2026-06-18'
+  row_count: 4140
+  qa_status: passed
+- symbol: EFAV
+  group: international_minvol_expansion
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: true
+  approved_status: approved_cache_ready
+  approval_source: approved_symbol_expansion_review
+  notes: 'Approved expansion symbol; cache bootstrapped and QA-passed for exploratory research only. Expected lane: international_lowvol_defensive.'
+  cache_ready: true
+  latest_cache_bootstrap_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\approved_expansion_cache_bootstrap\latest
+  data_source: yfinance_compatible_adjusted_daily_etf_data
+  first_date: '2011-10-20'
+  last_date: '2026-06-18'
+  row_count: 3686
+  qa_status: passed
+- symbol: EEMV
+  group: international_minvol_expansion
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: true
+  approved_status: approved_cache_ready
+  approval_source: approved_symbol_expansion_review
+  notes: 'Approved expansion symbol; cache bootstrapped and QA-passed for exploratory research only. Expected lane: international_lowvol_defensive.'
+  cache_ready: true
+  latest_cache_bootstrap_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\approved_expansion_cache_bootstrap\latest
+  data_source: yfinance_compatible_adjusted_daily_etf_data
+  first_date: '2011-10-20'
+  last_date: '2026-06-18'
+  row_count: 3686
+  qa_status: passed
+- symbol: DIA
+  group: first_expansion_required_broad_etf
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: true
+  approved_status: approved_cache_ready
+  approval_source: first_expansion_data_availability_refresh
+  cache_ready: true
+  latest_cache_refresh_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\data_availability\first_expansion_batch\latest
+  data_source: yfinance_compatible_adjusted_daily_etf_data
+  notes: Required frozen first-expansion candidate symbol; authorized only for daily adjusted ETF cache refresh and research
+    availability.
+  last_authorized_refresh_utc: '2026-06-28T00:58:21.406920+00:00'
+  first_date: '2007-01-03'
+  last_date: '2026-06-26'
+  row_count: 4901
+  qa_status: passed
+  schema_matches_existing_daily_etf_data: true
+- symbol: XLRE
+  group: first_expansion_required_sector_etf
+  allowed_for_strategy: true
+  allowed_for_benchmark: true
+  requires_explicit_prompt: true
+  approved_status: approved_cache_ready
+  approval_source: first_expansion_data_availability_refresh
+  cache_ready: true
+  latest_cache_refresh_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\data_availability\first_expansion_batch\latest
+  data_source: yfinance_compatible_adjusted_daily_etf_data
+  notes: Required frozen first-expansion sector ETF symbol; authorized only for daily adjusted ETF cache refresh and research
+    availability.
+  last_authorized_refresh_utc: '2026-06-28T00:58:21.406920+00:00'
+  first_date: '2015-10-08'
+  last_date: '2026-06-26'
+  row_count: 2694
+  qa_status: passed
+  schema_matches_existing_daily_etf_data: true

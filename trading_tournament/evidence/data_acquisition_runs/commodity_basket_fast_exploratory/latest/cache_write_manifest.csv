@@ -1,6 +1,0 @@
-symbol,cache_path,rows_written,sha256,write_status
-DBC,data/cache/DBC.csv,5115,1388b2576ca2bf665f3aa73c2dc58b1bfd56daa2fcc75a7edcc0047a7e450935,written
-PDBC,data/cache/PDBC.csv,2910,b03a8ecf871f20eb235607eb16fcab47170d84c64553b2a94a5272b363f51b80,written
-COMT,data/cache/COMT.csv,2926,ed250fa9c0e93ef027da83184543cebe35b573e5e4af7d89625626f946c00032,written
-GSG,data/cache/GSG.csv,5000,5c0a5cf4b399186567e242e557dbfdd6084adcd9639399b3f8f49c0d57d404e2,written
-USCI,data/cache/USCI.csv,3980,adfded8452e4d318b32a5927f808abfd590386d20b0c2aad153493c9255d7717,written

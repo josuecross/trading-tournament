@@ -1,0 +1,27 @@
+failure_taxonomy_version: 1
+controlled_labels:
+- too_risky
+- risk_buffer_too_thin
+- duplicate_or_near_duplicate
+- too_slow_for_profit_goal
+- weaker_than_active_references
+- benchmark_watchlist
+- no_meaningful_improvement
+- limited_history_same_window_required
+- signal_funnel_bug
+- parent_child_mismatch_risk
+- blocked_due_to_intraday_source
+- manual_terms_required
+recent_family_lessons:
+  high_upside_rows:
+  - too_risky
+  - risk_buffer_too_thin
+  safer_rows:
+  - too_slow_for_profit_goal
+  - weaker_than_active_references
+  ensemble_rows:
+  - duplicate_or_near_duplicate
+  - no_meaningful_improvement
+  intraday:
+  - blocked_due_to_intraday_source
+  - manual_terms_required

@@ -1,0 +1,36 @@
+family_id: volatility_managed_equity_etf
+description: Long-only ETF wrapper using quality/low-volatility/proxy sleeves with
+  trend and volatility-aware ranking.
+lane: moderate_tactical_etf_lane
+role: profit_engine
+status: active_accepted
+tested_variants:
+- paper_forward_vm_quality_lowvol_proxy_v1
+- vm_quality_lowvol_proxy_v1
+accepted_variants:
+- paper_forward_vm_quality_lowvol_proxy_v1
+rejected_variants: []
+benchmark_controls:
+- SPY
+- QQQ
+- BIL
+- SPY_200d_trend_model
+- active_combo_vm_dsr_equal_weight_v1
+primary_failure_patterns:
+- duplicate_or_near_duplicate
+data_status: sufficient
+family_open_status: protected_active_observation_no_rule_change
+allowed_future_work:
+- observe_active_frozen_row
+- compare_as_reference
+- family_level_audit_only
+forbidden_future_work:
+- change_active_observation_rules
+- reopen_exact_rejected_variant
+- post_result_parameter_tuning
+- candidate_exhaustive_without_promotion_review
+- paper_demo_without_candidate_exhaustive
+- broker_or_live_path
+- real_money_recommendation
+next_allowed_action: manual_review_refactored_research_os
+notes: Active VM state is preserved exactly; this refactor adds only governance metadata.

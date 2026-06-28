@@ -1,3 +1,0 @@
-family_id,strategy_id,profit_first_score,score_label,strategy_verdict
-carry_yield_etf_proxy,carry_yield_top2_v1,6.48816463236642,weak,too_risky
-carry_yield_etf_proxy,carry_yield_defensive_filter_v1,51.43,diversifier_watchlist_candidate,diversifier_watchlist_candidate

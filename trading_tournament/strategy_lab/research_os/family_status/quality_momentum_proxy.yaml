@@ -1,0 +1,37 @@
+family_id: quality_momentum_proxy
+description: Quality/value/momentum and low-volatility quality ETF proxy family.
+lane: moderate_tactical_etf_lane
+role: profit_engine
+status: watchlist_closed_no_rescue_now
+tested_variants:
+- qvm_quality_value_momentum_top2_v1
+- qvm_quality_value_momentum_risk_adjusted_top2_v1
+- lvq_lowvol_quality_spy_regime_v1
+accepted_variants: []
+rejected_variants:
+- qvm_quality_value_momentum_risk_adjusted_top2_v1
+- lvq_lowvol_quality_spy_regime_v1
+benchmark_controls:
+- SPY
+- QQQ
+- BIL
+- paper_forward_vm_quality_lowvol_proxy_v1
+- active_combo_vm_dsr_equal_weight_v1
+primary_failure_patterns:
+- too_risky
+- risk_buffer_too_thin
+- weaker_than_active_references
+data_status: sufficient
+family_open_status: closed_exact_variants_future_hypothesis_only
+allowed_future_work:
+- watchlist_only
+- audit_family_failures
+forbidden_future_work:
+- reopen_exact_rejected_variant
+- post_result_parameter_tuning
+- candidate_exhaustive_without_promotion_review
+- paper_demo_without_candidate_exhaustive
+- broker_or_live_path
+- real_money_recommendation
+next_allowed_action: audit_family_failures
+notes: High-upside versions failed risk buffer; safer versions lagged active references.

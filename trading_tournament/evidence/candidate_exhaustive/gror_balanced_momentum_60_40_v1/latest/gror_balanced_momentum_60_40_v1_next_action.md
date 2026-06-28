@@ -1,3 +1,0 @@
-# Next Action
-
-`keep_gror_balanced_momentum_60_40_v1_candidate_watchlist_choose_next_lane`

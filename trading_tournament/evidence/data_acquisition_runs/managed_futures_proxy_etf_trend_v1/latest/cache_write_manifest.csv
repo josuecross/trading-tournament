@@ -1,3 +1,0 @@
-symbol,cache_path,rows_written,sha256,write_status
-DBMF,data/cache/DBMF.csv,1780,5fcc4af7f500aa6618aadc4dd43e44bcdc01d724d6fe13c0f691d545bc438e2e,written
-KMLM,data/cache/KMLM.csv,1383,458ebf20a2e1ca388ad42a6d8a320cedf535ba45def84973d1b9bbfb3bb9fc55,written

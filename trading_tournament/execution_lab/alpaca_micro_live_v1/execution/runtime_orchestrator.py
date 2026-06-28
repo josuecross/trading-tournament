@@ -138,6 +138,7 @@ def run_orchestrator(
             bars = bars_fetcher(
                 client,
                 symbols=symbols,
+                approved_symbols=symbols,
                 start=(date.today() - timedelta(days=420)).isoformat(),
                 feed=config.get("data_feed", "iex"),
                 adjustment=config.get("data_adjustment", "all"),

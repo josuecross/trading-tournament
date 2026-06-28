@@ -1,0 +1,51 @@
+phase_model_version: 1
+no_direct_jump_from_discovery_to_paper_demo: true
+phases:
+- phase_id: phase_0_governance
+  purpose: Define family, lane, data status, and prohibited actions.
+  exit_requires:
+  - manual_review_or_pre_registration
+- phase_id: phase_1_family_archetype_discovery
+  purpose: Run only a pre-registered family archetype batch.
+  exit_requires:
+  - signal_funnel
+  - same_window_controls
+  - family_assignment
+- phase_id: phase_2_family_failure_synthesis
+  purpose: Convert row outcomes into family-level lessons.
+  exit_requires:
+  - failure_taxonomy
+  - closed_exact_variants
+  - allowed_future_work
+- phase_id: phase_3_risk_control_followup
+  purpose: Test one structurally justified risk-control follow-up only after lineage
+    review.
+  exit_requires:
+  - parent_child_consistency_check
+  - overfitting_control_ledger
+- phase_id: phase_4_promotion_review
+  purpose: Strict promotion-review gate before candidate exhaustive.
+  exit_requires:
+  - complete_evidence
+  - risk_buffer_pass
+  - duplication_review
+- phase_id: phase_5_candidate_exhaustive
+  purpose: Separate exhaustive validation after promotion review.
+  exit_requires:
+  - frozen_rules
+  - exhaustive_packet
+  - no_paper_demo_jump
+- phase_id: phase_6_paper_demo_observation
+  purpose: Paper/demo observation only after promotion review, candidate exhaustive,
+    and paper-forward review pass.
+  exit_requires:
+  - operational_review
+  - no_real_money_boundary
+- phase_id: phase_blocked_data_or_terms
+  purpose: Block strategy testing until source terms, cache, and QA are resolved.
+  exit_requires:
+  - data_source_gate_pass
+- phase_id: phase_paused_summary_required
+  purpose: Pause expansion and summarize state when repeated failures saturate a lane.
+  exit_requires:
+  - manual_governance_decision

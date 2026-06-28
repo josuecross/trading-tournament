@@ -1,9 +1,0 @@
-failure_mode,review_handling
-short_history,label and gate before promotion
-high_fee_or_tracking_difference,label and gate before promotion
-too_slow_or_low_return,label and gate before promotion
-equity_bull_market_underperformance,label and gate before promotion
-internally_futures_based_but_share_only_project,label and gate before promotion
-start_date_dependency,label and gate before promotion
-single_recent_regime_dependency,label and gate before promotion
-duplicate_bonds_gld_bil_or_equity_beta,label and gate before promotion

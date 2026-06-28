@@ -1,0 +1,32 @@
+family_id: turn_of_month_calendar
+description: Calendar-effect ETF wrapper family centered on turn-of-month behavior.
+lane: diversifier_contribution_lane
+role: diversifier
+status: rejected_after_bugfix_rerun
+tested_variants:
+- turn_of_month_spy_qqq_v1
+accepted_variants: []
+rejected_variants:
+- turn_of_month_spy_qqq_v1
+benchmark_controls:
+- SPY
+- QQQ
+- BIL
+- active_combo_vm_dsr_equal_weight_v1
+primary_failure_patterns:
+- signal_funnel_bug
+- too_slow_for_profit_goal
+- weaker_than_active_references
+data_status: sufficient
+family_open_status: closed_exact_variants_future_hypothesis_only
+allowed_future_work:
+- signal_funnel_regression_audit
+forbidden_future_work:
+- reopen_exact_rejected_variant
+- post_result_parameter_tuning
+- candidate_exhaustive_without_promotion_review
+- paper_demo_without_candidate_exhaustive
+- broker_or_live_path
+- real_money_recommendation
+next_allowed_action: audit_family_failures
+notes: Zero-trade bug led to mandatory signal-funnel diagnostics for future runners.

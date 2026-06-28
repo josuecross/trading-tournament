@@ -1,9 +1,0 @@
-{
-  "attribution_diagnostics_unit_tests": "passed",
-  "candidate_exhaustive_run": false,
-  "data_downloaded": false,
-  "real_money_recommendation": false,
-  "test_command": ".venv/bin/python -m pytest tests/test_attribution_diagnostics.py",
-  "tests_passed": 9
-}
-

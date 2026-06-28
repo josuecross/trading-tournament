@@ -1,3 +1,0 @@
-symbol,cache_path,cache_written_this_run,raw_ohlcv_in_evidence,status
-BTC-USD,/Users/jcruzlopez/trading/trading_tournament/data/exploratory/crypto_spot_momentum/cache/yfinance_BTC-USD.csv,False,False,cache_confirmed
-ETH-USD,/Users/jcruzlopez/trading/trading_tournament/data/exploratory/crypto_spot_momentum/cache/yfinance_ETH-USD.csv,False,False,cache_confirmed

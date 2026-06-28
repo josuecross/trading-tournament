@@ -131,3 +131,21 @@ def generate_signal_from_bars(
         approximations=[],
     )
 
+
+def generate_target_from_bars(bars_by_symbol: dict[str, pd.DataFrame], spec: dict[str, Any]) -> dict[str, Any]:
+    signal = generate_signal_from_bars(bars_by_symbol, spec=spec)
+    return {
+        "strategy_id": signal.strategy_id,
+        "as_of": signal.as_of,
+        "target_source": "alpaca_runtime",
+        "target_weights": signal.target_weights,
+        "cash_weight": signal.cash_weight,
+        "metadata": {
+            "strategy_logic_modified": False,
+            "selected_holdings": signal.selected_holdings,
+            "eligibility": signal.eligibility_table,
+            "ranking": signal.ranking_table,
+            "fallback_triggered": signal.fallback_triggered,
+        },
+    }
+

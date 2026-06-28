@@ -1,4 +1,0 @@
-strategy,status,reason,next_action
-combo_SPY200d_GLD_50_50_v1,practical_historical_leader_and_active_paper_demo_observation,Practical leader from triage/promotion path; active forward observation is too early to judge.,run checkpoint only after 30 trading days; continue historical research in parallel
-asset_class_tsmom_top2_v1,serious_challenger,Serious historical challenger with more drawdown-budget usage than combo.,retain as primary benchmark for future combination reviews
-SPY_200d_trend_model,frozen_paper_forward_control,Frozen control; not replaced by combo.,observe beside combo without rule change

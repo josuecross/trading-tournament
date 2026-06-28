@@ -1,5 +1,4 @@
 version: 1
-
 strategies:
   vm_quality_lowvol_proxy_v1:
     enabled: true
@@ -12,12 +11,50 @@ strategies:
     rebalance_policy: target_change_or_drift
     paper_trading_allowed: true
     live_trading_allowed: false
-    capital_sleeve_notional: 25.00
-    max_order_notional: 5.00
-    rebalance_tolerance_notional: 1.00
+    capital_sleeve_notional: 25.0
+    max_order_notional: 5.0
+    rebalance_tolerance_notional: 1.0
     allowed_symbols:
-      - SPLV
-      - USMV
-      - QUAL
-      - SPY
-      - BIL
+    - SPLV
+    - USMV
+    - QUAL
+    - SPY
+    - BIL
+  dsr_sector_equal_weight_defensive_filter_v1:
+    enabled: true
+    runtime_ready: true
+    runtime_spec: runtime_strategies/dsr_sector_equal_weight_defensive_filter_v1.yaml
+    runtime_module: runtime_strategies/dsr_sector_equal_weight_defensive_filter_v1.py
+    target_source: alpaca_runtime
+    data_timeframe: 1Day
+    signal_cadence: daily_completed_bar
+    paper_trading_allowed: true
+    live_trading_allowed: false
+    capital_sleeve_notional: 25.0
+    max_order_notional: 5.0
+    rebalance_tolerance_notional: 1.0
+    allowed_symbols:
+    - XLK
+    - XLF
+    - XLE
+    - XLV
+    - XLY
+    - XLP
+    - XLU
+    - XLI
+    - XLB
+    - XLC
+    - BIL
+  gror_balanced_momentum_60_40_v1:
+    enabled: false
+    runtime_ready: false
+    blocked_reason: Promotion candidate is queued, but candidate_exhaustive was not
+      run and full runtime rule source is not locally copied.
+    paper_trading_allowed: false
+    live_trading_allowed: false
+  crypto_spot:
+    enabled: false
+    runtime_ready: false
+    blocked_reason: Crypto is outside current Alpaca stock/ETF paper runtime scope.
+    paper_trading_allowed: false
+    live_trading_allowed: false

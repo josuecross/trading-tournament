@@ -1,0 +1,46 @@
+lane_model_version: 1
+lanes:
+  conservative_etf_allocation_lane:
+    allowed_roles:
+    - risk_reducer
+    - profit_engine
+    benchmark_interpretation: Must protect drawdown and avoid duplication while offering
+      usable return contribution.
+    promotion_bias: strict_risk_buffer_first
+  moderate_tactical_etf_lane:
+    allowed_roles:
+    - profit_engine
+    - risk_reducer
+    benchmark_interpretation: Needs standalone edge or clearly additive portfolio
+      contribution versus active references.
+    promotion_bias: profit_plus_drawdown_balance
+  macro_gld_duration_risk_off_lane:
+    allowed_roles:
+    - diversifier
+    - risk_reducer
+    - profit_engine
+    benchmark_interpretation: Can be useful as a diversifier, but standalone promotion
+      still needs risk-buffer and stress survival.
+    promotion_bias: portfolio_contribution_must_be_explicit
+  diversifier_contribution_lane:
+    allowed_roles:
+    - diversifier
+    - benchmark_control
+    benchmark_interpretation: May have research value without standalone profit-engine
+      promotion.
+    promotion_bias: contribution_over_headline_return
+  breadth_state_regime_lane:
+    allowed_roles:
+    - risk_reducer
+    - profit_engine
+    - diversifier
+    benchmark_interpretation: State-machine value must exceed simple ranking/active-combo
+      duplication.
+    promotion_bias: structural_difference_required
+  intraday_research_only_lane:
+    allowed_roles:
+    - execution_research_only
+    - data_methodology_only
+    benchmark_interpretation: Data, session, fill, and terms readiness gate before
+      strategy testing.
+    promotion_bias: blocked_until_source_approved

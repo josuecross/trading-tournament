@@ -195,6 +195,7 @@ def build_dashboard() -> Path:
         / "observation_activation_manifest.json"
     )
     triage_manifest = read_json(REPO_ROOT / "candidate_triage" / "candidate_triage_manifest.json")
+    active_combo_manifest = read_json(REPO_ROOT / "evidence" / "active_combo_benchmark" / "latest" / "active_combo_manifest.json")
 
     combo = find_row(status_rows, "strategy", "combo_SPY200d_GLD_50_50_v1")
     spy = find_row(status_rows, "strategy", "SPY_200d_trend_model")
@@ -502,6 +503,14 @@ Forward checkpoint is not ready for judgment. No conclusion is allowed from firs
 
 The 30-trading-day paper-forward checkpoint rule does not block historical research. Historical research, data reviews, implementation reviews, diagnostics design, and predeclared combination-design preparation may continue in parallel under evidence gates.
 
+## Active Combo Benchmark Reference
+
+- active-combo benchmark id: `{active_combo_manifest.get('benchmark_id', 'unavailable')}`
+- active-combo reference available: `{str(active_combo_manifest.get('active_combo_reference_available', False)).lower()}`
+- active-combo role: `benchmark_reference_only`
+- active-combo next action: `{active_combo_manifest.get('next_action', 'unavailable')}`
+- active-combo paper_forward_active: `false`
+
 ## Candidate Triage
 
 - no recent research_sample candidate deserves candidate_exhaustive now: `true`
@@ -589,6 +598,10 @@ Read `current_state_summary.md` first, then the CSV matrices for active observat
         "combo_checkpoint_status": combo.get("decision_status", "unavailable"),
         "combo_current_equity": combo.get("current_equity", ""),
         "combo_paper_forward_active": bool(combo_registry.get("paper_forward_active", activation_manifest.get("paper_forward_active", False))),
+        "active_combo_benchmark_id": active_combo_manifest.get("benchmark_id", "unavailable"),
+        "active_combo_reference_available": bool(active_combo_manifest.get("active_combo_reference_available", False)),
+        "active_combo_is_reference_not_active_strategy": bool(active_combo_manifest.get("active_combo_is_reference_not_active_strategy", False)),
+        "active_combo_next_action": active_combo_manifest.get("next_action", "unavailable"),
         "combination_batch1_overall_verdict": combination_verdict,
         "combination_batch1_verdict_audit_decision": combination_audit_decision,
         "combination_batch1_candidate_exhaustive_review_decision": combination_audit_candidate_exhaustive_decision,

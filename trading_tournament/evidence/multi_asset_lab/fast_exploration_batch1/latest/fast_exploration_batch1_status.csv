@@ -1,4 +1,0 @@
-experiment_id,status,verdict,candidate_exhaustive_recommended,paper_forward_active,real_money_recommendation,reason
-global_multi_asset_tsmom_top2_v1,completed,research_sample_candidate_risk_budget_breach,False,False,False,global multi-asset row retains upside but breaches the -600 drawdown budget
-global_multi_asset_tsmom_top2_defensive_50_v1,completed,watchlist,False,False,False,global multi-asset row did not sufficiently improve primary benchmark tradeoffs
-combo_plus_global_multi_asset_80_20_v1,completed,watchlist,False,False,False,global multi-asset row did not sufficiently improve primary benchmark tradeoffs

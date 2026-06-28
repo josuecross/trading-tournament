@@ -414,6 +414,7 @@ def advisor_index_generated_files(created: str) -> list[FileEntry]:
     historical_research_base = REPO_ROOT / "evidence" / "historical_research_expansion" / "latest"
     research_state_base = REPO_ROOT / "evidence" / "research_state" / "latest"
     research_diagnostics_base = REPO_ROOT / "evidence" / "research_diagnostics" / "latest"
+    active_combo_base = REPO_ROOT / "evidence" / "active_combo_benchmark" / "latest"
     individual_stock_gate1b_base = REPO_ROOT / "evidence" / "research_memos" / "gate1b" / "individual_stock_momentum" / "latest"
     individual_stock_gate1c_base = REPO_ROOT / "evidence" / "research_memos" / "gate1c" / "individual_stock_momentum" / "latest"
     individual_stock_gate1d_base = REPO_ROOT / "evidence" / "research_memos" / "gate1d" / "individual_stock_momentum" / "latest"
@@ -462,6 +463,7 @@ def advisor_index_generated_files(created: str) -> list[FileEntry]:
     historical_research_manifest = safe_read_json(historical_research_base / "historical_research_manifest.json") or {}
     research_state_manifest = safe_read_json(research_state_base / "research_state_manifest.json") or {}
     research_diagnostics_manifest = safe_read_json(research_diagnostics_base / "research_diagnostics_manifest.json") or {}
+    active_combo_manifest = safe_read_json(active_combo_base / "active_combo_manifest.json") or {}
     individual_stock_gate1b_manifest = safe_read_json(individual_stock_gate1b_base / "gate1b_manifest.json") or {}
     individual_stock_gate1c_manifest = safe_read_json(individual_stock_gate1c_base / "gate1c_manifest.json") or {}
     individual_stock_gate1d_manifest = safe_read_json(individual_stock_gate1d_base / "gate1d_manifest.json") or {}
@@ -1617,6 +1619,7 @@ def advisor_index_generated_files(created: str) -> list[FileEntry]:
         "historical_research_expansion_latest": historical_research_base,
         "research_state_dashboard_latest": research_state_base,
         "research_diagnostics_latest": research_diagnostics_base,
+        "active_combo_benchmark_latest": active_combo_base,
         "individual_stock_momentum_gate1b_latest": individual_stock_gate1b_base,
         "individual_stock_momentum_gate1c_latest": individual_stock_gate1c_base,
         "individual_stock_momentum_gate1d_latest": individual_stock_gate1d_base,
@@ -2403,6 +2406,7 @@ def build_all_packets(output_root: Path, include_optional: bool = True, include_
             "data_acquisition_runs/crypto_spot_fast_exploratory",
             "data_acquisition_runs/global_multi_asset_fast_exploratory",
             "multi_asset_lab/fast_exploration_batch1",
+            "evidence/active_combo_benchmark/latest",
             "commodity_lab/risk_control_batch1",
             "commodity_lab/risk_control_batch1_verdict_audit",
             "commodity_lab/risk_control_batch1_diagnostics_completion",

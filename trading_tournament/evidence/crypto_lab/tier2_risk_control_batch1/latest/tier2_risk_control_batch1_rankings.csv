@@ -1,4 +1,0 @@
-rank_overall,rank_stop_aware_practical,rank_profit_seeking,rank_drawdown_control,experiment_id,verdict,run_status,balanced_drawdown_aware_score_v2,profit_seeking_score,drawdown_control_score,deserves_candidate_exhaustive,notes
-8,8,8,8,crypto_spot_tsmom_top1_cash_filter_v1,high_upside_high_risk_watchlist,completed,-1109.4678046294155,-427.84446598953605,-734.8492377437809,False,crypto spot Tier 2 exploratory row; high-risk/non-final and not paper-forward ready
-7,7,7,7,crypto_spot_equal_weight_200d_filter_v1,high_upside_high_risk_watchlist,completed,-891.8749155959655,-351.90459956782144,-546.9070511608107,False,crypto spot Tier 2 exploratory row; high-risk/non-final and not paper-forward ready
-6,5,6,6,combo_plus_crypto_spot_tsmom_90_10_v1,research_sample_candidate,completed,-105.58907461660391,-67.27905755494638,-38.5105640676162,False,crypto spot Tier 2 row deserves research_sample review only

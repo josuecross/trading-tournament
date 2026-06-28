@@ -1,0 +1,13 @@
+paper_demo_eligibility_version: 1
+requires:
+- promotion_review_passed
+- candidate_exhaustive_passed
+- paper_forward_review_passed
+- operational_simplicity
+- no_broker_reconciliation_issues
+- no_stale_or_open_order_risk
+- explicit_no_real_money_recommendation_boundary
+forbidden_shortcuts:
+- paper_demo_from_discovery
+- paper_demo_from_research_value_only
+- live_or_real_money_path

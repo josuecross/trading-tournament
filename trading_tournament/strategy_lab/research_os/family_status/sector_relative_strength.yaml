@@ -1,0 +1,33 @@
+family_id: sector_relative_strength
+description: Sector ETF relative-strength family using limited-history same-window
+  controls.
+lane: moderate_tactical_etf_lane
+role: profit_engine
+status: rejected_current_variants
+tested_variants:
+- sector_rs_weekly_cash_filter_v1
+accepted_variants: []
+rejected_variants:
+- sector_rs_weekly_cash_filter_v1
+benchmark_controls:
+- SPY
+- BIL
+- paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+- active_combo_vm_dsr_equal_weight_v1
+primary_failure_patterns:
+- limited_history_same_window_required
+- weaker_than_active_references
+data_status: limited_history_same_window_required
+family_open_status: closed_exact_variants_future_hypothesis_only
+allowed_future_work:
+- data_window_methodology_review
+- audit_family_failures
+forbidden_future_work:
+- reopen_exact_rejected_variant
+- post_result_parameter_tuning
+- candidate_exhaustive_without_promotion_review
+- paper_demo_without_candidate_exhaustive
+- broker_or_live_path
+- real_money_recommendation
+next_allowed_action: audit_family_failures
+notes: XLRE history constraints require common-window labeling before any future work.

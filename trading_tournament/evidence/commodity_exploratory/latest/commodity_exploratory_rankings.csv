@@ -1,2 +1,0 @@
-rank_overall,rank_stop_aware_practical,rank_profit_seeking,rank_drawdown_control,experiment_id,verdict,run_status,balanced_drawdown_aware_score_v2,profit_seeking_score,drawdown_control_score,deserves_candidate_exhaustive,notes
-7,9,6,9,commodity_basket_tsmom_top2_v1,research_sample_candidate_risk_budget_breach,completed,-196.73757101698013,52.03624467556341,-143.71234074246863,False,fast exploratory public-data row; target power exists but risk-control review is required before any stronger gate

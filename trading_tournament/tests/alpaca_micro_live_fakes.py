@@ -67,7 +67,12 @@ def write_runtime_files(tmp_path: Path, *, require_market_open: bool = True) -> 
                     "vm_quality_lowvol_proxy_v1": {
                         "enabled": True,
                         "runtime_ready": True,
+                        "runtime_spec": "runtime_strategies/vm_quality_lowvol_proxy_v1.yaml",
+                        "runtime_module": "runtime_strategies/vm_quality_lowvol_proxy_v1.py",
+                        "target_source": "alpaca_runtime",
+                        "data_timeframe": "1Day",
                         "live_trading_allowed": False,
+                        "paper_trading_allowed": True,
                         "allowed_symbols": ["SPLV", "USMV", "QUAL", "SPY", "BIL"],
                     }
                 },
@@ -78,15 +83,31 @@ def write_runtime_files(tmp_path: Path, *, require_market_open: bool = True) -> 
     return config, risk, registry
 
 
-def make_bars_by_symbol(eligible: bool = True) -> dict[str, pd.DataFrame]:
-    symbols = ["SPLV", "USMV", "QUAL", "SPY", "BIL"]
+def make_bars_by_symbol(eligible: bool = True, symbols: list[str] | None = None) -> dict[str, pd.DataFrame]:
+    symbols = symbols or ["SPLV", "USMV", "QUAL", "SPY", "BIL"]
     start = date(2025, 1, 1)
     bars: dict[str, pd.DataFrame] = {}
-    slopes = {"SPLV": 0.30, "USMV": 0.15, "QUAL": 0.45, "SPY": 0.10, "BIL": 0.01}
+    default_slopes = {
+        "SPLV": 0.30,
+        "USMV": 0.15,
+        "QUAL": 0.45,
+        "SPY": 0.10,
+        "BIL": 0.01,
+        "XLK": 0.32,
+        "XLF": 0.25,
+        "XLE": 0.20,
+        "XLV": 0.18,
+        "XLY": 0.16,
+        "XLP": 0.14,
+        "XLU": 0.12,
+        "XLI": 0.11,
+        "XLB": 0.10,
+        "XLC": 0.09,
+    }
     for symbol in symbols:
         records: list[dict[str, Any]] = []
         for day in range(260):
-            value = 100.0 + slopes[symbol] * day
+            value = 100.0 + default_slopes.get(symbol, 0.10) * day
             if not eligible and symbol != "BIL" and day == 259:
                 value = 50.0
             records.append(

@@ -93,6 +93,7 @@ def generate_signal(
     bars = fetch_daily_bars(
         client,
         symbols=symbols,
+        approved_symbols=symbols,
         start=start,
         feed=client_config.data_feed,
         adjustment=client_config.data_adjustment,

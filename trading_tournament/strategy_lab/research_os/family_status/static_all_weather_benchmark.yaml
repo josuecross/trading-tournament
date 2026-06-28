@@ -1,0 +1,33 @@
+family_id: static_all_weather_benchmark
+description: Static all-weather/permanent-portfolio-style ETF benchmark/control.
+lane: diversifier_contribution_lane
+role: benchmark_control
+status: benchmark_control_accepted
+tested_variants:
+- static_all_weather_benchmark_v1
+accepted_variants: []
+rejected_variants: []
+benchmark_controls:
+- static_all_weather_benchmark_v1
+- SPY
+- BIL
+- active_combo_vm_dsr_equal_weight_v1
+primary_failure_patterns:
+- benchmark_watchlist
+- too_slow_for_profit_goal
+data_status: sufficient
+family_open_status: benchmark_control_only_closed_to_promotion
+allowed_future_work:
+- same_window_benchmark_control
+forbidden_future_work:
+- reopen_exact_rejected_variant
+- post_result_parameter_tuning
+- candidate_exhaustive_without_promotion_review
+- paper_demo_without_candidate_exhaustive
+- broker_or_live_path
+- real_money_recommendation
+- promotion_review
+- candidate_exhaustive
+- paper_demo_activation
+next_allowed_action: manual_review_refactored_research_os
+notes: Accepted only as same-window benchmark/control; not a strategy candidate.

@@ -1,7 +1,0 @@
-symbol,downloaded,cache_written,row_count,first_date,last_date,duplicate_date_count,missing_adjusted_close_count,missing_close_count,missing_volume_count,adjusted_close_available,raw_close_available,dividends_available,splits_available,adjusted_ohlc_constructible,enough_rows_for_200d_sma,enough_rows_for_126d_momentum,enough_rows_for_180d_rolling_after_warmup,common_overlap_with_cached_SPY_BIL,quality_status,quality_notes
-MTUM,True,True,3303,2013-04-18,2026-06-04,0,0,0,0,True,True,True,True,True,True,True,True,2013-04-18 to 2026-05-29,pass,pass
-VLUE,True,True,3303,2013-04-18,2026-06-04,0,0,0,0,True,True,True,True,True,True,True,True,2013-04-18 to 2026-05-29,pass,pass
-VTV,True,True,4886,2007-01-03,2026-06-04,0,0,0,0,True,True,True,True,True,True,True,True,2007-05-30 to 2026-05-29,pass,pass
-QUAL,True,True,3240,2013-07-18,2026-06-04,0,0,0,0,True,True,True,True,True,True,True,True,2013-07-18 to 2026-05-29,pass,pass
-USMV,True,True,3676,2011-10-20,2026-06-04,0,0,0,0,True,True,True,True,True,True,True,True,2011-10-20 to 2026-05-29,pass,pass
-SPLV,True,True,3793,2011-05-05,2026-06-04,0,0,0,0,True,True,True,True,True,True,True,True,2011-05-05 to 2026-05-29,pass,pass

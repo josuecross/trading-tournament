@@ -1,0 +1,39 @@
+indicator_governance_version: 1
+library_install_allowed_in_this_step: false
+future_action: pre_register_indicator_library_integration_audit
+allowed_initial_indicator_categories:
+  trend:
+  - SMA
+  - EMA
+  - Donchian high/low
+  - ADX only after validation
+  momentum:
+  - ROC
+  - RSI
+  - MACD only after validation
+  volatility:
+  - ATR
+  - realized volatility
+  - Bollinger Band z-score
+  - Keltner Channel only after validation
+  volume_liquidity:
+  - volume SMA
+  - volume spike filter
+  - OBV only after validation
+  risk:
+  - rolling drawdown
+  - volatility percentile
+  - ATR risk unit
+blocked_by_default:
+- unrestricted candlestick pattern mining
+- large indicator combinations
+- genetic search
+- AI-selected indicator formulas
+- parameter sweeps eligible for promotion
+- indicators requiring unavailable data
+- intraday indicators until intraday source is approved
+candidate_libraries_for_future_audit:
+- ta
+- pandas-ta-classic
+- TA-Lib
+- similar

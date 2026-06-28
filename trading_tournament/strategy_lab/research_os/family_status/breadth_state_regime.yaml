@@ -1,0 +1,41 @@
+family_id: breadth_state_regime
+description: Market breadth/state machine ETF wrapper lane, distinct from simple top-N
+  ranking.
+lane: breadth_state_regime_lane
+role: risk_reducer
+status: no_candidate_archive_lane
+tested_variants:
+- bsr_breadth_state_top_assets_v1
+- bsr_breadth_state_defensive_shift_v1
+- bsr_breadth_state_lowvol_overlay_v1
+- bsr_breadth_state_active_combo_overlay_v1
+accepted_variants: []
+rejected_variants:
+- bsr_breadth_state_top_assets_v1
+- bsr_breadth_state_defensive_shift_v1
+- bsr_breadth_state_lowvol_overlay_v1
+- bsr_breadth_state_active_combo_overlay_v1
+benchmark_controls:
+- SPY
+- QQQ
+- BIL
+- SPY_200d_trend_model
+- paper_forward_vm_quality_lowvol_proxy_v1
+- paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+- active_combo_vm_dsr_equal_weight_v1
+primary_failure_patterns:
+- no_meaningful_improvement
+- weaker_than_active_references
+data_status: sufficient
+family_open_status: closed_after_final_lane_no_candidate
+allowed_future_work:
+- archive_or_manual_review_only
+forbidden_future_work:
+- reopen_exact_rejected_variant
+- post_result_parameter_tuning
+- candidate_exhaustive_without_promotion_review
+- paper_demo_without_candidate_exhaustive
+- broker_or_live_path
+- real_money_recommendation
+next_allowed_action: manual_review_refactored_research_os
+notes: Final structurally different ETF lane did not create a promotion-review candidate.

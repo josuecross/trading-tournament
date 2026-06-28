@@ -1,0 +1,36 @@
+family_id: managed_futures_etf_wrapper
+description: Managed-futures-style ETF/fund-wrapper proxy, without direct futures
+  or derivatives.
+lane: diversifier_contribution_lane
+role: diversifier
+status: rejected_current_variants
+tested_variants:
+- managed_futures_etf_trend_wrapper_v1
+accepted_variants: []
+rejected_variants:
+- managed_futures_etf_trend_wrapper_v1
+benchmark_controls:
+- SPY
+- BIL
+- active_combo_vm_dsr_equal_weight_v1
+- static_all_weather_benchmark_v1
+primary_failure_patterns:
+- weaker_than_active_references
+- too_slow_for_profit_goal
+data_status: sufficient
+family_open_status: future_hypothesis_only
+allowed_future_work:
+- pre_register_next_family_archetype_review
+forbidden_future_work:
+- reopen_exact_rejected_variant
+- post_result_parameter_tuning
+- candidate_exhaustive_without_promotion_review
+- paper_demo_without_candidate_exhaustive
+- broker_or_live_path
+- real_money_recommendation
+- direct_futures
+- options
+- forex
+- leverage
+next_allowed_action: manual_review_refactored_research_os
+notes: ETF/fund-wrapper only; no direct managed-futures execution path is authorized.

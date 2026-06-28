@@ -1,0 +1,29 @@
+benchmark_control_registry_version: 1
+controls:
+  static_all_weather_benchmark_v1:
+    status: benchmark_control_accepted
+    role: same-window benchmark/control only
+    promotion_eligible: false
+    candidate_exhaustive_eligible: false
+    paper_demo_live_eligible: false
+  SPY:
+    status: market_reference
+    role: equity beta reference
+  QQQ:
+    status: market_reference
+    role: growth/tech beta reference
+  BIL:
+    status: cash_proxy_reference
+    role: defensive/cash proxy
+  SPY_200d_trend_model:
+    status: active_observation_reference
+    role: trend-model reference
+  active_combo_vm_dsr_equal_weight_v1:
+    status: benchmark_watchlist_reference
+    role: active VM/DSR combo reference only
+  paper_forward_vm_quality_lowvol_proxy_v1:
+    status: active_frozen_reference
+    role: protected active VM reference
+  paper_forward_dsr_sector_equal_weight_defensive_filter_v1:
+    status: active_frozen_reference
+    role: protected active DSR reference

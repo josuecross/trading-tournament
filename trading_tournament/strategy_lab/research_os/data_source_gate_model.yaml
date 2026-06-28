@@ -1,0 +1,15 @@
+data_source_gate_model_version: 1
+statuses:
+- sufficient
+- limited_history_same_window_required
+- missing_required_data
+- manual_terms_required
+- blocked_due_to_terms
+- blocked_due_to_intraday_source
+intraday_required_before_testing:
+- source_terms_approved
+- local_cache_exists
+- SPY_QQQ_1Min_or_5Min_history_exists
+- session_calendar_QA_passes
+intraday_current_status: blocked_due_to_intraday_source
+provider_download_requires_explicit_authorization: true

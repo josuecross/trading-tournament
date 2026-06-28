@@ -1,9 +1,0 @@
-metric,value,evidence_source,notes
-90d_worst_drawdown,-474.5046,promotion_review_diagnostic_cached_etf_data,
-180d_worst_drawdown,-488.0685,promotion_review_diagnostic_cached_etf_data,
-median_drawdown,-302.4091,promotion_review_diagnostic_cached_etf_data,180d
-stop_hit_rate,0.0,promotion_review_diagnostic_cached_etf_data,180d
-risk_buffer_vs_minus_600,111.9315,promotion_review_diagnostic_cached_etf_data,positive means above stop budget
-worst_loss_window,-439.1972,promotion_review_diagnostic_cached_etf_data,180d
-concentration_risk_notes,top2_sector_concentration,promotion_review_diagnostic_cached_etf_data,More concentrated than equal-weight DSR.
-drawdown_vs_dsr_equal_weight,10.8791,computed_proxy_from_cached_sector_etfs,positive means less severe worst drawdown than DSR equal-weight.

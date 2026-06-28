@@ -1,0 +1,15 @@
+promotion_eligibility_version: 1
+direct_candidate_exhaustive_allowed: false
+direct_paper_demo_allowed: false
+required_gates:
+- frozen_rules_exist
+- same_window_benchmarks_valid
+- risk_buffer_passes
+- drawdown_acceptable_for_lane
+- slippage_stress_passes
+- benchmark_edge_or_portfolio_contribution_meaningful
+- no_duplication_issue_dominates
+- signal_funnel_sane
+- data_status_sufficient
+- overfitting_risk_controlled
+- evidence_complete

@@ -12,6 +12,13 @@ rebalance_tolerance_notional: 1.00
 cash_buffer_pct: 0.05
 max_orders_per_loop: 10
 
+multi_strategy_allocation_policy: independent_virtual_sleeves
+shared_fallback_symbols:
+  - BIL
+shared_symbol_policy:
+  allow_shared_fallback_symbols: true
+  block_shared_risk_assets: true
+
 require_market_open: true
 allow_queued_paper_orders: false
 
@@ -27,3 +34,9 @@ broker_read_retry_max_attempts: 3
 broker_read_retry_backoff_seconds:
   - 1
   - 3
+
+weekly_runner_read_error_policy:
+  fail_on_single_read_error: false
+  max_consecutive_read_errors: 5
+  read_error_backoff_seconds: 60
+  mark_session_degraded_after_errors: 1

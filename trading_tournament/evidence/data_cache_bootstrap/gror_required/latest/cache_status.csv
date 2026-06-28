@@ -1,6 +1,0 @@
-symbol,cache_file_exists,qa_passed,status,cache_file,cache_file_hash
-SPY,True,True,ready,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\SPY.csv,ddb9651fab7bfdb17c47b77c1b6fa51a57cf45daf086bad8d4790eee8d9ae492
-QQQ,True,True,ready,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\QQQ.csv,f70039fa090873e89eeff409d817c2f1310aa23cf0ed22b5fa77e4db06b4c0ba
-GLD,True,True,ready,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\GLD.csv,8f92f9bf4ead1f94308b5fd290ded3e14a2bfe6c2cfda8ef46174ea41ea524a1
-IEF,True,True,ready,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\IEF.csv,be5efaa6331dfb7eea0b6b1bc24cbbd81a69e23eb90897ee6128038323efdeb9
-BIL,True,True,ready,C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\data\cache\BIL.csv,c88d0180a7c69d5980a59adc85f873856eefcb429d955e638ab52232546fdae2

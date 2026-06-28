@@ -1,0 +1,35 @@
+family_id: gld_duration_macro_rotation
+description: GLD/duration/risk-off macro rotation ETF wrapper family.
+lane: macro_gld_duration_risk_off_lane
+role: diversifier
+status: rejected_current_variants
+tested_variants:
+- gld_gror_balanced_momentum_clean_v1
+- gld_ief_spy_defensive_rotation_v1
+accepted_variants: []
+rejected_variants:
+- gld_gror_balanced_momentum_clean_v1
+- gld_ief_spy_defensive_rotation_v1
+benchmark_controls:
+- SPY
+- GLD
+- IEF
+- BIL
+- static_all_weather_benchmark_v1
+primary_failure_patterns:
+- too_slow_for_profit_goal
+- weaker_than_active_references
+data_status: sufficient
+family_open_status: closed_exact_variants_future_hypothesis_only
+allowed_future_work:
+- diversifier_contribution_review_only
+forbidden_future_work:
+- reopen_exact_rejected_variant
+- post_result_parameter_tuning
+- candidate_exhaustive_without_promotion_review
+- paper_demo_without_candidate_exhaustive
+- broker_or_live_path
+- real_money_recommendation
+next_allowed_action: audit_family_failures
+notes: Useful as a macro/diversifier lesson, not as a standalone profit promotion
+  path.

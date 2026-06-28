@@ -10,7 +10,6 @@ from execution_lab.alpaca_micro_live_v1.adapters.alpaca_client import AlpacaClie
 from execution_lab.alpaca_micro_live_v1.data.alpaca_runtime_cache import write_symbol_bars
 
 
-ALLOWED_SYMBOLS = {"SPLV", "USMV", "QUAL", "SPY", "BIL"}
 MIN_HISTORY_DAYS = 201
 
 
@@ -47,6 +46,7 @@ def fetch_daily_bars(
     client: AlpacaClient,
     *,
     symbols: list[str],
+    approved_symbols: set[str] | list[str] | tuple[str, ...],
     start: str,
     end: str | None = None,
     feed: str = "iex",
@@ -55,7 +55,10 @@ def fetch_daily_bars(
     cache_dir: Path | None = None,
     min_history_days: int = MIN_HISTORY_DAYS,
 ) -> dict[str, pd.DataFrame]:
-    unknown = sorted(set(symbols) - ALLOWED_SYMBOLS)
+    approved = set(approved_symbols)
+    if not approved:
+        raise ValueError("No approved symbols were provided for this runtime.")
+    unknown = sorted(set(symbols) - approved)
     if unknown:
         raise ValueError(f"Symbols are not approved for this runtime: {unknown}")
 

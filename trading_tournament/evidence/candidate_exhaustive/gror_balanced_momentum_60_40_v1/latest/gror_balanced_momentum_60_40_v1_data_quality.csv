@@ -1,6 +1,0 @@
-symbol,first_date,last_date,row_count,adjusted_close_availability,missing_values,duplicate_dates,impossible_ohlc_values,warmup_sufficiency,inclusion_decision,reason_for_exclusion
-SPY,2007-01-03,2026-06-18,4896,True,0,0,0,True,include,
-QQQ,2007-01-03,2026-06-18,4896,True,0,0,0,True,include,
-GLD,2007-01-03,2026-06-18,4896,True,0,0,0,True,include,
-IEF,2007-01-03,2026-06-18,4896,True,0,0,0,True,include,
-BIL,2007-05-30,2026-06-18,4795,True,0,0,0,True,include,

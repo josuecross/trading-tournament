@@ -1,7 +1,0 @@
-symbol,cache_path,rows_written,sha256,write_status
-MTUM,data/cache/MTUM.csv,3303,df7358b730260066721b3372150916ea0ba31ea3fe7a0c228e811a577f25f0cc,written
-VLUE,data/cache/VLUE.csv,3303,1ebb02e5dbb2729288591b4b6a88537a71c841548bf338415ebf7019929a1e74,written
-VTV,data/cache/VTV.csv,4886,ae5f187222bef25f836e257679fc9aa0092b0721a00aa7bd4bc12e50ae239d80,written
-QUAL,data/cache/QUAL.csv,3240,377e42cafc81b6a2f640ec473f816b198e9690f9b259cabfefe840a05909e763,written
-USMV,data/cache/USMV.csv,3676,4dbbb4376132dfae183dbcb98653f2ebb6376505eef9529fee29c7a54cd84f42,written
-SPLV,data/cache/SPLV.csv,3793,47bfe128e9388e5de7f718484acd88fd8cb414ff267f82ae418dd2924eeb5cf2,written

@@ -1,3 +1,0 @@
-symbol,source,first_date,last_date,row_count,missing_ohlc_count,missing_volume_count,excluded_reason
-BTC-USD,yfinance,2018-01-01,2026-05-31,3072,0,0,
-ETH-USD,yfinance,2018-01-01,2026-05-31,3072,0,0,
