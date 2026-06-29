@@ -1,10 +1,24 @@
 # Current Tournament State
 
-Created UTC: `2026-06-28T22:11:36.927021+00:00`
+Created UTC: `2026-06-29T01:22:56.014181+00:00`
 
-Current research mode: `repository_refactor_governance_only`
+Current research mode: `next_family_discovery_after_indicator_validation_completed`
 
-Current next action: `manual_review_required_after_repository_refactor`
+Current next action: `pause_expansion_and_wait_for_manual_direction`
+
+Selected family: `managed_futures_etf_wrapper`
+
+Candidate evaluated: `mfv_equal_weight_trend_filter_v1`
+
+Candidate outcome: `discovery_reject`
+
+Promotion candidates count: `0`
+
+Limited-history label: `limited_history_common_window_short`
+
+Decision label: `weaker_than_active_references`
+
+Discovery evidence: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\next_family_after_indicator_validation\latest`
 
 ## Active Accepted / Paper-Demo Observations
 
@@ -13,25 +27,26 @@ Current next action: `manual_review_required_after_repository_refactor`
 
 ## Benchmark Controls
 
-- `static_all_weather_benchmark_v1` is benchmark/control only.
-- SPY, QQQ, BIL, SPY_200d, active VM, active DSR, and active combo remain references/controls, not new promotions.
+- `static_all_weather_benchmark_v1` remains benchmark/control only.
+- Active combo, active VM, active DSR, SPY, QQQ, BIL, GLD, TLT, AGG, and static all-weather remain references/controls, not new promotions.
 
-## Paused / Closed State
+## Rejected / Paused State
 
-- Intraday research remains paused because data-source terms and local intraday cache are unresolved.
+- `mfv_equal_weight_trend_filter_v1` is a discovery reject.
+- Promotion candidates count remains `0`.
 - Exact rejected variants remain closed.
-- Risk-controlled high-return discovery produced no promotion candidates.
-- `rc_dual_momentum_paa_vol_scaled_v1` and `rc_donchian_breakout_risk_budget_v1` remain rejected after discovery.
-- Invalidated 55-day Donchian language must not be used.
-- Official Donchian child rule uses the reviewed 20-day breakout.
+- Old managed-futures top1/top2 rows remain historical context only and are not replayed.
+- Intraday research remains paused.
 
 ## Forbidden Actions
 
-- No strategy discovery.
-- No backtest or new performance metric computation.
+- No strategy discovery is authorized by this state sync.
+- No backtest or new strategy performance metric computation is authorized by this state sync.
+- No new candidates, variants, tuning, or rejected-row rescue.
 - No candidate_exhaustive.
 - No paper-forward review or activation.
 - No provider download.
 - No intraday data use.
+- No indicator library dependency.
 - No broker/live-order path activation or order action.
 - No real-money recommendation.

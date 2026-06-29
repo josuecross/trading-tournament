@@ -2,20 +2,22 @@
 
 ## Compact Current State
 
-- Updated UTC: `2026-06-28T22:31:00.959614+00:00`
-- Repository refactor manual review evidence: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\repository_refactor\manual_review_after_family_lane_os_refactor\latest`
-- Compact state: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\reports\compact_state\current_tournament_state.md`
-- Current research mode: `family_lane_research_os_governance_accepted`
-- Official current next action: `audit_risk_controlled_high_return_discovery_failures`
-- Repository refactor accepted: `true`
-- Canonical compact state accepted: `true`
-- Family status, lane policy, indicator governance, artifact policy, and cleanup policy are canonical governance layers.
-- Active accepted/paper-demo observations preserved: active VM and active DSR.
-- Benchmark/control preserved: `static_all_weather_benchmark_v1` remains benchmark/control only.
-- Intraday remains paused due to unresolved data-source terms and missing local intraday cache.
-- Exact rejected variants remain closed, including the latest risk-controlled high-return rejects.
-- Older roadmap next-action lines below are historical/context unless they match this official current next action.
-- This section does not authorize discovery, backtests, new metrics, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live order paths, or real-money recommendation.
+- Updated UTC: `2026-06-29T01:22:56.014181+00:00`
+- Current research mode: `next_family_discovery_after_indicator_validation_completed`
+- Official current next action: `pause_expansion_and_wait_for_manual_direction`
+- Post-discovery state-sync evidence: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\tournament_checkpoints\post_next_family_discovery_state_sync\latest`
+- Next-family discovery evidence: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\next_family_after_indicator_validation\latest`
+- Selected family: `managed_futures_etf_wrapper`
+- Candidate evaluated: `mfv_equal_weight_trend_filter_v1`
+- Candidate outcome: `discovery_reject`
+- Promotion candidates count: `0`
+- Limited-history label: `limited_history_common_window_short`
+- Decision label: `weaker_than_active_references`
+- Active VM and active DSR preserved.
+- `static_all_weather_benchmark_v1` remains benchmark/control only.
+- Exact rejected variants remain closed; old managed-futures top1/top2 rows remain historical context only.
+- Intraday remains paused: `true`
+- This sync did not run discovery, backtests, new metrics, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live path, or real-money recommendation.
 
 ## Priority Backlog
 
@@ -383,3 +385,146 @@
 - Bulk generated-artifact untracking is safely deferred until a human confirms historical lineage coverage.
 - Prior `manual_review_required_after_repository_refactor` and `manual_review_refactored_research_os` labels are now completed historical review labels.
 - No strategy discovery, backtest, new metric, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live path, order action, rejected-row reopening, active-state mutation, or real-money recommendation is authorized by this review.
+
+## Post Git Untrack Validation
+
+- Created UTC: `2026-06-28T22:46:23.504180+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\repository_refactor\post_git_untrack_validation\latest`
+- Validation status: `passed`
+- Canonical files present: `true`
+- Generated artifacts untracked or ignored: `true`
+- Official current next action: `audit_risk_controlled_high_return_discovery_failures`
+- No strategy discovery, backtest, new metric, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live path, order action, rejected-row reopening, active-state mutation, or real-money recommendation is authorized by this validation.
+
+## Risk-Controlled High-Return Failure Audit
+
+- Created UTC: `2026-06-28T22:51:54.236506+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\tournament_failure_synthesis\risk_controlled_high_return_failure_audit\latest`
+- Audit-only governance step: `true`
+- Candidates audited: `rc_dual_momentum_paa_vol_scaled_v1`, `rc_donchian_breakout_risk_budget_v1`
+- Promotion-review candidates: `0`
+- Clean rejects: `2`
+- Dual momentum conclusion: volatility scaling preserved some target-hit evidence but failed small-account drawdown/risk-buffer, stress, and benchmark gates.
+- Donchian conclusion: risk-budget sizing reduced drawdown but destroyed target-hit evidence and left skip/block logic plus defensive allocation dominating the result.
+- Invalidated 55-day Donchian rule used: `false`
+- Exact variants remain closed: `true`
+- Immediate risk-control rescue allowed: `false`
+- Intraday remains paused: `true`
+- Official current next action: `pause_expansion_and_summarize_tournament_state`
+- No backtest, discovery, new metric, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live path, order action, rejected-row reopening, risk-control tuning, gate relaxation, or real-money recommendation is authorized by this audit.
+
+## Pause Expansion Summary
+
+- Created UTC: `2026-06-28T23:00:16.496120+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\tournament_checkpoints\pause_expansion_summary\latest`
+- Expansion paused: `true`
+- Promotion candidates current count: `0`
+- Active/frozen observations: `2`
+- Benchmark/control references: `7`
+- Closed exact-variant groups: `7`
+- Families open only with future new hypothesis: `5`
+- Intraday remains paused: `true`
+- Official current next action: `pre_register_indicator_library_integration_audit`
+- This checkpoint does not authorize discovery, backtests, new metrics, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live order paths, exact rejected variant reopening, gate relaxation, post-result tuning, or real-money recommendation.
+
+## Indicator Library Integration Audit
+
+- Created UTC: `2026-06-28T23:09:58.909235+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\governance\indicator_library_integration_audit\latest`
+- Governance-only audit: `true`
+- Dependency decision: `no_dependency_added_policy_only`
+- Selected library: `current_custom_indicators_only`
+- Library dependency added: `false`
+- Allowed indicator entries: `17`
+- Forbidden indicator rules: `11`
+- Expansion remains paused: `true`
+- Intraday remains paused: `true`
+- Official current next action: `pre_register_indicator_validation_harness`
+- This audit does not authorize discovery, backtests, new metrics, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live order paths, exact rejected variant reopening, indicator mining, parameter grids, gate weakening, or real-money recommendation.
+
+## Indicator Validation Harness Preregistration
+
+- Created UTC: `2026-06-28T23:20:59.220756+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\governance\indicator_validation_harness_preregistration\latest`
+- Preregistration-only: `true`
+- Indicator library dependency added: `false`
+- Fixture types defined: `7`
+- Indicator categories covered: `5`
+- Lookahead checks defined: `6`
+- Parity-test policy defined: `true`
+- Expansion remains paused: `true`
+- Intraday remains paused: `true`
+- Official current next action: `implement_indicator_validation_harness`
+- This preregistration does not authorize discovery, backtests, new metrics, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live order paths, indicator-library installation, strategy rule creation, or real-money recommendation.
+
+## Indicator Validation Harness Implementation
+
+- Created UTC: `2026-06-28T23:54:27.767971+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\governance\indicator_validation_harness_implementation\latest`
+- Implementation-only: `true`
+- Indicator library dependency added: `false`
+- Fixture types implemented: `7`
+- Indicator tests added: `19`
+- Lookahead tests added: `6`
+- Indicator bugs found: `0`
+- Indicator bugs fixed: `0`
+- Material past-strategy-result risk flagged: `false`
+- Expansion remains paused: `true`
+- Intraday remains paused: `true`
+- Official current next action: `pre_register_indicator_library_dependency_review`
+- This implementation does not authorize discovery, trading backtests, new strategy metrics, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live order paths, indicator-library installation, strategy rule creation, or real-money recommendation.
+
+## Indicator Library Dependency Review
+
+- Created UTC: `2026-06-29T00:14:06.525177+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\governance\indicator_library_dependency_review\latest`
+- Dependency-review-only: `true`
+- Dependency installed: `false`
+- Dependency files changed: `false`
+- Dependency decision: `stay_custom_indicators_only`
+- Selected dependency candidate: `current_custom_indicators_only`
+- Proposed dependency patch created: `false`
+- Expansion remains paused: `true`
+- Intraday remains paused: `true`
+- Official current next action: `pre_register_next_family_after_indicator_validation`
+- This review does not authorize dependency installation, strategy discovery, trading backtests, new strategy metrics, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live order paths, indicator strategy creation, grid search, or real-money recommendation.
+
+## Next Family After Indicator Validation Preregistration
+
+- Created UTC: `2026-06-29T00:46:51.160137+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\pre_registered_lanes\next_family_after_indicator_validation\latest`
+- Family-preregistration-only: `true`
+- Selected family: `managed_futures_etf_wrapper`
+- Candidate count: `1`
+- Candidate IDs: `mfv_equal_weight_trend_filter_v1`
+- Data availability status: `sufficient_for_preregistered_discovery`
+- Indicator library dependency added: `false`
+- Expansion remains paused until discovery is separately authorized: `true`
+- Intraday remains paused: `true`
+- Official current next action: `run_next_family_discovery_after_indicator_validation`
+- This preregistration does not authorize discovery, backtests, new strategy metrics, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live order paths, exact rejected variant reopening, or real-money recommendation.
+
+## Next Family Discovery After Indicator Validation
+
+- Created UTC: `2026-06-29T01:12:49.817446+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\next_family_after_indicator_validation\latest`
+- Discovery scope: `mfv_equal_weight_trend_filter_v1` only
+- Selected family: `managed_futures_etf_wrapper`
+- Candidate outcome: `discovery_reject`
+- Decision label: `weaker_than_active_references`
+- Promotion candidates count: `0`
+- Limited-history label: `limited_history_common_window_short`
+- Next action: `pause_expansion_and_wait_for_manual_direction`
+- Forbidden paths remained closed: candidate_exhaustive, paper-forward, provider download, intraday, broker/live order, and real-money recommendation.
+
+## Post Next-Family Discovery State Sync
+
+- Created UTC: `2026-06-29T01:22:56.014181+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\tournament_checkpoints\post_next_family_discovery_state_sync\latest`
+- State-sync-only: `true`
+- Candidate: `mfv_equal_weight_trend_filter_v1`
+- Candidate outcome: `discovery_reject`
+- Promotion candidates count: `0`
+- Limited-history label: `limited_history_common_window_short`
+- Next action: `pause_expansion_and_wait_for_manual_direction`
+- No strategy discovery, backtest, new metric, provider download, intraday data, indicator dependency install, candidate_exhaustive, paper-forward, broker/live, or real-money action occurred in this sync.
