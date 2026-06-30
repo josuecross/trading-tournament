@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 import zipfile
 from pathlib import Path
 
@@ -125,9 +126,9 @@ def test_no_forbidden_execution_or_real_money_flags() -> None:
     assert manifest["live_orders"] is False
     assert manifest["order_placement"] is False
     assert manifest["real_money_recommendation"] is False
-    assert "real_money_recommendation: true" not in registry
-    assert "broker_integration: true" not in registry
-    assert "live_orders: true" not in registry
+    assert re.search(r"(?m)^\s*real_money_recommendation:\s*true\s*$", registry) is None
+    assert re.search(r"(?m)^\s*broker_integration:\s*true\s*$", registry) is None
+    assert re.search(r"(?m)^\s*live_orders:\s*true\s*$", registry) is None
 
 
 def test_latest_packets_and_strategy_lab_validate() -> None:

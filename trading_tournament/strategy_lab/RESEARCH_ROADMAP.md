@@ -2,22 +2,20 @@
 
 ## Compact Current State
 
-- Updated UTC: `2026-06-29T01:22:56.014181+00:00`
-- Current research mode: `next_family_discovery_after_indicator_validation_completed`
-- Official current next action: `pause_expansion_and_wait_for_manual_direction`
-- Post-discovery state-sync evidence: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\tournament_checkpoints\post_next_family_discovery_state_sync\latest`
-- Next-family discovery evidence: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\next_family_after_indicator_validation\latest`
-- Selected family: `managed_futures_etf_wrapper`
-- Candidate evaluated: `mfv_equal_weight_trend_filter_v1`
-- Candidate outcome: `discovery_reject`
-- Promotion candidates count: `0`
-- Limited-history label: `limited_history_common_window_short`
-- Decision label: `weaker_than_active_references`
-- Active VM and active DSR preserved.
+- Updated UTC: `2026-06-30T04:46:20.364119+00:00`
+- Current research mode: `independent_research_engine_audit_completed`
+- Official current next action: `split_operations_and_research_tracks`
+- Independent research-engine audit evidence: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\research_engine_audit\independent_research_engine_audit\latest`
+- Final recommendation: `split_operations_and_research_tracks`
+- Blocking issue found: `False`
+- Backtester trust assessment: `conditionally_trustworthy_for_research_mapping_not_direct_promotion`
+- Registry trust assessment: `conditionally_trustworthy_current_compact_state_has_stale_historical_sections`
+- GLD/macro lineage needs recovery: `True`
+- Active VM and active DSR remain protected active/frozen observations.
 - `static_all_weather_benchmark_v1` remains benchmark/control only.
-- Exact rejected variants remain closed; old managed-futures top1/top2 rows remain historical context only.
+- Exact rejected variants remain closed.
 - Intraday remains paused: `true`
-- This sync did not run discovery, backtests, new metrics, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live path, or real-money recommendation.
+- This audit did not run a new sandbox batch, strategy discovery, new strategy backtest, candidate_exhaustive, paper-forward activation, provider download, intraday test, broker/live action, strategy promotion, rejected variant reopening, or real-money recommendation.
 
 ## Priority Backlog
 
@@ -528,3 +526,248 @@
 - Limited-history label: `limited_history_common_window_short`
 - Next action: `pause_expansion_and_wait_for_manual_direction`
 - No strategy discovery, backtest, new metric, provider download, intraday data, indicator dependency install, candidate_exhaustive, paper-forward, broker/live, or real-money action occurred in this sync.
+
+## Exploratory Strategy Search Sandbox Preregistration
+
+- Created UTC: `2026-06-29T03:28:37.596074+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\governance\exploratory_strategy_search_sandbox_preregistration\latest`
+- Sandbox-preregistration-only: `true`
+- Purpose: broad opportunity-map building only.
+- All future sandbox outputs must remain `non_promotable_exploration`.
+- Max total future variants: `200`
+- Max families per future run: `7`
+- Max variants per family: `30`
+- Max parameter choices per indicator concept: `5`
+- Max universe groups per run: `8`
+- Max portfolio-combination variants: `40`
+- Next action: `implement_exploratory_strategy_search_sandbox`
+- No sandbox exploration, strategy discovery, backtest, new strategy metric, dependency install, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live path, or real-money recommendation is authorized by this preregistration.
+
+## Exploratory Strategy Search Sandbox Implementation
+
+- Created UTC: `2026-06-29T05:00:57.914444+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\governance\exploratory_strategy_search_sandbox_implementation\latest`
+- Sandbox-implementation-only: `true`
+- Dry-run/plan-only mode created: `true`
+- Variant plan generated: `True`
+- Variant plan rows: `80`
+- Max total future variants: `200`
+- Max families per future run: `7`
+- Max variants per family: `30`
+- Max parameter choices per indicator concept: `5`
+- Max universe groups per run: `8`
+- Max portfolio-combination variants: `40`
+- Forbidden statuses blocked by code: `True`
+- Next action: `run_exploratory_strategy_search_sandbox_batch`
+- Do not run the next action in this implementation task.
+- No sandbox search, strategy discovery, trading backtest, performance metric computation, dependency install, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live path, or real-money recommendation occurred.
+
+## Exploratory Sandbox Batch 001
+
+- Created UTC: `2026-06-29T15:19:28.545282+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\exploratory_sandbox\batch_001\latest`
+- Sandbox batch run: `true`
+- Variant count planned: `80`
+- Variant count evaluated: `80`
+- Families evaluated: `7`
+- Future preregistration candidate count: `0`
+- Best single variant promoted: `false`
+- Next action: `audit_exploratory_sandbox_batch_results`
+- Do not run the next action in this batch task.
+- No formal discovery, candidate_exhaustive, paper-forward action, provider download, intraday data, broker/live path, or real-money recommendation occurred.
+
+## Exploratory Sandbox Batch 001 Audit
+
+- Created UTC: `2026-06-29T16:02:34.379998+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\exploratory_sandbox\batch_001_audit\latest`
+- Audit-only: `true`
+- Consistency issue found: `True`
+- Consistency issue blocking: `True`
+- Families interesting count: `2`
+- Families actionable count: `0`
+- Next action: `fix_exploratory_sandbox_batch_evidence_packet`
+- Do not run the next action in this audit task.
+- No new sandbox batch, discovery, backtest, new metric, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live path, or real-money recommendation occurred.
+
+## Exploratory Sandbox Batch 001 Packet Fix
+
+- Created UTC: `2026-06-29T18:08:42.040923+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\exploratory_sandbox\batch_001_packet_fix\latest`
+- Repaired packet path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\exploratory_sandbox\batch_001\latest\sandbox_batch_packet.zip`
+- Original packet consistency passed: `False`
+- Repaired packet consistency passed: `True`
+- Required packet files exist after fix: `True`
+- Next action: `manual_review_after_sandbox_packet_fix`
+- Do not run the next action in this packet-fix task.
+- No new sandbox batch, discovery, backtest, new metric, provider download, intraday data, candidate_exhaustive, paper-forward action, broker/live path, or real-money recommendation occurred.
+
+## Manual Review After Sandbox Packet Fix
+
+- Created UTC: `2026-06-29T18:18:09.663684+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\exploratory_sandbox\manual_review_after_packet_fix\latest`
+- Packet fix accepted: `True`
+- Batch 001 accepted as non-promotable exploration: `True`
+- Families actionable count: `0`
+- Future preregistration candidate count: `0`
+- Decision: current blocker is objective/risk/universe mismatch rather than one actionable family.
+- Next action: `create_objective_reset_review`
+- Do not run the next action in this manual review task.
+
+## Objective Reset Review
+
+- Created UTC: `2026-06-29T18:38:58.277002+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\objective_reset\objective_reset_review\latest`
+- Current objective diagnosis: original high-dollar short-horizon target is not internally realistic under current ETF-only, daily-data, no-leverage, strict-risk constraints.
+- Recommended objective profile: `realistic_etf_wrapper_growth_objective`
+- Batch 002 directly authorized: `False`
+- Active VM/DSR observation recommended: `True`
+- Next action: `define_revised_etf_wrapper_objective`
+- Do not run the next action in this objective-reset review.
+
+## Revised ETF Wrapper Objective
+
+- Created UTC: `2026-06-29T18:50:58.755514+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\objective_reset\revised_etf_wrapper_objective\latest`
+- Revised objective profile: `realistic_etf_wrapper_growth_objective`
+- Objective statement: `Find daily ETF/fund-wrapper strategies or sleeves that improve realistic risk-adjusted growth and/or portfolio contribution for a small paper/demo account, while preserving drawdown discipline and avoiding overfit promotion.`
+- Old $300-$400 target reclassified as stretch diagnostic: `True`
+- Standard-lane leverage allowed: `False`
+- Batch 002 directly authorized: `False`
+- Next action: `pre_register_revised_objective_sandbox_batch`
+- Do not run the next action in this objective-definition task.
+
+## Revised Objective Sandbox Preregistration
+
+- Created UTC: `2026-06-29T20:22:23.528683+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\objective_reset\revised_objective_sandbox_preregistration\latest`
+- Planned batch ID: `batch_002_revised_objective`
+- Planned max variants: `100`
+- Planned family count: `5`
+- Included families: `breakout_continuation`, `portfolio_combination_sleeve_ensemble`, `volatility_regime`, `trend_momentum`, `macro_portfolio_contribution`
+- Deprioritized/not in batch 002: `mean_reversion`, `factor_style_rotation`
+- Old dollar target is hard gate: `False`
+- Sandbox results can promote: `False`
+- Batch 002 directly run: `False`
+- Next action: `implement_revised_objective_sandbox_batch`
+- Do not run the next action in this preregistration task.
+
+## Revised Objective Sandbox Implementation
+
+- Created UTC: `2026-06-29T22:16:20.075115+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\objective_reset\revised_objective_sandbox_implementation\latest`
+- Batch ID: `batch_002_revised_objective`
+- Planned variant count: `80`
+- Planned family count: `5`
+- Revised scoring schemas created: `true`
+- Target-tier mapping created: `true`
+- Portfolio-contribution schema created: `true`
+- Stretch diagnostics are promotion gates: `False`
+- Forbidden statuses blocked: `True`
+- Next action: `run_revised_objective_sandbox_batch`
+- Do not run the next action in this implementation task.
+
+## Revised Objective Sandbox Batch 002
+
+- Created UTC: `2026-06-29T22:40:54.124764+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\objective_reset\revised_objective_sandbox_batch\latest`
+- Batch ID: `batch_002_revised_objective`
+- Sandbox batch run: `true`
+- Variant count planned: `80`
+- Variant count evaluated: `80`
+- Families evaluated: `5`
+- Future preregistration candidate count: `2`
+- Families directly actionable now: `0`
+- Best single variant promoted: `false`
+- Next action: `audit_revised_objective_sandbox_batch_results`
+- Do not run the next action in this batch task.
+
+## Revised Objective Sandbox Batch Audit
+
+- Created UTC: `2026-06-30T01:41:09.298195+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\objective_reset\revised_objective_sandbox_batch_audit\latest`
+- Audited batch ID: `batch_002_revised_objective`
+- Batch consistency passed: `True`
+- Sandbox guardrails held: `True`
+- Standalone score saturation found: `True`
+- Scoring fix required: `True`
+- Families actionable after audit: `0`
+- Formal preregistration recommended now: `false`
+- Next action: `fix_revised_objective_sandbox_scoring`
+- Do not run the next action in this audit task.
+
+## Revised Objective Sandbox Scoring Fix
+
+- Created UTC: `2026-06-30T01:55:39.327282+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\objective_reset\revised_objective_sandbox_scoring_fix\latest`
+- V2 scoring fields created: `true`
+- Diagnostic rescore performed: `True`
+- Diagnostic rescore status: `performed_existing_saved_batch_002_fields_only`
+- Standalone saturation fixed in schema: `True`
+- Candidate creation allowed from rescore: `false`
+- Next action: `audit_scoring_fix_before_more_research`
+- Do not run the next action in this scoring-fix task.
+
+## Revised Objective Sandbox Scoring Fix Audit
+
+- Created UTC: `2026-06-30T02:08:53.901392+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\objective_reset\revised_objective_sandbox_scoring_fix_audit\latest`
+- Saturation fixed: `True`
+- Overcorrection found: `True`
+- V2 calibration accepted: `False`
+- Rerun with fixed scoring recommended: `False`
+- Next action: `fix_revised_objective_sandbox_scoring_again`
+- Do not run the next action in this audit task.
+
+## Revised Objective Sandbox Scoring Fix V3
+
+- Created UTC: `2026-06-30T02:45:54.515597+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\objective_reset\revised_objective_sandbox_scoring_fix_v3\latest`
+- V2 overcorrection addressed in schema: `True`
+- Diagnostic rescore performed: `True`
+- Standalone saturation failed: `False`
+- Standalone floor collapse failed: `False`
+- Next action: `audit_scoring_fix_v3_before_more_research`
+- Do not run the next action in this scoring-fix task.
+
+## Revised Objective Sandbox Scoring Fix V3 Audit
+
+- Created UTC: `2026-06-30T03:06:59.008154+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\objective_reset\revised_objective_sandbox_scoring_fix_v3_audit\latest`
+- V3 calibration accepted: `True`
+- Rerun with fixed scoring recommended: `True`
+- Next action: `rerun_revised_objective_sandbox_batch_with_fixed_scoring`
+- Do not run the next action in this audit task.
+
+## Fixed-Scoring Revised Objective Sandbox Rerun
+
+- Created UTC: `2026-06-30T03:38:49.094738+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\objective_reset\revised_objective_sandbox_batch_v3_rerun\latest`
+- Batch ID: `batch_002_revised_objective`
+- Scoring version: `v3`
+- Variant count planned: `80`
+- Variant count evaluated: `80`
+- Families evaluated: `5`
+- Future preregistration candidate count: `0`
+- Families directly actionable now: `0`
+- Best single variant promoted: `false`
+- Next action: `audit_fixed_scoring_revised_objective_sandbox_rerun`
+- Do not run the next action in this rerun task.
+
+## Fixed-Scoring Rerun Audit
+
+- Created UTC: `2026-06-30T04:00:54.132379+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\objective_reset\fixed_scoring_rerun_audit\latest`
+- Formal preregistration recommended: `False`
+- Families actionable after audit: `0`
+- Next action: `continue_paper_forward_observation_only`
+- Do not run the next action in this audit task.
+
+## Independent Research Engine Audit
+
+- Created UTC: `2026-06-30T04:46:20.364119+00:00`
+- Evidence path: `C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\research_engine_audit\independent_research_engine_audit\latest`
+- Final recommendation: `split_operations_and_research_tracks`
+- Area classifications: `{'data_pipeline': 'minor issue', 'signal_execution_timing': 'minor issue', 'backtester_calculation': 'minor issue', 'benchmark_alignment': 'minor issue', 'registry_state': 'minor issue', 'evidence_lineage': 'major issue', 'gate_and_scoring': 'minor issue', 'lost_family_lineage': 'major issue'}`
+- Blocking issue found: `False`
+- Exact next action: `split_operations_and_research_tracks`
+- Do not run the next action in this audit task.
