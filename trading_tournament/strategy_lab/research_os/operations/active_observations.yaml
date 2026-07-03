@@ -1,0 +1,64 @@
+created_utc: '2026-06-30T16:47:13.265671+00:00'
+track: operations_observation
+source_of_truth: true
+research_mutation_allowed: false
+paper_forward_activation_allowed: false
+broker_live_action_allowed: false
+real_money_recommendation_allowed: false
+active_observations:
+- strategy_id: paper_forward_vm_quality_lowvol_proxy_v1
+  state: active_accepted_frozen_observation
+  paper_forward_active: true
+  protected: true
+- strategy_id: paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+  state: active_accepted_frozen_observation
+  paper_forward_active: true
+  protected: true
+benchmark_controls:
+- strategy_id: static_all_weather_benchmark_v1
+  state: benchmark_control_only
+  paper_forward_active: false
+  protected: true
+references:
+- SPY
+- QQQ
+- BIL
+- active_vm
+- active_dsr
+- active_combo
+- static_all_weather
+forbidden:
+- new_paper_forward_candidate
+- paper_forward_activation
+- broker_live_action
+- real_money_recommendation
+- research_mutation
+latest_manual_observation_logs_review:
+  created_utc: '2026-06-30T18:22:09.631659+00:00'
+  evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\operations_observation\manual_review_required_for_observation_logs\latest
+  canonical_log_schema_created: true
+  manual_checkpoint_template_created: true
+  placeholder_snapshots_created: true
+  next_action: create_initial_manual_observation_snapshots
+latest_initial_manual_observation_snapshots:
+  created_utc: '2026-06-30T18:21:57.462577+00:00'
+  evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\operations_observation\create_initial_manual_observation_snapshots\latest
+  vm_initial_snapshot_created: true
+  dsr_initial_snapshot_created: true
+  manual_input_required: true
+  next_action: manual_input_required_for_initial_observation_snapshots
+latest_manual_input_snapshot_validation:
+  created_utc: '2026-06-30T22:47:05.241223+00:00'
+  evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\operations_observation\manual_input_required_for_initial_observation_snapshots\latest
+  manual_values_supplied: false
+  manual_input_required: true
+  vm_snapshot_status: partial_snapshot_manual_inputs_still_required
+  dsr_snapshot_status: partial_snapshot_manual_inputs_still_required
+  next_action: manual_input_required_for_initial_observation_snapshots
+observation_manual_snapshot_loop_delegated_to_alpaca_module:
+  created_utc: '2026-06-30T22:47:32.497838+00:00'
+  evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\operations_observation\observation_loop_delegated_to_alpaca_module\latest
+  manual_observation_loop_blocking_research: false
+  alpaca_execution_module_delegated: true
+  active_vm_preserved: true
+  active_dsr_preserved: true

@@ -1,0 +1,44 @@
+created_utc: '2026-06-30T16:47:13.265671+00:00'
+track: research_discovery
+current_expansion_status: paused
+sandbox_batch_authorized: false
+strategy_discovery_authorized: false
+candidate_exhaustive_authorized: false
+paper_forward_candidate_creation_authorized: false
+future_research_requirements:
+- specific_objective
+- specific_lane
+- specific_hypothesis
+- separate_preregistration_before_formal_discovery
+- sandbox_outputs_non_promotable
+active_bounded_research_task:
+  id: commodity_basket_etf_momentum_bounded_lane_v1
+  family_id: commodity_basket_etf_momentum_v1
+  selected_step: design_commodity_basket_etf_momentum_bounded_lane
+  status: completed_for_now
+  selected_from_blocker_path: evidence/research_recovery/profit_research_queue_next_task_selection/latest
+  source_evidence:
+  - evidence/commodity_exploratory/latest
+  - evidence/commodity_lab/risk_control_batch1_diagnostics_completion/latest
+  - evidence/research_recovery/commodity_basket_etf_momentum_bounded_run/latest
+  planned_row_count: 6
+  run_readiness_decision: commodity_basket_bounded_run_completed_context_only
+  blocker: bounded run completed; weak diagnostic evidence; only the control row passed; excluded from immediate continuation
+  cache_revalidation_status: completed_raw_price_history_ready
+  provider_refresh_evidence: evidence/research_recovery/commodity_basket_provider_refresh/latest
+  cache_revalidation_evidence: evidence/research_recovery/commodity_basket_local_cache_revalidation/latest
+  next_action: direction_owner_decision_required_before_new_research
+  authorizes_backtests: false
+  authorizes_discovery: false
+  authorizes_provider_download: false
+  authorizes_candidate_exhaustive: false
+  authorizes_paper_forward: false
+queued_governance_reviews:
+- id: recover_gld_macro_family_lineage
+  purpose: Recover GLD/gold/macro/risk-on-risk-off decisions into a compact ledger before any new macro/diversifier research.
+  status: queued_not_run
+  authorizes_backtests: false
+  authorizes_discovery: false
+  authorizes_rejected_row_reopening: false
+  authorizes_provider_download: false
+  authorizes_paper_forward: false

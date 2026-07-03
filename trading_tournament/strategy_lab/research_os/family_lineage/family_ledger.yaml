@@ -1,0 +1,95 @@
+created_utc: '2026-06-30T16:47:13.265671+00:00'
+track: archive_lineage
+ledger_status: scaffold_created_recovery_not_run
+full_lineage_recovery_performed: false
+entries:
+- family_id: gld_macro_risk_off
+  current_status: lineage_recovery_needed
+  latest_decision: context_only_until_recovered
+  authoritative_evidence_path: strategy_lab/RESEARCH_ROADMAP.md and historical evidence packets
+  active_rejected_context_status: context_only
+  lineage_recovery_needed: true
+  future_research_allowed: false
+  required_next_review_before_reopening: recover_gld_macro_family_lineage
+  notes: Recover GLD/gold/macro/risk-on-risk-off decisions before any new macro/diversifier research.
+- family_id: managed_futures_etf_wrapper
+  current_status: closed_under_current_mechanics
+  latest_decision: mfv_equal_weight_trend_filter_v1 rejected as weaker than active references
+  authoritative_evidence_path: evidence/parallel_research_discovery/next_family_after_indicator_validation/latest
+  active_rejected_context_status: rejected
+  lineage_recovery_needed: false
+  future_research_allowed: false
+  required_next_review_before_reopening: new_objective_or_data_class_review
+  notes: ETF-wrapper managed-futures ideas remain historical context, not direct futures trading.
+- family_id: quality_momentum_etf_proxy
+  current_status: context_watchlist
+  latest_decision: upside rows had insufficient risk buffer
+  authoritative_evidence_path: evidence/promotion_reviews/qvm_quality_value_momentum_risk_adjusted_top2_v1/latest
+  active_rejected_context_status: context_only
+  lineage_recovery_needed: false
+  future_research_allowed: false
+  required_next_review_before_reopening: separate_family_lineage_review
+  notes: Do not reopen exact variants without a new frozen thesis.
+- family_id: defensive_sector_rotation
+  current_status: active_dsr_preserved
+  latest_decision: paper_forward_dsr_sector_equal_weight_defensive_filter_v1 active/frozen
+  authoritative_evidence_path: strategy_lab/strategy_registry.yaml
+  active_rejected_context_status: active_frozen_observation
+  lineage_recovery_needed: false
+  future_research_allowed: false
+  required_next_review_before_reopening: operations_track_observation_review_only
+  notes: Active DSR remains protected and not research-mutated.
+- family_id: volatility_managed_quality_lowvol
+  current_status: active_vm_preserved
+  latest_decision: paper_forward_vm_quality_lowvol_proxy_v1 active/frozen
+  authoritative_evidence_path: strategy_lab/strategy_registry.yaml
+  active_rejected_context_status: active_frozen_observation
+  lineage_recovery_needed: false
+  future_research_allowed: false
+  required_next_review_before_reopening: operations_track_observation_review_only
+  notes: Active VM remains protected and not research-mutated.
+- family_id: breakout_continuation
+  current_status: sandbox_clue_only
+  latest_decision: interesting but not actionable after fixed-scoring rerun audit
+  authoritative_evidence_path: evidence/objective_reset/fixed_scoring_rerun_audit/latest
+  active_rejected_context_status: context_only
+  lineage_recovery_needed: false
+  future_research_allowed: false
+  required_next_review_before_reopening: manual_family_lineage_review
+  notes: Contribution score was not enough; useful contribution evidence variants remained zero.
+- family_id: macro_portfolio_contribution
+  current_status: sandbox_context_only
+  latest_decision: weak/contextual after v3 rerun audit
+  authoritative_evidence_path: evidence/objective_reset/fixed_scoring_rerun_audit/latest
+  active_rejected_context_status: context_only
+  lineage_recovery_needed: true
+  future_research_allowed: false
+  required_next_review_before_reopening: recover_gld_macro_family_lineage
+  notes: Treat as benchmark/contribution context until macro lineage is compacted.
+- family_id: trend_momentum
+  current_status: deprioritized
+  latest_decision: weak after v3 rerun audit; risk integrity blocked
+  authoritative_evidence_path: evidence/objective_reset/fixed_scoring_rerun_audit/latest
+  active_rejected_context_status: sandbox_weak
+  lineage_recovery_needed: false
+  future_research_allowed: false
+  required_next_review_before_reopening: new_risk_control_hypothesis_preregistration
+  notes: Do not rely on standalone score when risk integrity fails.
+- family_id: volatility_regime
+  current_status: deprioritized
+  latest_decision: high-upside/high-risk pattern persisted
+  authoritative_evidence_path: evidence/objective_reset/fixed_scoring_rerun_audit/latest
+  active_rejected_context_status: sandbox_weak
+  lineage_recovery_needed: false
+  future_research_allowed: false
+  required_next_review_before_reopening: new_risk_control_hypothesis_preregistration
+  notes: No new volatility-regime research without a distinct risk-control thesis.
+- family_id: portfolio_combination_sleeve_ensemble
+  current_status: deprioritized
+  latest_decision: active-combo repackaging concern remains
+  authoritative_evidence_path: evidence/objective_reset/fixed_scoring_rerun_audit/latest
+  active_rejected_context_status: sandbox_weak
+  lineage_recovery_needed: false
+  future_research_allowed: false
+  required_next_review_before_reopening: duplicate_behavior_review
+  notes: Do not reopen without a non-duplicate portfolio-contribution thesis.

@@ -10,3 +10,4 @@ trading_tournament/execution_lab/alpaca_micro_live_v1/config/*.local.yaml
 trading_tournament/execution_lab/alpaca_micro_live_v1/evidence/
 !trading_tournament/execution_lab/alpaca_micro_live_v1/evidence/.gitkeep
 
+/trading_tournament/strategy_lab/research_os/operations/observation_logs
