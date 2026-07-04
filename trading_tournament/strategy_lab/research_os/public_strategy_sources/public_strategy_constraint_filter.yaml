@@ -1,0 +1,60 @@
+schema_version: 1
+filter_id: public_strategy_constraint_filter_v1
+default_decision_for_blank_or_incomplete_intake: source_intake_incomplete
+allowed_next_action_values:
+  - source_intake_incomplete
+  - blocked_by_project_constraints
+  - duplicate_or_do_not_retest
+  - eligible_for_bounded_bt_design
+  - needs_direction_owner_review
+hard_constraint_blocks:
+  prohibited_data_or_instrument_features:
+    - intraday_data
+    - options
+    - futures
+    - direct_futures
+    - leverage
+    - shorting
+    - margin
+    - forex
+    - crypto
+    - derivatives
+    - volatility_products
+  prohibited_operational_features:
+    - provider_download_without_authorization
+    - broker_live_execution
+    - alpaca_or_broker_api_required
+    - paper_order_submission_required
+    - real_money_recommendation_required
+  data_availability_rules:
+    local_cache_required: true
+    unavailable_symbols_block: true
+    provider_download_requires_separate_authorization: true
+    summary_tables_cannot_replace_price_history: true
+  implementation_rules:
+    public_source_scraping_allowed: false
+    public_strategy_list_ingestion_allowed: false
+    strategy_backtest_allowed_during_intake: false
+    bounded_bt_design_allowed_after_intake_only: true
+required_complete_intake_fields:
+  - source.source_name
+  - source.source_url_or_citation
+  - source.source_type
+  - strategy_description.strategy_family
+  - strategy_description.claimed_hypothesis
+  - strategy_description.rule_clarity
+  - strategy_description.instruments
+  - strategy_description.timeframe
+  - rules.entry_rule
+  - rules.exit_rule
+  - rules.rebalance_frequency
+  - data_and_execution.data_requirements
+  - data_and_execution.execution_assumptions
+eligibility_requirements_for_bounded_bt_design:
+  all_required_fields_complete: true
+  no_hard_constraint_blocks: true
+  no_duplicate_or_do_not_retest_match: true
+  data_requirements_local_cache_compatible: true
+  rules_clear_enough_to_freeze: true
+  source_is_manual_user_selected: true
+  output_remains_non_promotable: true

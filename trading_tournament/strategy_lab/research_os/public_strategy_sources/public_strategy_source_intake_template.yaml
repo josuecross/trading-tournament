@@ -1,0 +1,37 @@
+schema_version: 1
+intake_status: blank_template_manual_input_required
+source:
+  source_name: manual_input_required
+  source_url_or_citation: manual_input_required
+  source_type: manual_input_required
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: manual_input_required
+  claimed_hypothesis: manual_input_required
+  rule_clarity: manual_input_required
+  instruments: []
+  timeframe: manual_input_required
+rules:
+  entry_rule: manual_input_required
+  exit_rule: manual_input_required
+  ranking_selection_rule: manual_input_required
+  rebalance_frequency: manual_input_required
+  risk_controls: manual_input_required
+data_and_execution:
+  data_requirements: []
+  execution_assumptions: manual_input_required
+project_screening:
+  project_constraint_violations: []
+  similar_already_tested_project_families: []
+  do_not_retest_match: manual_input_required
+  allowed_next_action: source_intake_incomplete
+governance:
+  public_strategy_selected_by_user: false
+  source_scraped_by_codex: false
+  strategy_implemented: false
+  backtest_run: false
+  promotion_or_paper_forward_allowed: false
+notes:
+  - Fill this file manually for exactly one public source idea before any bounded design.
+  - Public-source presence is context only and is not proof of profitability.
+  - Leave unknown fields explicit rather than inferred.
