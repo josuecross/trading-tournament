@@ -1,0 +1,48 @@
+schema_version: 1
+intake_status: manual_source_supplied_for_validation
+source:
+  source_id: cci_correction
+  source_name: CCI Correction
+  source_url_or_citation: StockCharts ChartSchool CCI Correction
+  source_type: public practitioner strategy documentation
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: oscillator_pullback_in_trend
+  claimed_hypothesis: A weekly CCI trend bias with a daily CCI pullback/reversal may identify long pullback entries in an ongoing bullish equity trend.
+  rule_clarity: needs_direction_owner_review
+  instruments:
+    - SPY
+    - BIL
+  timeframe: weekly trend bias with daily signal
+rules:
+  entry_rule: Weekly CCI defines bullish bias; daily CCI pullback and reversal triggers long SPY.
+  exit_rule: Exit to BIL/cash when daily/weekly CCI reversal or rule-defined exit occurs.
+  ranking_selection_rule: not_applicable; this is a single-instrument oscillator pullback rule.
+  rebalance_frequency: daily signal check with weekly trend-bias context.
+  risk_controls: Long-only SPY exposure; BIL/cash fallback when not in trade; no leverage; no shorting; no options/futures; no intraday execution.
+data_and_execution:
+  data_requirements: Daily adjusted close data for SPY and BIL sufficient to compute daily CCI and weekly CCI context.
+  execution_assumptions: Signals are computed from end-of-day and weekly close data; target weights would use the project's no-lookahead shifted-weight convention; BIL is the cash proxy outside active SPY positions.
+  compatible_with_bt_adapter: true
+project_screening:
+  project_constraint_violations: []
+  similar_already_tested_project_families: []
+  do_not_retest_match: none
+  allowed_next_action: validate_public_source_intake_only
+governance:
+  public_strategy_selected_by_user: true
+  source_scraped_by_codex: false
+  strategy_implemented: false
+  backtest_run: false
+  promotion_or_paper_forward_allowed: false
+project_notes:
+  source_evidence_status: public_source_context_only_not_profitability_proof
+  similarity_risk_vs_project: low_to_medium
+  similarity_notes: Different from tested momentum and calendar lanes, but exit semantics may be too broad for immediate freezing.
+  expected_bridge_decision: needs_direction_owner_review
+  allowed_next_action: validate_public_source_intake_only
+notes:
+  - Source details were manually supplied by the user/direction owner.
+  - Codex did not browse, scrape, choose, or add any public source.
+  - Long-only adaptation only.
+  - Public-source presence is context only and is not proof of profitability.

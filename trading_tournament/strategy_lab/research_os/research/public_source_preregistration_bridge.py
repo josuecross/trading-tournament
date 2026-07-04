@@ -75,6 +75,7 @@ CACHE_FIELDS = ("symbol", "path", "rows", "first_date", "last_date", "has_adj_cl
 MISSING_TEXT_MARKERS = {
     "",
     "manual_input_required",
+    "none",
     "unknown",
     "not_available",
     "unspecified",
@@ -249,12 +250,17 @@ def evaluate_intake(
     constraint_blocks = find_constraint_blocks(intake, constraint_filter, root)
     hits = family_similarity_hits(intake, family_map)
     do_not_retest = dotted_get(intake, "project_screening.do_not_retest_match")
+    review_hit = any(
+        "review" in str(hit.get("public_source_intake_action", "")).lower()
+        or "direction_owner" in str(hit.get("public_source_intake_action", "")).lower()
+        for hit in hits
+    )
     if validation["blank_required_field_count"] > 0 or not validation["public_strategy_selected_by_user"]:
         decision = DECISION_INCOMPLETE
     elif constraint_blocks:
         decision = DECISION_CONSTRAINT_BLOCKED
     elif hits or (isinstance(do_not_retest, str) and do_not_retest not in {"", "manual_input_required", "none"}):
-        decision = DECISION_DUPLICATE
+        decision = DECISION_REVIEW if review_hit and is_missing(do_not_retest) else DECISION_DUPLICATE
     else:
         decision = DECISION_ELIGIBLE
     return {

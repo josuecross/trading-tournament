@@ -1,0 +1,50 @@
+schema_version: 1
+intake_status: manual_source_supplied_for_validation
+source:
+  source_id: low_volatility_factor_proxy
+  source_name: Low-Volatility Factor Proxy
+  source_url_or_citation: Quantpedia Low Volatility Factor Effect in Stocks
+  source_type: public strategy documentation
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: low_volatility_factor_proxy
+  claimed_hypothesis: Low-volatility equity portfolios may deliver different risk/return behavior than broad market capitalization weighted equity exposure.
+  rule_clarity: manual_input_required
+  instruments:
+    - SPLV
+    - USMV
+    - SPY
+    - BIL
+  timeframe: daily or monthly wrapper comparison
+rules:
+  entry_rule: manual_input_required
+  exit_rule: manual_input_required
+  ranking_selection_rule: Wrapper proxy comparison using SPLV or USMV if later approved; exact source rule not frozen in this intake.
+  rebalance_frequency: manual_input_required
+  risk_controls: Long-only ETF wrapper only if later approved; BIL/cash comparison only; no leverage; no shorting; no options/futures; no intraday execution.
+data_and_execution:
+  data_requirements: Daily adjusted close data for SPLV, USMV, SPY, and BIL.
+  execution_assumptions: No strategy execution assumptions are frozen yet; if later designed, target weights would use the project's no-lookahead shifted-weight convention.
+  compatible_with_bt_adapter: true
+project_screening:
+  project_constraint_violations: []
+  similar_already_tested_project_families: []
+  do_not_retest_match: none
+  allowed_next_action: validate_public_source_intake_only
+governance:
+  public_strategy_selected_by_user: true
+  source_scraped_by_codex: false
+  strategy_implemented: false
+  backtest_run: false
+  promotion_or_paper_forward_allowed: false
+project_notes:
+  source_evidence_status: public_source_context_only_not_profitability_proof
+  similarity_risk_vs_project: medium_high
+  similarity_notes: Needs data/cache and rule-definition check and may overlap active VM quality/low-vol research state.
+  expected_bridge_decision: source_intake_incomplete or needs_direction_owner_review
+  allowed_next_action: validate_public_source_intake_only
+notes:
+  - Source details were manually supplied by the user/direction owner.
+  - Codex did not browse, scrape, choose, or add any public source.
+  - Missing entry/exit/rebalance fields are intentionally preserved instead of invented.
+  - Public-source presence is context only and is not proof of profitability.

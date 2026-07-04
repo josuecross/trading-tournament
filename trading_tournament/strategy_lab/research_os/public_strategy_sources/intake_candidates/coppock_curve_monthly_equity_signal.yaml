@@ -1,0 +1,47 @@
+schema_version: 1
+intake_status: manual_source_supplied_for_validation
+source:
+  source_id: coppock_curve_monthly_equity_signal
+  source_name: Coppock Curve Monthly Equity Signal
+  source_url_or_citation: StockCharts ChartSchool Coppock Curve
+  source_type: public practitioner strategy documentation
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: long_term_equity_recovery_signal
+  claimed_hypothesis: The monthly Coppock Curve may identify long-term equity recovery regimes when momentum turns up from negative territory.
+  rule_clarity: needs_direction_owner_review
+  instruments:
+    - SPY
+    - BIL
+  timeframe: monthly
+rules:
+  entry_rule: Buy/hold SPY when monthly Coppock Curve moves from negative territory to positive territory.
+  exit_rule: Exit to BIL/cash when Coppock Curve moves below zero or when project requires explicit defensive exit.
+  ranking_selection_rule: not_applicable; this is a single-instrument long-term equity recovery signal.
+  rebalance_frequency: monthly signal check using month-end data.
+  risk_controls: Long-only SPY exposure; BIL/cash fallback when not in trade; no leverage; no shorting; no options/futures; no intraday execution.
+data_and_execution:
+  data_requirements: Daily or monthly adjusted close data for SPY and BIL sufficient to compute monthly Coppock Curve.
+  execution_assumptions: Signals are computed after month-end close; target weights would use the project's no-lookahead shifted-weight convention; BIL is the cash proxy outside active SPY positions.
+  compatible_with_bt_adapter: true
+project_screening:
+  project_constraint_violations: []
+  similar_already_tested_project_families: []
+  do_not_retest_match: none
+  allowed_next_action: validate_public_source_intake_only
+governance:
+  public_strategy_selected_by_user: true
+  source_scraped_by_codex: false
+  strategy_implemented: false
+  backtest_run: false
+  promotion_or_paper_forward_allowed: false
+project_notes:
+  source_evidence_status: public_source_context_only_not_profitability_proof
+  similarity_risk_vs_project: medium
+  similarity_notes: Long-term SPY/BIL timing can resemble existing trend-control references, and the defensive exit semantics need owner review.
+  expected_bridge_decision: needs_direction_owner_review
+  allowed_next_action: validate_public_source_intake_only
+notes:
+  - Source details were manually supplied by the user/direction owner.
+  - Codex did not browse, scrape, choose, or add any public source.
+  - Public-source presence is context only and is not proof of profitability.

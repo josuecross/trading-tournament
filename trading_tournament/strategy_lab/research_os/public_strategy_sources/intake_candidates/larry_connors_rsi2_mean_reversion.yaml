@@ -1,0 +1,52 @@
+schema_version: 1
+intake_status: manual_source_supplied_for_validation
+source:
+  source_id: larry_connors_rsi2_mean_reversion
+  source_name: Larry Connors 2-Period RSI Mean Reversion
+  source_url_or_citation: "StockCharts ChartSchool: RSI(2); WH SelfInvest: The RSI 2P Strategy from Larry Connors"
+  source_type: public practitioner strategy documentation
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: short_term_equity_mean_reversion
+  claimed_hypothesis: Equity indexes in a broader uptrend may mean-revert after very short-term oversold conditions; a deeply oversold 2-period RSI can identify pullbacks within an uptrend.
+  rule_clarity: clear_and_testable
+  instruments:
+    - SPY
+    - BIL
+  timeframe: daily
+rules:
+  entry_rule: Enter long SPY when SPY is above its 200-day simple moving average and RSI(2) closes below 5.
+  exit_rule: Exit SPY and allocate to BIL/cash when SPY closes above its 5-day simple moving average.
+  ranking_selection_rule: not_applicable; this is a single-instrument short-term mean-reversion timing rule.
+  rebalance_frequency: daily signal check using end-of-day data.
+  risk_controls: Long-only SPY exposure; BIL/cash fallback when not in trade; 200-day SMA trend filter; no short side; no leverage; no options/futures; no intraday execution.
+data_and_execution:
+  data_requirements: Daily adjusted close data for SPY and BIL; enough history to compute 200-day SMA, 5-day SMA, and 2-period RSI.
+  execution_assumptions: Signals are computed after the daily close; target weights are applied using the project no-lookahead shifted-weight convention; BIL is used as the cash proxy outside active SPY positions.
+  compatible_with_bt_adapter: true
+project_screening:
+  project_constraint_violations: []
+  similar_already_tested_project_families: []
+  do_not_retest_match: none
+  direction_owner_similarity_review_completed: true
+  similarity_review_resolution: clarified_public_source_not_exact_rejected_variant
+  single_source_validation_selected: true
+  allowed_next_action: validate_public_source_intake_only
+governance:
+  public_strategy_selected_by_user: true
+  source_scraped_by_codex: false
+  strategy_implemented: false
+  backtest_run: false
+  promotion_or_paper_forward_allowed: false
+project_notes:
+  source_evidence_status: public_source_context_only_not_profitability_proof
+  similarity_risk_vs_project: low_to_medium
+  similarity_notes: This differs from the already tested allocation, momentum, macro, commodity, calendar, and volatility-control lanes because the core hypothesis is short-term mean reversion. Similarity risk is moderate only because it still uses SPY, BIL, and a 200-day trend filter.
+  source_uncertainty: StockCharts describes RSI(2) below 10 as deeply oversold; WH SelfInvest gives a stricter long-entry threshold of RSI(2) below 5 and an exit above the 5-period moving average. This intake uses the WH SelfInvest rule as the frozen implementation source.
+  expected_bridge_decision: eligible_for_bounded_bt_design
+  allowed_next_action: validate_public_source_intake_only
+notes:
+  - Source details were manually supplied by the user/direction owner.
+  - Codex did not browse, scrape, choose, or add any public source.
+  - The source includes long and short variants, but this intake uses only the long-only SPY/BIL adaptation to comply with project constraints.
+  - Public-source presence is context only and is not proof of profitability.

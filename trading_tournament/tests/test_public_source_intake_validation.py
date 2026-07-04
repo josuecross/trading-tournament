@@ -4,7 +4,6 @@ import json
 from pathlib import Path
 
 from strategy_lab.research_os.research.public_source_intake_validation import (
-    DECISION_DUPLICATE,
     DECISION_ELIGIBLE,
     DECISION_INCOMPLETE,
     DECISION_REVIEW,
@@ -77,20 +76,20 @@ def complete_synthetic_intake(rule_clarity: str = "clear") -> dict:
     }
 
 
-def test_manifest_records_asset_class_trend_following_duplicate_candidate() -> None:
+def test_manifest_records_selected_rsi2_candidate_as_eligible_intake() -> None:
     manifest = load_manifest()
     consistency = load_consistency()
 
     assert manifest["public_source_intake_validation_only"] is True
     assert manifest["candidate_file_count"] == 1
     assert manifest["manual_source_supplied"] is True
-    assert manifest["source_id"] == "asset_class_trend_following_taa"
-    assert manifest["intake_candidate_path"].endswith("asset_class_trend_following_taa.yaml")
-    assert manifest["eligibility_decision"] == DECISION_DUPLICATE
-    assert manifest["next_action"] == "public_source_duplicate_or_do_not_retest_no_design"
+    assert manifest["source_id"] == "larry_connors_rsi2_mean_reversion"
+    assert manifest["intake_candidate_path"].endswith("larry_connors_rsi2_mean_reversion.yaml")
+    assert manifest["eligibility_decision"] == DECISION_ELIGIBLE
+    assert manifest["next_action"] == "design_public_source_larry_connors_rsi2_mean_reversion_bounded_bt_lane"
     assert manifest["exact_missing_fields"] == []
     assert manifest["local_cache_checked"] is True
-    assert "global_multi_asset" in manifest["family_similarity_hits"]
+    assert "mean_reversion_rejected_or_existing_candidate" in manifest["family_similarity_hits"]
     assert consistency["consistency_passed"] is True
 
 

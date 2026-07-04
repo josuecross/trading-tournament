@@ -45,6 +45,11 @@ families:
       - tactical ETF equity index
       - equity growth momentum
       - sector growth momentum
+      - sector momentum
+      - sector ETF momentum
+      - sector_etf_momentum_rotation
+      - sector momentum rotational system
+      - sector rotation
     current_project_status: completed_diagnostic_evidence_not_promotable
     primary_evidence_paths:
       - evidence/research_recovery/high_return_tactical_etf_equity_index_bounded_run/latest
@@ -70,6 +75,75 @@ families:
       - evidence/research_recovery/bt_adapter_multasset_control_poc/latest
     public_source_intake_action: map_as_existing_current_engine_template
     do_not_retest_rule: do not rerun global multi-asset as strategy discovery; adapter reference only unless separately authorized
+  - family_key: turn_of_month_calendar_effect
+    aliases:
+      - turn of the month
+      - turn-of-the-month
+      - calendar effect
+      - calendar anomaly
+      - seasonal equity calendar
+      - seasonal_equity_calendar
+      - sell in may
+      - halloween effect
+      - calendar_effect_turn_of_month_equity_index
+    current_project_status: completed_diagnostic_evidence_cost_sensitive_and_rolling_weak
+    primary_evidence_paths:
+      - evidence/research_recovery/public_source_turn_of_month_bounded_bt_robustness/latest
+      - evidence/research_recovery/public_source_turn_of_month_bounded_bt_results_audit/latest
+      - strategy_lab/research_os/family_status/turn_of_month_calendar.yaml
+    public_source_intake_action: map_as_recently_tested_context
+    do_not_retest_rule: do not optimize or retest turn-of-month calendar windows without direction-owner approval
+  - family_key: mean_reversion_rejected_or_existing_candidate
+    aliases:
+      - mean reversion
+      - short term equity mean reversion
+      - short-term equity mean reversion
+      - daily_mean_reversion
+      - D_mean_reversion
+      - RSI(2)
+      - 2-period RSI
+      - oversold rebound
+    current_project_status: rejected_legacy_family_and_existing_unrun_expansion_candidate
+    primary_evidence_paths:
+      - strategy_lab/strategy_registry.yaml
+      - strategy_lab/strategy_expansion_candidates_v1.yaml
+    public_source_intake_action: requires_direction_owner_review_before_bounded_design
+    do_not_retest_rule: do not reopen exact rejected mean-reversion variants; RSI-style public-source intake must be reconciled with existing mean-reversion lineage first
+  - family_key: spy200d_trend_control
+    aliases:
+      - SPY 200d
+      - SPY200d
+      - 200-day SMA
+      - 200 day SMA
+      - 200-day moving average
+      - 200 day moving average
+      - 50-day moving average
+      - 50 day moving average
+      - golden cross
+      - 50/200
+      - 50 200
+      - moving_average_trend_crossover
+    current_project_status: active_benchmark_control_and_reference_mechanic
+    primary_evidence_paths:
+      - evidence/research_recovery/bt_adapter_control_poc/latest
+      - strategy_lab/strategy_registry.yaml
+    public_source_intake_action: map_as_control_duplicate_or_reference_only
+    do_not_retest_rule: do not retest SPY_200d or golden-cross-style controls as new public-source strategy candidates
+  - family_key: low_volatility_quality_proxy
+    aliases:
+      - low volatility
+      - low-volatility
+      - low_volatility_factor_proxy
+      - SPLV
+      - USMV
+      - quality lowvol
+      - quality-lowvol
+    current_project_status: active_or_contextual_quality_lowvol_overlap
+    primary_evidence_paths:
+      - strategy_lab/strategy_registry.yaml
+      - evidence/operations_observation/continue_paper_forward_observation_only/latest
+    public_source_intake_action: requires_direction_owner_review_before_bounded_design
+    do_not_retest_rule: low-volatility factor proxy must be reconciled with active VM quality/low-vol observation and local-cache/rule definition before design
   - family_key: regional_international_momentum
     aliases:
       - regional international momentum

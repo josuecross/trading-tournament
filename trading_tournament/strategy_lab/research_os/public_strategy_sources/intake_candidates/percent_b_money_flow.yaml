@@ -1,0 +1,58 @@
+schema_version: 1
+intake_status: manual_source_supplied_for_validation
+source:
+  source_id: percent_b_money_flow
+  source_name: Percent B Money Flow
+  source_url_or_citation: StockCharts ChartSchool Percent B Money Flow
+  source_type: public practitioner strategy documentation
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: price_band_money_flow_confirmation
+  claimed_hypothesis: Strong price location within Bollinger Bands confirmed by strong Money Flow Index may identify persistent bullish equity participation, while weak band and money-flow confirmation may define exit conditions.
+  rule_clarity: clear_and_testable
+  instruments:
+    - SPY
+    - BIL
+  timeframe: daily
+rules:
+  entry_rule: Buy SPY when %B moves above 0.80 and Money Flow Index moves above 80.
+  exit_rule: Exit to BIL/cash when %B moves below 0.20 and Money Flow Index moves below 20.
+  ranking_selection_rule: not_applicable; this is a single-instrument price-band and money-flow confirmation rule.
+  rebalance_frequency: daily signal check using end-of-day data.
+  risk_controls: Long-only SPY exposure; BIL/cash fallback when not in trade; no leverage; no shorting; no options/futures; no intraday execution.
+indicator_definitions:
+  parameter_status: source_backed_parameters
+  bollinger_band_period: 20
+  bollinger_band_standard_deviation: 2
+  money_flow_index_period: 10
+  percent_b_upper_threshold: 0.80
+  percent_b_lower_threshold: 0.20
+  mfi_upper_threshold: 80
+  mfi_lower_threshold: 20
+  source_basis: StockCharts documents Percent B default settings as Bollinger Bands (20,2) and the Percent B / MFI trend-identification conditions as %B > 0.80 with MFI(10) > 80, with opposite thresholds %B < 0.20 and MFI(10) < 20.
+  tuned_parameters: false
+data_and_execution:
+  data_requirements: Daily adjusted OHLCV data for SPY and daily adjusted close data for BIL; sufficient history to compute %B and Money Flow Index.
+  execution_assumptions: Signals are computed after daily close; target weights would use the project's no-lookahead shifted-weight convention; BIL is used as the cash proxy outside active SPY positions.
+  compatible_with_bt_adapter: true
+project_screening:
+  project_constraint_violations: []
+  similar_already_tested_project_families: []
+  do_not_retest_match: none
+  allowed_next_action: validate_public_source_intake_only
+governance:
+  public_strategy_selected_by_user: true
+  source_scraped_by_codex: false
+  strategy_implemented: false
+  backtest_run: false
+  promotion_or_paper_forward_allowed: false
+project_notes:
+  source_evidence_status: public_source_context_only_not_profitability_proof
+  similarity_risk_vs_project: low
+  similarity_notes: Distinct from already tested momentum, macro, calendar, volatility-throttle, and commodity lanes; remains SPY/BIL single-index timing.
+  expected_bridge_decision: eligible_for_bounded_bt_design
+  allowed_next_action: validate_public_source_intake_only
+notes:
+  - Source details were manually supplied by the user/direction owner.
+  - Codex did not browse, scrape, choose, or add any public source.
+  - Public-source presence is context only and is not proof of profitability.

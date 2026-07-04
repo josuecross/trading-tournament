@@ -1,0 +1,48 @@
+schema_version: 1
+intake_status: manual_source_supplied_for_validation
+source:
+  source_id: bollinger_band_squeeze_breakout
+  source_name: Bollinger Band Squeeze Breakout
+  source_url_or_citation: StockCharts ChartSchool Bollinger Band Squeeze
+  source_type: public practitioner strategy documentation
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: volatility_contraction_breakout
+  claimed_hypothesis: Periods of low volatility may precede larger directional moves; a squeeze followed by upside breakout confirmation may identify long equity entries.
+  rule_clarity: needs_direction_owner_review
+  instruments:
+    - SPY
+    - BIL
+  timeframe: daily
+rules:
+  entry_rule: Squeeze condition followed by upside breakout confirmation.
+  exit_rule: Exit to BIL/cash on failed breakout or unclear source exit.
+  ranking_selection_rule: not_applicable; this is a single-instrument volatility-contraction breakout rule.
+  rebalance_frequency: daily signal check using end-of-day data.
+  risk_controls: Long-only SPY exposure; BIL/cash fallback when not in trade; no leverage; no shorting; no options/futures; no intraday execution.
+data_and_execution:
+  data_requirements: Daily adjusted close data for SPY and BIL sufficient to compute Bollinger Band squeeze and breakout confirmation.
+  execution_assumptions: Signals are computed after daily close; target weights would use the project's no-lookahead shifted-weight convention; BIL is the cash proxy outside active SPY positions.
+  compatible_with_bt_adapter: true
+project_screening:
+  project_constraint_violations: []
+  similar_already_tested_project_families: []
+  do_not_retest_match: none
+  allowed_next_action: validate_public_source_intake_only
+governance:
+  public_strategy_selected_by_user: true
+  source_scraped_by_codex: false
+  strategy_implemented: false
+  backtest_run: false
+  promotion_or_paper_forward_allowed: false
+project_notes:
+  source_evidence_status: public_source_context_only_not_profitability_proof
+  similarity_risk_vs_project: low_to_medium
+  similarity_notes: Breakout concept differs from recently tested momentum/calendar lanes, but direction and failed-breakout exit semantics need review.
+  expected_bridge_decision: needs_direction_owner_review
+  allowed_next_action: validate_public_source_intake_only
+notes:
+  - Source details were manually supplied by the user/direction owner.
+  - Codex did not browse, scrape, choose, or add any public source.
+  - Source says the squeeze is neutral and needs other analysis for direction; this file preserves that uncertainty.
+  - Public-source presence is context only and is not proof of profitability.

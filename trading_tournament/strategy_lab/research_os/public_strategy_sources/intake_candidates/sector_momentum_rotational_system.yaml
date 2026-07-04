@@ -1,0 +1,57 @@
+schema_version: 1
+intake_status: manual_source_supplied_for_validation
+source:
+  source_id: sector_momentum_rotational_system
+  source_name: Sector Momentum Rotational System
+  source_url_or_citation: Quantpedia Sector Momentum Rotational System
+  source_type: public strategy documentation
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: sector_etf_momentum_rotation
+  claimed_hypothesis: Equity sectors may show relative momentum persistence, allowing rotation into stronger sector ETFs while holding BIL/cash when adapted defensively.
+  rule_clarity: clear_and_testable
+  instruments:
+    - XLK
+    - XLF
+    - XLV
+    - XLE
+    - XLI
+    - XLY
+    - XLP
+    - XLU
+    - XLB
+    - XLRE
+    - XLC
+    - BIL
+  timeframe: monthly
+rules:
+  entry_rule: Rank sector ETFs by momentum and hold the strongest sectors under a frozen bounded design if later approved.
+  exit_rule: Rotate out of sectors that leave the selected top-ranked group; unused or defensive allocation goes to BIL/cash if adapted.
+  ranking_selection_rule: Rank sector ETFs by source-defined momentum.
+  rebalance_frequency: monthly or source-defined periodic rebalance.
+  risk_controls: Long-only sector ETF exposure; optional BIL/cash adaptation; no leverage; no shorting; no options/futures; no intraday execution.
+data_and_execution:
+  data_requirements: Daily adjusted close data for sector ETFs and BIL sufficient to compute source-defined momentum at rebalance dates.
+  execution_assumptions: Signals are computed after close at rebalance dates; target weights would use the project's no-lookahead shifted-weight convention; BIL is used only as an adapted cash proxy if needed.
+  compatible_with_bt_adapter: true
+project_screening:
+  project_constraint_violations: []
+  similar_already_tested_project_families: []
+  do_not_retest_match: none
+  allowed_next_action: validate_public_source_intake_only
+governance:
+  public_strategy_selected_by_user: true
+  source_scraped_by_codex: false
+  strategy_implemented: false
+  backtest_run: false
+  promotion_or_paper_forward_allowed: false
+project_notes:
+  source_evidence_status: public_source_context_only_not_profitability_proof
+  similarity_risk_vs_project: high
+  similarity_notes: Likely duplicate-risk versus already tested sector/growth tactical and high-return tactical equity work.
+  expected_bridge_decision: duplicate_or_do_not_retest
+  allowed_next_action: validate_public_source_intake_only
+notes:
+  - Source details were manually supplied by the user/direction owner.
+  - Codex did not browse, scrape, choose, or add any public source.
+  - Public-source presence is context only and is not proof of profitability.

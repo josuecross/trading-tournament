@@ -77,6 +77,17 @@ def candidate_files(root: Path) -> list[Path]:
     return sorted([*candidate_dir.glob("*.yaml"), *candidate_dir.glob("*.yml")])
 
 
+def selected_candidate_files(files: list[Path]) -> list[Path]:
+    selected: list[Path] = []
+    for path in files:
+        intake, parse_error = safe_load_candidate(path)
+        if parse_error:
+            continue
+        if dotted_get(intake, "project_screening.single_source_validation_selected") is True:
+            selected.append(path)
+    return selected or files
+
+
 def sanitize_source_id(value: str) -> str:
     cleaned = re.sub(r"[^a-z0-9]+", "_", value.strip().lower())
     cleaned = re.sub(r"_+", "_", cleaned).strip("_")
@@ -264,6 +275,16 @@ def evaluate_candidate(
         decision = DECISION_CONSTRAINT_BLOCKED
     if decision == DECISION_ELIGIBLE and rule_status != "clear":
         decision = DECISION_REVIEW
+    if (
+        decision == DECISION_REVIEW
+        and dotted_get(intake, "project_screening.direction_owner_similarity_review_completed") is True
+        and rule_status == "clear"
+        and not evaluation.get("blank_required_fields", [])
+        and not evaluation.get("constraint_blocks", [])
+        and not governance
+        and is_missing(dotted_get(intake, "project_screening.do_not_retest_match"))
+    ):
+        decision = DECISION_ELIGIBLE
 
     return {
         **evaluation,
@@ -559,7 +580,7 @@ def run(root: Path = ROOT) -> dict[str, Any]:
 
     constraint_filter = read_yaml(root / CONSTRAINT_FILTER_PATH)
     family_map = read_yaml(root / FAMILY_MAP_PATH)
-    files = candidate_files(root)
+    files = selected_candidate_files(candidate_files(root))
     candidate_path = files[0] if len(files) == 1 else None
     intake: dict[str, Any] = {}
     parse_error: str | None = None

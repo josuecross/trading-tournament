@@ -1,0 +1,47 @@
+schema_version: 1
+intake_status: manual_source_supplied_for_validation
+source:
+  source_id: golden_cross_50_200
+  source_name: Golden Cross 50/200
+  source_url_or_citation: StockCharts Golden Cross
+  source_type: public practitioner strategy documentation
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: moving_average_trend_crossover
+  claimed_hypothesis: A 50-day moving average crossing above the 200-day moving average may identify bullish equity trend regimes.
+  rule_clarity: clear_and_testable
+  instruments:
+    - SPY
+    - BIL
+  timeframe: daily
+rules:
+  entry_rule: Buy/hold SPY when the 50-day moving average crosses above the 200-day moving average.
+  exit_rule: Exit to BIL/cash when the 50-day moving average crosses below the 200-day moving average.
+  ranking_selection_rule: not_applicable; this is a single-instrument moving-average crossover rule.
+  rebalance_frequency: daily signal check using end-of-day data.
+  risk_controls: Long-only SPY exposure; BIL/cash fallback when not in trade; no leverage; no shorting; no options/futures; no intraday execution.
+data_and_execution:
+  data_requirements: Daily adjusted close data for SPY and BIL sufficient to compute 50-day and 200-day simple moving averages.
+  execution_assumptions: Signals are computed after daily close; target weights would use the project's no-lookahead shifted-weight convention; BIL is the cash proxy outside active SPY positions.
+  compatible_with_bt_adapter: true
+project_screening:
+  project_constraint_violations: []
+  similar_already_tested_project_families: []
+  do_not_retest_match: none
+  allowed_next_action: validate_public_source_intake_only
+governance:
+  public_strategy_selected_by_user: true
+  source_scraped_by_codex: false
+  strategy_implemented: false
+  backtest_run: false
+  promotion_or_paper_forward_allowed: false
+project_notes:
+  source_evidence_status: public_source_context_only_not_profitability_proof
+  similarity_risk_vs_project: high
+  similarity_notes: Likely duplicate/control-risk due to existing SPY_200d controls and trend-filter mechanics.
+  expected_bridge_decision: duplicate_or_do_not_retest
+  allowed_next_action: validate_public_source_intake_only
+notes:
+  - Source details were manually supplied by the user/direction owner.
+  - Codex did not browse, scrape, choose, or add any public source.
+  - Public-source presence is context only and is not proof of profitability.

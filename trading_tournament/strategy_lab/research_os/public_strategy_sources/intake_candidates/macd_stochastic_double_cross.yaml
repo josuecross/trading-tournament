@@ -1,0 +1,48 @@
+schema_version: 1
+intake_status: manual_source_supplied_for_validation
+source:
+  source_id: macd_stochastic_double_cross
+  source_name: MACD + Stochastic Double-Cross
+  source_url_or_citation: Investopedia MACD and Stochastic Double-Cross Strategy
+  source_type: public practitioner strategy documentation
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: indicator_confirmation_trend_reversal
+  claimed_hypothesis: A bullish stochastic crossover confirmed by MACD may identify long equity reversal entries when both momentum tools align.
+  rule_clarity: needs_direction_owner_review
+  instruments:
+    - SPY
+    - BIL
+  timeframe: daily
+rules:
+  entry_rule: Bullish stochastic crossover and bullish MACD confirmation occur within the source-defined timing window.
+  exit_rule: Exit to BIL/cash on bearish reversal or if the source exit is unclear, mark incomplete/review.
+  ranking_selection_rule: not_applicable; this is a single-instrument indicator-confirmation rule.
+  rebalance_frequency: daily signal check using end-of-day data.
+  risk_controls: Long-only SPY exposure; BIL/cash fallback when not in trade; no leverage; no shorting; no options/futures; no intraday execution; do not tune indicator parameters.
+data_and_execution:
+  data_requirements: Daily adjusted close data for SPY and BIL sufficient to compute MACD and stochastic oscillator inputs.
+  execution_assumptions: Signals are computed after daily close; target weights would use the project's no-lookahead shifted-weight convention; BIL is the cash proxy outside active SPY positions.
+  compatible_with_bt_adapter: true
+project_screening:
+  project_constraint_violations: []
+  similar_already_tested_project_families: []
+  do_not_retest_match: none
+  allowed_next_action: validate_public_source_intake_only
+governance:
+  public_strategy_selected_by_user: true
+  source_scraped_by_codex: false
+  strategy_implemented: false
+  backtest_run: false
+  promotion_or_paper_forward_allowed: false
+project_notes:
+  source_evidence_status: public_source_context_only_not_profitability_proof
+  similarity_risk_vs_project: low_to_medium
+  similarity_notes: Distinct from tested allocation families, but source-defined timing window and exit semantics require review before freezing.
+  expected_bridge_decision: needs_direction_owner_review
+  allowed_next_action: validate_public_source_intake_only
+notes:
+  - Source details were manually supplied by the user/direction owner.
+  - Codex did not browse, scrape, choose, or add any public source.
+  - Long-only adaptation only.
+  - Public-source presence is context only and is not proof of profitability.

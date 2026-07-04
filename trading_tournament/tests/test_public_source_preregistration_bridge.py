@@ -10,6 +10,7 @@ from strategy_lab.research_os.research.public_source_preregistration_bridge impo
     DECISION_DUPLICATE,
     DECISION_ELIGIBLE,
     DECISION_INCOMPLETE,
+    DECISION_REVIEW,
     NEXT_ACTION,
     VALID_ELIGIBILITY_DECISIONS,
     evaluate_intake,
@@ -86,7 +87,7 @@ def test_bridge_manifest_guardrails_and_prerequisites() -> None:
     assert manifest["blank_example_intake_created"] is True
     assert manifest["blank_intake_eligibility_decision"] == DECISION_INCOMPLETE
     assert set(manifest["valid_eligibility_decisions"]) == VALID_ELIGIBILITY_DECISIONS
-    assert manifest["family_similarity_group_count"] == 8
+    assert manifest["family_similarity_group_count"] == 12
     assert manifest["bt_control_poc_passed"] is True
     assert manifest["bt_multasset_poc_passed"] is True
     assert manifest["bt_adapter_target_weight_contract_validated"] is True
@@ -149,6 +150,10 @@ def test_yaml_template_filter_and_family_map_exist_and_are_bounded() -> None:
         "commodity_basket_etf_momentum",
         "high_return_tactical_equity",
         "global_multi_asset",
+        "turn_of_month_calendar_effect",
+        "mean_reversion_rejected_or_existing_candidate",
+        "spy200d_trend_control",
+        "low_volatility_quality_proxy",
         "regional_international_momentum",
         "managed_futures_etf_wrapper",
         "crypto_deferred",
@@ -199,6 +204,16 @@ def test_classifier_blocks_constraints_duplicates_and_allows_clean_manual_intake
     duplicate["strategy_description"]["strategy_family"] = "global multi asset"
     duplicate["strategy_description"]["claimed_hypothesis"] = "global tactical asset allocation top N ETF momentum"
     assert evaluate_intake(duplicate, constraint_filter, family_map, ROOT)["eligibility_decision"] == DECISION_DUPLICATE
+
+    mean_reversion = complete_synthetic_intake()
+    mean_reversion["strategy_description"]["strategy_family"] = "short_term_equity_mean_reversion"
+    mean_reversion["rules"]["entry_rule"] = "Enter when RSI(2) is oversold."
+    assert evaluate_intake(mean_reversion, constraint_filter, family_map, ROOT)["eligibility_decision"] == DECISION_REVIEW
+
+    golden_cross = complete_synthetic_intake()
+    golden_cross["strategy_description"]["strategy_family"] = "moving_average_trend_crossover"
+    golden_cross["rules"]["entry_rule"] = "Enter SPY after a golden cross of the 50-day moving average above the 200-day moving average."
+    assert evaluate_intake(golden_cross, constraint_filter, family_map, ROOT)["eligibility_decision"] == DECISION_DUPLICATE
 
 
 def test_constraint_filter_does_not_block_negated_prohibited_features() -> None:

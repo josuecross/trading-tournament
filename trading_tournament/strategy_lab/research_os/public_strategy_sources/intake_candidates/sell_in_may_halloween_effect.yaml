@@ -1,0 +1,47 @@
+schema_version: 1
+intake_status: manual_source_supplied_for_validation
+source:
+  source_id: sell_in_may_halloween_effect
+  source_name: Sell in May / Halloween Effect
+  source_url_or_citation: Investopedia / Fidelity Sell in May
+  source_type: public practitioner strategy documentation
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: seasonal_equity_calendar
+  claimed_hypothesis: Equity market returns may be seasonally stronger from late fall through spring than during the May-to-October period.
+  rule_clarity: clear_and_testable
+  instruments:
+    - SPY
+    - BIL
+  timeframe: monthly or calendar-date seasonal window
+rules:
+  entry_rule: Buy/hold SPY during the Halloween/strong-season window under the source-defined calendar dates.
+  exit_rule: Exit to BIL/cash during the Sell-in-May/weak-season window under the source-defined calendar dates.
+  ranking_selection_rule: not_applicable; this is a single-instrument seasonal calendar rule.
+  rebalance_frequency: seasonal calendar rebalance.
+  risk_controls: Long-only SPY exposure during the equity season; BIL/cash outside the equity season; no leverage; no shorting; no options/futures; no intraday execution.
+data_and_execution:
+  data_requirements: Daily adjusted close data for SPY and BIL sufficient to apply calendar-date seasonal windows.
+  execution_assumptions: Signals are computed from calendar dates and end-of-day data; target weights would use the project's no-lookahead shifted-weight convention; BIL is the cash proxy outside active SPY positions.
+  compatible_with_bt_adapter: true
+project_screening:
+  project_constraint_violations: []
+  similar_already_tested_project_families: []
+  do_not_retest_match: none
+  allowed_next_action: validate_public_source_intake_only
+governance:
+  public_strategy_selected_by_user: true
+  source_scraped_by_codex: false
+  strategy_implemented: false
+  backtest_run: false
+  promotion_or_paper_forward_allowed: false
+project_notes:
+  source_evidence_status: public_source_context_only_not_profitability_proof
+  similarity_risk_vs_project: high
+  similarity_notes: Seasonal equity calendar effect is duplicate-risk after Turn-of-the-Month completed and was downgraded as cost-sensitive and rolling-weak.
+  expected_bridge_decision: duplicate_or_do_not_retest
+  allowed_next_action: validate_public_source_intake_only
+notes:
+  - Source details were manually supplied by the user/direction owner.
+  - Codex did not browse, scrape, choose, or add any public source.
+  - Public-source presence is context only and is not proof of profitability.
