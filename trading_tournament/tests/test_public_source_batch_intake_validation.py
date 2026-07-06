@@ -109,16 +109,19 @@ def test_candidate_files_and_required_evidence_exist() -> None:
 def test_batch_decision_counts_and_key_decisions() -> None:
     manifest = load_manifest()
 
-    assert manifest["eligible_candidate_count"] == 2
-    assert manifest["needs_direction_review_candidate_count"] == 4
+    assert manifest["eligible_candidate_count"] == 3
+    assert manifest["needs_direction_review_candidate_count"] == 3
     assert manifest["duplicate_or_do_not_retest_candidate_count"] == 3
     assert manifest["blocked_candidate_count"] == 0
     assert manifest["incomplete_candidate_count"] == 1
-    assert manifest["eligible_source_ids"] == ["larry_connors_rsi2_mean_reversion", "percent_b_money_flow"]
+    assert manifest["eligible_source_ids"] == [
+        "coppock_curve_monthly_equity_signal",
+        "larry_connors_rsi2_mean_reversion",
+        "percent_b_money_flow",
+    ]
     assert set(manifest["needs_direction_review_source_ids"]) == {
         "bollinger_band_squeeze_breakout",
         "cci_correction",
-        "coppock_curve_monthly_equity_signal",
         "macd_stochastic_double_cross",
     }
     assert set(manifest["duplicate_source_ids"]) == {
@@ -130,6 +133,18 @@ def test_batch_decision_counts_and_key_decisions() -> None:
 
 
 def test_eligibility_rows_preserve_expected_filter_reasons() -> None:
+    coppock = row_by_source("eligibility_decisions.csv", "coppock_curve_monthly_equity_signal")
+    assert coppock["eligibility_decision"] == DECISION_ELIGIBLE
+    assert coppock["next_action"] == "design_public_source_coppock_curve_monthly_equity_signal_bounded_bt_lane"
+    assert "spy200d_trend_control" in coppock["family_similarity_hits"]
+    assert "global_multi_asset" in coppock["family_similarity_hits"]
+    assert "macro_gld_duration_risk_off" in coppock["family_similarity_hits"]
+    assert "high_return_tactical_equity" in coppock["family_similarity_hits"]
+    assert "volatility_throttle_volatility_managed_equity" in coppock["family_similarity_hits"]
+    assert "turn_of_month_calendar_effect" in coppock["family_similarity_hits"]
+    assert "mean_reversion_rejected_or_existing_candidate" in coppock["family_similarity_hits"]
+    assert "price_band_money_flow_confirmation" in coppock["family_similarity_hits"]
+
     percent_b = row_by_source("eligibility_decisions.csv", "percent_b_money_flow")
     assert percent_b["eligibility_decision"] == DECISION_ELIGIBLE
     assert percent_b["next_action"] == "design_public_source_percent_b_money_flow_bounded_bt_lane"
@@ -162,6 +177,7 @@ def test_local_cache_availability_checked_for_explicit_instruments() -> None:
     by_source_symbol = {(row["source_id"], row["symbol"]): row for row in rows}
 
     for source_id in {
+        "coppock_curve_monthly_equity_signal",
         "percent_b_money_flow",
         "golden_cross_50_200",
         "larry_connors_rsi2_mean_reversion",

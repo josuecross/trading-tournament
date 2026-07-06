@@ -78,14 +78,20 @@ def candidate_files(root: Path) -> list[Path]:
 
 
 def selected_candidate_files(files: list[Path]) -> list[Path]:
-    selected: list[Path] = []
+    selected: list[tuple[int, str, Path]] = []
     for path in files:
         intake, parse_error = safe_load_candidate(path)
         if parse_error:
             continue
         if dotted_get(intake, "project_screening.single_source_validation_selected") is True:
-            selected.append(path)
-    return selected or files
+            try:
+                priority = int(dotted_get(intake, "project_screening.single_source_validation_priority") or 0)
+            except (TypeError, ValueError):
+                priority = 0
+            selected.append((priority, source_id_for(path, intake), path))
+    if selected:
+        return [max(selected, key=lambda item: (item[0], item[1]))[2]]
+    return files
 
 
 def sanitize_source_id(value: str) -> str:

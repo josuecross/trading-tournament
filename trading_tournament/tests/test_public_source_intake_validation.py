@@ -76,20 +76,28 @@ def complete_synthetic_intake(rule_clarity: str = "clear") -> dict:
     }
 
 
-def test_manifest_records_selected_rsi2_candidate_as_eligible_intake() -> None:
+def test_manifest_records_selected_coppock_candidate_as_eligible_intake() -> None:
     manifest = load_manifest()
     consistency = load_consistency()
 
     assert manifest["public_source_intake_validation_only"] is True
     assert manifest["candidate_file_count"] == 1
     assert manifest["manual_source_supplied"] is True
-    assert manifest["source_id"] == "larry_connors_rsi2_mean_reversion"
-    assert manifest["intake_candidate_path"].endswith("larry_connors_rsi2_mean_reversion.yaml")
+    assert manifest["source_id"] == "coppock_curve_monthly_equity_signal"
+    assert manifest["intake_candidate_path"].endswith("coppock_curve_monthly_equity_signal.yaml")
     assert manifest["eligibility_decision"] == DECISION_ELIGIBLE
-    assert manifest["next_action"] == "design_public_source_larry_connors_rsi2_mean_reversion_bounded_bt_lane"
+    assert manifest["next_action"] == "design_public_source_coppock_curve_monthly_equity_signal_bounded_bt_lane"
     assert manifest["exact_missing_fields"] == []
     assert manifest["local_cache_checked"] is True
+    assert manifest["rule_clarity_status"] == "clear"
+    assert "spy200d_trend_control" in manifest["family_similarity_hits"]
+    assert "global_multi_asset" in manifest["family_similarity_hits"]
+    assert "macro_gld_duration_risk_off" in manifest["family_similarity_hits"]
+    assert "high_return_tactical_equity" in manifest["family_similarity_hits"]
+    assert "volatility_throttle_volatility_managed_equity" in manifest["family_similarity_hits"]
+    assert "turn_of_month_calendar_effect" in manifest["family_similarity_hits"]
     assert "mean_reversion_rejected_or_existing_candidate" in manifest["family_similarity_hits"]
+    assert "price_band_money_flow_confirmation" in manifest["family_similarity_hits"]
     assert consistency["consistency_passed"] is True
 
 
