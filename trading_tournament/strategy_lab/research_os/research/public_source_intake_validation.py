@@ -54,6 +54,11 @@ REQUIRED_FILES = (
     "family_similarity_do_not_retest_report.md",
     "local_cache_availability_report.csv",
     "local_cache_availability_report.md",
+    "long_only_adaptation_caveat_report.md",
+    "setup_definition_completeness_report.md",
+    "directional_confirmation_completeness_report.md",
+    "exit_rule_completeness_report.md",
+    "indicator_defaults_completeness_report.md",
     "eligibility_decision.md",
     "guardrail_checklist.json",
     "public_source_intake_validation_next_action.md",
@@ -412,6 +417,166 @@ Missing symbols:
 """
 
 
+def exit_rule_completeness_status(intake: dict[str, Any], result: dict[str, Any]) -> str:
+    explicit = dotted_get(intake, "project_notes.exit_rule_completeness_status")
+    if explicit:
+        return str(explicit)
+    exit_rule = str(dotted_get(intake, "rules.exit_rule") or "").lower()
+    if result["eligibility_decision"] == DECISION_REVIEW and any(
+        marker in exit_rule for marker in ("unclear", "incomplete", "review", "if the source exit")
+    ):
+        return "needs_direction_owner_review_exit_rule_not_freezable"
+    if exit_rule and result["eligibility_decision"] != DECISION_INCOMPLETE:
+        return "present_not_independently_special_cased"
+    return "missing_or_incomplete"
+
+
+def indicator_defaults_status(intake: dict[str, Any], result: dict[str, Any]) -> str:
+    explicit = dotted_get(intake, "project_notes.indicator_defaults_completeness_status")
+    if explicit:
+        return str(explicit)
+    explicit = dotted_get(intake, "indicator_definitions.default_status")
+    if explicit:
+        return str(explicit)
+    indicators = dotted_get(intake, "indicator_definitions")
+    if isinstance(indicators, dict) and indicators:
+        return "indicator_definitions_present_not_independently_special_cased"
+    if result["eligibility_decision"] == DECISION_REVIEW:
+        return "needs_direction_owner_review_indicator_defaults_not_freezable"
+    return "not_applicable_or_not_supplied"
+
+
+def long_only_adaptation_status(intake: dict[str, Any]) -> str:
+    caveat = dotted_get(intake, "project_notes.long_only_adaptation_caveat")
+    risk_controls = str(dotted_get(intake, "rules.risk_controls") or "").lower()
+    if caveat:
+        return "long_only_caveat_explicit"
+    if "long-only" in risk_controls or "long only" in risk_controls:
+        return "long_only_in_risk_controls"
+    return "not_explicit"
+
+
+def setup_definition_status(intake: dict[str, Any], result: dict[str, Any]) -> str:
+    explicit = dotted_get(intake, "project_notes.setup_definition_completeness_status")
+    if explicit:
+        return str(explicit)
+    setup = str(dotted_get(intake, "indicator_definitions.squeeze_setup_definition") or "").lower()
+    if result["eligibility_decision"] == DECISION_REVIEW and any(
+        marker in setup for marker in ("near", "context", "review", "range")
+    ):
+        return "needs_direction_owner_review_setup_definition_not_freezable"
+    if setup:
+        return "setup_definition_present_not_independently_special_cased"
+    return "not_applicable_or_not_supplied"
+
+
+def directional_confirmation_status(intake: dict[str, Any], result: dict[str, Any]) -> str:
+    explicit = dotted_get(intake, "project_notes.directional_confirmation_completeness_status")
+    if explicit:
+        return str(explicit)
+    entry = str(dotted_get(intake, "rules.entry_rule") or "").lower()
+    if result["eligibility_decision"] == DECISION_REVIEW and any(
+        marker in entry for marker in ("confirmation", "breakout", "unclear", "review")
+    ):
+        return "needs_direction_owner_review_directional_confirmation_not_freezable"
+    if entry:
+        return "directional_confirmation_present_not_independently_special_cased"
+    return "missing_or_incomplete"
+
+
+def long_only_adaptation_md(intake: dict[str, Any]) -> str:
+    return f"""# Long-Only Adaptation Caveat Report
+
+Status: `{long_only_adaptation_status(intake)}`
+
+Risk controls: `{dotted_get(intake, 'rules.risk_controls') or ''}`
+
+Caveat: `{dotted_get(intake, 'project_notes.long_only_adaptation_caveat') or ''}`
+
+This intake report does not authorize shorting, inverse ETFs, leverage, options, futures, margin, intraday execution, broker/live action, or real-money use.
+"""
+
+
+def setup_definition_md(intake: dict[str, Any], result: dict[str, Any]) -> str:
+    definitions = dotted_get(intake, "indicator_definitions") or {}
+    return f"""# Setup-Definition Completeness Report
+
+Status: `{setup_definition_status(intake, result)}`
+
+Setup definition: `{dotted_get(intake, 'indicator_definitions.squeeze_setup_definition') or ''}`
+
+BandWidth definition: `{dotted_get(intake, 'indicator_definitions.bandwidth_definition') or ''}`
+
+BandWidth lookback context: `{dotted_get(intake, 'indicator_definitions.bandwidth_lookback_window') or ''}`
+
+Source uncertainty: `{dotted_get(intake, 'project_notes.setup_definition_uncertainty') or ''}`
+
+Indicator definitions:
+
+```json
+{json.dumps(definitions, indent=2, sort_keys=True)}
+```
+
+Eligibility decision: `{result['eligibility_decision']}`
+
+If the setup threshold cannot be frozen without interpretation or tuning, the candidate remains `needs_direction_owner_review` and cannot proceed to bounded design from this intake step.
+"""
+
+
+def directional_confirmation_md(intake: dict[str, Any], result: dict[str, Any]) -> str:
+    return f"""# Directional-Confirmation Completeness Report
+
+Status: `{directional_confirmation_status(intake, result)}`
+
+Entry rule: `{dotted_get(intake, 'rules.entry_rule') or ''}`
+
+Upside breakout confirmation: `{dotted_get(intake, 'indicator_definitions.upside_breakout_confirmation') or ''}`
+
+Downside breakout interpretation: `{dotted_get(intake, 'indicator_definitions.downside_breakout_interpretation') or ''}`
+
+Source uncertainty: `{dotted_get(intake, 'project_notes.directional_confirmation_uncertainty') or ''}`
+
+Eligibility decision: `{result['eligibility_decision']}`
+
+This intake step does not add RSI, MACD, MFI, OBV, Chaikin Money Flow, volume filters, support/resistance rules, stops, profit targets, alternate exits, or any other confirmation logic.
+"""
+
+
+def exit_rule_completeness_md(intake: dict[str, Any], result: dict[str, Any]) -> str:
+    return f"""# Exit-Rule Completeness Report
+
+Status: `{exit_rule_completeness_status(intake, result)}`
+
+Exit rule: `{dotted_get(intake, 'rules.exit_rule') or ''}`
+
+Source uncertainty: `{dotted_get(intake, 'project_notes.exit_rule_uncertainty') or ''}`
+
+Eligibility decision: `{result['eligibility_decision']}`
+
+If the source-backed exit/cash rule cannot be frozen without interpretation, the candidate remains `needs_direction_owner_review` and cannot proceed to bounded design from this intake step.
+"""
+
+
+def indicator_defaults_md(intake: dict[str, Any], result: dict[str, Any]) -> str:
+    definitions = dotted_get(intake, "indicator_definitions") or {}
+    return f"""# Indicator-Defaults Completeness Report
+
+Status: `{indicator_defaults_status(intake, result)}`
+
+Indicator definitions:
+
+```json
+{json.dumps(definitions, indent=2, sort_keys=True)}
+```
+
+Indicator-default uncertainty: `{dotted_get(intake, 'project_notes.indicator_defaults_uncertainty') or ''}`
+
+Eligibility decision: `{result['eligibility_decision']}`
+
+Source-backed defaults are intake context only. This step does not tune, optimize, or backtest any indicator parameter.
+"""
+
+
 def eligibility_md(result: dict[str, Any], next_action: str) -> str:
     return f"""# Eligibility Decision
 
@@ -497,6 +662,11 @@ def manifest_payload(
         "family_similarity_hit_count": result.get("family_similarity_hit_count", 0),
         "rule_clarity_status": result.get("rule_clarity_status", "not_evaluated"),
         "local_cache_checked": local_cache_checked,
+        "long_only_adaptation_status": long_only_adaptation_status(read_yaml(Path(result["intake_candidate_path"])) if result.get("intake_candidate_path") not in {"not_supplied", "multiple"} else {}),
+        "setup_definition_completeness_status": result.get("setup_definition_completeness_status", "see_report"),
+        "directional_confirmation_completeness_status": result.get("directional_confirmation_completeness_status", "see_report"),
+        "exit_rule_completeness_status": result.get("exit_rule_completeness_status", "see_report"),
+        "indicator_defaults_completeness_status": result.get("indicator_defaults_completeness_status", "see_report"),
         "bounded_bt_design_created": False,
         "public_strategy_selected_by_codex": False,
         "public_source_scraped": False,
@@ -620,6 +790,17 @@ def run(root: Path = ROOT) -> dict[str, Any]:
     write_text(output / "family_similarity_do_not_retest_report.md", similarity_md(result))
     write_csv(output / "local_cache_availability_report.csv", cache_rows, list(CACHE_AVAILABILITY_FIELDS))
     write_text(output / "local_cache_availability_report.md", local_cache_md(cache_rows, local_cache_checked))
+    manifest["long_only_adaptation_status"] = long_only_adaptation_status(intake)
+    manifest["setup_definition_completeness_status"] = setup_definition_status(intake, result)
+    manifest["directional_confirmation_completeness_status"] = directional_confirmation_status(intake, result)
+    manifest["exit_rule_completeness_status"] = exit_rule_completeness_status(intake, result)
+    manifest["indicator_defaults_completeness_status"] = indicator_defaults_status(intake, result)
+    write_json(output / "public_source_intake_validation_manifest.json", manifest)
+    write_text(output / "long_only_adaptation_caveat_report.md", long_only_adaptation_md(intake))
+    write_text(output / "setup_definition_completeness_report.md", setup_definition_md(intake, result))
+    write_text(output / "directional_confirmation_completeness_report.md", directional_confirmation_md(intake, result))
+    write_text(output / "exit_rule_completeness_report.md", exit_rule_completeness_md(intake, result))
+    write_text(output / "indicator_defaults_completeness_report.md", indicator_defaults_md(intake, result))
     write_text(output / "eligibility_decision.md", eligibility_md(result, next_action))
     write_json(output / "guardrail_checklist.json", guardrail_payload(manifest))
     write_text(output / "public_source_intake_validation_next_action.md", next_action_md(next_action))

@@ -4,30 +4,52 @@ source:
   source_id: cci_correction
   source_name: CCI Correction
   source_url_or_citation: StockCharts ChartSchool CCI Correction
-  source_type: public practitioner strategy documentation
+  source_type: public practitioner technical strategy documentation
   source_evidence_public_context_only: true
 strategy_description:
-  strategy_family: oscillator_pullback_in_trend
-  claimed_hypothesis: A weekly CCI trend bias with a daily CCI pullback/reversal may identify long pullback entries in an ongoing bullish equity trend.
-  rule_clarity: needs_direction_owner_review
+  strategy_family: equity_index_cci_pullback_trend_bias
+  claimed_hypothesis: A larger bullish trend/bias identified by weekly CCI may allow long entries after daily CCI pullbacks reverse upward.
+  rule_clarity: clear_and_testable
   instruments:
     - SPY
     - BIL
-  timeframe: weekly trend bias with daily signal
+  timeframe: weekly CCI trend/bias with daily CCI pullback/reversal signal
 rules:
-  entry_rule: Weekly CCI defines bullish bias; daily CCI pullback and reversal triggers long SPY.
-  exit_rule: Exit to BIL/cash when daily/weekly CCI reversal or rule-defined exit occurs.
-  ranking_selection_rule: not_applicable; this is a single-instrument oscillator pullback rule.
-  rebalance_frequency: daily signal check with weekly trend-bias context.
-  risk_controls: Long-only SPY exposure; BIL/cash fallback when not in trade; no leverage; no shorting; no options/futures; no intraday execution.
+  entry_rule: During a bullish weekly CCI bias, enter or resume long SPY after daily CCI has plunged below -100 and then surges back above 0.
+  exit_rule: Exit SPY to BIL/cash when weekly CCI enters bearish mode by plunging below -100.
+  ranking_selection_rule: not_applicable; this is a single-instrument SPY/BIL timing rule.
+  rebalance_frequency: daily signal check using completed daily close data with completed weekly CCI bias context.
+  risk_controls: Long-only SPY exposure; BIL/cash fallback outside active long exposure; no shorting; no inverse ETFs; no leverage; no options/futures; no intraday execution.
+indicator_definitions:
+  weekly_cci_period: 26
+  daily_cci_period: 26
+  weekly_bullish_bias_threshold: 100
+  weekly_bearish_bias_threshold: -100
+  daily_pullback_threshold: -100
+  daily_reversal_threshold: 0
+  parameter_status: source_backed_parameters_not_tuned
+  alternate_parameters_added: false
 data_and_execution:
-  data_requirements: Daily adjusted close data for SPY and BIL sufficient to compute daily CCI and weekly CCI context.
-  execution_assumptions: Signals are computed from end-of-day and weekly close data; target weights would use the project's no-lookahead shifted-weight convention; BIL is the cash proxy outside active SPY positions.
+  data_requirements: Daily adjusted close data for SPY and BIL sufficient to compute 26-day CCI and completed 26-week CCI context.
+  execution_assumptions: Weekly bias uses completed weekly data only; daily signals use completed daily close data only; target weights use the project no-lookahead shifted-weight convention; BIL is the cash proxy outside active SPY exposure.
   compatible_with_bt_adapter: true
 project_screening:
   project_constraint_violations: []
-  similar_already_tested_project_families: []
+  similar_already_tested_project_families:
+    - spy200d_trend_control
+    - global_multi_asset
+    - macro_gld_duration_risk_off
+    - high_return_tactical_equity
+    - volatility_throttle_volatility_managed_equity
+    - turn_of_month_calendar_effect
+    - mean_reversion_rejected_or_existing_candidate
+    - larry_connors_rsi2_mean_reversion
+    - price_band_money_flow_confirmation
+    - coppock_curve_monthly_equity_signal
+  direction_owner_similarity_review_completed: true
   do_not_retest_match: none
+  single_source_validation_selected: true
+  single_source_validation_priority: 300
   allowed_next_action: validate_public_source_intake_only
 governance:
   public_strategy_selected_by_user: true
@@ -38,11 +60,12 @@ governance:
 project_notes:
   source_evidence_status: public_source_context_only_not_profitability_proof
   similarity_risk_vs_project: low_to_medium
-  similarity_notes: Different from tested momentum and calendar lanes, but exit semantics may be too broad for immediate freezing.
-  expected_bridge_decision: needs_direction_owner_review
+  similarity_notes: CCI Correction is distinct from completed momentum, macro/risk-off, commodity, calendar-effect, volatility-managed equity, Percent B Money Flow, Coppock, and RSI(2) lanes because it uses a weekly CCI trend-bias plus daily CCI pullback/reversal structure. Similarity remains nonzero because it is still a SPY/BIL long-only timing rule and should be routed only to a future bounded bt design if eligible.
+  long_only_adaptation_caveat: The original CCI Correction documentation includes bearish-side logic. This project intake freezes only the long-only SPY/BIL adaptation; bearish mode means BIL/cash, not a short, inverse, leveraged, options, futures, or intraday trade.
+  expected_bridge_decision: eligible_for_bounded_bt_design
   allowed_next_action: validate_public_source_intake_only
 notes:
   - Source details were manually supplied by the user/direction owner.
   - Codex did not browse, scrape, choose, or add any public source.
-  - Long-only adaptation only.
+  - Parameters are source-backed and are not tuning or optimization.
   - Public-source presence is context only and is not proof of profitability.

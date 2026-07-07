@@ -1,0 +1,33 @@
+from __future__ import annotations
+
+import json
+
+from strategy_lab.research_os.research.public_source_cci_correction_bounded_bt_design import run
+
+
+if __name__ == "__main__":
+    result = run()
+    print(
+        json.dumps(
+            {
+                "output_dir": result["output_dir"],
+                "source_id": result["source_id"],
+                "lane_id": result["lane_id"],
+                "family_id": result["family_id"],
+                "planned_row_count": result["planned_row_count"],
+                "source_backed_parameters": result["source_backed_parameters"],
+                "parameters_tuned": result["parameters_tuned"],
+                "similarity_hit_count": result["similarity_hit_count"],
+                "duplicate_or_do_not_retest_blocker": result["duplicate_or_do_not_retest_blocker"],
+                "long_only_adaptation_caveat_documented": result["long_only_adaptation_caveat_documented"],
+                "local_cache_complete": result["local_cache_complete"],
+                "run_readiness_decision": result["run_readiness_decision"],
+                "run_readiness_blocker": result["run_readiness_blocker"],
+                "bounded_bt_lane_run": result["bounded_bt_lane_run"],
+                "strategy_backtest_run": result["strategy_backtest_run"],
+                "next_action": result["next_action"],
+                "consistency_passed": result["consistency_passed"],
+            },
+            indent=2,
+        )
+    )

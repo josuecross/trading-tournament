@@ -2,32 +2,59 @@ schema_version: 1
 intake_status: manual_source_supplied_for_validation
 source:
   source_id: macd_stochastic_double_cross
-  source_name: MACD + Stochastic Double-Cross
-  source_url_or_citation: Investopedia MACD and Stochastic Double-Cross Strategy
-  source_type: public practitioner strategy documentation
+  source_name: MACD and Stochastic Double-Cross
+  source_url_or_citation: 'Investopedia, "MACD and Stochastic: A Double-Cross Strategy"; Investopedia MACD calculation article; Investopedia stochastic oscillator article'
+  source_type: public practitioner / technical strategy documentation
   source_evidence_public_context_only: true
 strategy_description:
-  strategy_family: indicator_confirmation_trend_reversal
-  claimed_hypothesis: A bullish stochastic crossover confirmed by MACD may identify long equity reversal entries when both momentum tools align.
+  strategy_family: equity_index_momentum_confirmation_double_cross
+  claimed_hypothesis: A bullish stochastic crossover confirmed by a bullish MACD crossover may identify improving momentum in SPY; BIL/cash is used outside confirmed bullish states.
   rule_clarity: needs_direction_owner_review
   instruments:
     - SPY
     - BIL
   timeframe: daily
 rules:
-  entry_rule: Bullish stochastic crossover and bullish MACD confirmation occur within the source-defined timing window.
-  exit_rule: Exit to BIL/cash on bearish reversal or if the source exit is unclear, mark incomplete/review.
-  ranking_selection_rule: not_applicable; this is a single-instrument indicator-confirmation rule.
-  rebalance_frequency: daily signal check using end-of-day data.
-  risk_controls: Long-only SPY exposure; BIL/cash fallback when not in trade; no leverage; no shorting; no options/futures; no intraday execution; do not tune indicator parameters.
+  entry_rule: Look for bullish stochastic and MACD crossovers occurring within a close timing window; the source says bullish crossovers should occur within two days of each other, ideally with stochastic below the 50 line, preferably with the MACD histogram already above zero or moving above zero within two days of the trade, and with the MACD crossover slightly after the stochastic crossover.
+  exit_rule: Tentative long-only adaptation exits SPY to BIL/cash when the bullish confirmation state is no longer valid because MACD crosses below its signal line, or when a bearish double-cross is detected; this exit rule is explicitly flagged as potentially incomplete or insufficiently source-backed.
+  ranking_selection_rule: not_applicable; this is a single-instrument SPY/BIL momentum-confirmation timing rule.
+  rebalance_frequency: daily signal check using completed daily close data.
+  risk_controls: Long-only SPY exposure during confirmed bullish states; BIL/cash fallback outside confirmed bullish states; optional 200-day moving average safety context is noted by the source but not frozen as an absolute project rule; no shorting; no inverse ETFs; no leverage; no options/futures; no margin; no intraday execution.
+indicator_definitions:
+  macd_fast_ema_period: 12
+  macd_slow_ema_period: 26
+  macd_signal_ema_period: 9
+  stochastic_period: 14
+  stochastic_signal_rule: percent_k_crosses_above_percent_d
+  crossover_window_days: 2
+  stochastic_preferred_below_line: 50
+  macd_histogram_preferred_state: above_zero_or_moves_above_zero_within_two_days
+  source_backed_parameters: true
+  tuned_parameters: false
+  alternate_parameters_added: false
+  default_status: source_supported_but_article_interval_flexibility_requires_direction_owner_review_before_design
 data_and_execution:
-  data_requirements: Daily adjusted close data for SPY and BIL sufficient to compute MACD and stochastic oscillator inputs.
-  execution_assumptions: Signals are computed after daily close; target weights would use the project's no-lookahead shifted-weight convention; BIL is the cash proxy outside active SPY positions.
+  data_requirements: Daily adjusted close data for SPY and BIL sufficient to compute standard MACD 12/26/9, stochastic oscillator 14-period inputs, and optional 200-day moving-average context if direction owner later freezes it.
+  execution_assumptions: Signals would be computed after daily close; target weights would use the project no-lookahead shifted-weight convention; BIL is the cash proxy outside active SPY positions; no intraday data, provider download, broker API, paper order, live order, or real-money path is required.
   compatible_with_bt_adapter: true
 project_screening:
   project_constraint_violations: []
-  similar_already_tested_project_families: []
+  similar_already_tested_project_families:
+    - spy200d_trend_control
+    - global_multi_asset
+    - macro_gld_duration_risk_off
+    - high_return_tactical_equity
+    - volatility_throttle_volatility_managed_equity
+    - turn_of_month_calendar_effect
+    - mean_reversion_rejected_or_existing_candidate
+    - larry_connors_rsi2_mean_reversion
+    - price_band_money_flow_confirmation
+    - coppock_curve_monthly_equity_signal
+    - cci_correction
+  direction_owner_similarity_review_completed: false
   do_not_retest_match: none
+  single_source_validation_selected: true
+  single_source_validation_priority: 450
   allowed_next_action: validate_public_source_intake_only
 governance:
   public_strategy_selected_by_user: true
@@ -37,12 +64,18 @@ governance:
   promotion_or_paper_forward_allowed: false
 project_notes:
   source_evidence_status: public_source_context_only_not_profitability_proof
-  similarity_risk_vs_project: low_to_medium
-  similarity_notes: Distinct from tested allocation families, but source-defined timing window and exit semantics require review before freezing.
+  similarity_risk_vs_project: medium
+  similarity_notes: This differs from completed calendar, CCI, Coppock, RSI(2), Percent B/MFI, global allocation, macro/risk-off, and volatility-managed lanes because it requires dual momentum-confirmation crossovers. Similarity remains meaningful because it is still a SPY/BIL long-only equity timing rule and references optional 200-day moving-average safety context.
+  long_only_adaptation_caveat: The public article includes broader trading discussion. This intake freezes only a possible long-only SPY/BIL adaptation; bearish or failed confirmation maps to BIL/cash, never short, inverse, leveraged, options, futures, margin, intraday, paper-order, live-order, or real-money logic.
+  exit_rule_completeness_status: needs_direction_owner_review_exit_rule_not_source_backed_enough_to_freeze
+  exit_rule_uncertainty: The source is clearer on bullish entry confirmation than on a complete standalone exit/cash system; the tentative MACD-below-signal or bearish-double-cross exit must be reviewed before any bounded design.
+  indicator_defaults_completeness_status: needs_direction_owner_review_article_allows_interval_setting_flexibility
+  indicator_defaults_uncertainty: Standard MACD 12/26/9 and stochastic 14-period settings are documented as source-supported context, but the source discusses changing intervals/settings; these must not be optimized or treated as design-ready without direction-owner review.
   expected_bridge_decision: needs_direction_owner_review
   allowed_next_action: validate_public_source_intake_only
 notes:
-  - Source details were manually supplied by the user/direction owner.
+  - Source details were manually supplied by the direction owner.
   - Codex did not browse, scrape, choose, or add any public source.
-  - Long-only adaptation only.
+  - Indicator defaults are source-backed intake context, not tuned parameters.
+  - Exit semantics remain the main blocker for bounded design.
   - Public-source presence is context only and is not proof of profitability.
