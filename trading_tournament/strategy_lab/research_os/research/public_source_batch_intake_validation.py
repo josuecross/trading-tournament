@@ -36,6 +36,7 @@ from strategy_lab.research_os.research.public_source_preregistration_bridge impo
 OUTPUT_DIR = Path("evidence") / "research_recovery" / "public_source_batch_intake_validation" / "latest"
 NEXT_ACTION = "direction_owner_review_required_for_public_source_batch_intake"
 VALID_NEXT_ACTIONS = {NEXT_ACTION}
+EXPECTED_CANDIDATE_COUNT = 12
 
 REQUIRED_FILES = (
     "public_source_batch_intake_validation_manifest.json",
@@ -304,8 +305,8 @@ def manifest_payload(created: str, output: Path, batch: dict[str, Any]) -> dict[
         "evidence_path": str(output.resolve()),
         "public_source_batch_intake_validation_only": True,
         "candidate_count": len(results),
-        "expected_candidate_count": 10,
-        "candidate_count_matches_manual_batch": len(results) == 10,
+        "expected_candidate_count": EXPECTED_CANDIDATE_COUNT,
+        "candidate_count_matches_manual_batch": len(results) == EXPECTED_CANDIDATE_COUNT,
         "eligibility_counts": counts,
         "eligible_candidate_count": counts.get(DECISION_ELIGIBLE, 0),
         "needs_direction_review_candidate_count": counts.get(DECISION_REVIEW, 0),
@@ -355,7 +356,7 @@ def consistency_check(manifest: dict[str, Any], output: Path) -> dict[str, Any]:
     required["public_source_batch_intake_validation_consistency_check.json"] = True
     checks = {
         "batch_validation_only": manifest["public_source_batch_intake_validation_only"] is True,
-        "candidate_count_10": manifest["candidate_count_matches_manual_batch"] is True,
+        "candidate_count_expected": manifest["candidate_count_matches_manual_batch"] is True,
         "decisions_sum_to_candidate_count": sum(manifest["eligibility_counts"].values()) == manifest["candidate_count"],
         "no_design_or_backtest": manifest["bounded_bt_design_created"] is False
         and manifest["strategy_backtest_run"] is False

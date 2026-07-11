@@ -3,31 +3,58 @@ intake_status: manual_source_supplied_for_validation
 source:
   source_id: bollinger_band_squeeze_breakout
   source_name: Bollinger Band Squeeze Breakout
-  source_url_or_citation: StockCharts ChartSchool Bollinger Band Squeeze
-  source_type: public practitioner strategy documentation
+  source_url_or_citation: "StockCharts ChartSchool Bollinger Band Squeeze; StockCharts ChartSchool Bollinger BandWidth; Investopedia, \"How To Profit From the Bollinger Squeeze\""
+  source_type: public practitioner / technical strategy documentation
   source_evidence_public_context_only: true
 strategy_description:
-  strategy_family: volatility_contraction_breakout
-  claimed_hypothesis: Periods of low volatility may precede larger directional moves; a squeeze followed by upside breakout confirmation may identify long equity entries.
+  strategy_family: equity_index_volatility_contraction_breakout
+  claimed_hypothesis: Periods of low volatility may precede larger directional moves; a squeeze followed by upside Bollinger Band breakout confirmation may identify long SPY entries.
   rule_clarity: needs_direction_owner_review
   instruments:
     - SPY
     - BIL
   timeframe: daily
 rules:
-  entry_rule: Squeeze condition followed by upside breakout confirmation.
-  exit_rule: Exit to BIL/cash on failed breakout or unclear source exit.
+  entry_rule: After a completed squeeze setup, enter or hold SPY only on a completed daily close above the upper Bollinger Band.
+  exit_rule: Remain in or allocate to BIL/cash if no upside breakout occurs, if a downside breakout occurs, or when the bullish setup fails; the source-backed standalone exit/cash rule is explicitly incomplete and review-required before bounded design.
   ranking_selection_rule: not_applicable; this is a single-instrument volatility-contraction breakout rule.
   rebalance_frequency: daily signal check using end-of-day data.
-  risk_controls: Long-only SPY exposure; BIL/cash fallback when not in trade; no leverage; no shorting; no options/futures; no intraday execution.
+  risk_controls: Long-only SPY exposure only after confirmed bullish upside breakout; BIL/cash fallback outside confirmed bullish states; no shorting; no inverse ETFs; no leverage; no options/futures; no margin; no intraday execution.
+indicator_definitions:
+  bollinger_band_period: 20
+  bollinger_band_standard_deviation: 2
+  bandwidth_definition: distance_between_upper_and_lower_bollinger_bands
+  bandwidth_lookback_window: six_month_range_context
+  squeeze_setup_definition: bandwidth_at_or_near_low_end_of_six_month_range
+  upside_breakout_confirmation: completed_daily_close_above_upper_bollinger_band
+  downside_breakout_interpretation: bearish_or_no_long_trade_maps_to_bil_cash
+  source_backed_parameters: true
+  tuned_parameters: false
+  alternate_parameters_added: false
+  default_status: bollinger_defaults_source_backed_but_setup_threshold_and_exit_need_direction_owner_review
 data_and_execution:
-  data_requirements: Daily adjusted close data for SPY and BIL sufficient to compute Bollinger Band squeeze and breakout confirmation.
-  execution_assumptions: Signals are computed after daily close; target weights would use the project's no-lookahead shifted-weight convention; BIL is the cash proxy outside active SPY positions.
+  data_requirements: Daily adjusted close data for SPY and BIL sufficient to compute 20-period 2-standard-deviation Bollinger Bands, BandWidth, six-month low BandWidth context, and completed-close upper-band breakout confirmation.
+  execution_assumptions: Signals are computed after daily close; target weights would use the project's no-lookahead shifted-weight convention; BIL is the cash proxy outside active SPY positions; no intraday data, provider download, broker API, paper order, live order, or real-money path is required.
   compatible_with_bt_adapter: true
 project_screening:
   project_constraint_violations: []
-  similar_already_tested_project_families: []
+  similar_already_tested_project_families:
+    - spy200d_trend_control
+    - global_multi_asset
+    - macro_gld_duration_risk_off
+    - high_return_tactical_equity
+    - volatility_throttle_volatility_managed_equity
+    - turn_of_month_calendar_effect
+    - mean_reversion_rejected_or_existing_candidate
+    - larry_connors_rsi2_mean_reversion
+    - price_band_money_flow_confirmation
+    - coppock_curve_monthly_equity_signal
+    - cci_correction
+    - macd_stochastic_double_cross
+  direction_owner_similarity_review_completed: false
   do_not_retest_match: none
+  single_source_validation_selected: true
+  single_source_validation_priority: 500
   allowed_next_action: validate_public_source_intake_only
 governance:
   public_strategy_selected_by_user: true
@@ -37,12 +64,23 @@ governance:
   promotion_or_paper_forward_allowed: false
 project_notes:
   source_evidence_status: public_source_context_only_not_profitability_proof
-  similarity_risk_vs_project: low_to_medium
-  similarity_notes: Breakout concept differs from recently tested momentum/calendar lanes, but direction and failed-breakout exit semantics need review.
+  similarity_risk_vs_project: medium
+  similarity_notes: This differs from completed calendar, CCI, Coppock, RSI(2), Percent B/MFI, MACD/Stochastic, global allocation, macro/risk-off, and volatility-managed lanes because it is a volatility-contraction breakout setup. Similarity remains meaningful because it is still a SPY/BIL long-only equity timing rule with volatility and breakout concepts adjacent to existing project diagnostics.
+  long_only_adaptation_caveat: The public sources discuss the Squeeze as a neutral volatility-contraction setup. This intake freezes only a possible long-only SPY/BIL adaptation; bearish/downside breaks, no breakout, or unconfirmed direction map to BIL/cash, never short, inverse, leveraged, options, futures, margin, intraday, paper-order, live-order, or real-money logic.
+  setup_definition_completeness_status: needs_direction_owner_review_six_month_low_threshold_not_freezable
+  setup_definition_uncertainty: Sources describe BandWidth near the low end of its six-month range or six-month low volatility, but the exact threshold for "near" the low is not source-frozen enough for bounded design without direction-owner review.
+  directional_confirmation_completeness_status: needs_direction_owner_review_extra_confirmation_not_source_backed_enough_to_freeze
+  directional_confirmation_uncertainty: Sources state the Squeeze itself has no directional clue and often requires band break confirmation and/or other technical analysis; this intake records upper-band close as bullish context but does not invent extra confirmation indicators.
+  exit_rule_completeness_status: needs_direction_owner_review_exit_rule_not_source_backed_enough_to_freeze
+  exit_rule_uncertainty: The sources are clearer on squeeze setup and breakout direction than on a complete standalone long-only exit/cash system; failed-breakout, downside-breakout, and cash-state semantics require direction-owner review before any bounded design.
+  indicator_defaults_completeness_status: bollinger_defaults_source_backed_setup_exit_review_required
+  indicator_defaults_uncertainty: Bollinger Band 20-period and 2-standard-deviation defaults are source-backed intake context, but BandWidth six-month-low threshold, directional confirmation beyond band break, and exit/cash semantics remain review-required.
   expected_bridge_decision: needs_direction_owner_review
   allowed_next_action: validate_public_source_intake_only
 notes:
   - Source details were manually supplied by the user/direction owner.
   - Codex did not browse, scrape, choose, or add any public source.
-  - Source says the squeeze is neutral and needs other analysis for direction; this file preserves that uncertainty.
+  - Source says the squeeze is neutral and needs band break confirmation and/or other analysis for direction; this file preserves that uncertainty.
+  - Indicator defaults are source-backed intake context, not tuned parameters.
+  - Setup threshold and exit/cash semantics remain blockers for bounded design.
   - Public-source presence is context only and is not proof of profitability.

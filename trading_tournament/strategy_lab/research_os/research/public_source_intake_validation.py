@@ -37,6 +37,7 @@ NEXT_ACTION_MANUAL_SOURCE_REQUIRED = "manual_public_source_intake_required"
 NEXT_ACTION_BLOCKED_BY_CONSTRAINTS = "source_intake_blocked_by_project_constraints"
 NEXT_ACTION_DUPLICATE_NO_DESIGN = "public_source_duplicate_or_do_not_retest_no_design"
 NEXT_ACTION_REVIEW_REQUIRED = "direction_owner_review_required_for_public_source_intake"
+NEXT_ACTION_PARABOLIC_SAR_DESIGN = "design_public_source_parabolic_sar_spy_bil_bounded_bt_lane"
 
 VALID_NEXT_ACTIONS = {
     NEXT_ACTION_MANUAL_SOURCE_REQUIRED,
@@ -55,10 +56,18 @@ REQUIRED_FILES = (
     "local_cache_availability_report.csv",
     "local_cache_availability_report.md",
     "long_only_adaptation_caveat_report.md",
+    "indicator_formula_parameter_completeness_report.md",
+    "entry_rule_completeness_report.md",
     "setup_definition_completeness_report.md",
     "directional_confirmation_completeness_report.md",
     "exit_rule_completeness_report.md",
     "indicator_defaults_completeness_report.md",
+    "parabolic_sar_formula_contract_completeness_report.md",
+    "parabolic_sar_parameter_completeness_report.md",
+    "parabolic_sar_initialization_reversal_completeness_report.md",
+    "parabolic_sar_initialization_convention_report.md",
+    "parabolic_sar_reversal_state_transition_report.md",
+    "parabolic_sar_warmup_tradability_report.md",
     "eligibility_decision.md",
     "guardrail_checklist.json",
     "public_source_intake_validation_next_action.md",
@@ -124,6 +133,8 @@ def source_id_for(candidate_path: Path | None, intake: dict[str, Any]) -> str:
 
 def next_action_for(decision: str, source_id: str) -> str:
     if decision == DECISION_ELIGIBLE:
+        if source_id == "parabolic_sar_spy_bil_long_only_reversal":
+            return NEXT_ACTION_PARABOLIC_SAR_DESIGN
         return f"design_public_source_{source_id}_bounded_bt_lane"
     if decision == DECISION_CONSTRAINT_BLOCKED:
         return NEXT_ACTION_BLOCKED_BY_CONSTRAINTS
@@ -446,6 +457,121 @@ def indicator_defaults_status(intake: dict[str, Any], result: dict[str, Any]) ->
     return "not_applicable_or_not_supplied"
 
 
+def parabolic_sar_parameter_status(intake: dict[str, Any]) -> str:
+    explicit = dotted_get(intake, "project_notes.parabolic_sar_parameter_completeness_status")
+    if explicit:
+        return str(explicit)
+    if source_id_for(None, intake) != "parabolic_sar_spy_bil_long_only_reversal":
+        return "not_applicable"
+    definitions = dotted_get(intake, "indicator_definitions") or {}
+    required = (
+        "parabolic_sar_acceleration_factor_start",
+        "parabolic_sar_acceleration_factor_increment",
+        "parabolic_sar_acceleration_factor_maximum",
+    )
+    if isinstance(definitions, dict) and all(not is_missing(definitions.get(key)) for key in required):
+        return "parabolic_sar_af_parameters_present_not_independently_freeze_complete"
+    return "missing_parabolic_sar_af_parameters"
+
+
+def parabolic_sar_formula_contract_status(intake: dict[str, Any]) -> str:
+    explicit = dotted_get(intake, "project_notes.parabolic_sar_formula_contract_completeness_status")
+    if explicit:
+        return str(explicit)
+    if source_id_for(None, intake) != "parabolic_sar_spy_bil_long_only_reversal":
+        return "not_applicable"
+    definitions = dotted_get(intake, "indicator_definitions") or {}
+    required = (
+        "formula_contract_id",
+        "rising_sar_formula",
+        "rising_extreme_point_definition",
+        "rising_af_update_rule",
+        "falling_sar_formula",
+        "falling_extreme_point_definition",
+        "falling_af_update_rule",
+        "rising_to_falling_reversal_rule",
+        "falling_to_rising_reversal_rule",
+        "reversal_af_reset_rule",
+        "reversal_sar_initialization_rule",
+        "reversal_ep_initialization_rule",
+        "initial_trend_rule",
+        "initial_rising_sar_rule",
+        "initial_rising_ep_rule",
+        "initial_falling_sar_rule",
+        "initial_falling_ep_rule",
+        "warmup_rule",
+        "no_lookahead_contract",
+    )
+    if isinstance(definitions, dict) and all(not is_missing(definitions.get(key)) for key in required):
+        return "parabolic_sar_formula_contract_present_not_independently_special_cased"
+    return "missing_parabolic_sar_formula_contract_fields"
+
+
+def parabolic_sar_initialization_reversal_status(intake: dict[str, Any]) -> str:
+    explicit = dotted_get(intake, "project_notes.parabolic_sar_initialization_reversal_completeness_status")
+    if explicit:
+        return str(explicit)
+    if source_id_for(None, intake) != "parabolic_sar_spy_bil_long_only_reversal":
+        return "not_applicable"
+    definitions = dotted_get(intake, "indicator_definitions") or {}
+    has_flip_rules = isinstance(definitions, dict) and all(
+        not is_missing(definitions.get(key)) for key in ("buy_signal", "sell_exit_signal")
+    )
+    if has_flip_rules:
+        return "needs_direction_owner_review_initial_sar_ep_af_update_and_reversal_contract_not_fully_freezable"
+    return "missing_parabolic_sar_flip_rules"
+
+
+def parabolic_sar_initialization_convention_status(intake: dict[str, Any]) -> str:
+    explicit = dotted_get(intake, "project_notes.parabolic_sar_initialization_convention_status")
+    if explicit:
+        return str(explicit)
+    if source_id_for(None, intake) != "parabolic_sar_spy_bil_long_only_reversal":
+        return "not_applicable"
+    definitions = dotted_get(intake, "indicator_definitions") or {}
+    required = (
+        "initial_trend_rule",
+        "initial_rising_sar_rule",
+        "initial_rising_ep_rule",
+        "initial_falling_sar_rule",
+        "initial_falling_ep_rule",
+    )
+    if isinstance(definitions, dict) and all(not is_missing(definitions.get(key)) for key in required):
+        return "parabolic_sar_initialization_convention_present_not_independently_special_cased"
+    return "missing_parabolic_sar_initialization_convention_fields"
+
+
+def parabolic_sar_reversal_state_transition_status(intake: dict[str, Any]) -> str:
+    explicit = dotted_get(intake, "project_notes.parabolic_sar_reversal_state_transition_status")
+    if explicit:
+        return str(explicit)
+    if source_id_for(None, intake) != "parabolic_sar_spy_bil_long_only_reversal":
+        return "not_applicable"
+    definitions = dotted_get(intake, "indicator_definitions") or {}
+    required = (
+        "rising_to_falling_reversal_rule",
+        "falling_to_rising_reversal_rule",
+        "reversal_af_reset_rule",
+        "reversal_sar_initialization_rule",
+        "reversal_ep_initialization_rule",
+    )
+    if isinstance(definitions, dict) and all(not is_missing(definitions.get(key)) for key in required):
+        return "parabolic_sar_reversal_state_transition_present_not_independently_special_cased"
+    return "missing_parabolic_sar_reversal_state_transition_fields"
+
+
+def parabolic_sar_warmup_tradability_status(intake: dict[str, Any]) -> str:
+    explicit = dotted_get(intake, "project_notes.parabolic_sar_warmup_tradability_status")
+    if explicit:
+        return str(explicit)
+    if source_id_for(None, intake) != "parabolic_sar_spy_bil_long_only_reversal":
+        return "not_applicable"
+    definitions = dotted_get(intake, "indicator_definitions") or {}
+    if isinstance(definitions, dict) and not is_missing(definitions.get("warmup_rule")):
+        return "parabolic_sar_warmup_rule_present_not_independently_special_cased"
+    return "missing_parabolic_sar_warmup_rule"
+
+
 def long_only_adaptation_status(intake: dict[str, Any]) -> str:
     caveat = dotted_get(intake, "project_notes.long_only_adaptation_caveat")
     risk_controls = str(dotted_get(intake, "rules.risk_controls") or "").lower()
@@ -468,6 +594,32 @@ def setup_definition_status(intake: dict[str, Any], result: dict[str, Any]) -> s
     if setup:
         return "setup_definition_present_not_independently_special_cased"
     return "not_applicable_or_not_supplied"
+
+
+def formula_parameter_status(intake: dict[str, Any], result: dict[str, Any]) -> str:
+    explicit = dotted_get(intake, "project_notes.formula_parameter_completeness_status")
+    if explicit:
+        return str(explicit)
+    definitions = dotted_get(intake, "indicator_definitions")
+    if isinstance(definitions, dict) and definitions:
+        if result["eligibility_decision"] == DECISION_INCOMPLETE:
+            return "indicator_formula_parameters_present_but_intake_incomplete"
+        return "indicator_formula_parameters_present_not_independently_special_cased"
+    return "not_applicable_or_not_supplied"
+
+
+def entry_rule_completeness_status(intake: dict[str, Any], result: dict[str, Any]) -> str:
+    explicit = dotted_get(intake, "project_notes.entry_rule_completeness_status")
+    if explicit:
+        return str(explicit)
+    entry = str(dotted_get(intake, "rules.entry_rule") or "").strip()
+    if not entry:
+        return "missing_or_incomplete"
+    if result["eligibility_decision"] == DECISION_REVIEW and any(
+        marker in entry.lower() for marker in ("unclear", "review", "tentative", "incomplete")
+    ):
+        return "needs_direction_owner_review_entry_rule_not_freezable"
+    return "entry_rule_present_not_independently_special_cased"
 
 
 def directional_confirmation_status(intake: dict[str, Any], result: dict[str, Any]) -> str:
@@ -523,6 +675,41 @@ If the setup threshold cannot be frozen without interpretation or tuning, the ca
 """
 
 
+def formula_parameter_md(intake: dict[str, Any], result: dict[str, Any]) -> str:
+    definitions = dotted_get(intake, "indicator_definitions") or {}
+    return f"""# Indicator Formula / Parameter Completeness Report
+
+Status: `{formula_parameter_status(intake, result)}`
+
+Indicator definitions:
+
+```json
+{json.dumps(definitions, indent=2, sort_keys=True)}
+```
+
+Source uncertainty: `{dotted_get(intake, 'project_notes.formula_parameter_uncertainty') or ''}`
+
+Eligibility decision: `{result['eligibility_decision']}`
+
+This intake step does not tune, optimize, sweep, backtest, or promote any formula or parameter.
+"""
+
+
+def entry_rule_completeness_md(intake: dict[str, Any], result: dict[str, Any]) -> str:
+    return f"""# Entry-Rule Completeness Report
+
+Status: `{entry_rule_completeness_status(intake, result)}`
+
+Entry rule: `{dotted_get(intake, 'rules.entry_rule') or ''}`
+
+Source uncertainty: `{dotted_get(intake, 'project_notes.entry_rule_uncertainty') or ''}`
+
+Eligibility decision: `{result['eligibility_decision']}`
+
+This intake step does not add SPY_200d, RSI, MACD, Bollinger, CCI, volume filters, stops, profit targets, alternate exits, volatility filters, or any other non-source rule.
+"""
+
+
 def directional_confirmation_md(intake: dict[str, Any], result: dict[str, Any]) -> str:
     return f"""# Directional-Confirmation Completeness Report
 
@@ -574,6 +761,136 @@ Indicator-default uncertainty: `{dotted_get(intake, 'project_notes.indicator_def
 Eligibility decision: `{result['eligibility_decision']}`
 
 Source-backed defaults are intake context only. This step does not tune, optimize, or backtest any indicator parameter.
+"""
+
+
+def parabolic_sar_parameter_md(intake: dict[str, Any]) -> str:
+    definitions = dotted_get(intake, "indicator_definitions") or {}
+    return f"""# Parabolic SAR Parameter Completeness Report
+
+Status: `{parabolic_sar_parameter_status(intake)}`
+
+Acceleration factor start: `{dotted_get(intake, 'indicator_definitions.parabolic_sar_acceleration_factor_start') or ''}`
+
+Acceleration factor increment: `{dotted_get(intake, 'indicator_definitions.parabolic_sar_acceleration_factor_increment') or ''}`
+
+Acceleration factor maximum: `{dotted_get(intake, 'indicator_definitions.parabolic_sar_acceleration_factor_maximum') or ''}`
+
+Source-backed parameters: `{dotted_get(intake, 'indicator_definitions.source_backed_parameters') or ''}`
+
+Tuned parameters: `{dotted_get(intake, 'indicator_definitions.tuned_parameters') or ''}`
+
+Indicator definitions:
+
+```json
+{json.dumps(definitions, indent=2, sort_keys=True)}
+```
+
+This intake step does not tune, sweep, optimize, backtest, or promote Parabolic SAR parameters.
+"""
+
+
+def parabolic_sar_formula_contract_md(intake: dict[str, Any]) -> str:
+    definitions = dotted_get(intake, "indicator_definitions") or {}
+    return f"""# Parabolic SAR Formula Contract Completeness Report
+
+Status: `{parabolic_sar_formula_contract_status(intake)}`
+
+Formula contract ID: `{dotted_get(intake, 'indicator_definitions.formula_contract_id') or ''}`
+
+Repository-standard PSAR utility found: `{dotted_get(intake, 'indicator_definitions.repository_standard_psar_utility_found')}`
+
+Rising SAR formula: `{dotted_get(intake, 'indicator_definitions.rising_sar_formula') or ''}`
+
+Falling SAR formula: `{dotted_get(intake, 'indicator_definitions.falling_sar_formula') or ''}`
+
+No-lookahead contract: `{dotted_get(intake, 'indicator_definitions.no_lookahead_contract') or ''}`
+
+Indicator definitions:
+
+```json
+{json.dumps(definitions, indent=2, sort_keys=True)}
+```
+
+The formula contract is intake evidence only. This step does not implement the strategy, create a bounded design, run a backtest, tune parameters, or treat public-source context as profitability proof.
+"""
+
+
+def parabolic_sar_initialization_reversal_md(intake: dict[str, Any]) -> str:
+    return f"""# Parabolic SAR Initialization / Reversal Completeness Report
+
+Status: `{parabolic_sar_initialization_reversal_status(intake)}`
+
+Bullish state: `{dotted_get(intake, 'indicator_definitions.bullish_state') or ''}`
+
+Bearish state: `{dotted_get(intake, 'indicator_definitions.bearish_state') or ''}`
+
+Buy signal: `{dotted_get(intake, 'indicator_definitions.buy_signal') or ''}`
+
+Sell / exit signal: `{dotted_get(intake, 'indicator_definitions.sell_exit_signal') or ''}`
+
+Formula uncertainty: `{dotted_get(intake, 'project_notes.formula_parameter_uncertainty') or ''}`
+
+Eligibility implication: SAR initialization, EP/AF update, and reversal-state transition details are frozen as an intake formula contract if the status is complete. Codex did not implement the strategy or run a backtest in this intake step.
+"""
+
+
+def parabolic_sar_initialization_convention_md(intake: dict[str, Any]) -> str:
+    return f"""# Parabolic SAR Initialization Convention Report
+
+Status: `{parabolic_sar_initialization_convention_status(intake)}`
+
+Initialization convention source: `{dotted_get(intake, 'indicator_definitions.initialization_convention_source') or ''}`
+
+Initial trend rule: `{dotted_get(intake, 'indicator_definitions.initial_trend_rule') or ''}`
+
+Initial rising SAR rule: `{dotted_get(intake, 'indicator_definitions.initial_rising_sar_rule') or ''}`
+
+Initial rising EP rule: `{dotted_get(intake, 'indicator_definitions.initial_rising_ep_rule') or ''}`
+
+Initial falling SAR rule: `{dotted_get(intake, 'indicator_definitions.initial_falling_sar_rule') or ''}`
+
+Initial falling EP rule: `{dotted_get(intake, 'indicator_definitions.initial_falling_ep_rule') or ''}`
+
+This initialization convention is recorded as deterministic implementation convention, not trading optimization or parameter tuning.
+"""
+
+
+def parabolic_sar_reversal_state_transition_md(intake: dict[str, Any]) -> str:
+    return f"""# Parabolic SAR Reversal-State Transition Report
+
+Status: `{parabolic_sar_reversal_state_transition_status(intake)}`
+
+Rising-to-falling reversal rule: `{dotted_get(intake, 'indicator_definitions.rising_to_falling_reversal_rule') or ''}`
+
+Falling-to-rising reversal rule: `{dotted_get(intake, 'indicator_definitions.falling_to_rising_reversal_rule') or ''}`
+
+AF reset rule: `{dotted_get(intake, 'indicator_definitions.reversal_af_reset_rule') or ''}`
+
+Reversal SAR initialization rule: `{dotted_get(intake, 'indicator_definitions.reversal_sar_initialization_rule') or ''}`
+
+Reversal EP initialization rule: `{dotted_get(intake, 'indicator_definitions.reversal_ep_initialization_rule') or ''}`
+
+This report records formula determinism only. It does not add filters, stops, profit targets, shorting, inverse exposure, or strategy execution.
+"""
+
+
+def parabolic_sar_warmup_tradability_md(intake: dict[str, Any]) -> str:
+    return f"""# Parabolic SAR Warmup / Tradability Report
+
+Status: `{parabolic_sar_warmup_tradability_status(intake)}`
+
+Warmup rule: `{dotted_get(intake, 'indicator_definitions.warmup_rule') or ''}`
+
+First valid SAR date reporting required: `{dotted_get(intake, 'indicator_definitions.first_valid_sar_date_reporting_required')}`
+
+First reversal date reporting required: `{dotted_get(intake, 'indicator_definitions.first_reversal_date_reporting_required')}`
+
+First tradable signal date reporting required: `{dotted_get(intake, 'indicator_definitions.first_tradable_signal_date_reporting_required')}`
+
+Initialization sensitivity policy: `{dotted_get(intake, 'indicator_definitions.initialization_sensitivity_policy') or ''}`
+
+No dates are computed in this intake-only step because no Parabolic SAR strategy implementation, bounded design, or backtest is authorized. Future bounded design/run evidence must report these dates before interpreting results.
 """
 
 
@@ -663,10 +980,32 @@ def manifest_payload(
         "rule_clarity_status": result.get("rule_clarity_status", "not_evaluated"),
         "local_cache_checked": local_cache_checked,
         "long_only_adaptation_status": long_only_adaptation_status(read_yaml(Path(result["intake_candidate_path"])) if result.get("intake_candidate_path") not in {"not_supplied", "multiple"} else {}),
+        "indicator_formula_parameter_completeness_status": result.get(
+            "indicator_formula_parameter_completeness_status", "see_report"
+        ),
+        "entry_rule_completeness_status": result.get("entry_rule_completeness_status", "see_report"),
         "setup_definition_completeness_status": result.get("setup_definition_completeness_status", "see_report"),
         "directional_confirmation_completeness_status": result.get("directional_confirmation_completeness_status", "see_report"),
         "exit_rule_completeness_status": result.get("exit_rule_completeness_status", "see_report"),
         "indicator_defaults_completeness_status": result.get("indicator_defaults_completeness_status", "see_report"),
+        "parabolic_sar_formula_contract_completeness_status": result.get(
+            "parabolic_sar_formula_contract_completeness_status", "see_report"
+        ),
+        "parabolic_sar_parameter_completeness_status": result.get(
+            "parabolic_sar_parameter_completeness_status", "see_report"
+        ),
+        "parabolic_sar_initialization_reversal_completeness_status": result.get(
+            "parabolic_sar_initialization_reversal_completeness_status", "see_report"
+        ),
+        "parabolic_sar_initialization_convention_status": result.get(
+            "parabolic_sar_initialization_convention_status", "see_report"
+        ),
+        "parabolic_sar_reversal_state_transition_status": result.get(
+            "parabolic_sar_reversal_state_transition_status", "see_report"
+        ),
+        "parabolic_sar_warmup_tradability_status": result.get(
+            "parabolic_sar_warmup_tradability_status", "see_report"
+        ),
         "bounded_bt_design_created": False,
         "public_strategy_selected_by_codex": False,
         "public_source_scraped": False,
@@ -706,10 +1045,17 @@ def consistency_check(manifest: dict[str, Any], output: Path) -> dict[str, Any]:
         manifest["next_action"].startswith(f"design_public_source_{manifest['source_id']}_bounded_bt_lane")
         and manifest["eligibility_decision"] == DECISION_ELIGIBLE
     )
+    parabolic_sar_design_action_valid = (
+        manifest["source_id"] == "parabolic_sar_spy_bil_long_only_reversal"
+        and manifest["next_action"] == NEXT_ACTION_PARABOLIC_SAR_DESIGN
+        and manifest["eligibility_decision"] == DECISION_ELIGIBLE
+    )
     checks = {
         "validation_only": manifest["public_source_intake_validation_only"] is True,
         "decision_valid": manifest["eligibility_decision"] in VALID_ELIGIBILITY_DECISIONS,
-        "next_action_valid": manifest["next_action"] in VALID_NEXT_ACTIONS or design_action_valid,
+        "next_action_valid": manifest["next_action"] in VALID_NEXT_ACTIONS
+        or design_action_valid
+        or parabolic_sar_design_action_valid,
         "incomplete_when_no_candidate": (
             manifest["candidate_file_count"] != 0 or manifest["eligibility_decision"] == DECISION_INCOMPLETE
         ),
@@ -791,16 +1137,43 @@ def run(root: Path = ROOT) -> dict[str, Any]:
     write_csv(output / "local_cache_availability_report.csv", cache_rows, list(CACHE_AVAILABILITY_FIELDS))
     write_text(output / "local_cache_availability_report.md", local_cache_md(cache_rows, local_cache_checked))
     manifest["long_only_adaptation_status"] = long_only_adaptation_status(intake)
+    manifest["indicator_formula_parameter_completeness_status"] = formula_parameter_status(intake, result)
+    manifest["entry_rule_completeness_status"] = entry_rule_completeness_status(intake, result)
     manifest["setup_definition_completeness_status"] = setup_definition_status(intake, result)
     manifest["directional_confirmation_completeness_status"] = directional_confirmation_status(intake, result)
     manifest["exit_rule_completeness_status"] = exit_rule_completeness_status(intake, result)
     manifest["indicator_defaults_completeness_status"] = indicator_defaults_status(intake, result)
+    manifest["parabolic_sar_formula_contract_completeness_status"] = parabolic_sar_formula_contract_status(intake)
+    manifest["parabolic_sar_parameter_completeness_status"] = parabolic_sar_parameter_status(intake)
+    manifest["parabolic_sar_initialization_reversal_completeness_status"] = (
+        parabolic_sar_initialization_reversal_status(intake)
+    )
+    manifest["parabolic_sar_initialization_convention_status"] = parabolic_sar_initialization_convention_status(intake)
+    manifest["parabolic_sar_reversal_state_transition_status"] = parabolic_sar_reversal_state_transition_status(intake)
+    manifest["parabolic_sar_warmup_tradability_status"] = parabolic_sar_warmup_tradability_status(intake)
     write_json(output / "public_source_intake_validation_manifest.json", manifest)
     write_text(output / "long_only_adaptation_caveat_report.md", long_only_adaptation_md(intake))
+    write_text(output / "indicator_formula_parameter_completeness_report.md", formula_parameter_md(intake, result))
+    write_text(output / "entry_rule_completeness_report.md", entry_rule_completeness_md(intake, result))
     write_text(output / "setup_definition_completeness_report.md", setup_definition_md(intake, result))
     write_text(output / "directional_confirmation_completeness_report.md", directional_confirmation_md(intake, result))
     write_text(output / "exit_rule_completeness_report.md", exit_rule_completeness_md(intake, result))
     write_text(output / "indicator_defaults_completeness_report.md", indicator_defaults_md(intake, result))
+    write_text(output / "parabolic_sar_formula_contract_completeness_report.md", parabolic_sar_formula_contract_md(intake))
+    write_text(output / "parabolic_sar_parameter_completeness_report.md", parabolic_sar_parameter_md(intake))
+    write_text(
+        output / "parabolic_sar_initialization_reversal_completeness_report.md",
+        parabolic_sar_initialization_reversal_md(intake),
+    )
+    write_text(
+        output / "parabolic_sar_initialization_convention_report.md",
+        parabolic_sar_initialization_convention_md(intake),
+    )
+    write_text(
+        output / "parabolic_sar_reversal_state_transition_report.md",
+        parabolic_sar_reversal_state_transition_md(intake),
+    )
+    write_text(output / "parabolic_sar_warmup_tradability_report.md", parabolic_sar_warmup_tradability_md(intake))
     write_text(output / "eligibility_decision.md", eligibility_md(result, next_action))
     write_json(output / "guardrail_checklist.json", guardrail_payload(manifest))
     write_text(output / "public_source_intake_validation_next_action.md", next_action_md(next_action))

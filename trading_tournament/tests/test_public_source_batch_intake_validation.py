@@ -44,8 +44,8 @@ def test_manifest_records_batch_intake_only_guardrails() -> None:
     consistency = load_consistency()
 
     assert manifest["public_source_batch_intake_validation_only"] is True
-    assert manifest["candidate_count"] == 10
-    assert manifest["expected_candidate_count"] == 10
+    assert manifest["candidate_count"] == 12
+    assert manifest["expected_candidate_count"] == 12
     assert manifest["candidate_count_matches_manual_batch"] is True
     assert manifest["bounded_bt_design_created"] is False
     assert manifest["public_strategy_selected_by_codex"] is False
@@ -76,6 +76,7 @@ def test_manifest_records_batch_intake_only_guardrails() -> None:
 def test_candidate_files_and_required_evidence_exist() -> None:
     candidates = sorted(path.name for path in CANDIDATE_DIR.glob("*.yaml"))
     assert candidates == [
+        "adx_dmi_trend_strength_crossover.yaml",
         "bollinger_band_squeeze_breakout.yaml",
         "cci_correction.yaml",
         "coppock_curve_monthly_equity_signal.yaml",
@@ -83,6 +84,7 @@ def test_candidate_files_and_required_evidence_exist() -> None:
         "larry_connors_rsi2_mean_reversion.yaml",
         "low_volatility_factor_proxy.yaml",
         "macd_stochastic_double_cross.yaml",
+        "parabolic_sar_spy_bil_long_only_reversal.yaml",
         "percent_b_money_flow.yaml",
         "sector_momentum_rotational_system.yaml",
         "sell_in_may_halloween_effect.yaml",
@@ -109,15 +111,17 @@ def test_candidate_files_and_required_evidence_exist() -> None:
 def test_batch_decision_counts_and_key_decisions() -> None:
     manifest = load_manifest()
 
-    assert manifest["eligible_candidate_count"] == 4
+    assert manifest["eligible_candidate_count"] == 6
     assert manifest["needs_direction_review_candidate_count"] == 2
     assert manifest["duplicate_or_do_not_retest_candidate_count"] == 3
     assert manifest["blocked_candidate_count"] == 0
     assert manifest["incomplete_candidate_count"] == 1
     assert manifest["eligible_source_ids"] == [
+        "adx_dmi_trend_strength_crossover",
         "cci_correction",
         "coppock_curve_monthly_equity_signal",
         "larry_connors_rsi2_mean_reversion",
+        "parabolic_sar_spy_bil_long_only_reversal",
         "percent_b_money_flow",
     ]
     assert set(manifest["needs_direction_review_source_ids"]) == {
@@ -133,6 +137,22 @@ def test_batch_decision_counts_and_key_decisions() -> None:
 
 
 def test_eligibility_rows_preserve_expected_filter_reasons() -> None:
+    adx = row_by_source("eligibility_decisions.csv", "adx_dmi_trend_strength_crossover")
+    assert adx["eligibility_decision"] == DECISION_ELIGIBLE
+    assert adx["next_action"] == "design_public_source_adx_dmi_trend_strength_crossover_bounded_bt_lane"
+    assert "spy200d_trend_control" in adx["family_similarity_hits"]
+    assert "global_multi_asset" in adx["family_similarity_hits"]
+    assert "macro_gld_duration_risk_off" in adx["family_similarity_hits"]
+    assert "high_return_tactical_equity" in adx["family_similarity_hits"]
+    assert "volatility_throttle_volatility_managed_equity" in adx["family_similarity_hits"]
+    assert "turn_of_month_calendar_effect" in adx["family_similarity_hits"]
+    assert "price_band_money_flow_confirmation" in adx["family_similarity_hits"]
+    assert "larry_connors_rsi2_mean_reversion" in adx["family_similarity_hits"]
+    assert "coppock_curve_monthly_equity_signal" in adx["family_similarity_hits"]
+    assert "cci_correction" in adx["family_similarity_hits"]
+    assert "macd_stochastic_double_cross" in adx["family_similarity_hits"]
+    assert "bollinger_band_squeeze_breakout" in adx["family_similarity_hits"]
+
     cci = row_by_source("eligibility_decisions.csv", "cci_correction")
     assert cci["eligibility_decision"] == DECISION_ELIGIBLE
     assert cci["next_action"] == "design_public_source_cci_correction_bounded_bt_lane"
@@ -168,6 +188,12 @@ def test_eligibility_rows_preserve_expected_filter_reasons() -> None:
     assert rsi2["next_action"] == "design_public_source_larry_connors_rsi2_mean_reversion_bounded_bt_lane"
     assert "mean_reversion_rejected_or_existing_candidate" in rsi2["family_similarity_hits"]
 
+    parabolic_sar = row_by_source("eligibility_decisions.csv", "parabolic_sar_spy_bil_long_only_reversal")
+    assert parabolic_sar["eligibility_decision"] == DECISION_ELIGIBLE
+    assert parabolic_sar["next_action"] == "design_public_source_parabolic_sar_spy_bil_bounded_bt_lane"
+    assert "spy200d_trend_control" in parabolic_sar["family_similarity_hits"]
+    assert "adx_dmi_trend_strength_crossover" in parabolic_sar["family_similarity_hits"]
+
     golden_cross = row_by_source("eligibility_decisions.csv", "golden_cross_50_200")
     assert golden_cross["eligibility_decision"] == DECISION_DUPLICATE
     assert "spy200d_trend_control" in golden_cross["family_similarity_hits"]
@@ -191,11 +217,13 @@ def test_local_cache_availability_checked_for_explicit_instruments() -> None:
     by_source_symbol = {(row["source_id"], row["symbol"]): row for row in rows}
 
     for source_id in {
+        "adx_dmi_trend_strength_crossover",
         "coppock_curve_monthly_equity_signal",
         "cci_correction",
         "percent_b_money_flow",
         "golden_cross_50_200",
         "larry_connors_rsi2_mean_reversion",
+        "parabolic_sar_spy_bil_long_only_reversal",
         "sell_in_may_halloween_effect",
     }:
         assert by_source_symbol[(source_id, "SPY")]["cache_status"] == "cache_ready"

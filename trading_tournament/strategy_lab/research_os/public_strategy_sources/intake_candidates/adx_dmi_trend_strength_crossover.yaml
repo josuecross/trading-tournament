@@ -1,0 +1,85 @@
+schema_version: 1
+intake_status: manual_source_supplied_for_validation
+source:
+  source_id: adx_dmi_trend_strength_crossover
+  source_name: ADX / DMI Trend Strength Crossover
+  source_url_or_citation: "Investopedia, \"ADX Explained: How to Measure and Trade Trend Strength\"; Investopedia, \"DMI Points the Way to Profits\""
+  source_type: public practitioner / technical indicator documentation
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: equity_index_adx_dmi_trend_strength
+  claimed_hypothesis: A +DI/-DI bullish directional crossover confirmed by ADX trend strength may identify tradable SPY uptrends; BIL/cash is used outside confirmed bullish states.
+  rule_clarity: clear_and_testable
+  instruments:
+    - SPY
+    - BIL
+  timeframe: daily
+rules:
+  entry_rule: Enter or hold SPY when daily +DI(14) crosses above -DI(14) and ADX(14) is above 25 on the completed daily close.
+  exit_rule: Continue holding SPY while +DI remains above -DI; exit SPY to BIL/cash when daily -DI(14) crosses above +DI(14), or hold BIL/cash when no valid bullish state exists.
+  ranking_selection_rule: not_applicable; this is a single-instrument SPY/BIL trend-strength timing rule.
+  rebalance_frequency: daily signal check using completed daily OHLC data.
+  risk_controls: Long-only SPY exposure only during confirmed bullish +DI/-DI states with ADX trend-strength confirmation; BIL/cash fallback outside confirmed bullish states; no shorting; no inverse ETFs; no leverage; no options/futures; no margin; no intraday execution.
+indicator_definitions:
+  dmi_adx_period: 14
+  adx_trend_strength_threshold: 25
+  bullish_direction_state: +DI above -DI
+  bearish_or_cash_direction_state: -DI above +DI
+  entry_confirmation: +DI(14) crosses above -DI(14) with ADX(14) above 25 on completed daily close
+  exit_confirmation: -DI(14) crosses above +DI(14) on completed daily close
+  adx_direction_caveat: ADX measures trend strength, not direction; +DI and -DI provide directional context.
+  source_backed_parameters: true
+  tuned_parameters: false
+  alternate_parameters_added: false
+  default_status: adx_dmi_period_and_threshold_source_backed_not_tuned
+data_and_execution:
+  data_requirements: Daily adjusted OHLC data for SPY and BIL sufficient to compute DMI/ADX(14), +DI, -DI, and ADX trend-strength confirmation.
+  execution_assumptions: Signals use completed daily OHLC data only; target weights would use the project no-lookahead shifted-weight convention; BIL is the cash proxy outside active SPY positions; no intraday data, provider download, broker API, paper order, live order, or real-money path is required.
+  compatible_with_bt_adapter: true
+project_screening:
+  project_constraint_violations: []
+  similar_already_tested_project_families:
+    - spy200d_trend_control
+    - global_multi_asset
+    - macro_gld_duration_risk_off
+    - high_return_tactical_equity
+    - volatility_throttle_volatility_managed_equity
+    - turn_of_month_calendar_effect
+    - price_band_money_flow_confirmation
+    - larry_connors_rsi2_mean_reversion
+    - coppock_curve_monthly_equity_signal
+    - cci_correction
+    - macd_stochastic_double_cross
+    - bollinger_band_squeeze_breakout
+  direction_owner_similarity_review_completed: true
+  similarity_review_resolution: direction_owner_selected_distinct_adx_dmi_trend_strength_for_intake_validation_only
+  do_not_retest_match: none
+  single_source_validation_selected: true
+  single_source_validation_priority: 600
+  allowed_next_action: validate_public_source_intake_only
+governance:
+  public_strategy_selected_by_user: true
+  source_scraped_by_codex: false
+  strategy_implemented: false
+  backtest_run: false
+  promotion_or_paper_forward_allowed: false
+project_notes:
+  source_evidence_status: public_source_context_only_not_profitability_proof
+  similarity_risk_vs_project: medium
+  similarity_notes: This overlaps with completed SPY/BIL timing, trend, and equity-risk-control project context, but the frozen intake rule is a DMI/ADX trend-strength crossover rather than SPY_200d, calendar timing, mean reversion, Coppock, CCI, MACD/Stochastic, Bollinger squeeze, Percent B/MFI, global allocation, macro/risk-off, or volatility-managed equity logic.
+  long_only_adaptation_caveat: Public DMI/ADX materials can be used for long or bearish directional interpretation. This project intake freezes only a long-only SPY/BIL adaptation; bearish -DI dominance or absent bullish confirmation maps to BIL/cash, never short, inverse, leveraged, options, futures, margin, intraday, paper-order, live-order, or real-money logic.
+  formula_parameter_completeness_status: adx_dmi_period_threshold_and_direction_rules_source_backed_complete
+  formula_parameter_uncertainty: ADX/DMI period 14 and ADX threshold 25 are recorded as source-backed intake parameters. Alternative thresholds such as 20 are noted by sources but are not used, optimized, swept, or treated as authorization for tuning.
+  entry_rule_completeness_status: adx_dmi_entry_rule_source_backed_complete
+  entry_rule_uncertainty: The entry rule is frozen as +DI(14) crossing above -DI(14) with ADX(14) above 25 on completed daily close; this does not add SPY_200d, RSI, MACD, Bollinger, CCI, volume, stops, or profit-target filters.
+  exit_rule_completeness_status: adx_dmi_exit_cash_rule_source_backed_complete
+  exit_rule_uncertainty: The long-only exit/cash mapping uses -DI(14) crossing above +DI(14) or absence of valid bullish state to map to BIL/cash. This is an intake-only adaptation and not proof of profitability.
+  indicator_defaults_completeness_status: adx_dmi_defaults_source_backed_complete
+  indicator_defaults_uncertainty: ADX is lagging and does not predict future prices; ADX measures strength but not direction, so +DI/-DI direction context is part of the frozen intake rule.
+  expected_bridge_decision: eligible_for_bounded_bt_design
+  allowed_next_action: validate_public_source_intake_only
+notes:
+  - Source details were manually supplied by the direction owner.
+  - Codex did not browse, scrape, choose, or add any public source.
+  - ADX/DMI parameters are source-backed intake context, not tuning or optimization.
+  - Public-source presence is context only and is not proof of profitability.

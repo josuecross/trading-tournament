@@ -1,0 +1,122 @@
+schema_version: 1
+intake_status: manual_source_supplied_for_validation
+source:
+  source_id: parabolic_sar_spy_bil_long_only_reversal
+  source_name: Parabolic SAR Long-Only SPY/BIL Reversal
+  source_url_or_citation: "StockCharts ChartSchool Parabolic SAR; Investopedia Parabolic SAR indicator documentation"
+  source_type: public practitioner / technical indicator documentation
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: equity_index_parabolic_sar_trend_reversal
+  claimed_hypothesis: Parabolic SAR trend-reversal signals may identify tradable SPY trend states; BIL/cash is used outside bullish SAR states.
+  rule_clarity: clear_and_testable
+  instruments:
+    - SPY
+    - BIL
+  timeframe: daily
+rules:
+  entry_rule: Enter SPY after completed daily Parabolic SAR flips from above price to below price; continue holding SPY while SAR remains below price.
+  exit_rule: Exit SPY to BIL/cash after completed daily Parabolic SAR flips from below price to above price; hold BIL/cash while SAR remains above price.
+  ranking_selection_rule: not_applicable; this is a single-instrument SPY/BIL trend-reversal timing rule.
+  rebalance_frequency: daily signal check using completed daily OHLC data.
+  risk_controls: Long-only SPY exposure only during bullish SAR state; BIL/cash fallback during bearish SAR state; no shorting; no inverse ETFs; no leverage; no options/futures; no margin; no intraday execution.
+indicator_definitions:
+  formula_contract_id: parabolic_sar_wilder_stockcharts_contract_v1
+  formula_contract_status: deterministic_formula_contract_supplied_by_direction_owner
+  formula_contract_source_basis: StockCharts / Investopedia public Parabolic SAR documentation plus direction-owner supplied deterministic implementation convention.
+  data_contract: completed daily adjusted SPY OHLC data only; BIL is cash proxy only and is not used to compute SAR.
+  parabolic_sar_acceleration_factor_start: 0.02
+  parabolic_sar_acceleration_factor_increment: 0.02
+  parabolic_sar_acceleration_factor_maximum: 0.20
+  bullish_state: SAR dots below price indicate upward trend / bullish state.
+  bearish_state: SAR dots above price indicate downward trend / bearish state.
+  buy_signal: SAR flips from above price to below price on completed daily OHLC.
+  sell_exit_signal: SAR flips from below price to above price on completed daily OHLC.
+  rising_sar_formula: SAR_t = SAR_{t-1} + AF_{t-1} * (EP_{t-1} - SAR_{t-1})
+  rising_extreme_point_definition: highest high in the current uptrend
+  rising_af_update_rule: increase AF by 0.02 when a new rising EP is reached, capped at 0.20
+  falling_sar_formula: SAR_t = SAR_{t-1} - AF_{t-1} * (SAR_{t-1} - EP_{t-1})
+  falling_extreme_point_definition: lowest low in the current downtrend
+  falling_af_update_rule: increase AF by 0.02 when a new falling EP is reached, capped at 0.20
+  rising_to_falling_reversal_rule: in rising state, if current low breaches candidate SAR, reverse to falling state
+  falling_to_rising_reversal_rule: in falling state, if current high breaches candidate SAR, reverse to rising state
+  reversal_af_reset_rule: reset AF to 0.02 on every reversal
+  reversal_sar_initialization_rule: on reversal, initialize the new SAR from the prior trend's EP
+  reversal_ep_initialization_rule: on reversal, initialize the new EP from the current bar's low for falling state or current bar's high for rising state
+  repository_standard_psar_utility_found: false
+  initialization_convention_source: direction_owner_supplied_implementation_convention_not_trading_optimization
+  initial_trend_rule: initial trend is rising if second completed close is greater than or equal to first completed close, otherwise falling
+  initial_rising_sar_rule: minimum low of the first two completed bars
+  initial_rising_ep_rule: maximum high of the first two completed bars
+  initial_falling_sar_rule: maximum high of the first two completed bars
+  initial_falling_ep_rule: minimum low of the first two completed bars
+  warmup_rule: signals before stable indicator warmup must not be tradable
+  first_valid_sar_date_reporting_required: true
+  first_reversal_date_reporting_required: true
+  first_tradable_signal_date_reporting_required: true
+  initialization_sensitivity_policy: if initialization sensitivity is material in future bounded evidence, label as needs_direction_owner_review
+  no_lookahead_contract: use completed daily OHLC only; target weights use the project no-lookahead shifted-weight convention; no same-day signal bar may generate and profit from exposure on that same bar
+  extreme_point_update_context: Acceleration factor increases when a new extreme point is reached.
+  source_backed_parameters: true
+  tuned_parameters: false
+  alternate_parameters_added: false
+  default_status: parabolic_sar_wilder_stockcharts_contract_v1_complete_not_tuned
+data_and_execution:
+  data_requirements: Daily adjusted OHLC data for SPY and BIL sufficient to compute Parabolic SAR with source-backed acceleration factor start, increment, and maximum.
+  execution_assumptions: Signals use completed daily OHLC data only; target weights would use the project no-lookahead shifted-weight convention; BIL is the cash proxy outside active SPY positions; no intraday data, provider download, broker API, paper order, live order, or real-money path is required.
+  compatible_with_bt_adapter: true
+project_screening:
+  project_constraint_violations: []
+  similar_already_tested_project_families:
+    - spy200d_trend_control
+    - global_multi_asset
+    - macro_gld_duration_risk_off
+    - high_return_tactical_equity
+    - volatility_throttle_volatility_managed_equity
+    - turn_of_month_calendar_effect
+    - price_band_money_flow_confirmation
+    - larry_connors_rsi2_mean_reversion
+    - coppock_curve_monthly_equity_signal
+    - cci_correction
+    - macd_stochastic_double_cross
+    - bollinger_band_squeeze_breakout
+    - adx_dmi_trend_strength_crossover
+  direction_owner_similarity_review_completed: true
+  similarity_review_resolution: direction_owner_selected_distinct_parabolic_sar_trend_reversal_for_intake_validation_only
+  do_not_retest_match: none
+  single_source_validation_selected: true
+  single_source_validation_priority: 700
+  allowed_next_action: validate_public_source_intake_only
+governance:
+  public_strategy_selected_by_user: true
+  source_scraped_by_codex: false
+  strategy_implemented: false
+  backtest_run: false
+  promotion_or_paper_forward_allowed: false
+project_notes:
+  source_evidence_status: public_source_context_only_not_profitability_proof
+  similarity_risk_vs_project: medium
+  similarity_notes: This overlaps with completed SPY/BIL timing, trend, and equity-risk-control project context, including SPY_200d and ADX/DMI, but the manually supplied source rule is Parabolic SAR stop-and-reverse state mapping rather than moving-average, DMI/ADX, calendar, mean-reversion, oscillator, price-band, allocation, macro, or volatility-managed logic.
+  long_only_adaptation_caveat: Public Parabolic SAR materials can be interpreted as stop-and-reverse. This project intake freezes only a long-only SPY/BIL adaptation; bearish SAR state maps to BIL/cash, never short, inverse, leveraged, options, futures, margin, intraday, paper-order, live-order, or real-money logic.
+  formula_parameter_completeness_status: parabolic_sar_af_parameters_source_backed_complete
+  parabolic_sar_formula_contract_completeness_status: parabolic_sar_wilder_stockcharts_contract_v1_complete
+  parabolic_sar_parameter_completeness_status: parabolic_sar_af_parameters_source_backed_complete
+  parabolic_sar_initialization_reversal_completeness_status: parabolic_sar_initialization_ep_af_reversal_contract_complete
+  parabolic_sar_initialization_convention_status: deterministic_initialization_convention_complete_no_repo_standard_psar_utility_found
+  parabolic_sar_reversal_state_transition_status: parabolic_sar_reversal_state_transition_contract_complete
+  parabolic_sar_warmup_tradability_status: parabolic_sar_warmup_tradability_contract_complete_dates_to_be_reported_in_future_bounded_design_or_run
+  formula_parameter_uncertainty: Acceleration factor start 0.02, increment 0.02, and maximum 0.20 are source-backed intake parameters. The initial trend, initial SAR/EP, reversal SAR/EP reset, AF update, and warmup/tradability rules are frozen from the direction-owner-supplied deterministic formula contract as implementation conventions, not trading optimization.
+  entry_rule_completeness_status: parabolic_sar_bullish_entry_hold_rule_source_backed_complete
+  entry_rule_uncertainty: The long-only entry/hold state is source-backed as SAR below price after a completed daily flip from above to below price. This does not add ADX, moving averages, RSI, MACD, Bollinger, CCI, volume, stops, profit targets, volatility filters, or alternate exits.
+  exit_rule_completeness_status: parabolic_sar_bearish_exit_cash_rule_source_backed_complete
+  exit_rule_uncertainty: The long-only exit/cash mapping is source-backed as SAR above price after a completed daily flip from below to above price. The formula contract freezes SAR initialization and reversal mechanics for future bounded design.
+  indicator_defaults_completeness_status: parabolic_sar_wilder_stockcharts_contract_defaults_complete
+  indicator_defaults_uncertainty: Parabolic SAR whipsaw risk in sideways markets is source context only. Confirmation filters mentioned by sources, such as ADX or moving averages, are not included or authorized by this intake.
+  expected_bridge_decision: eligible_for_bounded_bt_design
+  allowed_next_action: validate_public_source_intake_only
+notes:
+  - Source details were manually supplied by the direction owner.
+  - Codex did not browse, scrape, choose, or add any public source.
+  - Parabolic SAR acceleration parameters are source-backed intake context, not tuning or optimization.
+  - Exact SAR initialization and reversal implementation details were supplied by the direction owner as a deterministic formula contract and are not tuned.
+  - Public-source presence is context only and is not proof of profitability.

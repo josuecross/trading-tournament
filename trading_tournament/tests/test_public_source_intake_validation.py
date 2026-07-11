@@ -76,46 +76,55 @@ def complete_synthetic_intake(rule_clarity: str = "clear") -> dict:
     }
 
 
-def test_manifest_records_selected_bollinger_squeeze_candidate_as_review_required_intake() -> None:
+def test_manifest_records_selected_parabolic_sar_candidate_as_formula_complete_eligible_intake() -> None:
     manifest = load_manifest()
     consistency = load_consistency()
 
     assert manifest["public_source_intake_validation_only"] is True
     assert manifest["candidate_file_count"] == 1
     assert manifest["manual_source_supplied"] is True
-    assert manifest["source_id"] == "bollinger_band_squeeze_breakout"
-    assert manifest["intake_candidate_path"].endswith("bollinger_band_squeeze_breakout.yaml")
-    assert manifest["eligibility_decision"] == DECISION_REVIEW
-    assert manifest["next_action"] == "direction_owner_review_required_for_public_source_intake"
+    assert manifest["source_id"] == "parabolic_sar_spy_bil_long_only_reversal"
+    assert manifest["intake_candidate_path"].endswith("parabolic_sar_spy_bil_long_only_reversal.yaml")
+    assert manifest["eligibility_decision"] == DECISION_ELIGIBLE
+    assert manifest["next_action"] == "design_public_source_parabolic_sar_spy_bil_bounded_bt_lane"
     assert manifest["exact_missing_fields"] == []
     assert manifest["local_cache_checked"] is True
-    assert manifest["rule_clarity_status"] == "unclear_or_not_freezable"
+    assert manifest["rule_clarity_status"] == "clear"
     assert manifest["long_only_adaptation_status"] == "long_only_caveat_explicit"
-    assert manifest["setup_definition_completeness_status"] == (
-        "needs_direction_owner_review_six_month_low_threshold_not_freezable"
+    assert manifest["indicator_formula_parameter_completeness_status"] == "parabolic_sar_af_parameters_source_backed_complete"
+    assert manifest["parabolic_sar_formula_contract_completeness_status"] == (
+        "parabolic_sar_wilder_stockcharts_contract_v1_complete"
     )
-    assert manifest["directional_confirmation_completeness_status"] == (
-        "needs_direction_owner_review_extra_confirmation_not_source_backed_enough_to_freeze"
+    assert manifest["indicator_formula_parameter_completeness_status"] == "parabolic_sar_af_parameters_source_backed_complete"
+    assert manifest["parabolic_sar_parameter_completeness_status"] == "parabolic_sar_af_parameters_source_backed_complete"
+    assert manifest["parabolic_sar_initialization_reversal_completeness_status"] == (
+        "parabolic_sar_initialization_ep_af_reversal_contract_complete"
     )
-    assert manifest["exit_rule_completeness_status"] == (
-        "needs_direction_owner_review_exit_rule_not_source_backed_enough_to_freeze"
+    assert manifest["parabolic_sar_initialization_convention_status"] == (
+        "deterministic_initialization_convention_complete_no_repo_standard_psar_utility_found"
     )
-    assert manifest["indicator_defaults_completeness_status"] == (
-        "bollinger_defaults_source_backed_setup_exit_review_required"
+    assert manifest["parabolic_sar_reversal_state_transition_status"] == (
+        "parabolic_sar_reversal_state_transition_contract_complete"
     )
-    assert "low_volatility_quality_proxy" in manifest["family_similarity_hits"]
+    assert manifest["parabolic_sar_warmup_tradability_status"] == (
+        "parabolic_sar_warmup_tradability_contract_complete_dates_to_be_reported_in_future_bounded_design_or_run"
+    )
+    assert manifest["entry_rule_completeness_status"] == "parabolic_sar_bullish_entry_hold_rule_source_backed_complete"
+    assert manifest["exit_rule_completeness_status"] == "parabolic_sar_bearish_exit_cash_rule_source_backed_complete"
+    assert manifest["indicator_defaults_completeness_status"] == "parabolic_sar_wilder_stockcharts_contract_defaults_complete"
     assert "spy200d_trend_control" in manifest["family_similarity_hits"]
     assert "global_multi_asset" in manifest["family_similarity_hits"]
     assert "macro_gld_duration_risk_off" in manifest["family_similarity_hits"]
     assert "high_return_tactical_equity" in manifest["family_similarity_hits"]
     assert "volatility_throttle_volatility_managed_equity" in manifest["family_similarity_hits"]
     assert "turn_of_month_calendar_effect" in manifest["family_similarity_hits"]
-    assert "mean_reversion_rejected_or_existing_candidate" in manifest["family_similarity_hits"]
     assert "price_band_money_flow_confirmation" in manifest["family_similarity_hits"]
     assert "larry_connors_rsi2_mean_reversion" in manifest["family_similarity_hits"]
     assert "coppock_curve_monthly_equity_signal" in manifest["family_similarity_hits"]
     assert "cci_correction" in manifest["family_similarity_hits"]
     assert "macd_stochastic_double_cross" in manifest["family_similarity_hits"]
+    assert "bollinger_band_squeeze_breakout" in manifest["family_similarity_hits"]
+    assert "adx_dmi_trend_strength_crossover" in manifest["family_similarity_hits"]
     assert consistency["consistency_passed"] is True
 
 
@@ -158,10 +167,18 @@ def test_required_evidence_outputs_exist() -> None:
         "local_cache_availability_report.csv",
         "local_cache_availability_report.md",
         "long_only_adaptation_caveat_report.md",
+        "indicator_formula_parameter_completeness_report.md",
+        "entry_rule_completeness_report.md",
         "setup_definition_completeness_report.md",
         "directional_confirmation_completeness_report.md",
         "exit_rule_completeness_report.md",
         "indicator_defaults_completeness_report.md",
+        "parabolic_sar_formula_contract_completeness_report.md",
+        "parabolic_sar_parameter_completeness_report.md",
+        "parabolic_sar_initialization_reversal_completeness_report.md",
+        "parabolic_sar_initialization_convention_report.md",
+        "parabolic_sar_reversal_state_transition_report.md",
+        "parabolic_sar_warmup_tradability_report.md",
         "eligibility_decision.md",
         "guardrail_checklist.json",
         "public_source_intake_validation_next_action.md",
