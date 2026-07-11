@@ -1,0 +1,77 @@
+schema_version: 1
+owner: strategy_lab/research_os/strategy_evidence_library
+purpose: >
+  Minimum viable Strategy Evidence Library schema for provenance, lineage,
+  experiment records, lifecycle state, failure taxonomy, duplicate detection,
+  and generated repository-hygiene reports.
+canonical_inputs:
+  strategy_identity: strategy_lab/strategy_registry.yaml
+  lifecycle_status: strategy_lab/strategy_registry.yaml
+  family_lineage: strategy_lab/research_os/family_lineage/family_ledger.yaml
+  research_queue: strategy_lab/research_os/research/research_queue.yaml
+  public_source_intake: strategy_lab/research_os/public_strategy_sources/intake_candidates/
+  active_observations: strategy_lab/research_os/operations/active_observations.yaml
+  active_observation_details: paper_forward_observations/*/active_observation.yaml
+  frozen_evidence: evidence/**/latest/
+generated_outputs:
+  evidence_root: evidence/strategy_evidence_library/latest
+  source_records: sel_sources.json
+  idea_records: sel_ideas.json
+  preregistration_records: sel_preregistrations.json
+  implementation_records: sel_implementations.json
+  experiment_records: sel_experiments.json
+  decision_records: sel_decisions.json
+evidence_levels:
+  E0: unqualified_lead
+  E1: source_qualified_idea
+  E2: preregistered_testable_specification
+  E3: reproducible_implementation
+  E4: locally_valid_backtest
+  E5: robustness_qualified
+  E6: paper_demo_eligible
+  E7: active_paper_demo_observation
+lifecycle_statuses:
+  - backlog
+  - blocked
+  - rejected
+  - retest_only_on_new_evidence
+  - eligible
+  - active
+  - retired
+failure_codes:
+  - SOURCE_NOT_REPRODUCED
+  - RULES_INCOMPLETE
+  - DATA_UNAVAILABLE
+  - LOOKAHEAD
+  - SURVIVORSHIP
+  - IMPLEMENTATION_MISMATCH
+  - EXECUTION_UNREALISTIC
+  - COST_SENSITIVE
+  - NO_OUT_OF_SAMPLE_EDGE
+  - PARAMETER_INSTABILITY
+  - STRUCTURAL_BREAK
+  - FAMILY_REDUNDANT
+  - ACCOUNT_INFEASIBLE
+  - HOLDOUT_FAILURE
+  - CODE_DEFECT
+  - PAPER_DEMO_DRIFT
+fingerprint_components:
+  - family
+  - signal_direction
+  - universe_type
+  - formation_horizon
+  - holding_horizon
+  - rebalance_frequency
+  - weighting_method
+  - risk_overlay
+  - execution_cadence
+migration_policy:
+  conservative_evidence_levels: true
+  source_claimed_metrics_separate_from_project_observed_metrics: true
+  preserve_existing_strategy_ids: true
+  preserve_existing_lifecycle_decisions: true
+  unknown_not_invented: true
+cleanup_policy:
+  delete_only_after_dependency_and_information_checks: true
+  generated_python_caches_are_removable: true
+  frozen_evidence_latest_directories_are_historical_evidence_by_default: true
