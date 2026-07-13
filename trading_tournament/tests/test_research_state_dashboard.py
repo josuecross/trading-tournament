@@ -55,6 +55,13 @@ def test_dashboard_manifest_confirms_no_forbidden_actions() -> None:
     assert manifest["component_drawdown_attribution_available"] is True
     assert manifest["recovery_attribution_available"] is True
     assert manifest["worst_n_drawdown_export_available"] is True
+    assert manifest["dsr_historical_metric_evidence_status"] == "unverified_non_comparable"
+    assert manifest["dsr_current_diagnostic_evidence_status"] == "reproducible_diagnostic_only"
+    assert manifest["dsr_metric_comparability"] == "non_comparable"
+    assert manifest["dsr_metric_eligible_for_e4"] is False
+    assert manifest["dsr_highest_independent_sel_level"] == "E1"
+    assert manifest["dsr_metric_evidence_status"]["canonical_lifecycle_status"] == "active"
+    assert manifest["dsr_metric_evidence_status"]["evidence_warning"].endswith("lifecycle_active_state_unchanged")
     assert manifest["individual_stock_momentum_gate1b_decision"] == "conditional_pending_provider_cost_review"
     assert manifest["individual_stock_momentum_gate1b_status"] == "conditional_pending_package_and_terms_selection"
     assert manifest["individual_stock_momentum_gate1b_implementation_status"] == "not_implemented"
@@ -185,6 +192,10 @@ def test_current_state_summary_contains_phase_and_correction() -> None:
     assert f"current_phase: `{PHASE}`" in summary
     assert "combo active as paper/demo observation" in summary
     assert "SPY_200d frozen control" in summary
+    assert "DSR active/frozen observation: `active`" in summary
+    assert "historical_unverified_non_comparable" in summary
+    assert "current_diagnostic_only" in summary
+    assert "not_qualifying_e4" in summary
     assert "Forward checkpoint is not ready for judgment" in summary
     assert "does not block historical research" in summary
     assert "no recent research_sample candidate deserves candidate_exhaustive now" in summary
@@ -262,9 +273,13 @@ def test_dashboard_csvs_report_active_combo_and_queues() -> None:
     blocked = pd.read_csv(LATEST_DIR / "blocked_and_gated_items.csv")
     actions = pd.read_csv(LATEST_DIR / "next_allowed_actions.csv")
     combo = active[active["strategy"].eq("combo_SPY200d_GLD_50_50_v1")].iloc[0]
+    dsr = active[active["strategy"].eq("paper_forward_dsr_sector_equal_weight_defensive_filter_v1")].iloc[0]
     assert combo["status"] == "active_paper_demo_observation"
     assert round(float(combo["current_equity"]), 2) == 2998.50
     assert combo["decision_status"] == "inconclusive_too_early"
+    assert "unverified_non_comparable" in dsr["notes"]
+    assert "reproducible_diagnostic_only" in dsr["notes"]
+    assert "E4 lineage incomplete" in dsr["notes"]
     assert "asset_class_tsmom_top2_v1" in set(leaders["strategy"])
     recent = candidates[candidates["candidate_id"].isin([
         "qqq_spy_gld_ief_dual_momentum_v1",

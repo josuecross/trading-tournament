@@ -72,7 +72,8 @@
 
 - ETF-wrapper discovery is paused.
 - Current best supported pair is active VM + active DSR.
+- Active-combo benchmark/reference series is exact and restored.
 - Candidate pipeline has no surviving candidate_exhaustive row.
-- Next engineering action is `repair_active_combo_benchmark_and_reporting`.
+- Next engineering action is `none_active_combo_repaired`.
 - DSR caveat is accepted but recorded.
 - No more immediate similar ETF-wrapper batch discovery.

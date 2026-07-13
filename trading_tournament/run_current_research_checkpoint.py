@@ -20,7 +20,10 @@ DSR_ID = "paper_forward_dsr_sector_equal_weight_defensive_filter_v1"
 SPY_200D_ID = "SPY_200d_trend_model"
 BIL_ID = "BIL_cash_proxy"
 LVQ_ID = "lvq_lowvol_quality_spy_regime_v1"
+COMBO_ID = "active_combo_vm_dsr_equal_weight_v1"
+ACTIVE_COMBO_RECONCILIATION_DIR = Path("evidence") / "active_combo_series_reconciliation" / "latest"
 NEXT_ENGINEERING_ACTION = "repair_active_combo_benchmark_and_reporting"
+NEXT_ENGINEERING_ACTION_REPAIRED = "none_active_combo_repaired"
 NEXT_RESEARCH_AFTER_ENGINEERING = "choose_structurally_distinct_lane_or_archive"
 
 
@@ -90,6 +93,26 @@ def registry_value(row: dict[str, Any], key: str) -> str:
     return "missing_or_unavailable" if val in (None, "") else str(val)
 
 
+def active_combo_reconciliation_state(root: Path) -> dict[str, Any]:
+    base = root / ACTIVE_COMBO_RECONCILIATION_DIR
+    manifest = load_json(base / "active_combo_series_reconciliation.json")
+    consistency = load_json(base / "reconciliation_consistency_check.json")
+    metrics = single_metric_map(base / "combo_metric_summary.csv")
+    exact = (
+        manifest.get("reconstructability_classification") == "exactly_reconstructable"
+        and manifest.get("checkpoint_combo_row_safe_to_restore") is True
+        and consistency.get("consistency_passed") is True
+    )
+    return {
+        "available": exact,
+        "evidence_path": str(base),
+        "manifest": manifest,
+        "consistency": consistency,
+        "metrics": metrics,
+        "next_engineering_action": NEXT_ENGINEERING_ACTION_REPAIRED if exact else NEXT_ENGINEERING_ACTION,
+    }
+
+
 def evidence_state(root: Path) -> dict[str, Any]:
     registry = load_yaml(root / REGISTRY_PATH)
     rows = registry_rows(registry)
@@ -105,17 +128,8 @@ def evidence_state(root: Path) -> dict[str, Any]:
     stale_candidate_flags = [sid for sid, row in rows.items() if row.get("candidate_exhaustive_recommended") is True]
     stale_promotion_flags = [sid for sid, row in rows.items() if row.get("promotion_review_required") is True]
     active_rows = [sid for sid, row in rows.items() if row.get("paper_forward_active") is True]
-    active_combo_available = False
-    for path in [
-        root / "evidence" / "parallel_research_discovery" / "approved_cache_batch_3" / "latest" / "approved_cache_batch_3_benchmark_delta.csv",
-        root / "evidence" / "parallel_research_discovery" / "expanded_universe_batch_1" / "latest" / "expanded_universe_batch_1_benchmark_delta.csv",
-        root / "evidence" / "promotion_reviews" / LVQ_ID / "latest" / f"{LVQ_ID}_profit_review.csv",
-    ]:
-        for row in read_csv_rows(path):
-            if row.get("benchmark_id") == "active_combo" and row.get("comparison_status") == "computed":
-                active_combo_available = True
-            if row.get("metric") == "delta_vs_active_combo" and row.get("value") not in {"unavailable", "", None}:
-                active_combo_available = True
+    active_combo_state = active_combo_reconciliation_state(root)
+    active_combo_available = active_combo_state["available"]
     mismatches: list[str] = []
     for sid in [VM_ID, DSR_ID]:
         row = rows.get(sid, {})
@@ -135,6 +149,7 @@ def evidence_state(root: Path) -> dict[str, Any]:
         "stale_promotion_flags": stale_promotion_flags,
         "active_rows": active_rows,
         "active_combo_available": active_combo_available,
+        "active_combo_state": active_combo_state,
         "expanded_promotions": [row.get("strategy_id", "") for row in expanded_promotions if row.get("strategy_id")],
         "mismatches": mismatches,
     }
@@ -169,13 +184,48 @@ def current_best_strategy_set(root: Path, rows: dict[str, dict[str, Any]]) -> li
             "recommended_action": action,
         }
 
-    return [
+    best_rows = [
         row(VM_ID, "protected_active_observation", active_metrics.get(VM_ID, {}), "stable risk-buffer profile in recompute", "less upside than high-risk variants", "accepted_active", "minor deltas accepted", "observe_only"),
-        row(DSR_ID, "protected_active_observation", active_metrics.get(DSR_ID, {}), "best current 180d median among protected active pair", "accepted recovered-vs-recomputed best-equity mismatch", "accepted_active_with_caveat", "recovered best_final_equity around 4071.04; recomputed around 3481.6998", "observe_only"),
-        row(SPY_200D_ID, "frozen_control", {}, "simple benchmark/control", "exact current checkpoint metrics not in checkpoint inputs", "benchmark_control", "metrics marked unavailable rather than fabricated", "compare_only"),
-        row(BIL_ID, "cash_benchmark", {}, "defensive cash proxy", "too slow for profit target", "benchmark_control", "metrics marked unavailable rather than fabricated", "compare_only"),
-        row(LVQ_ID, "watchlist_diagnostic_only", lvq_metrics, "safer/interesting low-vol quality profile", "weaker than active DSR/SPY references", "watchlist_only", "not active; not candidate_exhaustive-ready", "keep_watchlist"),
+        row(
+            DSR_ID,
+            "protected_active_observation",
+            active_metrics.get(DSR_ID, {}),
+            "active/frozen lifecycle preserved; current diagnostics remain reproducible",
+            "historical best-equity claim is unverified_non_comparable and not qualifying E4",
+            "active_e1_with_metric_warning",
+            "historical recovered best_final_equity 4071.04 is unverified_non_comparable; current diagnostic best_final_equity 3481.6998 is reproducible_diagnostic_only, non_comparable, and not_qualifying_e4",
+            "observe_only",
+        ),
     ]
+    combo_state = active_combo_reconciliation_state(root)
+    if combo_state["available"]:
+        combo_metrics = combo_state["metrics"]
+        best_rows.append(
+            {
+                "strategy_id": COMBO_ID,
+                "role": "reconstructed_benchmark_reference",
+                "status": "benchmark_watchlist_reference",
+                "evidence_source": combo_state["evidence_path"],
+                "180d_median_equity": value(combo_metrics, "180d_median_final_equity"),
+                "target_300_rate": value(combo_metrics, "target_300_before_stop_rate"),
+                "target_400_rate": value(combo_metrics, "target_400_before_stop_rate"),
+                "worst_drawdown": value(combo_metrics, "180d_worst_drawdown"),
+                "stop_hit_rate": value(combo_metrics, "stop_hit_rate"),
+                "key_strength": "deterministic active VM/DSR benchmark reference restored",
+                "key_weakness": "benchmark/control only; not independently E4-qualified",
+                "trust_level": "reconstructed_benchmark_reference",
+                "caveat": "exact daily series reconstructed from frozen VM/DSR rules; reference only; no paper-forward or promotion eligibility",
+                "recommended_action": "compare_only",
+            }
+        )
+    best_rows.extend(
+        [
+            row(SPY_200D_ID, "frozen_control", {}, "simple benchmark/control", "exact current checkpoint metrics not in checkpoint inputs", "benchmark_control", "metrics marked unavailable rather than fabricated", "compare_only"),
+            row(BIL_ID, "cash_benchmark", {}, "defensive cash proxy", "too slow for profit target", "benchmark_control", "metrics marked unavailable rather than fabricated", "compare_only"),
+            row(LVQ_ID, "watchlist_diagnostic_only", lvq_metrics, "safer/interesting low-vol quality profile", "weaker than active DSR/SPY references", "watchlist_only", "not active; not candidate_exhaustive-ready", "keep_watchlist"),
+        ]
+    )
+    return best_rows
 
 
 def candidate_pipeline_status(state: dict[str, Any]) -> list[dict[str, str]]:
@@ -193,7 +243,7 @@ def candidate_pipeline_status(state: dict[str, Any]) -> list[dict[str, str]]:
         "approved-cache batch 3",
         "expanded-universe batch 1",
     ]
-    return [
+    rows = [
         {"stage": "active_frozen", "count": len(protected), "rows": ";".join(protected), "status": "protected_active_observations", "next_action": "observe_only"},
         {"stage": "promotion_review_candidates", "count": 0, "rows": "", "status": "empty_current_checkpoint", "next_action": "none"},
         {"stage": "candidate_exhaustive_queue", "count": 0, "rows": "", "status": "empty_current_checkpoint", "next_action": "none"},
@@ -202,8 +252,12 @@ def candidate_pipeline_status(state: dict[str, Any]) -> list[dict[str, str]]:
         {"stage": "benchmark_watchlist", "count": len(benchmark_watchlist), "rows": ";".join(benchmark_watchlist), "status": "control_rows_only", "next_action": "compare_only"},
         {"stage": "diversifier_watchlist", "count": 1, "rows": LVQ_ID, "status": "diagnostic_watchlist_only", "next_action": "keep_watchlist"},
         {"stage": "rejected_or_archived", "count": len(rejected), "rows": ";".join(rejected), "status": "resolved_or_saturated_for_now", "next_action": "do_not_rerun_now"},
-        {"stage": "data_pending", "count": 1, "rows": "active_combo_benchmark_series", "status": "engineering_repair_needed", "next_action": NEXT_ENGINEERING_ACTION},
     ]
+    if state["active_combo_available"]:
+        rows.append({"stage": "benchmark_reference_available", "count": 1, "rows": COMBO_ID, "status": "active_combo_exact_reconstruction_available", "next_action": "compare_only"})
+    else:
+        rows.append({"stage": "data_pending", "count": 1, "rows": "active_combo_benchmark_series", "status": "engineering_repair_needed", "next_action": NEXT_ENGINEERING_ACTION})
+    return rows
 
 
 def failed_lanes() -> list[dict[str, Any]]:
@@ -253,20 +307,27 @@ def watchlist_rows() -> list[dict[str, str]]:
     ]
 
 
-def accepted_caveats_text() -> str:
-    return """# Accepted Caveats
+def accepted_caveats_text(state: dict[str, Any]) -> str:
+    active_combo_section = """## Active Combo Benchmark Restored
 
-## DSR Recovered Best-Equity Mismatch
-
-- Recovered best_final_equity was around `4071.04`.
-- Recomputed best_final_equity was around `3481.6998`.
-- The user chose not to spend more resources on manual review.
-- DSR remains accepted for research continuity, not as perfectly reconciled evidence.
-
-## Active Combo Unavailable
+- `active_combo_vm_dsr_equal_weight_v1` has an exact deterministic benchmark/reference series in `evidence/active_combo_series_reconciliation/latest`.
+- It remains benchmark/control only, not an active strategy, not independently E4-qualified, and not paper-forward eligible.
+- Future comparisons may use the restored daily series and metric summary, with the benchmark-only caveat preserved.
+""" if state["active_combo_available"] else """## Active Combo Unavailable
 
 - The exact active-combo benchmark series is not consistently available.
 - Future comparative reviews should repair this before major new discovery.
+"""
+    return f"""# Accepted Caveats
+
+## DSR Recovered Best-Equity Mismatch
+
+- Historical recovered best_final_equity was around `4071.04`; role=`historical_recovered_claim`; evidence_status=`unverified_non_comparable`; eligible_E4=`false`.
+- Current diagnostic best_final_equity was around `3481.6998`; role=`current_sampled_window_diagnostic`; evidence_status=`reproducible_diagnostic_only`; eligible_E4=`false`.
+- The two values are `non_comparable`; the current diagnostic is not activation performance and is not a historical replacement.
+- DSR remains active/frozen for lifecycle continuity, not because qualifying backtest lineage is complete.
+
+{active_combo_section}
 
 ## Data
 
@@ -298,11 +359,17 @@ def do_not_rerun_text() -> str:
     return "\n".join(lines) + "\n"
 
 
-def engineering_next_steps_text() -> str:
-    return """# Recommended Engineering Next Steps
+def engineering_next_steps_text(state: dict[str, Any]) -> str:
+    if state["active_combo_available"]:
+        first = """1. Active-combo benchmark repair is complete for this checkpoint.
+   - Use `evidence/active_combo_series_reconciliation/latest` for deterministic active-combo benchmark comparisons.
+   - Keep the row benchmark/control only; do not treat it as strategy promotion evidence."""
+    else:
+        first = """1. `repair_active_combo_benchmark_and_reporting`
+   - Build a deterministic active-combo benchmark series and use it consistently in comparison tables."""
+    return f"""# Recommended Engineering Next Steps
 
-1. `repair_active_combo_benchmark_and_reporting`
-   - Build a deterministic active-combo benchmark series and use it consistently in comparison tables.
+{first}
 2. Normalize decision taxonomy.
    - Avoid `needs_benchmark_delta_review` when deltas exist.
    - Use `weaker_than_active_references_watchlist` if supported.
@@ -335,6 +402,8 @@ Do not start another immediate random ETF-wrapper discovery batch.
 
 def summary_text(state: dict[str, Any]) -> str:
     mismatch_text = "\n".join(f"- {item}" for item in state["mismatches"]) or "- none"
+    combo_line = f"`{COMBO_ID}` as reconstructed benchmark/reference" if state["active_combo_available"] else "active combo benchmark remains pending repair"
+    next_engineering = state["active_combo_state"]["next_engineering_action"]
     return f"""# Current Research Checkpoint
 
 Created at UTC: `{now_utc()}`
@@ -347,6 +416,7 @@ This checkpoint pauses the current ETF-wrapper discovery track. It is an audit/c
 - `{DSR_ID}`
 - `{SPY_200D_ID}` as frozen control
 - `{BIL_ID}` as cash benchmark
+- {combo_line}
 - `{LVQ_ID}` as watchlist/diagnostic only
 
 ## Pipeline Conclusion
@@ -355,7 +425,7 @@ This checkpoint pauses the current ETF-wrapper discovery track. It is an audit/c
 - Candidate_exhaustive queue: `0`
 - New paper-forward actions recommended: `0`
 - Expanded-universe batch 1 promotion candidates: `0`
-- Primary next engineering action: `{NEXT_ENGINEERING_ACTION}`
+- Primary next engineering action: `{next_engineering}`
 
 ## State Mismatches / Assumptions Recorded
 
@@ -365,15 +435,18 @@ The checkpoint treats stale registry flags as historical residue, not as current
 """
 
 
-def update_roadmap(root: Path) -> bool:
+def update_roadmap(root: Path, state: dict[str, Any]) -> bool:
     path = root / ROADMAP_PATH
     existing = path.read_text(encoding="utf-8") if path.exists() else "# Research Roadmap\n"
+    next_engineering = state["active_combo_state"]["next_engineering_action"]
+    combo_status = "Active-combo benchmark/reference series is exact and restored." if state["active_combo_available"] else "Active-combo benchmark/reference series remains unavailable."
     section = f"""## Current Research Checkpoint
 
 - ETF-wrapper discovery is paused.
 - Current best supported pair is active VM + active DSR.
+- {combo_status}
 - Candidate pipeline has no surviving candidate_exhaustive row.
-- Next engineering action is `{NEXT_ENGINEERING_ACTION}`.
+- Next engineering action is `{next_engineering}`.
 - DSR caveat is accepted but recorded.
 - No more immediate similar ETF-wrapper batch discovery.
 """
@@ -387,17 +460,20 @@ def update_roadmap(root: Path) -> bool:
     return True
 
 
-def update_registry_metadata(root: Path) -> bool:
+def update_registry_metadata(root: Path, state: dict[str, Any]) -> bool:
     path = root / REGISTRY_PATH
+    next_engineering = state["active_combo_state"]["next_engineering_action"]
     updates = {
         "current_research_checkpoint_path": str(root / OUTPUT_DIR),
         "etf_discovery_status": "paused",
         "candidate_pipeline_empty": "true",
-        "next_engineering_action": NEXT_ENGINEERING_ACTION,
+        "next_engineering_action": next_engineering,
         "next_research_action_after_engineering": NEXT_RESEARCH_AFTER_ENGINEERING,
         "no_candidate_exhaustive_run": "true",
         "no_paper_forward_action": "true",
         "no_real_money_recommendation": "true",
+        "active_combo_reconciliation_path": str(root / ACTIVE_COMBO_RECONCILIATION_DIR),
+        "active_combo_reference_available": "true" if state["active_combo_available"] else "false",
     }
     if not path.exists():
         registry = {"registry": {"schema_version": 1, "project": "trading_tournament", "research_only": True, "real_money_recommendation": False, "broker_integration": False, "live_orders": False}, "risk_framework": {}, "strategies": []}
@@ -424,9 +500,6 @@ def update_registry_metadata(root: Path) -> bool:
             seen.add(key)
             continue
         output.append(line)
-        if in_registry and line.startswith("  research_roadmap_next_action:") and not inserted:
-            output.extend(f"  {key}: {val}" for key, val in updates.items() if key not in seen)
-            inserted = True
     if in_registry and not inserted:
         output.extend(f"  {key}: {val}" for key, val in updates.items() if key not in seen)
     path.write_text("\n".join(output) + "\n", encoding="utf-8")
@@ -459,9 +532,9 @@ def write_outputs(root: Path, state: dict[str, Any]) -> dict[str, Any]:
     write_csv(output / "failed_research_lanes.csv", failed_rows, ["lane_or_strategy", "best_row", "status", "primary_failure_reason", "secondary_failure_reason", "still_useful_as", "should_rerun_now", "reason"])
     write_csv(output / "saturated_lanes.csv", saturated_rows, ["family", "reason_saturated", "best_known_row", "why_not_rerun_now", "condition_to_revisit"])
     write_csv(output / "watchlist_and_diagnostic_rows.csv", watchlist, ["strategy_id", "role", "status", "reason"])
-    (output / "accepted_caveats.md").write_text(accepted_caveats_text(), encoding="utf-8")
+    (output / "accepted_caveats.md").write_text(accepted_caveats_text(state), encoding="utf-8")
     (output / "do_not_rerun_now.md").write_text(do_not_rerun_text(), encoding="utf-8")
-    (output / "recommended_engineering_next_steps.md").write_text(engineering_next_steps_text(), encoding="utf-8")
+    (output / "recommended_engineering_next_steps.md").write_text(engineering_next_steps_text(state), encoding="utf-8")
     (output / "recommended_research_next_steps.md").write_text(research_next_steps_text(), encoding="utf-8")
     (output / "current_research_checkpoint_summary.md").write_text(summary_text(state), encoding="utf-8")
     manifest = {
@@ -474,8 +547,10 @@ def write_outputs(root: Path, state: dict[str, Any]) -> dict[str, Any]:
         "stale_promotion_review_flags": state["stale_promotion_flags"],
         "active_combo_available": state["active_combo_available"],
         "recorded_mismatches": state["mismatches"],
-        "next_engineering_action": NEXT_ENGINEERING_ACTION,
+        "next_engineering_action": state["active_combo_state"]["next_engineering_action"],
         "next_research_action_after_engineering": NEXT_RESEARCH_AFTER_ENGINEERING,
+        "active_combo_reconciliation_path": state["active_combo_state"]["evidence_path"],
+        "active_combo_reconstructability_classification": state["active_combo_state"]["manifest"].get("reconstructability_classification", "unavailable"),
         "strategy_discovery_run": False,
         "research_sample_run": False,
         "candidate_exhaustive_run": False,
@@ -521,13 +596,13 @@ def write_outputs(root: Path, state: dict[str, Any]) -> dict[str, Any]:
 
 def run_current_research_checkpoint(root: Path = ROOT) -> dict[str, Any]:
     state = evidence_state(root)
-    update_roadmap(root)
-    update_registry_metadata(root)
+    update_roadmap(root, state)
+    update_registry_metadata(root, state)
     result = write_outputs(root, state)
     return {
         "output_dir": result["output_dir"],
         "packet": result["packet"],
-        "next_engineering_action": NEXT_ENGINEERING_ACTION,
+        "next_engineering_action": state["active_combo_state"]["next_engineering_action"],
         "next_research_action_after_engineering": NEXT_RESEARCH_AFTER_ENGINEERING,
         "recorded_mismatches": state["mismatches"],
         "consistency": result["consistency"],

@@ -12,6 +12,8 @@ from typing import Any
 import pandas as pd
 import yaml
 
+from strategy_lab.research_os.research.dsr_evidence_status import DSR_ACTIVE_ID
+
 
 REPO_ROOT = Path(__file__).resolve().parent
 CHALLENGE_LATEST = REPO_ROOT / "evidence" / "challenge_runs" / "latest"
@@ -233,6 +235,94 @@ def advisor_zip_forbidden_entries(advisor_latest: Path, forbidden_tokens: list[s
     return findings
 
 
+def generated_dsr_decision_texts(repo_root: Path = REPO_ROOT) -> dict[str, str]:
+    paths = [
+        repo_root / "evidence" / "strategy_evidence_library" / "latest" / "sel_decisions.json",
+        repo_root / "evidence" / "research_state" / "latest" / "research_state_manifest.json",
+        repo_root / "evidence" / "research_state" / "latest" / "active_observations.csv",
+        repo_root / "evidence" / "current_research_checkpoint" / "latest" / "current_best_strategy_set.csv",
+        repo_root / "evidence" / "current_research_checkpoint" / "latest" / "accepted_caveats.md",
+    ]
+    return {str(path.relative_to(repo_root)).replace("\\", "/"): safe_read_text(path) for path in paths if path.exists()}
+
+
+def dsr_metric_semantic_findings(texts: dict[str, str]) -> list[dict[str, Any]]:
+    findings: list[dict[str, Any]] = []
+    for name, text in texts.items():
+        lowered = text.lower()
+        if "4071.04" in text and "unverified_non_comparable" not in lowered:
+            findings.append(
+                {
+                    "file": name,
+                    "metric": "4071.04",
+                    "issue": "historical recovered metric presented without unverified_non_comparable status",
+                }
+            )
+        if "3481.6998" in text:
+            if "reproducible_diagnostic_only" not in lowered and "current_diagnostic_only" not in lowered:
+                findings.append(
+                    {
+                        "file": name,
+                        "metric": "3481.6998",
+                        "issue": "current diagnostic metric presented without diagnostic-only status",
+                    }
+                )
+            forbidden_current_labels = [
+                "activation performance",
+                "approved performance",
+                "validated performance",
+                "qualifying performance",
+                "qualifying e4",
+                "qualifies as e4",
+                "e4 evidence",
+            ]
+            matched = []
+            for phrase in forbidden_current_labels:
+                if phrase not in lowered:
+                    continue
+                if phrase == "activation performance" and "not activation performance" in lowered:
+                    continue
+                if phrase == "qualifying e4" and ("not qualifying e4" in lowered or "not_qualifying_e4" in lowered):
+                    continue
+                if phrase == "e4 evidence" and "absence of qualifying e4 evidence" in lowered:
+                    continue
+                matched.append(phrase)
+            if matched:
+                findings.append(
+                    {
+                        "file": name,
+                        "metric": "3481.6998",
+                        "issue": "current diagnostic metric is labeled as activation/approved/validated/qualifying performance",
+                        "matched_phrases": matched,
+                    }
+                )
+        if "4071.04" in text and "3481.6998" in text and "non_comparable" not in lowered:
+            findings.append(
+                {
+                    "file": name,
+                    "metric": "both",
+                    "issue": "historical and current diagnostic metrics appear together without non_comparable status",
+                }
+            )
+        if DSR_ACTIVE_ID.lower() in lowered and "inactive because" in lowered and "evidence chain" in lowered:
+            findings.append(
+                {
+                    "file": name,
+                    "metric": "lifecycle",
+                    "issue": "DSR appears inactive because evidence chain is incomplete",
+                }
+            )
+        if DSR_ACTIVE_ID.lower() in lowered and "complete evidence chain because" in lowered and "active" in lowered:
+            findings.append(
+                {
+                    "file": name,
+                    "metric": "lifecycle",
+                    "issue": "DSR active lifecycle is used to synthesize complete evidence chain",
+                }
+            )
+    return findings
+
+
 def evaluate_consistency(
     summary_text: str,
     challenge: pd.DataFrame,
@@ -407,6 +497,18 @@ def evaluate_consistency(
             )
         )
 
+    dsr_texts = {"challenge_summary.md": summary_text, **advisor_texts, **generated_dsr_decision_texts()}
+    dsr_findings = dsr_metric_semantic_findings(dsr_texts)
+    if dsr_findings:
+        errors.append(
+            issue(
+                "dsr_metric_evidence_status_semantics",
+                "error",
+                "DSR historical and current diagnostic metrics are not safely distinguished.",
+                {"findings": dsr_findings[:50]},
+            )
+        )
+
     status = "errors" if errors else "warnings" if warnings else "passed"
     return {
         "created_timestamp_utc": utc_now(),
@@ -422,6 +524,8 @@ def evaluate_consistency(
         "row_level_exact_evidence_present": bool(row_exact_exists),
         "exact_family_rows_present": bool(exact_family_rows_exist(rolling)),
         "run_level_finality_false_detected": bool(run_level_finality_false(summary_text)),
+        "dsr_metric_semantic_findings": dsr_findings,
+        "dsr_metric_semantic_finding_count": len(dsr_findings),
     }
 
 
@@ -480,6 +584,8 @@ Row-level exact evidence present: {report.get('row_level_exact_evidence_present'
 Exact family rows present: {report.get('exact_family_rows_present')}
 
 Run-level finality false detected: {report.get('run_level_finality_false_detected')}
+
+DSR metric semantic findings: {report.get('dsr_metric_semantic_finding_count')}
 
 ## Errors
 

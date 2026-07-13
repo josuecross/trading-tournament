@@ -10,6 +10,8 @@ from typing import Any
 
 import yaml
 
+from strategy_lab.research_os.research.dsr_evidence_status import DSR_ACTIVE_ID, load_dsr_evidence_status
+
 
 REPO_ROOT = Path(__file__).resolve().parent
 OUTPUT_ROOT = REPO_ROOT / "evidence" / "research_state"
@@ -207,6 +209,11 @@ def build_dashboard() -> Path:
     commodity_risk_control_best_registry = registry_strategy(registry, commodity_risk_control_manifest.get("best_risk_control_candidate", ""))
     crypto_tier2_best_registry = registry_strategy(registry, crypto_tier2_risk_control_manifest.get("best_risk_control_candidate", ""))
     global_multi_asset_best_registry = registry_strategy(registry, global_multi_asset_batch1_manifest.get("best_multi_asset_candidate", ""))
+    dsr_metric_status = load_dsr_evidence_status(REPO_ROOT)
+    dsr_dashboard_note = (
+        "active/frozen observation; historical activation performance unverified_non_comparable; "
+        "current cached diagnostic reproducible_diagnostic_only and non_comparable; E4 lineage incomplete"
+    )
 
     OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)
     run_id = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
@@ -233,7 +240,7 @@ def build_dashboard() -> Path:
                     "decision_status": row.get("decision_status", ""),
                     "signal_state": row.get("signal_state", ""),
                     "paper_forward_active": str(row.get("strategy", "")) in {"combo_SPY200d_GLD_50_50_v1", "SPY_200d_trend_model"},
-                    "notes": "paper/demo observation only; not a trading signal",
+                    "notes": dsr_dashboard_note if row.get("strategy") == DSR_ACTIVE_ID else "paper/demo observation only; not a trading signal",
                 }
             )
     for row in registry.get("strategies", []):
@@ -249,7 +256,7 @@ def build_dashboard() -> Path:
                         "decision_status": "recovered_frozen_too_early",
                         "signal_state": "recovered_active_observation",
                         "paper_forward_active": True,
-                        "notes": "conversation-recovered frozen paper/demo observation only; not a trading signal",
+                        "notes": dsr_dashboard_note if row_id == DSR_ACTIVE_ID else "conversation-recovered frozen paper/demo observation only; not a trading signal",
                     }
                 )
 
@@ -496,6 +503,8 @@ current_phase: `{PHASE}`
 - SPY_200d frozen control: `{str(spy_registry.get('rules_frozen', False)).lower()}`
 - SPY_200d status: `{spy.get('status', spy_registry.get('status', 'unavailable'))}`
 - SPY_200d replaced: `false`
+- DSR active/frozen observation: `{dsr_metric_status['canonical_lifecycle_status']}`
+- DSR evidence warning: `{dsr_metric_status['evidence_warning']}`
 
 Forward checkpoint is not ready for judgment. No conclusion is allowed from first-day forward observation evidence.
 
@@ -612,6 +621,12 @@ Read `current_state_summary.md` first, then the CSV matrices for active observat
         "component_drawdown_attribution_available": component_drawdown_attribution_available,
         "current_phase": PHASE,
         "data_downloaded": False,
+        "dsr_metric_evidence_status": dsr_metric_status,
+        "dsr_historical_metric_evidence_status": dsr_metric_status["historical_metric_evidence_status"],
+        "dsr_current_diagnostic_evidence_status": dsr_metric_status["current_diagnostic_evidence_status"],
+        "dsr_metric_comparability": dsr_metric_status["metric_comparability"],
+        "dsr_metric_eligible_for_e4": dsr_metric_status["metric_eligible_for_evidence_stage"]["E4"],
+        "dsr_highest_independent_sel_level": dsr_metric_status["highest_independent_sel_level"],
         "historical_research_parallel_allowed": True,
         "individual_stock_momentum_gate1b_decision": stock_gate1b_manifest.get("decision", "unavailable"),
         "individual_stock_momentum_gate1b_status": stock_gate1b_registry.get("status", "unavailable"),

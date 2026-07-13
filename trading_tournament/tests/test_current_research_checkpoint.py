@@ -98,6 +98,38 @@ def write_state(root: Path) -> None:
     write_csv(expanded / "expanded_universe_batch_1_benchmark_delta.csv", [{"strategy_id": "x", "benchmark_id": "active_combo", "delta": "unavailable", "comparison_status": "unavailable"}], ["strategy_id", "benchmark_id", "delta", "comparison_status"])
 
 
+def write_exact_active_combo_reconciliation(root: Path) -> None:
+    base = root / checkpoint.ACTIVE_COMBO_RECONCILIATION_DIR
+    base.mkdir(parents=True, exist_ok=True)
+    (base / "active_combo_series_reconciliation.json").write_text(
+        json.dumps(
+            {
+                "combo_id": checkpoint.COMBO_ID,
+                "reconstructability_classification": "exactly_reconstructable",
+                "checkpoint_combo_row_safe_to_restore": True,
+                "series_reconstructed": True,
+                "max_daily_exposure": 1.0,
+                "weight_invariant_passed": True,
+                "bil_remainder_passed": True,
+                "date_alignment_passed": True,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (base / "reconciliation_consistency_check.json").write_text(json.dumps({"consistency_passed": True}), encoding="utf-8")
+    write_csv(
+        base / "combo_metric_summary.csv",
+        [
+            {"benchmark_id": checkpoint.COMBO_ID, "metric": "180d_median_final_equity", "value": "3373.0109", "horizon": "180", "notes": "test"},
+            {"benchmark_id": checkpoint.COMBO_ID, "metric": "target_300_before_stop_rate", "value": "0.6", "horizon": "180", "notes": "test"},
+            {"benchmark_id": checkpoint.COMBO_ID, "metric": "target_400_before_stop_rate", "value": "0.6", "horizon": "180", "notes": "test"},
+            {"benchmark_id": checkpoint.COMBO_ID, "metric": "180d_worst_drawdown", "value": "-247.5385", "horizon": "180", "notes": "test"},
+            {"benchmark_id": checkpoint.COMBO_ID, "metric": "stop_hit_rate", "value": "0.0", "horizon": "180", "notes": "test"},
+        ],
+        ["benchmark_id", "metric", "value", "horizon", "notes"],
+    )
+
+
 @pytest.fixture()
 def synthetic_checkpoint(tmp_path: Path) -> dict[str, object]:
     write_registry(tmp_path)
@@ -165,11 +197,35 @@ def test_accepted_dsr_caveat_is_recorded(synthetic_checkpoint: dict[str, object]
     text = (Path(synthetic_checkpoint["result"]["output_dir"]) / "accepted_caveats.md").read_text(encoding="utf-8")
     assert "4071.04" in text
     assert "3481.6998" in text
+    assert "unverified_non_comparable" in text
+    assert "reproducible_diagnostic_only" in text
+    assert "not activation performance" in text
+    assert "eligible_E4=`false`" in text
 
 
 def test_active_combo_repair_is_recommended(synthetic_checkpoint: dict[str, object]) -> None:
     text = (Path(synthetic_checkpoint["result"]["output_dir"]) / "recommended_engineering_next_steps.md").read_text(encoding="utf-8")
     assert checkpoint.NEXT_ENGINEERING_ACTION in text
+
+
+def test_active_combo_row_is_included_after_exact_reconciliation(tmp_path: Path) -> None:
+    write_registry(tmp_path)
+    write_state(tmp_path)
+    write_exact_active_combo_reconciliation(tmp_path)
+    result = checkpoint.run_current_research_checkpoint(tmp_path)
+    output = Path(result["output_dir"])
+    best = list(csv.DictReader((output / "current_best_strategy_set.csv").open(encoding="utf-8")))
+    ids = {row["strategy_id"] for row in best}
+    assert {checkpoint.VM_ID, checkpoint.DSR_ID, checkpoint.SPY_200D_ID, checkpoint.BIL_ID, checkpoint.LVQ_ID} <= ids
+    combo_row = next(row for row in best if row["strategy_id"] == checkpoint.COMBO_ID)
+    assert combo_row["role"] == "reconstructed_benchmark_reference"
+    assert combo_row["recommended_action"] == "compare_only"
+    pipeline = {row["stage"]: row for row in csv.DictReader((output / "candidate_pipeline_status.csv").open(encoding="utf-8"))}
+    assert "data_pending" not in pipeline
+    assert pipeline["benchmark_reference_available"]["rows"] == checkpoint.COMBO_ID
+    caveats = (output / "accepted_caveats.md").read_text(encoding="utf-8")
+    assert "Active Combo Benchmark Restored" in caveats
+    assert "Active Combo Unavailable" not in caveats
 
 
 def test_consistency_check_passes(synthetic_checkpoint: dict[str, object]) -> None:

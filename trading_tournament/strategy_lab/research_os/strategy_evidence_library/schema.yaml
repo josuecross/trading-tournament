@@ -21,6 +21,58 @@ generated_outputs:
   implementation_records: sel_implementations.json
   experiment_records: sel_experiments.json
   decision_records: sel_decisions.json
+source_origin_taxonomy:
+  origins:
+    - external
+    - internal
+    - generated
+    - unknown
+  external_classes:
+    - academic_primary
+    - academic_replication
+    - practitioner_research
+    - documented_strategy_archetype
+    - open_source_implementation_reference
+    - benchmark_or_dataset_reference
+    - book_or_long_form_reference
+    - community_lead_only
+    - unverified_external_claim
+  internal_classes:
+    - internal_prompt_idea
+    - internal_project_evidence
+    - internal_registry
+    - internal_governance_record
+    - internal_implementation
+    - internal_benchmark_definition
+  generated_classes:
+    - generated_report
+    - generated_manifest
+    - generated_reconciliation
+    - generated_dashboard
+  required_source_classification_fields:
+    - raw_source_type
+    - source_origin
+    - source_class
+    - source_role
+    - external_public_source
+    - eligible_for_external_discovery_backlog
+    - primary_source_available
+    - source_url_or_citation_available
+    - implementation_reference_only
+    - internal_evidence_only
+    - classification_rule_id
+    - classification_provenance
+    - classification_confidence
+    - classification_unresolved_reason
+  external_backlog_rules:
+    project_evidence_records_are_internal: true
+    local_evidence_paths_are_internal_or_generated: true
+    internal_prompt_records_are_internal: true
+    local_implementations_are_internal: true
+    public_repositories_are_implementation_references_unless_rules_claims_are_explicit: true
+    strategy_name_alone_is_not_external_backlog_evidence: true
+    generated_reconciliation_dashboard_checkpoint_reports_are_not_external_sources: true
+    active_combo_benchmark_definition_is_internal_benchmark_definition: true
 evidence_levels:
   E0: unqualified_lead
   E1: source_qualified_idea
@@ -38,6 +90,63 @@ lifecycle_statuses:
   - eligible
   - active
   - retired
+  - unmapped
+  - unknown
+semantic_validation:
+  migration_placeholders_qualify_as_preregistration: false
+  evidence_levels_require_explicit_qualifying_evidence: true
+  evidence_levels_are_cumulative_without_stage_skipping: true
+  e2_requires_resolved_mandatory_fields_and_content_hash: true
+  see_artifact_is_not_a_resolved_specification_value: true
+  e3_requires_linked_qualifying_e2_and_tests_or_review: true
+  e4_excludes_audit_reconciliation_and_report_references: true
+  e5_requires_complete_e2_e4_chain_and_explicit_robustness_gate: true
+  e6_requires_complete_e2_e5_chain_and_explicit_eligibility: true
+  e7_is_not_synthesized_from_active_lifecycle_alone: true
+  e7_requires_canonical_active_observation_index_and_detail: true
+  active_lifecycle_status_separate_from_verified_evidence_level: true
+  lifecycle_normalization_exact_mapping_only: true
+  failure_codes_require_field_level_provenance: true
+  benchmark_or_control_role_does_not_imply_e6: true
+  promotion_review_passed_does_not_imply_paper_demo_eligible: true
+  source_status_preserved_exactly: true
+decision_record_required_provenance:
+  - evidence_level_provenance
+  - lifecycle_status_provenance
+  - failure_code_provenance
+  - source_project_status
+  - source_status_detail
+decision_record_dsr_metric_fields:
+  - historical_recovered_metrics
+  - historical_metric_evidence_status
+  - current_diagnostic_metrics
+  - current_diagnostic_scope
+  - metric_comparability
+  - metric_eligible_for_evidence_stage
+  - missing_evidence_stages
+  - evidence_warning
+  - source_artifact_provenance
+specification_record_kinds:
+  - source_rule_spec
+  - source_intake_reference
+  - design_evidence_reference
+  - migration_placeholder
+  - unknown
+mandatory_e2_specification_fields:
+  - strategy_universe
+  - entry_rule
+  - exit_rule
+  - timeframe
+  - rebalance_cadence
+  - parameters
+  - required_data
+  - signal_timestamp
+  - order_timestamp
+  - benchmark_rule
+  - success_criteria
+  - failure_criteria
+  - frozen_specification_reference
+  - specification_content_hash
 failure_codes:
   - SOURCE_NOT_REPRODUCED
   - RULES_INCOMPLETE

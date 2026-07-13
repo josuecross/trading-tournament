@@ -130,3 +130,35 @@ def test_flags_real_money_recommendation_language(tmp_path: Path) -> None:
 def test_real_money_negation_is_allowed(tmp_path: Path) -> None:
     report = evaluate("This is not real-money suitable and has no guaranteed return.", rolling=pd.DataFrame(), tmp_path=tmp_path)
     assert "real_money_boundary" not in rule_ids(report)
+
+
+def test_flags_unannotated_dsr_historical_metric(tmp_path: Path) -> None:
+    report = evaluate("DSR caveat: 4071.04", rolling=pd.DataFrame(), tmp_path=tmp_path)
+    assert "dsr_metric_evidence_status_semantics" in rule_ids(report)
+
+
+def test_flags_dsr_current_diagnostic_labeled_as_activation_performance(tmp_path: Path) -> None:
+    report = evaluate(
+        "DSR 3481.6998 reproducible_diagnostic_only activation performance",
+        rolling=pd.DataFrame(),
+        tmp_path=tmp_path,
+    )
+    assert "dsr_metric_evidence_status_semantics" in rule_ids(report)
+
+
+def test_allows_annotated_dsr_metric_distinction(tmp_path: Path) -> None:
+    report = evaluate(
+        "DSR 4071.04 unverified_non_comparable; 3481.6998 reproducible_diagnostic_only; non_comparable; not_qualifying_e4.",
+        rolling=pd.DataFrame(),
+        tmp_path=tmp_path,
+    )
+    assert "dsr_metric_evidence_status_semantics" not in rule_ids(report)
+
+
+def test_flags_active_lifecycle_used_as_complete_evidence_chain(tmp_path: Path) -> None:
+    report = evaluate(
+        f"{consistency.DSR_ACTIVE_ID} has a complete evidence chain because it is active.",
+        rolling=pd.DataFrame(),
+        tmp_path=tmp_path,
+    )
+    assert "dsr_metric_evidence_status_semantics" in rule_ids(report)

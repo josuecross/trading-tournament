@@ -10,13 +10,13 @@ from strategy_lab.research_os.strategy_evidence_library.builder import (
 
 def main() -> None:
     root = Path(__file__).resolve().parent
-    library = write_strategy_evidence_library(root, cleanup_generated=True)
+    library = write_strategy_evidence_library(root, cleanup_generated=False)
     output = root / OUTPUT_DIR
     print(f"Strategy Evidence Library generated: {output}")
     print(f"Sources: {library['manifest']['source_records']}")
     print(f"Ideas: {library['manifest']['idea_records']}")
     print(f"Experiments: {library['manifest']['experiment_records']}")
-    print(f"Generated cache directories removed: {library['manifest']['generated_cache_directories_removed']}")
+    print("Generated cache cleanup disabled for this SEL generation")
 
 
 if __name__ == "__main__":

@@ -10,15 +10,17 @@ registry:
   current_research_checkpoint_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\current_research_checkpoint\latest
   etf_discovery_status: paused
   candidate_pipeline_empty: true
-  next_engineering_action: repair_active_combo_benchmark_and_reporting
+  next_engineering_action: none_active_combo_repaired
   next_research_action_after_engineering: choose_structurally_distinct_lane_or_archive
   no_candidate_exhaustive_run: true
   no_paper_forward_action: true
   no_real_money_recommendation: true
+  active_combo_reconciliation_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\active_combo_series_reconciliation\latest
+  active_combo_reference_available: true
   current_research_checkpoint_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\current_research_checkpoint\latest
   etf_discovery_status: paused
   candidate_pipeline_empty: true
-  next_engineering_action: repair_active_combo_benchmark_and_reporting
+  next_engineering_action: none_active_combo_repaired
   next_research_action_after_engineering: choose_structurally_distinct_lane_or_archive
   no_candidate_exhaustive_run: true
   no_paper_forward_action: true
