@@ -58,6 +58,40 @@ def write_state(root: Path) -> None:
     roadmap = root / checkpoint.ROADMAP_PATH
     roadmap.parent.mkdir(parents=True, exist_ok=True)
     roadmap.write_text("# Research Roadmap\n\nCurrent next action: `old_action`\n", encoding="utf-8")
+    research_queue = root / checkpoint.RESEARCH_QUEUE_PATH
+    research_queue.parent.mkdir(parents=True, exist_ok=True)
+    research_queue.write_text(
+        yaml.safe_dump(
+            {
+                "external_source_discovery_lane": {
+                    "status": "paused_pending_direction_owner_supplied_source",
+                    "external_source_library_role": "discovery_backlog_only",
+                    "automatic_next_source_selection": False,
+                    "new_external_screen_authorized": False,
+                    "next_source_requires_direction_owner_supply": True,
+                    "next_source_must_pass_existing_eligibility_filter": True,
+                    "latest_exact_variant_closure": str(checkpoint.MAX_DIV_EVIDENCE_DIR),
+                    "latest_closed_exact_variant": checkpoint.MAX_DIV_ID,
+                    "latest_closed_exact_variant_outcome": "risk_reduction_without_return_edge",
+                    "broader_family_status": "open_only_for_materially_distinct_source_backed_hypotheses",
+                    "next_allowed_actions": [
+                        "continue_existing_paper_demo_observation",
+                        "externally_research_and_select_one_direction_owner_source",
+                        "validate_direction_owner_supplied_external_source_against_existing_eligibility_filter",
+                    ],
+                    "blocked_reason": "automatic progression paused",
+                    "authorizes_backtests": False,
+                    "authorizes_validation": False,
+                    "authorizes_strategy_implementation": False,
+                    "authorizes_provider_download": False,
+                    "authorizes_candidate_exhaustive": False,
+                    "authorizes_paper_forward": False,
+                }
+            },
+            sort_keys=False,
+        ),
+        encoding="utf-8",
+    )
 
     profit_rows = [
         {"strategy_id": checkpoint.VM_ID, "metric": "180d_median_final_equity", "value": "3328.0857", "horizon": "180", "notes": "test"},
@@ -96,6 +130,88 @@ def write_state(root: Path) -> None:
     write_csv(root / "evidence" / "parallel_research_discovery" / "approved_cache_batch_2" / "latest" / "approved_cache_batch_2_promotion_candidates.csv", [], ["strategy_id"])
     write_csv(root / "evidence" / "parallel_research_discovery" / "approved_cache_batch_3" / "latest" / "approved_cache_batch_3_promotion_candidates.csv", [], ["strategy_id"])
     write_csv(expanded / "expanded_universe_batch_1_benchmark_delta.csv", [{"strategy_id": "x", "benchmark_id": "active_combo", "delta": "unavailable", "comparison_status": "unavailable"}], ["strategy_id", "benchmark_id", "delta", "comparison_status"])
+
+    max_div = root / checkpoint.MAX_DIV_EVIDENCE_DIR
+    max_div.mkdir(parents=True, exist_ok=True)
+    (max_div / "screening_outcome.json").write_text(
+        json.dumps(
+            {
+                "candidate_id": checkpoint.MAX_DIV_ID,
+                "screening_outcome": "risk_reduction_without_return_edge",
+                "broader_validation_or_robustness_run": False,
+                "promotion_authorized": False,
+                "paper_demo_authorized": False,
+                "candidate_exhaustive_authorized": False,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (max_div / "consistency_check.json").write_text(
+        json.dumps(
+            {
+                "candidate_id": checkpoint.MAX_DIV_ID,
+                "consistency_passed": True,
+                "optimizer_feasibility_passed": True,
+                "no_promotion_or_paper_demo_activation": True,
+                "no_provider_calls": True,
+            }
+        ),
+        encoding="utf-8",
+    )
+    write_csv(
+        max_div / "candidate_metrics.csv",
+        [
+            {
+                "strategy_id": checkpoint.MAX_DIV_ID,
+                "horizon_days": "180",
+                "median_final_equity": "3101.48470704",
+                "effective_number_of_assets": "2.74870885661",
+                "maximum_single_asset_weight": "0.714885802539",
+                "realized_volatility": "0.0723501512894",
+                "max_drawdown_pct": "-0.0810681712767",
+            }
+        ],
+        ["strategy_id", "horizon_days", "median_final_equity", "effective_number_of_assets", "maximum_single_asset_weight", "realized_volatility", "max_drawdown_pct"],
+    )
+    write_csv(
+        max_div / "benchmark_relative_metrics.csv",
+        [
+            {
+                "benchmark_id": "equal_weight_same_five_etf_monthly_rebalanced_benchmark",
+                "candidate_id": checkpoint.MAX_DIV_ID,
+                "horizon_days": "180",
+                "median_final_equity_delta": "-107.660573284",
+                "realized_volatility_delta": "-0.025550667949",
+                "max_drawdown_pct_delta": "0.0101849035603",
+                "win_count": "0",
+            },
+            {
+                "benchmark_id": "inverse_volatility_same_five_etf_monthly_benchmark",
+                "candidate_id": checkpoint.MAX_DIV_ID,
+                "horizon_days": "180",
+                "median_final_equity_delta": "-64.3677865763",
+                "realized_volatility_delta": "-0.00856460742864",
+                "max_drawdown_pct_delta": "0.00819027570434",
+                "win_count": "0",
+            },
+        ],
+        ["benchmark_id", "candidate_id", "horizon_days", "median_final_equity_delta", "realized_volatility_delta", "max_drawdown_pct_delta", "win_count"],
+    )
+    write_csv(
+        max_div / "exact_variant_research_memory.csv",
+        [
+            {
+                "candidate_id": checkpoint.MAX_DIV_ID,
+                "family": "maximum_diversification_cross_asset_allocation",
+                "screening_outcome": "risk_reduction_without_return_edge",
+                "exact_variant_closed_for_immediate_retesting": "true",
+                "broader_family_status": "open_only_for_materially_distinct_source_backed_hypotheses",
+                "disallowed_immediate_retests": "alternative_covariance_windows|weight_caps|shrinkage|different_universe|trend_overlay",
+                "next_action": "do_not_retest_exact_variant_without_new_source",
+            }
+        ],
+        ["candidate_id", "family", "screening_outcome", "exact_variant_closed_for_immediate_retesting", "broader_family_status", "disallowed_immediate_retests", "next_action"],
+    )
 
 
 def write_exact_active_combo_reconciliation(root: Path) -> None:
@@ -169,8 +285,12 @@ def test_no_paper_forward_active_flag_is_changed(synthetic_checkpoint: dict[str,
 def test_no_real_money_recommendation_is_created(synthetic_checkpoint: dict[str, object]) -> None:
     root = Path(synthetic_checkpoint["root"])
     registry = yaml.safe_load((root / checkpoint.REGISTRY_PATH).read_text(encoding="utf-8"))
-    assert registry["registry"]["no_real_money_recommendation"] is True
-    assert json.loads((Path(synthetic_checkpoint["result"]["output_dir"]) / "current_research_checkpoint_manifest.json").read_text(encoding="utf-8"))["real_money_recommendation"] is False
+    manifest = json.loads((Path(synthetic_checkpoint["result"]["output_dir"]) / "current_research_checkpoint_manifest.json").read_text(encoding="utf-8"))
+    view = json.loads((Path(synthetic_checkpoint["result"]["output_dir"]) / "current_research_checkpoint_registry_metadata_view.json").read_text(encoding="utf-8"))
+    assert registry["registry"].get("no_real_money_recommendation") is None
+    assert view["no_real_money_recommendation"] == "true"
+    assert manifest["real_money_recommendation"] is False
+    assert manifest["canonical_registry_write"] is False
 
 
 def test_active_vm_and_active_dsr_are_represented(synthetic_checkpoint: dict[str, object]) -> None:
@@ -184,6 +304,28 @@ def test_candidate_pipeline_is_empty(synthetic_checkpoint: dict[str, object]) ->
     rows = {row["stage"]: row for row in csv.DictReader((Path(synthetic_checkpoint["result"]["output_dir"]) / "candidate_pipeline_status.csv").open(encoding="utf-8"))}
     assert rows["promotion_review_candidates"]["count"] == "0"
     assert rows["candidate_exhaustive_queue"]["count"] == "0"
+
+
+def test_external_source_lane_is_paused_and_not_self_selected(synthetic_checkpoint: dict[str, object]) -> None:
+    output = Path(synthetic_checkpoint["result"]["output_dir"])
+    pipeline = {row["stage"]: row for row in csv.DictReader((output / "candidate_pipeline_status.csv").open(encoding="utf-8"))}
+    manifest = json.loads((output / "current_research_checkpoint_manifest.json").read_text(encoding="utf-8"))
+    research_steps = (output / "recommended_research_next_steps.md").read_text(encoding="utf-8")
+    queue = yaml.safe_load((Path(synthetic_checkpoint["root"]) / checkpoint.RESEARCH_QUEUE_PATH).read_text(encoding="utf-8"))
+    lane = queue["external_source_discovery_lane"]
+
+    assert pipeline["external_source_discovery_lane"]["status"] == "paused_pending_direction_owner_supplied_source"
+    assert manifest["external_source_library_role"] == "discovery_backlog_only"
+    assert manifest["automatic_next_source_selection"] is False
+    assert manifest["new_external_screen_authorized"] is False
+    assert manifest["next_source_requires_direction_owner_supply"] is True
+    assert manifest["codex_must_not_choose_next_source_from_backlog_readiness"] is True
+    assert manifest["implementation_or_screening_unauthorized_until_source_supplied_and_validated"] is True
+    assert lane["authorizes_backtests"] is False
+    assert lane["authorizes_validation"] is False
+    assert lane["authorizes_strategy_implementation"] is False
+    assert "Codex-selected next external strategy" in research_steps
+    assert "Externally research and select one direction-owner source" in research_steps
 
 
 def test_saturated_lanes_are_represented(synthetic_checkpoint: dict[str, object]) -> None:
@@ -201,6 +343,28 @@ def test_accepted_dsr_caveat_is_recorded(synthetic_checkpoint: dict[str, object]
     assert "reproducible_diagnostic_only" in text
     assert "not activation performance" in text
     assert "eligible_E4=`false`" in text
+
+
+def test_max_diversification_exact_variant_closure_is_checkpointed(synthetic_checkpoint: dict[str, object]) -> None:
+    output = Path(synthetic_checkpoint["result"]["output_dir"])
+    manifest = json.loads((output / "current_research_checkpoint_manifest.json").read_text(encoding="utf-8"))
+    registry_view = json.loads((output / "current_research_checkpoint_registry_metadata_view.json").read_text(encoding="utf-8"))
+    pipeline = {row["stage"]: row for row in csv.DictReader((output / "candidate_pipeline_status.csv").open(encoding="utf-8"))}
+    caveats = (output / "accepted_caveats.md").read_text(encoding="utf-8")
+
+    assert manifest["max_diversification_exact_variant"] == checkpoint.MAX_DIV_ID
+    assert manifest["max_diversification_exact_variant_closed_for_immediate_retesting"] is True
+    assert manifest["max_diversification_broader_family_closed"] is False
+    assert manifest["max_diversification_screening_outcome"] == "risk_reduction_without_return_edge"
+    assert manifest["max_diversification_primary_failure_reason"] == "lower_return_than_equal_weight_and_inverse_volatility"
+    assert registry_view["max_diversification_broader_family_closed"] == "false"
+    assert pipeline["exact_variant_research_memory"]["rows"] == checkpoint.MAX_DIV_ID
+    assert pipeline["exact_variant_research_memory"]["next_action"] == "do_not_retest_exact_variant_without_new_source"
+    assert "source, optimizer, accounting, and methodology gates passed" in caveats
+    assert "0/5" in caveats
+    assert "2.74870885661" in caveats
+    assert "0.714885802539" in caveats
+    assert "parameter search" in caveats
 
 
 def test_active_combo_repair_is_recommended(synthetic_checkpoint: dict[str, object]) -> None:
@@ -231,3 +395,14 @@ def test_active_combo_row_is_included_after_exact_reconciliation(tmp_path: Path)
 def test_consistency_check_passes(synthetic_checkpoint: dict[str, object]) -> None:
     consistency = json.loads((Path(synthetic_checkpoint["result"]["output_dir"]) / "current_research_checkpoint_consistency_check.json").read_text(encoding="utf-8"))
     assert consistency["consistency_passed"] is True
+    assert consistency["registry_metadata_view_created"] is True
+    assert consistency["canonical_registry_write"] is False
+
+
+def test_checkpoint_does_not_rewrite_registry(synthetic_checkpoint: dict[str, object]) -> None:
+    root = Path(synthetic_checkpoint["root"])
+    registry_path = root / checkpoint.REGISTRY_PATH
+    before = registry_path.read_bytes()
+    checkpoint.run_current_research_checkpoint(root)
+    after = registry_path.read_bytes()
+    assert after == before

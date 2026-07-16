@@ -1,0 +1,66 @@
+schema_version: 1
+intake_status: single_direction_owner_source_supplied_for_preregistration_gate
+source:
+  source_id: gatev_goetzmann_rouwenhorst_pairs_trading_2006
+  source_name: 'Pairs Trading: Performance of a Relative-Value Arbitrage Rule'
+  source_url_or_citation: Evan Gatev, William N. Goetzmann, K. Geert Rouwenhorst,
+    Review of Financial Studies, 2006; NBER Working Paper 7032
+  source_type: academic_primary
+  source_class: academic_primary
+  authors:
+  - Evan Gatev
+  - William N. Goetzmann
+  - K. Geert Rouwenhorst
+  publication_date: '2006'
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: relative_value_or_spread_etf_pairs
+  claimed_hypothesis: Historically similar securities can diverge temporarily; a relative-value
+    rule longs the underpriced member and shorts the overpriced member until normalized
+    price paths converge.
+  rule_clarity: clear_for_source_stock_study_but_project_etf_short_accounting_blocked
+  classification: source_inspired_etf_pairs_adaptation
+  timeframe: daily data; 12-month formation followed by six-month trading periods
+rules:
+  formation_period: 12 months
+  formation_price_series: normalized cumulative total-return price series
+  distance_measure: sum of squared deviations between normalized price paths
+  pair_ranking: ascending historical distance; closest pairs selected before trading
+    period
+  trading_period: following six months
+  spread_std_estimation: formation-period historical standard deviation of pair spread
+  entry_rule: open when normalized prices diverge by more than two formation-period
+    spread standard deviations
+  long_leg: relatively lower-priced security
+  short_leg: relatively higher-priced security
+  exit_rule: close at next crossing/convergence of normalized prices
+  forced_close: close remaining positions at six-month trading period end
+  reentry_rule: permit reopening after convergence when later divergence occurs
+  execution_timing: delayed execution; no same-close fills
+  sizing: equal-dollar long and short legs in source; project adaptation would cap
+    gross exposure at 1.0 if feasible
+project_adaptation:
+  candidate_id: etf_pairs_distance_12m_6m_2sd_v1
+  candidate_family: relative_value_or_spread_etf_pairs
+  adaptation_classification: source_inspired_etf_pairs_adaptation
+  not_exact_stock_universe_replication: true
+  project_paper_demo_exposure_convention:
+    max_gross_exposure: 1.0
+    net_exposure_target: 0.0
+    equal_gross_allocation_across_pair_sleeves: true
+    long_leg_fraction_of_sleeve_gross: 0.5
+    short_leg_fraction_of_sleeve_gross: 0.5
+    short_proceeds_available_for_additional_leverage: false
+governance:
+  source_selected_by_direction_owner: true
+  web_browsing_used: false
+  provider_download: false
+  strategy_implemented: false
+  backtest_run: false
+  promotion_or_paper_demo_allowed: false
+  prior_blocked_state_preserved: true
+resolution_packets:
+- resolution_id: etf_pairs_short_accounting_resolution_v1
+  path: evidence/etf_pairs_short_accounting_resolution_v1/latest
+  decision: preregistration_ready
+  previous_blocked_decision_preserved: evidence/etf_pairs_single_source_preregistration_v1/latest

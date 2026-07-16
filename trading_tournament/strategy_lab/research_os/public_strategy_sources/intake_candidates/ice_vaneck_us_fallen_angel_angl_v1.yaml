@@ -1,0 +1,109 @@
+schema_version: 1
+direction_owner_selected: true
+current_input_gate_candidate: true
+external_source_discovery_pause_remains_active: true
+source:
+  source_id: ice_vaneck_us_fallen_angel_angl_v1
+  source_name: ICE US Fallen Angel High Yield 10% Constrained Index / VanEck Fallen Angel High Yield Bond ETF
+  source_type: official index methodology and official ETF wrapper documentation with academic context
+  source_class: index_methodology_and_direct_etf_wrapper
+  source_url_or_citation: ICE Bond Index Methodologies; VanEck Fallen Angel High Yield Bond ETF (ANGL) official fund/index documentation; academic evidence on downgrade pressure and investor ownership.
+  author_or_publisher: ICE Data Indices; VanEck; academic downgrade-pressure literature
+  publication_date: mixed_current_methodology_and_academic_context
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: fallen_angel_credit_anomaly
+  candidate_id: angl_static_fallen_angel_credit_v1
+  economic_mechanism: Formerly investment-grade US-dollar corporate bonds downgraded to high yield may face rating-constrained selling and prior price deterioration; static ANGL exposure tests whether this segment earns a repeatable credit recovery premium versus broad high yield.
+  strategy_role: return_seeking_credit_allocation
+  primary_benchmark: HYG
+  rule_clarity: clear_for_static_wrapper_screen_after_cache_gate
+  instruments:
+  - ANGL
+  - HYG
+  - BIL
+  - IEF
+  timeframe: daily adjusted close data, sampled bounded windows and full common period
+source_facts:
+  direct_wrapper: ANGL seeks to track the ICE US Fallen Angel High Yield 10% Constrained Index.
+  eligible_bonds: Below-investment-grade US-dollar corporate bonds that were investment grade when issued; after the December 31, 2023 amendment, limited original-issue high-yield bonds from already represented obligors may qualify when senior or senior secured.
+  mechanism: Possible recovery after rating-related selling and prior price deterioration.
+  fund_inception: April 10, 2012
+  current_fund_objective: ANGL seeks to track the ICE US Fallen Angel High Yield 10% Constrained Index.
+  benchmark_history: ANGL reported benchmark history used the ICE BofA US Fallen Angel High Yield Index before February 28, 2020 and the ICE US Fallen Angel High Yield 10% Constrained Index from February 28, 2020 onward.
+  methodology_amendment_2023: Effective December 31, 2023, the current index methodology was amended so that, in addition to bonds rated investment grade at issuance, the index may include in limited circumstances original-issue high-yield bonds from an obligor whose bonds are already included, provided the additional bonds are senior or senior secured.
+  post_2023_exposure_purity_caveat: Post-2023 ANGL should not be described as consisting exclusively of securities that were investment grade at issuance.
+  evidence_balance: Forced-selling mechanism is plausible but academic findings are mixed.
+  sponsor_performance_policy: Source-reported and sponsor-reported performance is non-project evidence and must not enter project evidence.
+methodology_history:
+- regime_id: regime_1_prior_benchmark_methodology
+  start: fund_inception_or_common_history_start
+  end: immediately_before_2020-02-28
+  benchmark: ICE BofA US Fallen Angel High Yield Index
+  interpretation: prior benchmark methodology
+  source_classification: source_explicit
+- regime_id: regime_2_initial_h0cf_methodology
+  start: '2020-02-28'
+  end: '2023-12-31'
+  benchmark: ICE US Fallen Angel High Yield 10% Constrained Index
+  interpretation: initial H0CF methodology
+  source_classification: source_explicit
+- regime_id: regime_3_amended_h0cf_methodology
+  effective: '2023-12-31'
+  first_observable_project_trading_session: calculated_mechanically_from_common_angl_hyg_history
+  benchmark: ICE US Fallen Angel High Yield 10% Constrained Index
+  interpretation: amended eligibility methodology
+  required_caveat: Limited original-issue high-yield bonds from already represented obligors may qualify when senior or senior secured; post-2023 exposure is less pure fallen-angel exposure than the original investment-grade-at-issuance definition.
+  source_classification: source_explicit
+  citation_metadata:
+    issuer: VanEck ETF Trust
+    document: Supplement dated December 13, 2023
+    sec_filing_accession_context: '000113736023000915'
+    effective_date: '2023-12-31'
+rules:
+  entry_rule: Enter 100% ANGL at the first authorized execution of each frozen window.
+  exit_rule: Hold actual ETF shares until window end; exit only at window end for measurement.
+  sizing: 100% ANGL; no leverage.
+  weighting: Single static ETF wrapper exposure; no intermediate rebalance.
+  rebalance: No project-level rebalance during a window.
+  fallback: No BIL switch; BIL is cash context only.
+  missing_data_behavior: Missing candidate or benchmark prices invalidate the window; no forward filling.
+  prohibited_overlays: No trend, rate, spread, downgrade-timing, BIL, duration hedge, leverage, or shorting overlay.
+data_and_execution:
+  required_symbols:
+  - ANGL
+  - HYG
+  - BIL
+  optional_context_symbols:
+  - IEF
+  required_fields:
+  - date
+  - adj_close
+  execution_convention: Use the repository's canonical non-lookahead ETF execution convention for predetermined windows.
+  accounting_convention: Correct actual-share holdings accounting with adjusted close preserving distributions.
+  transaction_cost_convention: Canonical project ETF transaction cost applied consistently to candidate and directly constructed benchmarks.
+source_support:
+  direct_wrapper:
+    reference: Official ANGL fund/index documentation.
+    classification: source_explicit
+  fallen_angel_eligibility:
+    reference: ICE bond-index methodology and ANGL fund/index documentation.
+    classification: source_explicit
+  benchmark_methodology_transition:
+    reference: Official ANGL benchmark history; February 28, 2020 methodology boundary.
+    classification: source_explicit
+  forced_selling_mechanism:
+    reference: Academic evidence on downgrade pressure, investor ownership, and downgrade anticipation.
+    classification: source_explicit_mixed_evidence
+  static_wrapper_entry_exit:
+    reference: Direction-owner supplied project test convention.
+    classification: project_execution_convention
+known_ambiguities:
+- Local ANGL cache availability must be verified before preregistration.
+- Exact duplicate status must be checked against existing static credit/factor-wrapper evidence.
+- Canonical numeric transaction-cost constant must be resolved from repository conventions before screening.
+project_notes:
+  source_reported_performance_excluded: true
+  no_screen_authorized: true
+  no_backtest_authorized: true
+  expected_outcome_if_angl_missing: source_not_ready

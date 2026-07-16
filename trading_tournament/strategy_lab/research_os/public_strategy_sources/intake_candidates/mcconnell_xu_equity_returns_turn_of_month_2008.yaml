@@ -1,0 +1,36 @@
+schema_version: 1
+source:
+  source_id: mcconnell_xu_equity_returns_turn_of_month_2008
+  authors:
+  - John J. McConnell
+  - Wei Xu
+  title: Equity Returns at the Turn of the Month
+  publication: Financial Analysts Journal
+  publication_year: 2008
+  source_class: academic_primary
+  family: calendar_effects
+source_supported_rule:
+  turn_of_month_interval: Day -1 through Day +3
+  day_minus_1: final trading day of the prior calendar month
+  day_plus_1: first trading day of the new calendar month
+  day_plus_2: second trading day of the new calendar month
+  day_plus_3: third trading day of the new calendar month
+  source_reports_return_pattern_not_spy_bil_execution: true
+project_candidate:
+  candidate_id: spy_turn_of_month_bil_v1
+  family: calendar_effects
+  classification:
+  - source_inspired_etf_calendar_adaptation
+  - long_only_spy_bil_rotation
+  - not_source_index_replication
+  hypothesis: SPY exposure restricted to the documented turn-of-the-month interval
+    may provide useful return or return/risk characteristics, while BIL is held outside
+    the interval.
+  risk_asset: SPY
+  outside_asset: BIL
+governance:
+  web_browsing_used: false
+  provider_download: false
+  strategy_discovery: false
+  promotion_or_paper_forward_allowed: false
+  real_money_recommendation: false

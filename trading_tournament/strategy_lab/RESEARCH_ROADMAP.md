@@ -75,5 +75,8 @@
 - Active-combo benchmark/reference series is exact and restored.
 - Candidate pipeline has no surviving candidate_exhaustive row.
 - Next engineering action is `none_active_combo_repaired`.
+- External-source discovery is paused pending an explicitly supplied direction-owner source.
+- Strategy Evidence Library remains a discovery backlog and provenance memory layer, not an execution queue.
+- `max_diversification_cross_asset_etf_v1` is closed only for immediate exact retesting; the broader maximum-diversification/correlation-aware family remains open only for materially distinct source-backed hypotheses.
 - DSR caveat is accepted but recorded.
 - No more immediate similar ETF-wrapper batch discovery.

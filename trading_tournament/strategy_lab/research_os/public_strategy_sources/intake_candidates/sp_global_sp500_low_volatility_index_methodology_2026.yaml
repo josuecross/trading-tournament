@@ -1,0 +1,48 @@
+schema_version: 1
+intake_status: manual_primary_official_source_supplied_for_screen
+source:
+  source_id: sp_global_sp500_low_volatility_index_methodology_2026
+  source_name: S&P Low Volatility Indices Methodology
+  publisher: S&P Dow Jones Indices
+  source_class: index_methodology_primary
+  source_type: official index methodology
+  version_date: March 2026
+  target_index: S&P 500 Low Volatility Index
+  source_url_or_citation: S&P Dow Jones Indices, S&P Low Volatility Indices Methodology,
+    March 2026
+  source_evidence_public_context_only: true
+source_supported_rules:
+  parent_universe: S&P 500
+  target_constituent_count: 100
+  volatility_window_trading_days: 252
+  volatility_definition: standard deviation of daily price returns
+  ranking: rank eligible constituents from lowest realized volatility to highest realized
+    volatility
+  selection: select the 100 least volatile eligible S&P 500 constituents
+  weighting: weight each selected constituent inverse to its volatility
+  rebalance_reference_dates: last trading dates of January, April, July, and October
+  effective_rebalance_dates: after the close of the third Friday of February, May,
+    August, and November
+  long_only: true
+  fully_invested_equity_index: true
+  source_defined_tactical_cash_or_bil_rule: false
+project_wrapper_adaptation:
+  candidate_id: splv_static_low_vol_factor_wrapper_v1
+  family: low_volatility_factor_proxy
+  instrument: SPLV
+  classification:
+  - source_backed_index_etf_wrapper
+  - not_constituent_level_index_replication
+  wrapper_rule: Evaluate the cached SPLV ETF wrapper as a project-level buy-and-hold
+    exposure to the source-defined index.
+  constituent_level_replication: false
+secondary_source_preserved:
+  source_id: low_volatility_factor_proxy
+  role: secondary_discovery_lead_only
+  credibility_upgraded: false
+governance:
+  do_not_browse: true
+  do_not_download: true
+  do_not_add_tactical_rules: true
+  do_not_modify_active_vm: true
+  promotion_or_paper_forward_allowed: false

@@ -1,0 +1,215 @@
+schema_version: 1
+intake_status: single_direction_owner_source_supplied_for_validation
+source:
+  source_id: clare_seaton_smith_thomas_risk_parity_trend_following_2016
+  source_name: Risk Parity, Momentum and Trend Following in Global Asset Allocation
+  source_url_or_citation: Andrew Clare, James Seaton, Peter N. Smith, Stephen Thomas,
+    Risk Parity, Momentum and Trend Following in Global Asset Allocation, Journal
+    of Behavioral and Experimental Finance, Volume 9, 2016, pages 63-80; SSRN abstract
+    2126478
+  source_type: academic_primary
+  authors:
+  - Andrew Clare
+  - James Seaton
+  - Peter N. Smith
+  - Stephen Thomas
+  publication_date: '2016'
+  relevant_source_locations:
+  - Working-paper PDF Section 3.1, pages 6-7
+  - Table 1 notes, page 19
+  - Conclusion, pages 14-15
+  source_evidence_public_context_only: true
+strategy_description:
+  strategy_family: risk_parity_inverse_volatility_or_vol_targeting
+  claimed_hypothesis: Global asset classes can be combined using inverse-volatility
+    risk allocation while independent 10-month moving-average trend filters transfer
+    below-trend asset weights to Treasury bills.
+  rule_clarity: clear_and_testable_subject_to_etf_wrapper_mapping
+  instruments:
+  - developed_market_equities_wrapper_required
+  - emerging_market_equities_wrapper_required
+  - government_bonds_wrapper_required
+  - broad_commodities_wrapper_required
+  - global_real_estate_wrapper_required
+  - BIL
+  timeframe: monthly signals and monthly rebalance using daily or monthly adjusted
+    close data
+rules:
+  risk_allocation_rule: Estimate each asset class's volatility from the preceding
+    12 months, assign weights proportional to inverse volatility, normalize weights
+    so total exposure is 100%, and recalculate monthly.
+  trend_filter_rule: At each month end, compare each risky asset-class price with
+    its 10-month moving average.
+  risk_on_rule: If an asset class is above its 10-month moving average, retain its
+    calculated inverse-volatility weight.
+  risk_off_rule: If an asset class is below its 10-month moving average, assign that
+    asset class's calculated weight to US Treasury bills rather than shorting or redistributing
+    to remaining risky assets.
+  source_asset_classes:
+  - Developed-market equities
+  - Emerging-market equities
+  - Government bonds
+  - Broad commodities
+  - Global real estate
+  - US Treasury bills as risk-off
+  rebalance_frequency: monthly at month end
+  weighting: inverse volatility over the preceding 12 months, normalized to total
+    exposure 1.0
+  risk_controls: Long-only; no shorting; no project leverage; below-trend asset weights
+    move to Treasury bills/cash.
+  forbidden_translation_choices:
+  - do_not_use_GLD_as_broad_commodities
+  - do_not_use_long_duration_treasury_as_silent_world_government_bond_substitute
+  - do_not_drop_missing_asset_classes
+  - do_not_select_wrappers_from_prior_results
+data_and_execution:
+  data_requirements: Monthly or daily adjusted close history for all mapped ETF wrappers
+    sufficient for 12-month volatility and 10-month moving average warm-up.
+  execution_assumptions: 'Project execution assumptions are not source claims: signals
+    are frozen at month end and any future screen would use the project no-lookahead
+    shifted-weight convention, standard cost/slippage assumptions, and BIL as the
+    Treasury-bill/cash wrapper.'
+  compatible_with_bt_adapter: true
+source_support:
+  risk_allocation_rule:
+    classification: source_explicit
+    reference: Working-paper PDF Section 3.1, pages 6-7
+  trend_filter_rule:
+    classification: source_explicit
+    reference: Working-paper PDF Section 3.1, pages 6-7
+  risk_on_rule:
+    classification: source_explicit
+    reference: Working-paper PDF Section 3.1, pages 6-7
+  risk_off_rule:
+    classification: source_explicit
+    reference: Working-paper PDF Section 3.1, pages 6-7
+  source_asset_classes:
+    classification: source_explicit
+    reference: Table 1 notes, page 19
+  monthly_rebalance:
+    classification: source_explicit
+    reference: Working-paper PDF Section 3.1, pages 6-7
+  no_project_leverage:
+    classification: project_execution_convention
+    reference: Project execution convention supplied by direction owner; not attributed
+      to source
+  shifted_weight_execution:
+    classification: project_execution_convention
+    reference: Project execution convention supplied by direction owner; not attributed
+      to source
+  project_costs_slippage:
+    classification: project_execution_convention
+    reference: Project execution convention supplied by direction owner; not attributed
+      to source
+governance:
+  public_strategy_selected_by_user: true
+  source_scraped_by_codex: false
+  strategy_implemented: false
+  backtest_run: false
+  promotion_or_paper_forward_allowed: false
+approved_wrapper_mapping:
+  resolution_packet: evidence/risk_parity_trend_wrapper_resolution_v1/latest
+  candidate_id: rp_ivol_10m_trend_etf_wrapper_adaptation_v1
+  adaptation_classification: source_inspired_etf_wrapper_adaptation
+  source_replication_status: not_source_index_replication
+  fixed_universe:
+  - URTH
+  - EEM
+  - IGOV
+  - DBC
+  - REET
+  - BIL
+  mapping_rows:
+  - source_asset_class: Developed-market equities
+    local_ticker: URTH
+    mapping_status: direct ETF wrapper
+    source_benchmark_role: MSCI World
+    project_wrapper: iShares MSCI World ETF
+    adaptation_classification: source_inspired_etf_wrapper_adaptation
+    known_difference_or_caveat: not_source_index_replication
+    cache_ready: true
+    cache_start: '2012-01-12'
+    cache_end: '2026-07-13'
+    cache_rows: 3644
+    cache_hash: f763be0431edc1aab9d0f4b2a71c34ef26d1faf3d5881709390a44964e25ac9a
+    cache_path: data/cache/URTH.csv
+    mechanism_changed_by_translation: false
+  - source_asset_class: Emerging-market equities
+    local_ticker: EEM
+    mapping_status: direct ETF wrapper
+    source_benchmark_role: Emerging-market equities
+    project_wrapper: iShares MSCI Emerging Markets ETF
+    adaptation_classification: source_inspired_etf_wrapper_adaptation
+    known_difference_or_caveat: not_source_index_replication
+    cache_ready: true
+    cache_start: '2007-01-03'
+    cache_end: '2026-06-18'
+    cache_rows: 4896
+    cache_hash: 027f158cdd35259176d90825b3e7ca49be13005fa4a9108b92138342e4ef17fb
+    cache_path: data/cache/EEM.csv
+    mechanism_changed_by_translation: false
+  - source_asset_class: Developed-market government bonds
+    local_ticker: IGOV
+    mapping_status: role-preserving ETF-wrapper adaptation
+    source_benchmark_role: world government bonds including developed markets
+    project_wrapper: iShares International Treasury Bond ETF
+    adaptation_classification: known_mapping_difference
+    known_difference_or_caveat: IGOV excludes US government bonds and therefore is
+      not an exact reproduction of the source index
+    cache_ready: true
+    cache_start: '2009-01-30'
+    cache_end: '2026-07-13'
+    cache_rows: 4388
+    cache_hash: ee097d26e3f7afe9fc93cbed1ef27a64682ce1f3c3806e0aeeba8bb462f302a0
+    cache_path: data/cache/IGOV.csv
+    mechanism_changed_by_translation: false
+  - source_asset_class: Broad commodities
+    local_ticker: DBC
+    mapping_status: direct ETF wrapper
+    source_benchmark_role: Broad commodities
+    project_wrapper: Invesco DB Commodity Index Tracking Fund
+    adaptation_classification: source_inspired_etf_wrapper_adaptation
+    known_difference_or_caveat: not_source_index_replication; GLD explicitly prohibited
+      as broad commodity proxy
+    cache_ready: true
+    cache_start: '2006-02-06'
+    cache_end: '2026-07-01'
+    cache_rows: 5132
+    cache_hash: 915a502f55b9684d1582237e1f5d9bb6fbd743398336867c1731c105a3191286
+    cache_path: data/cache/DBC.csv
+    mechanism_changed_by_translation: false
+  - source_asset_class: Global listed real estate / global REITs
+    local_ticker: REET
+    mapping_status: direct ETF wrapper
+    source_benchmark_role: Global real estate
+    project_wrapper: iShares Global REIT ETF
+    adaptation_classification: source_inspired_etf_wrapper_adaptation
+    known_difference_or_caveat: not_source_index_replication
+    cache_ready: true
+    cache_start: '2014-07-10'
+    cache_end: '2026-07-13'
+    cache_rows: 3019
+    cache_hash: 5332a0b3ea3c641e3f3f7a4a007a7085228e1e16030bcde027ae7fb9d30ad618
+    cache_path: data/cache/REET.csv
+    mechanism_changed_by_translation: false
+  - source_asset_class: Treasury bills/risk-off
+    local_ticker: BIL
+    mapping_status: direct Treasury-bill/cash wrapper
+    source_benchmark_role: US Treasury bills as risk-off
+    project_wrapper: SPDR Bloomberg 1-3 Month T-Bill ETF
+    adaptation_classification: source_inspired_etf_wrapper_adaptation
+    known_difference_or_caveat: not_source_index_replication
+    cache_ready: true
+    cache_start: '2007-05-30'
+    cache_end: '2026-06-18'
+    cache_rows: 4795
+    cache_hash: c88d0180a7c69d5980a59adc85f873856eefcb429d955e638ab52232546fdae2
+    cache_path: data/cache/BIL.csv
+    mechanism_changed_by_translation: false
+  known_mapping_difference: IGOV excludes US government bonds and therefore is not
+    an exact reproduction of the source index.
+  provider_download_authorized_symbols:
+  - URTH
+  - IGOV
+  - REET
+  provider_download_forbidden_for_all_other_symbols: true

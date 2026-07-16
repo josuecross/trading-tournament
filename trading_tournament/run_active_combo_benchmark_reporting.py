@@ -124,11 +124,7 @@ def state_mismatches(root: Path, registry: dict[str, Any]) -> list[str]:
 
 
 def sleeve_daily_return(close: pd.DataFrame, today: int, weights: dict[str, float]) -> float:
-    daily_return = 0.0
-    for symbol, weight in weights.items():
-        if active.available_at(close, symbol, today, 1):
-            daily_return += weight * float(close.iloc[today][symbol] / close.iloc[today - 1][symbol] - 1.0)
-    return daily_return
+    return active.weighted_return(weights, active.daily_asset_returns(close, today, set(weights)))
 
 
 def combo_window(close: pd.DataFrame, start: int, horizon: int) -> dict[str, Any]:
@@ -151,11 +147,17 @@ def combo_window(close: pd.DataFrame, start: int, horizon: int) -> dict[str, Any
             total = vm_value + dsr_value
             vm_value = total * 0.5
             dsr_value = total * 0.5
-            vm_weights = active.strategy_weights(close, signal, active.VM_ID)
-            dsr_weights = active.strategy_weights(close, signal, active.DSR_ID)
+            new_vm_weights = active.strategy_weights(close, signal, active.VM_ID)
+            new_dsr_weights = active.strategy_weights(close, signal, active.DSR_ID)
+            vm_value = active.apply_rebalance_cost(vm_value, active.rebalance_turnover_units(new_vm_weights, vm_weights))
+            dsr_value = active.apply_rebalance_cost(dsr_value, active.rebalance_turnover_units(new_dsr_weights, dsr_weights))
+            vm_weights = new_vm_weights
+            dsr_weights = new_dsr_weights
             last_month = month
-        vm_value *= 1.0 + sleeve_daily_return(close, today, vm_weights)
-        dsr_value *= 1.0 + sleeve_daily_return(close, today, dsr_weights)
+        vm_ret, vm_weights, _vm_cost = active.portfolio_step(close, today, vm_weights)
+        dsr_ret, dsr_weights, _dsr_cost = active.portfolio_step(close, today, dsr_weights)
+        vm_value *= 1.0 + vm_ret
+        dsr_value *= 1.0 + dsr_ret
         equity = vm_value + dsr_value
         peak = max(peak, equity)
         max_drawdown = min(max_drawdown, equity - peak)
@@ -203,18 +205,38 @@ def full_equity_series(close: pd.DataFrame) -> tuple[pd.DataFrame, list[dict[str
     last_month = None
     vm_weights: dict[str, float] = {}
     dsr_weights: dict[str, float] = {}
+    vm_standalone_weights: dict[str, float] = {}
+    dsr_standalone_weights: dict[str, float] = {}
     rows: list[dict[str, Any]] = []
     allocations: list[dict[str, Any]] = []
     months = np.array([dt.year * 12 + dt.month for dt in close.index], dtype=int)
     for today in range(253, len(close)):
         signal = today - 1
         month = int(months[today])
+        vm_cost_return = 0.0
+        dsr_cost_return = 0.0
+        vm_turnover = 0.0
+        dsr_turnover = 0.0
         if month != last_month:
             total = vm_value + dsr_value
             vm_value = total * 0.5
             dsr_value = total * 0.5
-            vm_weights = active.strategy_weights(close, signal, active.VM_ID)
-            dsr_weights = active.strategy_weights(close, signal, active.DSR_ID)
+            new_vm_weights = active.strategy_weights(close, signal, active.VM_ID)
+            new_dsr_weights = active.strategy_weights(close, signal, active.DSR_ID)
+            vm_turnover = active.rebalance_turnover_units(new_vm_weights, vm_weights)
+            dsr_turnover = active.rebalance_turnover_units(new_dsr_weights, dsr_weights)
+            vm_standalone_turnover = active.rebalance_turnover_units(new_vm_weights, vm_standalone_weights)
+            dsr_standalone_turnover = active.rebalance_turnover_units(new_dsr_weights, dsr_standalone_weights)
+            vm_cost_return = vm_turnover * active.SLIPPAGE
+            dsr_cost_return = dsr_turnover * active.SLIPPAGE
+            vm_value = active.apply_rebalance_cost(vm_value, vm_turnover)
+            dsr_value = active.apply_rebalance_cost(dsr_value, dsr_turnover)
+            vm_standalone = active.apply_rebalance_cost(vm_standalone, vm_standalone_turnover)
+            dsr_standalone = active.apply_rebalance_cost(dsr_standalone, dsr_standalone_turnover)
+            vm_weights = new_vm_weights
+            dsr_weights = new_dsr_weights
+            vm_standalone_weights = new_vm_weights.copy()
+            dsr_standalone_weights = new_dsr_weights.copy()
             allocations.append(
                 {
                     "rebalance_date": str(close.index[today].date()),
@@ -223,17 +245,23 @@ def full_equity_series(close: pd.DataFrame) -> tuple[pd.DataFrame, list[dict[str
                     "dsr_sleeve_weight": 0.5,
                     "vm_sleeve_value_after_rebalance": round(vm_value, 4),
                     "dsr_sleeve_value_after_rebalance": round(dsr_value, 4),
+                    "vm_internal_turnover_units": round(vm_turnover, 8),
+                    "dsr_internal_turnover_units": round(dsr_turnover, 8),
+                    "vm_internal_cost_return": round(vm_cost_return, 10),
+                    "dsr_internal_cost_return": round(dsr_cost_return, 10),
                     "vm_holdings": json.dumps({k: round(v, 6) for k, v in sorted(vm_weights.items())}, sort_keys=True),
                     "dsr_holdings": json.dumps({k: round(v, 6) for k, v in sorted(dsr_weights.items())}, sort_keys=True),
                 }
             )
             last_month = month
-        vm_ret = sleeve_daily_return(close, today, vm_weights)
-        dsr_ret = sleeve_daily_return(close, today, dsr_weights)
+        vm_ret, vm_weights, _vm_step_cost = active.portfolio_step(close, today, vm_weights)
+        dsr_ret, dsr_weights, _dsr_step_cost = active.portfolio_step(close, today, dsr_weights)
+        vm_standalone_ret, vm_standalone_weights, _vm_standalone_cost = active.portfolio_step(close, today, vm_standalone_weights)
+        dsr_standalone_ret, dsr_standalone_weights, _dsr_standalone_cost = active.portfolio_step(close, today, dsr_standalone_weights)
         vm_value *= 1.0 + vm_ret
         dsr_value *= 1.0 + dsr_ret
-        vm_standalone *= 1.0 + vm_ret
-        dsr_standalone *= 1.0 + dsr_ret
+        vm_standalone *= 1.0 + vm_standalone_ret
+        dsr_standalone *= 1.0 + dsr_standalone_ret
         combo_equity = vm_value + dsr_value
         rows.append(
             {
@@ -545,6 +573,9 @@ Do not rerun old batches solely to relabel historical decisions. Historical `nee
     manifest = {
         "created_at_utc": now_utc(),
         "benchmark_id": COMBO_ID,
+        "portfolio_accounting_method": "monthly 50/50 VM/DSR sleeve targets; sleeve values drift between combo rebalances; component holdings drift between component rebalances",
+        "component_turnover_basis": "sum(abs(new component target weight - pre-trade actual component weight)) using active recompute convention",
+        "combo_level_cost_basis": "no separate combo-level cost in frozen benchmark definition; component-level costs are included",
         "diagnostics_available": payload["diagnostics_available"],
         "missing_symbols": payload["missing_symbols"],
         "active_combo_benchmark_created": payload["diagnostics_available"],

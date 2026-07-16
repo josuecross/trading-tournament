@@ -42,3 +42,28 @@ queued_governance_reviews:
   authorizes_rejected_row_reopening: false
   authorizes_provider_download: false
   authorizes_paper_forward: false
+external_source_discovery_lane:
+  status: paused_pending_direction_owner_supplied_source
+  external_source_library_role: discovery_backlog_only
+  automatic_next_source_selection: false
+  new_external_screen_authorized: false
+  next_source_requires_direction_owner_supply: true
+  next_source_must_pass_existing_eligibility_filter: true
+  strategy_evidence_library_available: true
+  latest_discovery_yield_checkpoint: evidence/strategy_library_discovery_yield_checkpoint_v1/latest
+  latest_exact_variant_closure: evidence/max_diversification_cross_asset_etf_screen_v1/latest
+  latest_closed_exact_variant: max_diversification_cross_asset_etf_v1
+  latest_closed_exact_variant_outcome: risk_reduction_without_return_edge
+  broader_family_status: open_only_for_materially_distinct_source_backed_hypotheses
+  next_allowed_actions:
+  - continue_existing_paper_demo_observation
+  - externally_research_and_select_one_direction_owner_source
+  - validate_direction_owner_supplied_external_source_against_existing_eligibility_filter
+  blocked_reason: automatic public-source progression paused after source library improved process but did not improve validated candidate yield
+  notes: Strategy Evidence Library is discovery backlog and memory only; Codex must not select the next source from backlog readiness; implementation and screening remain unauthorized until a source is direction-owner supplied and validated.
+  authorizes_backtests: false
+  authorizes_validation: false
+  authorizes_strategy_implementation: false
+  authorizes_provider_download: false
+  authorizes_candidate_exhaustive: false
+  authorizes_paper_forward: false

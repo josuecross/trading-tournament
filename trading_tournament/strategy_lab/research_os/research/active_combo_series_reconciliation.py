@@ -324,8 +324,15 @@ def classify(source_status: dict[str, Any], reconstructed: dict[str, Any], sourc
         "component_allocations_verified": component_allocations == [0.5, 0.5] and abs(sum(x or 0.0 for x in component_allocations) - 1.0) <= 1e-12,
         "components_frozen": all(str(row.get("frozen")).lower() == "true" and str(row.get("rules_frozen")).lower() == "true" for row in components),
         "rebalance_rule_verified": definition.get("rebalance") == "monthly" and "signal = today - 1" in source_code,
-        "missing_component_behavior_verified": "available_at(close, symbol, today, 1)" in source_code,
-        "cost_treatment_explicit": "sleeve_daily_return" in source_code and "SLIPPAGE" not in source_code.split("def combo_window", 1)[1].split("def run_windows", 1)[0],
+        "missing_component_behavior_verified": (
+            "available_at(close, symbol, today, 1)" in source_code
+            or ("daily_asset_returns" in source_code and "portfolio_step" in source_code)
+        ),
+        "cost_treatment_explicit": (
+            manifest.get("combo_level_cost_basis") == "no separate combo-level cost in frozen benchmark definition; component-level costs are included"
+            and "rebalance_turnover_units" in source_code
+            and "apply_rebalance_cost" in source_code
+        ),
         "source_series_reproduced": source_compare.get("series_matches_source") is True,
         "diagnostics_available": reconstructed.get("diagnostics_available") is True,
         "weight_invariant_passed": invariants["weight_invariant_passed"] is True,

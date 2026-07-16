@@ -1,0 +1,43 @@
+schema_version: 1
+intake_status: manual_primary_source_supplied_for_static_quality_factor_screen
+source:
+  source_id: msci_usa_sector_neutral_quality_index_qual
+  source_name: MSCI USA Sector Neutral Quality Index
+  index_provider: MSCI
+  index: MSCI USA Sector Neutral Quality Index
+  etf_wrapper: QUAL
+  etf_name: iShares MSCI USA Quality Factor ETF
+  source_class: index_methodology_and_direct_etf_wrapper
+  source_type: index methodology and direct ETF wrapper
+  source_url_or_citation: MSCI USA Sector Neutral Quality Index methodology and iShares
+    MSCI USA Quality Factor ETF wrapper linkage, as supplied by direction owner.
+  source_evidence_public_context_only: true
+source_supported_mechanism:
+  universe: US large- and mid-cap equity universe
+  sector_relative_quality: true
+  principal_quality_characteristics:
+  - high return on equity
+  - low financial leverage
+  - low earnings variability
+  sector_neutral_index_construction: true
+  long_only_equity_exposure: true
+  wrapper_tracking_statement: QUAL seeks to track the MSCI USA Sector Neutral Quality
+    Index.
+project_candidate:
+  candidate_id: qual_static_quality_factor_wrapper_v1
+  family: quality_factor_proxy
+  instrument: QUAL
+  classification:
+  - source_backed_index_etf_wrapper
+  - static_quality_factor_exposure
+  - not_constituent_level_index_replication
+  hypothesis: Static exposure to the source-defined quality-factor ETF may provide
+    better return or return/risk characteristics than broad US equity exposure.
+  constituent_level_index_replication: false
+  fundamental_data_or_index_rebalance_reconstruction: false
+governance:
+  web_browsing_used: false
+  provider_download: false
+  strategy_discovery: false
+  promotion_or_paper_forward_allowed: false
+  real_money_recommendation: false

@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parent
 OUTPUT_DIR = Path("evidence") / "current_research_checkpoint" / "latest"
 REGISTRY_PATH = Path("strategy_lab") / "strategy_registry.yaml"
 ROADMAP_PATH = Path("strategy_lab") / "RESEARCH_ROADMAP.md"
+RESEARCH_QUEUE_PATH = Path("strategy_lab") / "research_os" / "research" / "research_queue.yaml"
 VM_ID = "paper_forward_vm_quality_lowvol_proxy_v1"
 DSR_ID = "paper_forward_dsr_sector_equal_weight_defensive_filter_v1"
 SPY_200D_ID = "SPY_200d_trend_model"
@@ -24,7 +25,9 @@ COMBO_ID = "active_combo_vm_dsr_equal_weight_v1"
 ACTIVE_COMBO_RECONCILIATION_DIR = Path("evidence") / "active_combo_series_reconciliation" / "latest"
 NEXT_ENGINEERING_ACTION = "repair_active_combo_benchmark_and_reporting"
 NEXT_ENGINEERING_ACTION_REPAIRED = "none_active_combo_repaired"
-NEXT_RESEARCH_AFTER_ENGINEERING = "choose_structurally_distinct_lane_or_archive"
+NEXT_RESEARCH_AFTER_ENGINEERING = "validate_direction_owner_supplied_external_source_or_continue_observation"
+MAX_DIV_ID = "max_diversification_cross_asset_etf_v1"
+MAX_DIV_EVIDENCE_DIR = Path("evidence") / "max_diversification_cross_asset_etf_screen_v1" / "latest"
 
 
 def now_utc() -> str:
@@ -113,8 +116,68 @@ def active_combo_reconciliation_state(root: Path) -> dict[str, Any]:
     }
 
 
+def _csv_row_by_field(rows: list[dict[str, str]], field: str, value_to_match: str) -> dict[str, str]:
+    for row in rows:
+        if row.get(field) == value_to_match:
+            return row
+    return {}
+
+
+def max_diversification_research_memory_state(root: Path) -> dict[str, Any]:
+    base = root / MAX_DIV_EVIDENCE_DIR
+    outcome = load_json(base / "screening_outcome.json")
+    consistency = load_json(base / "consistency_check.json")
+    candidate_metrics = read_csv_rows(base / "candidate_metrics.csv")
+    benchmark_relative = read_csv_rows(base / "benchmark_relative_metrics.csv")
+    exact_memory = read_csv_rows(base / "exact_variant_research_memory.csv")
+    metrics_180 = _csv_row_by_field(candidate_metrics, "horizon_days", "180")
+    equal_180 = next(
+        (
+            row
+            for row in benchmark_relative
+            if row.get("horizon_days") == "180"
+            and row.get("benchmark_id") == "equal_weight_same_five_etf_monthly_rebalanced_benchmark"
+        ),
+        {},
+    )
+    inverse_180 = next(
+        (
+            row
+            for row in benchmark_relative
+            if row.get("horizon_days") == "180"
+            and row.get("benchmark_id") == "inverse_volatility_same_five_etf_monthly_benchmark"
+        ),
+        {},
+    )
+    return {
+        "available": bool(outcome) and bool(exact_memory),
+        "evidence_path": str(base),
+        "outcome": outcome,
+        "consistency": consistency,
+        "exact_memory": exact_memory,
+        "metrics_180": metrics_180,
+        "equal_weight_180": equal_180,
+        "inverse_volatility_180": inverse_180,
+        "primary_failure_reason": "lower_return_than_equal_weight_and_inverse_volatility",
+        "secondary_observation": "risk_reduction_accompanied_by_material_portfolio_concentration",
+        "immediate_retest_closure": True,
+        "broader_family_closed": False,
+        "allowed_future_condition": "materially_distinct_external_source_backed_hypothesis_only",
+        "prohibited_followups": [
+            "alternative_covariance_windows",
+            "shrinkage",
+            "weight_caps_or_floors",
+            "alternative_solvers",
+            "alternative_etf_universes",
+            "trend_or_bil_overlays",
+            "parameter_search",
+        ],
+    }
+
+
 def evidence_state(root: Path) -> dict[str, Any]:
     registry = load_yaml(root / REGISTRY_PATH)
+    research_queue = load_yaml(root / RESEARCH_QUEUE_PATH)
     rows = registry_rows(registry)
     expanded_manifest = load_json(root / "evidence" / "parallel_research_discovery" / "expanded_universe_batch_1" / "latest" / "expanded_universe_batch_1_manifest.json")
     expanded_promotions = read_csv_rows(root / "evidence" / "parallel_research_discovery" / "expanded_universe_batch_1" / "latest" / "expanded_universe_batch_1_promotion_candidates.csv")
@@ -130,6 +193,8 @@ def evidence_state(root: Path) -> dict[str, Any]:
     active_rows = [sid for sid, row in rows.items() if row.get("paper_forward_active") is True]
     active_combo_state = active_combo_reconciliation_state(root)
     active_combo_available = active_combo_state["available"]
+    external_source_lane = research_queue.get("external_source_discovery_lane", {})
+    max_div_state = max_diversification_research_memory_state(root)
     mismatches: list[str] = []
     for sid in [VM_ID, DSR_ID]:
         row = rows.get(sid, {})
@@ -150,6 +215,10 @@ def evidence_state(root: Path) -> dict[str, Any]:
         "active_rows": active_rows,
         "active_combo_available": active_combo_available,
         "active_combo_state": active_combo_state,
+        "external_source_lane": external_source_lane,
+        "max_div_state": max_div_state,
+        "max_div_outcome": max_div_state["outcome"],
+        "max_div_memory": max_div_state["exact_memory"],
         "expanded_promotions": [row.get("strategy_id", "") for row in expanded_promotions if row.get("strategy_id")],
         "mismatches": mismatches,
     }
@@ -257,6 +326,27 @@ def candidate_pipeline_status(state: dict[str, Any]) -> list[dict[str, str]]:
         rows.append({"stage": "benchmark_reference_available", "count": 1, "rows": COMBO_ID, "status": "active_combo_exact_reconstruction_available", "next_action": "compare_only"})
     else:
         rows.append({"stage": "data_pending", "count": 1, "rows": "active_combo_benchmark_series", "status": "engineering_repair_needed", "next_action": NEXT_ENGINEERING_ACTION})
+    external_lane = state.get("external_source_lane", {})
+    if external_lane:
+        rows.append(
+            {
+                "stage": "external_source_discovery_lane",
+                "count": 1,
+                "rows": "strategy_evidence_library_backlog",
+                "status": external_lane.get("status", "paused_pending_direction_owner_supplied_source"),
+                "next_action": "validate_direction_owner_supplied_external_source_against_existing_eligibility_filter",
+            }
+        )
+    if state.get("max_div_memory"):
+        rows.append(
+            {
+                "stage": "exact_variant_research_memory",
+                "count": 1,
+                "rows": MAX_DIV_ID,
+                "status": "closed_for_immediate_exact_retesting",
+                "next_action": "do_not_retest_exact_variant_without_new_source",
+            }
+        )
     return rows
 
 
@@ -308,6 +398,11 @@ def watchlist_rows() -> list[dict[str, str]]:
 
 
 def accepted_caveats_text(state: dict[str, Any]) -> str:
+    max_div = state.get("max_div_state", {})
+    max_div_metrics = max_div.get("metrics_180", {})
+    equal_180 = max_div.get("equal_weight_180", {})
+    inverse_180 = max_div.get("inverse_volatility_180", {})
+    max_div_outcome = max_div.get("outcome", {}).get("screening_outcome", "risk_reduction_without_return_edge")
     active_combo_section = """## Active Combo Benchmark Restored
 
 - `active_combo_vm_dsr_equal_weight_v1` has an exact deterministic benchmark/reference series in `evidence/active_combo_series_reconciliation/latest`.
@@ -328,6 +423,19 @@ def accepted_caveats_text(state: dict[str, Any]) -> str:
 - DSR remains active/frozen for lifecycle continuity, not because qualifying backtest lineage is complete.
 
 {active_combo_section}
+
+## External Source Discovery Pause
+
+- Strategy Evidence Library remains available as a discovery backlog and provenance memory layer.
+- Automatic next-source selection is paused.
+- No new source-backed screen is authorized unless the direction owner supplies a specific source and objective that pass the existing eligibility filter.
+- `{MAX_DIV_ID}` is closed only for immediate exact retesting after `{max_div_outcome}`; the broader maximum-diversification/correlation-aware family remains open only for materially distinct source-backed hypotheses.
+- Max-div source, optimizer, accounting, and methodology gates passed; this was not a methodology-failure closure.
+- The screen showed lower volatility and somewhat lower drawdown, but no return edge versus equal-weight and inverse-volatility primary mechanism benchmarks.
+- 180-day wins versus equal weight: `{equal_180.get("win_count", "missing")}/5`; 180-day wins versus inverse volatility: `{inverse_180.get("win_count", "missing")}/5`.
+- 180-day median final equity was lower than equal weight by `{equal_180.get("median_final_equity_delta", "missing")}` and lower than inverse volatility by `{inverse_180.get("median_final_equity_delta", "missing")}`.
+- 180-day effective asset count was approximately `{max_div_metrics.get("effective_number_of_assets", "missing")}`; maximum single-asset weight was `{max_div_metrics.get("maximum_single_asset_weight", "missing")}`.
+- Immediate retests remain prohibited for alternative covariance windows, shrinkage, weight caps/floors, alternative solvers, alternative ETF universes, trend/BIL overlays, and parameter search.
 
 ## Data
 
@@ -382,21 +490,39 @@ def engineering_next_steps_text(state: dict[str, Any]) -> str:
 """
 
 
-def research_next_steps_text() -> str:
+def research_next_steps_text(state: dict[str, Any]) -> str:
+    external_lane = state.get("external_source_lane", {})
+    external_status = external_lane.get("status", "paused_pending_direction_owner_supplied_source")
     return """# Recommended Research Next Steps
 
 Primary next research action:
 
-`repair_active_combo_benchmark_and_reporting`
+`validate_direction_owner_supplied_external_source_or_continue_observation`
 
-After that, choose one:
+External-source discovery lane:
 
-- `pre_register_active_sleeve_ensemble_lane`
-- `pre_register_breadth_state_regime_lane`
-- `pre_register_dividend_quality_shareholder_yield_lane`
-- `archive_current_etf_wrapper_track_as_checkpoint`
+- Status: `""" + str(external_status) + """`
+- Strategy Evidence Library role: `discovery_backlog_only`
+- Automatic next-source selection: `false`
+- New external screen authorized: `false`
+- Next source requires explicit direction-owner supply: `true`
+- Next source must pass the existing eligibility filter: `true`
 
-Do not start another immediate random ETF-wrapper discovery batch.
+Allowed next actions:
+
+- Continue existing paper/demo observation.
+- Externally research and select one direction-owner source.
+- Validate a direction-owner-supplied external source against the existing eligibility filter.
+
+Not allowed from this checkpoint:
+
+- Codex-selected next external strategy.
+- Automatic traversal of the external-source backlog.
+- Implementation based solely on backlog readiness.
+- Another screen without an explicit source and objective from the direction owner.
+- Strategy implementation or screening until a source is supplied and validated.
+
+Do not start another immediate random ETF-wrapper discovery batch or external-source experiment.
 """
 
 
@@ -426,6 +552,9 @@ This checkpoint pauses the current ETF-wrapper discovery track. It is an audit/c
 - New paper-forward actions recommended: `0`
 - Expanded-universe batch 1 promotion candidates: `0`
 - Primary next engineering action: `{next_engineering}`
+- External-source discovery lane: `paused_pending_direction_owner_supplied_source`
+- Strategy Evidence Library role: `discovery_backlog_only`
+- No automatic next external candidate is selected.
 
 ## State Mismatches / Assumptions Recorded
 
@@ -447,6 +576,9 @@ def update_roadmap(root: Path, state: dict[str, Any]) -> bool:
 - {combo_status}
 - Candidate pipeline has no surviving candidate_exhaustive row.
 - Next engineering action is `{next_engineering}`.
+- External-source discovery is paused pending an explicitly supplied direction-owner source.
+- Strategy Evidence Library remains a discovery backlog and provenance memory layer, not an execution queue.
+- `{MAX_DIV_ID}` is closed only for immediate exact retesting; the broader maximum-diversification/correlation-aware family remains open only for materially distinct source-backed hypotheses.
 - DSR caveat is accepted but recorded.
 - No more immediate similar ETF-wrapper batch discovery.
 """
@@ -460,50 +592,30 @@ def update_roadmap(root: Path, state: dict[str, Any]) -> bool:
     return True
 
 
-def update_registry_metadata(root: Path, state: dict[str, Any]) -> bool:
-    path = root / REGISTRY_PATH
+def registry_metadata_view(root: Path, state: dict[str, Any]) -> dict[str, str]:
     next_engineering = state["active_combo_state"]["next_engineering_action"]
-    updates = {
+    max_div = state.get("max_div_state", {})
+    return {
         "current_research_checkpoint_path": str(root / OUTPUT_DIR),
         "etf_discovery_status": "paused",
         "candidate_pipeline_empty": "true",
         "next_engineering_action": next_engineering,
         "next_research_action_after_engineering": NEXT_RESEARCH_AFTER_ENGINEERING,
+        "external_source_library_role": "discovery_backlog_only",
+        "automatic_next_source_selection": "false",
+        "new_external_screen_authorized": "false",
+        "next_source_requires_direction_owner_supply": "true",
+        "next_source_must_pass_existing_eligibility_filter": "true",
+        "max_diversification_exact_variant_status": "closed_for_immediate_exact_retesting",
+        "max_diversification_screening_outcome": str(max_div.get("outcome", {}).get("screening_outcome", "unknown")),
+        "max_diversification_primary_failure_reason": str(max_div.get("primary_failure_reason", "unknown")),
+        "max_diversification_broader_family_closed": "false",
         "no_candidate_exhaustive_run": "true",
         "no_paper_forward_action": "true",
         "no_real_money_recommendation": "true",
         "active_combo_reconciliation_path": str(root / ACTIVE_COMBO_RECONCILIATION_DIR),
         "active_combo_reference_available": "true" if state["active_combo_available"] else "false",
     }
-    if not path.exists():
-        registry = {"registry": {"schema_version": 1, "project": "trading_tournament", "research_only": True, "real_money_recommendation": False, "broker_integration": False, "live_orders": False}, "risk_framework": {}, "strategies": []}
-        registry["registry"].update(updates)
-        path.write_text(yaml.safe_dump(registry, sort_keys=False, width=120), encoding="utf-8")
-        return True
-    lines = path.read_text(encoding="utf-8").splitlines()
-    seen: set[str] = set()
-    output: list[str] = []
-    in_registry = False
-    inserted = False
-    for idx, line in enumerate(lines):
-        if line == "registry:":
-            in_registry = True
-        elif line and not line.startswith(" ") and line != "registry:":
-            if in_registry and not inserted:
-                output.extend(f"  {key}: {val}" for key, val in updates.items() if key not in seen)
-                inserted = True
-            in_registry = False
-        stripped = line.strip()
-        key = stripped.split(":", 1)[0] if ":" in stripped else ""
-        if in_registry and line.startswith("  ") and key in updates:
-            output.append(f"  {key}: {updates[key]}")
-            seen.add(key)
-            continue
-        output.append(line)
-    if in_registry and not inserted:
-        output.extend(f"  {key}: {val}" for key, val in updates.items() if key not in seen)
-    path.write_text("\n".join(output) + "\n", encoding="utf-8")
-    return True
 
 
 def create_packet(output: Path) -> Path:
@@ -535,8 +647,10 @@ def write_outputs(root: Path, state: dict[str, Any]) -> dict[str, Any]:
     (output / "accepted_caveats.md").write_text(accepted_caveats_text(state), encoding="utf-8")
     (output / "do_not_rerun_now.md").write_text(do_not_rerun_text(), encoding="utf-8")
     (output / "recommended_engineering_next_steps.md").write_text(engineering_next_steps_text(state), encoding="utf-8")
-    (output / "recommended_research_next_steps.md").write_text(research_next_steps_text(), encoding="utf-8")
+    (output / "recommended_research_next_steps.md").write_text(research_next_steps_text(state), encoding="utf-8")
     (output / "current_research_checkpoint_summary.md").write_text(summary_text(state), encoding="utf-8")
+    registry_view = registry_metadata_view(root, state)
+    write_json(output / "current_research_checkpoint_registry_metadata_view.json", registry_view)
     manifest = {
         "created_at_utc": now_utc(),
         "checkpoint_created": True,
@@ -549,8 +663,26 @@ def write_outputs(root: Path, state: dict[str, Any]) -> dict[str, Any]:
         "recorded_mismatches": state["mismatches"],
         "next_engineering_action": state["active_combo_state"]["next_engineering_action"],
         "next_research_action_after_engineering": NEXT_RESEARCH_AFTER_ENGINEERING,
+        "external_source_library_role": "discovery_backlog_only",
+        "automatic_next_source_selection": False,
+        "new_external_screen_authorized": False,
+        "next_source_requires_direction_owner_supply": True,
+        "next_source_must_pass_existing_eligibility_filter": True,
+        "max_diversification_exact_variant": MAX_DIV_ID,
+        "max_diversification_exact_variant_status": "closed_for_immediate_exact_retesting",
+        "max_diversification_exact_variant_closed_for_immediate_retesting": True,
+        "max_diversification_broader_family_closed": False,
+        "max_diversification_screening_outcome": state["max_div_state"]["outcome"].get("screening_outcome", "unknown"),
+        "max_diversification_primary_failure_reason": state["max_div_state"]["primary_failure_reason"],
+        "max_diversification_secondary_observation": state["max_div_state"]["secondary_observation"],
+        "max_diversification_allowed_future_condition": state["max_div_state"]["allowed_future_condition"],
+        "max_diversification_prohibited_followups": state["max_div_state"]["prohibited_followups"],
+        "codex_must_not_choose_next_source_from_backlog_readiness": True,
+        "implementation_or_screening_unauthorized_until_source_supplied_and_validated": True,
         "active_combo_reconciliation_path": state["active_combo_state"]["evidence_path"],
         "active_combo_reconstructability_classification": state["active_combo_state"]["manifest"].get("reconstructability_classification", "unavailable"),
+        "canonical_registry_write": False,
+        "registry_metadata_view_path": str(output / "current_research_checkpoint_registry_metadata_view.json"),
         "strategy_discovery_run": False,
         "research_sample_run": False,
         "candidate_exhaustive_run": False,
@@ -586,9 +718,10 @@ def write_outputs(root: Path, state: dict[str, Any]) -> dict[str, Any]:
         "engineering_next_steps_created": True,
         "research_next_steps_created": True,
         "roadmap_updated_or_proposed": (root / ROADMAP_PATH).exists(),
-        "registry_updated_or_proposed": (root / REGISTRY_PATH).exists(),
+        "registry_metadata_view_created": (output / "current_research_checkpoint_registry_metadata_view.json").exists(),
+        "canonical_registry_write": False,
     }
-    consistency["consistency_passed"] = all(bool(value) for value in consistency.values())
+    consistency["consistency_passed"] = all(bool(value) for key, value in consistency.items() if key != "canonical_registry_write") and consistency["canonical_registry_write"] is False
     write_json(output / "current_research_checkpoint_consistency_check.json", consistency)
     packet = create_packet(output)
     return {"output_dir": str(output), "packet": str(packet), "manifest": manifest, "consistency": consistency}
@@ -597,7 +730,6 @@ def write_outputs(root: Path, state: dict[str, Any]) -> dict[str, Any]:
 def run_current_research_checkpoint(root: Path = ROOT) -> dict[str, Any]:
     state = evidence_state(root)
     update_roadmap(root, state)
-    update_registry_metadata(root, state)
     result = write_outputs(root, state)
     return {
         "output_dir": result["output_dir"],

@@ -336,6 +336,50 @@ def strategy_weights(close: pd.DataFrame, t: int, strategy_id: str) -> dict[str,
     return {"BIL": 1.0}
 
 
+def weight_union(left: dict[str, float], right: dict[str, float]) -> set[str]:
+    return set(left) | set(right)
+
+
+def rebalance_turnover_units(new_weights: dict[str, float], pre_trade_weights: dict[str, float]) -> float:
+    return float(sum(abs(new_weights.get(sym, 0.0) - pre_trade_weights.get(sym, 0.0)) for sym in weight_union(new_weights, pre_trade_weights)))
+
+
+def daily_asset_returns(close: pd.DataFrame, today: int, symbols: set[str] | list[str]) -> dict[str, float]:
+    returns: dict[str, float] = {}
+    for symbol in symbols:
+        if available_at(close, symbol, today, 1):
+            returns[symbol] = float(close.iloc[today][symbol] / close.iloc[today - 1][symbol] - 1.0)
+        else:
+            returns[symbol] = 0.0
+    return returns
+
+
+def weighted_return(weights: dict[str, float], asset_returns: dict[str, float]) -> float:
+    return float(sum(float(weight) * float(asset_returns.get(symbol, 0.0)) for symbol, weight in weights.items()))
+
+
+def drift_weights(weights: dict[str, float], asset_returns: dict[str, float]) -> dict[str, float]:
+    if not weights:
+        return {}
+    gross = 1.0 + weighted_return(weights, asset_returns)
+    if abs(gross) <= 1e-12:
+        return {symbol: float(weight) for symbol, weight in weights.items() if abs(weight) > 1e-12}
+    drifted = {symbol: float(weight) * (1.0 + float(asset_returns.get(symbol, 0.0))) / gross for symbol, weight in weights.items()}
+    return {symbol: weight for symbol, weight in drifted.items() if abs(weight) > 1e-12}
+
+
+def apply_rebalance_cost(equity: float, turnover_units: float) -> float:
+    return float(equity * (1.0 - turnover_units * SLIPPAGE))
+
+
+def portfolio_step(close: pd.DataFrame, today: int, weights: dict[str, float], apply_cost: bool = False, turnover_units: float = 0.0) -> tuple[float, dict[str, float], float]:
+    asset_returns = daily_asset_returns(close, today, set(weights))
+    gross_return = weighted_return(weights, asset_returns)
+    cost_return = turnover_units * SLIPPAGE if apply_cost else 0.0
+    net_return = float((1.0 - cost_return) * (1.0 + gross_return) - 1.0)
+    return net_return, drift_weights(weights, asset_returns), cost_return
+
+
 def simulate(close: pd.DataFrame, start: int, horizon: int, strategy_id: str) -> dict[str, Any]:
     equity = STARTING_EQUITY
     peak = equity
@@ -350,16 +394,13 @@ def simulate(close: pd.DataFrame, start: int, horizon: int, strategy_id: str) ->
         today = start + offset
         signal = today - 1
         month = int(months[today])
+        turnover = 0.0
         if month != last_month:
             new_weights = strategy_weights(close, signal, strategy_id)
-            turnover = sum(abs(new_weights.get(sym, 0.0) - weights.get(sym, 0.0)) for sym in set(new_weights) | set(weights))
-            equity -= equity * turnover * SLIPPAGE
+            turnover = rebalance_turnover_units(new_weights, weights)
             weights = new_weights
             last_month = month
-        daily_return = 0.0
-        for symbol, weight in weights.items():
-            if available_at(close, symbol, today, 1):
-                daily_return += weight * float(close.iloc[today][symbol] / close.iloc[today - 1][symbol] - 1.0)
+        daily_return, weights, _cost_return = portfolio_step(close, today, weights, apply_cost=turnover > 0.0, turnover_units=turnover)
         equity *= 1.0 + daily_return
         peak = max(peak, equity)
         max_drawdown = min(max_drawdown, equity - peak)
@@ -433,13 +474,13 @@ def full_returns(close: pd.DataFrame, strategy_id: str) -> pd.Series:
     for today in range(253, len(close)):
         signal = today - 1
         month = int(months[today])
+        turnover = 0.0
         if month != last_month:
-            weights = strategy_weights(close, signal, strategy_id)
+            new_weights = strategy_weights(close, signal, strategy_id)
+            turnover = rebalance_turnover_units(new_weights, weights)
+            weights = new_weights
             last_month = month
-        daily_return = 0.0
-        for symbol, weight in weights.items():
-            if available_at(close, symbol, today, 1):
-                daily_return += weight * float(close.iloc[today][symbol] / close.iloc[today - 1][symbol] - 1.0)
+        daily_return, weights, _cost_return = portfolio_step(close, today, weights, apply_cost=turnover > 0.0, turnover_units=turnover)
         equity *= 1.0 + daily_return
         values.append(equity)
         dates.append(close.index[today])
@@ -999,6 +1040,10 @@ def write_outputs(
     manifest = {
         "created_at_utc": now_utc(),
         "target_strategy_ids": TARGET_STRATEGY_IDS,
+        "portfolio_accounting_method": "monthly target weights are executed on scheduled month changes; actual weights drift with asset returns between rebalances",
+        "turnover_basis": "sum(abs(new target weight - pre-trade actual weight)) using the existing active recompute turnover unit convention",
+        "cost_basis": "equity * turnover_units * SLIPPAGE on scheduled rebalance trades only",
+        "target_and_actual_weights_separated_in_methodology": True,
         "diagnostics_available": payload["diagnostics_available"],
         "missing_symbols": payload["missing_symbols"],
         "cache_used": payload["diagnostics_available"] and not payload["missing_symbols"],
