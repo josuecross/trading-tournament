@@ -1,0 +1,57 @@
+observation_id: paper_forward_usci_dynamic_commodity_curve_selection_wrapper_v1
+base_strategy_id: usci_dynamic_commodity_curve_selection_wrapper_v1
+family: commodity_curve_selection
+role: commodity_curve_selection_diversifier
+status: active_paper_demo_observation
+account_type: simulated_paper_demo_only
+evidence_source: usci_paper_forward_eligibility_review_v1
+frozen: true
+rules_frozen: true
+paper_forward_active: true
+real_money_recommendation: false
+broker_integration: false
+live_orders: false
+order_placement: false
+leverage: false
+margin: false
+shorting: false
+options: false
+futures: false
+forex: false
+crypto: false
+intraday: false
+minimum_days_before_judgment: 30
+current_checkpoint_status: activated_observation_only_no_conclusion
+candidate_instrument: USCI
+primary_benchmark: DBC
+secondary_references:
+- BIL
+- SPY
+initial_virtual_capital: 3000.0
+initial_observation_date: '2026-06-18'
+initial_observed_price: 92.87999725341795
+initial_virtual_shares: 32.28359268593385
+initial_virtual_cash: 0.0
+rule_summary:
+- Static observation-only wrapper.
+- Hold 100% USCI after observation initialization.
+- No external rebalance, timing signal, BIL switch, futures reconstruction, leverage,
+  or shorting.
+- DBC is the frozen primary benchmark; BIL and SPY are secondary references.
+universe:
+- USCI
+- DBC
+- BIL
+- SPY
+monitoring_risks:
+- current_short_horizon_relative_weakness
+latest_committed_observation_date: '2026-07-01'
+latest_committed_virtual_equity: 2983.681843
+latest_committed_observed_price: 92.4209976196
+latest_committed_virtual_shares: 32.283592685934
+latest_committed_virtual_cash: 0.0
+latest_committed_forward_sessions: 8
+latest_component_forward_ledger: paper_forward_observations/paper_forward_usci_dynamic_commodity_curve_selection_wrapper_v1/component_forward_ledger.csv
+latest_operational_update_id: repair_vm_dsr_observation_data_and_state_v1
+latest_operational_update_evidence_path: evidence/repair_vm_dsr_observation_data_and_state_v1/latest
+latest_operational_update_status: usci_committed_independently_vm_dsr_state_recovery_blocked

@@ -272,7 +272,7 @@ registry:
   pause_expansion_summary_created_utc: '2026-06-28T23:00:16.496120+00:00'
   expansion_paused: true
   promotion_candidates_current_count: 0
-  active_observations_count: 2
+  active_observations_count: 4
   benchmark_controls_count: 7
   closed_exact_variant_count: 7
   families_open_only_with_future_hypothesis_count: 5
@@ -10604,3 +10604,122 @@ strategies:
   latest_discovery_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\breadth_state_regime\latest
   candidate_exhaustive_run_after_discovery: false
   paper_forward_active_after_discovery: false
+- id: paper_forward_usci_dynamic_commodity_curve_selection_wrapper_v1
+  display_name: Paper Forward USCI Dynamic Commodity Curve Selection Wrapper v1
+  lane: paper_forward
+  instrument_family: ETF
+  strategy_family: commodity_curve_selection
+  version: v1
+  parent_id: usci_dynamic_commodity_curve_selection_wrapper_v1
+  credibility_tier: tier4_paper_forward
+  status: active_paper_demo_observation
+  role: commodity_curve_selection_diversifier
+  rules_frozen: true
+  paper_forward_active: true
+  implementation_status: implemented
+  data_source: existing_adjusted_etf_cache
+  evidence_source: usci_paper_forward_eligibility_review_v1
+  latest_evidence_path: evidence/usci_paper_forward_eligibility_review_v1/latest/
+  latest_known_result_summary: Direction-owner override preserves formal historical_edge_recently_weakened validation label but approves observation-only paper-forward monitoring for exact static USCI wrapper versus DBC.
+  allowed_next_action: observe_only
+  forbidden_next_actions:
+  - change_rules
+  - tune_parameters
+  - run_candidate_exhaustive
+  - promote_to_real_money
+  - add_broker_integration
+  - place_orders
+  - place_live_orders
+  risk_framework_status: paper_forward_allowed_direction_owner_override_observation_only
+  paper_forward_allowed_by_risk_framework: true
+  real_money_recommendation: false
+  promotion_blockers: no_real_money_promotion;observation_only;recent_short_horizon_relative_weakness
+  promotion_requirements: Observation-only monitoring and future independent review before any promotion.
+  demotion_or_kill_criteria: Persistent relative weakness versus DBC, data quality failure, redundancy, or owner decision.
+  notes: Static investable-wrapper observation only. Buy-and-hold USCI versus DBC; no timing, futures reconstruction, leverage, shorting, broker path, orders, or real-money recommendation.
+  strategy_id: paper_forward_usci_dynamic_commodity_curve_selection_wrapper_v1
+  family: commodity_curve_selection
+  instrument_lane: ETF
+  evidence_tier: tier4_paper_forward
+  current_status: active_paper_demo_observation
+  allowed_next_actions:
+  - observe_only
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: paper_forward_observation_approved_direction_owner_override
+  promotion_reason: Historical evidence gate passed using frozen current-methodology packet; recent weakness disclosed as monitoring risk.
+  primary_failure_mode: current_short_horizon_relative_weakness
+  duplication_risk: not_redundant_with_active_vm_or_dsr
+  risk_budget_status: active_observation
+  evidence_needed: observation evidence only; no real-money conclusion
+  duplicate_of: ''
+  blocked_reason: ''
+  frozen: true
+  latest_active_evidence_recompute_path: ''
+  active_evidence_audit_decision: usci_observation_only_not_recomputed_active_strategy
+  active_evidence_recompute_completed: false
+  manual_review_required: false
+  no_candidate_exhaustive_run: true
+  no_paper_forward_checkpoint: true
+  no_real_money_recommendation: true
+- id: paper_forward_combo_vm_dsr_usci_equal_weight_monthly_v1
+  display_name: Paper Forward Combo VM DSR USCI Equal Weight Monthly v1
+  lane: paper_forward
+  instrument_family: ETF
+  strategy_family: multi_strategy_diversified_portfolio
+  version: v1
+  parent_id: combo_vm_dsr_usci_equal_weight_monthly_v1
+  credibility_tier: tier4_paper_forward
+  status: active_paper_demo_observation
+  role: derived_diversified_observation_portfolio
+  rules_frozen: true
+  paper_forward_active: true
+  implementation_status: implemented
+  data_source: component_paper_forward_observations
+  evidence_source: combo_vm_dsr_usci_paper_forward_eligibility_review_v1
+  latest_evidence_path: evidence/combo_vm_dsr_usci_paper_forward_eligibility_review_v1/latest/
+  latest_known_result_summary: Exact VM/DSR/USCI one-third monthly derived observation approved after immutable bounded-screen and validation packets; selection-conditioned and historical USCI-regime weakness retained.
+  allowed_next_action: observe_only
+  forbidden_next_actions:
+  - change_rules
+  - tune_weights
+  - tune_rebalance_frequency
+  - run_candidate_exhaustive
+  - promote_to_real_money
+  - add_broker_integration
+  - place_orders
+  - place_live_orders
+  risk_framework_status: paper_forward_observation_only
+  paper_forward_allowed_by_risk_framework: true
+  real_money_recommendation: false
+  promotion_blockers: observation_only;selection_conditioned_evidence;historical_usci_regime_weakness_retained;no_real_money_authorization
+  promotion_requirements: Independent paper-forward observation and future direction-owner review; no automatic promotion.
+  demotion_or_kill_criteria: Missing component data, stale observation data, accounting defect, persistent relative weakness, or direction-owner decision.
+  notes: Separate virtual account; component capital is not reserved or debited. Active combo remains benchmark/reference only.
+  strategy_id: paper_forward_combo_vm_dsr_usci_equal_weight_monthly_v1
+  family: multi_strategy_diversified_portfolio
+  instrument_lane: ETF
+  evidence_tier: tier4_paper_forward
+  current_status: active_paper_demo_observation
+  allowed_next_actions:
+  - observe_only
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: paper_forward_observation_only_approved
+  promotion_reason: Bounded screen comparative_evidence_positive and validation_supports_paper_forward_review preserved; activation is observation-only.
+  primary_failure_mode: selection_conditioned_current_methodology_evidence
+  duplication_risk: benchmark_overlap_managed_by_active_combo_reference
+  risk_budget_status: active_observation
+  evidence_needed: paper-forward observation evidence only; no real-money conclusion
+  duplicate_of: ''
+  blocked_reason: ''
+  frozen: true
+  latest_active_evidence_recompute_path: ''
+  active_evidence_audit_decision: combo_observation_only_not_recomputed_active_strategy
+  active_evidence_recompute_completed: false
+  manual_review_required: false
+  no_candidate_exhaustive_run: true
+  no_paper_forward_checkpoint: true
+  no_real_money_recommendation: true

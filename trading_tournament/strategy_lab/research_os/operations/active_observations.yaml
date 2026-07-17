@@ -14,6 +14,14 @@ active_observations:
   state: active_accepted_frozen_observation
   paper_forward_active: true
   protected: true
+- strategy_id: paper_forward_usci_dynamic_commodity_curve_selection_wrapper_v1
+  state: active_accepted_frozen_observation
+  paper_forward_active: true
+  protected: true
+- strategy_id: paper_forward_combo_vm_dsr_usci_equal_weight_monthly_v1
+  state: active_accepted_frozen_observation
+  paper_forward_active: true
+  protected: true
 benchmark_controls:
 - strategy_id: static_all_weather_benchmark_v1
   state: benchmark_control_only
@@ -62,3 +70,28 @@ observation_manual_snapshot_loop_delegated_to_alpaca_module:
   alpaca_execution_module_delegated: true
   active_vm_preserved: true
   active_dsr_preserved: true
+latest_usci_paper_forward_eligibility_review:
+  evidence_path: evidence/usci_paper_forward_eligibility_review_v1/latest
+  observation_id: paper_forward_usci_dynamic_commodity_curve_selection_wrapper_v1
+  source_candidate: usci_dynamic_commodity_curve_selection_wrapper_v1
+  direction_owner_override: true
+  formal_validation_label_unchanged: historical_edge_recently_weakened
+  paper_forward_active: true
+  broker_integration: false
+  live_orders: false
+  real_money_recommendation: false
+  next_action: observe_usci_paper_forward_without_orders
+latest_combo_vm_dsr_usci_paper_forward_eligibility_review:
+  evidence_path: evidence/combo_vm_dsr_usci_paper_forward_eligibility_review_v1/latest
+  observation_id: paper_forward_combo_vm_dsr_usci_equal_weight_monthly_v1
+  source_candidate: combo_vm_dsr_usci_equal_weight_monthly_v1
+  decision: approve_combo_vm_dsr_usci_paper_forward_observation
+  selection_conditioning_limitation_retained: true
+  historical_usci_regime_dependence_retained: true
+  observation_only: true
+  paper_forward_active: true
+  broker_integration: false
+  live_orders: false
+  paper_orders: false
+  real_money_recommendation: false
+  next_action: resume_productive_research_while_combo_vm_dsr_usci_observes

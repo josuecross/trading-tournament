@@ -1,0 +1,84 @@
+observation_id: paper_forward_combo_vm_dsr_usci_equal_weight_monthly_v1
+base_strategy_id: combo_vm_dsr_usci_equal_weight_monthly_v1
+family: multi_strategy_diversified_portfolio
+role: derived_diversified_observation_portfolio
+status: active_paper_demo_observation
+account_type: simulated_paper_demo_only
+evidence_source: combo_vm_dsr_usci_paper_forward_eligibility_review_v1
+frozen: true
+rules_frozen: true
+paper_forward_active: true
+real_money_recommendation: false
+broker_integration: false
+live_orders: false
+paper_orders: false
+order_placement: false
+leverage: false
+margin: false
+shorting: false
+options: false
+futures: false
+forex: false
+crypto: false
+intraday: false
+automatic_promotion: false
+current_checkpoint_status: activated_observation_only_no_conclusion
+initial_virtual_capital: 3000.0
+initial_observation_date: '2026-06-18'
+activation_timestamp_utc: '2026-07-17T01:56:19.335863+00:00'
+component_observations:
+- paper_forward_vm_quality_lowvol_proxy_v1
+- paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+- paper_forward_usci_dynamic_commodity_curve_selection_wrapper_v1
+component_weights:
+  paper_forward_vm_quality_lowvol_proxy_v1: 0.3333333333333333
+  paper_forward_dsr_sector_equal_weight_defensive_filter_v1: 0.3333333333333333
+  paper_forward_usci_dynamic_commodity_curve_selection_wrapper_v1: 0.3333333333333333
+initial_sleeve_capital:
+  paper_forward_vm_quality_lowvol_proxy_v1: 1000.0
+  paper_forward_dsr_sector_equal_weight_defensive_filter_v1: 1000.0
+  paper_forward_usci_dynamic_commodity_curve_selection_wrapper_v1: 1000.0
+primary_benchmark: active_combo_vm_dsr_equal_weight_v1
+secondary_references:
+- paper_forward_vm_quality_lowvol_proxy_v1
+- paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+- paper_forward_usci_dynamic_commodity_curve_selection_wrapper_v1
+- SPY
+- BIL
+rebalance: monthly_first_common_valid_session
+drift_between_rebalances: true
+tactical_signal: none
+maximum_aggregate_exposure: 1.0
+missing_stale_data_policy:
+  missing_component_return_as_zero: false
+  forward_fill_missing_component_return: false
+  advance_on_partial_component_date: false
+  required_common_component_date: true
+  stale_component_action: mark_derived_observation_pending_or_stale_until_complete_common_component_date
+  historical_cache_used_for_future_returns_when_component_observation_exists: false
+  data_freshness_fields_required:
+  - observation_age
+  - component_source_date
+  - missing_component_status
+  - stale_date_status
+rule_summary:
+- Derived observation-only virtual portfolio.
+- Start independent VM, DSR, and USCI sleeves at one-third each.
+- Apply component authoritative net forward returns to actual sleeve values.
+- Allow sleeve values and weights to drift between monthly rebalances.
+- Restore one-third sleeve weights on the first common valid session of each calendar
+  month.
+- No broker orders, paper orders, live orders, leverage, shorting, tactical allocation,
+  or optimization.
+limitations:
+- USCI_selected_after_strong_post_2020_historical_evidence
+- combination_designed_after_USCI_selection
+- current_methodology_evidence_is_selection_conditioned
+- USCI_pct_total_candidate_gain
+- historical_pre_2021_same_construction_underperformed_active_combo
+- historical_pre_2021_excess_total_return
+- historical_pre_2021_CAGR_difference
+- paper_forward_observes_currently_applicable_USCI_methodology
+- observation_is_evidence_gathering_not_proof
+- promotion_authorized
+- real_money_recommendation
