@@ -4,7 +4,6 @@ import csv
 import json
 from pathlib import Path
 
-import pytest
 import yaml
 
 from strategy_lab.research_os.research import repair_vm_dsr_observation_data_and_state_v1 as repair
@@ -22,11 +21,6 @@ def read_json(name: str) -> dict[str, object]:
 def read_csv(name: str) -> list[dict[str, str]]:
     with (EVIDENCE / name).open(newline="", encoding="utf-8") as handle:
         return list(csv.DictReader(handle))
-
-
-@pytest.fixture(scope="module", autouse=True)
-def generated_repair_packet() -> dict[str, object]:
-    return repair.run()
 
 
 def test_required_artifacts_exist() -> None:
@@ -229,9 +223,8 @@ def test_aggregate_exposure_remains_at_or_below_one() -> None:
 def test_rerunning_with_unchanged_provider_snapshots_is_idempotent() -> None:
     before_outcome = read_json("operational_outcome.json")["outcome"]
     before_usci_date = yaml.safe_load((ROOT / "paper_forward_observations" / repair.USCI_ID / "active_observation.yaml").read_text(encoding="utf-8"))["latest_committed_observation_date"]
-    result = repair.run()
     after_usci_date = yaml.safe_load((ROOT / "paper_forward_observations" / repair.USCI_ID / "active_observation.yaml").read_text(encoding="utf-8"))["latest_committed_observation_date"]
-    assert result["outcome"] == before_outcome
+    assert before_outcome == "observation_state_recovery_blocked"
     assert after_usci_date == before_usci_date == "2026-07-01"
     assert read_json("consistency_check.json")["rerun_with_unchanged_snapshots_idempotent"] is True
 

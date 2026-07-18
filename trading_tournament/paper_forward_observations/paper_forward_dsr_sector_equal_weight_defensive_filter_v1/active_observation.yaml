@@ -66,3 +66,60 @@ conversation_recovered_metrics:
   equal_weight_sector_benchmark_correlation: about 0.855
   sector_benchmark_duplicate_label: likely_duplicate
   drawdown_improvement_vs_raw_equal_weight_sector_basket: about +$590.10
+operational_baseline_status: initialized
+operational_baseline_version: forward_operational_reinitialization_vm_dsr_combo_v1
+operational_baseline_date: '2026-06-18'
+operational_baseline_provenance: direction_owner_authorized_forward_only_operational_reinitialization
+continuity_from_original_activation: false
+prior_interval_status: unobserved_due_to_missing_authoritative_baseline
+initial_virtual_capital: 3000.0
+initialization_cost_rate: 0.0005
+initialization_turnover: 1.0
+initialization_cost: 1.5
+post_cost_equity: 2998.5
+latest_committed_observation_date: '2026-06-18'
+latest_committed_virtual_equity: 2998.5
+current_holdings:
+  XLK: 374.8125
+  XLF: 374.8125
+  XLE: 374.8125
+  XLV: 374.8125
+  XLP: 374.8125
+  XLU: 374.8125
+  XLI: 374.8125
+  XLB: 374.8125
+virtual_shares:
+  XLK: 1.9578588342043002
+  XLF: 6.996686618167245
+  XLE: 6.97066201988254
+  XLV: 2.5087852430549527
+  XLP: 4.499549655083603
+  XLU: 8.373827391760305
+  XLI: 2.071817436364922
+  XLB: 7.2343657607626035
+cash: 0.0
+target_allocation:
+  XLK: 0.125
+  XLF: 0.125
+  XLE: 0.125
+  XLV: 0.125
+  XLP: 0.125
+  XLU: 0.125
+  XLI: 0.125
+  XLB: 0.125
+last_signal_date: '2026-06-17'
+last_rebalance_date: '2026-06-18'
+strategy_fingerprint: d14cd83cb2b1c1c1701f8becb3a6e3fd7fbd5bc65e116d1e7e8012d99024ed08
+component_forward_ledger: paper_forward_observations/paper_forward_dsr_sector_equal_weight_defensive_filter_v1/component_forward_ledger.csv
+data_snapshot_hashes:
+  XLK: 49bbea5493568f7ca6258061a16cb0d14e3ad43d7cf2c020204880ff8812b1a2
+  XLF: 19e285941916278fd2e71b4c94d9bec6f549d60ad1ae71740f31ba9090e47562
+  XLE: 54850949d2f7a00d51155c05015b90c8c7997001ba20991b33840c26ffb6f92c
+  XLV: 0b0e55aab69a0049c029868c1cc92815a2842045921efe0d2c1c6e31279f1c20
+  XLP: c6f55e65f9c0095fc7a1eeabd5840f1c3c848511d927927944db5b8950241a1a
+  XLU: bdcb75247c5c9daa8edfe69ce49a616e502fcf6a116033fb76487baeeff4a938
+  XLI: 83fdce4eee02a8e977c82c610dc0f8bd45e39b6fc277c4d31146d450cc26a96d
+  XLB: d5bb913c7be95610e1997943f0ecff1fa0325b8dd4195fdbbdc15140d31739bd
+latest_operational_update_id: forward_operational_reinitialization_vm_dsr_combo_v1
+latest_operational_update_evidence_path: evidence/forward_operational_reinitialization_vm_dsr_combo_v1/latest
+latest_operational_update_status: forward_operational_reinitialization_passed

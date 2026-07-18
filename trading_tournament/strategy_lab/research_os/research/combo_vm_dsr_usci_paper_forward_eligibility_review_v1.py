@@ -666,9 +666,12 @@ latest_combo_vm_dsr_usci_paper_forward_eligibility_review:
 def write_observation_yaml(config: dict[str, Any], snapshot: dict[str, Any]) -> str:
     OBSERVATION_DIR.mkdir(parents=True, exist_ok=True)
     target = OBSERVATION_DIR / "active_observation.yaml"
+    existing = read_yaml(target) if target.exists() else {}
     payload = observation_yaml_payload(config, snapshot)
+    merged_payload = dict(existing)
+    merged_payload.update(payload)
     previous = target.read_text(encoding="utf-8") if target.exists() else ""
-    text = yaml.safe_dump(payload, sort_keys=False)
+    text = yaml.safe_dump(merged_payload, sort_keys=False)
     target.write_text(text, encoding="utf-8")
     return "ensured_present_existing" if previous == text else "ensured_present_written"
 

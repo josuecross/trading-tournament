@@ -43,3 +43,36 @@ conversation_recovered_metrics:
   stress_worst_drawdown: about -$557.47
   correlation_vs_active_combo: about 0.551
   correlation_vs_SPY_200d: about 0.8465
+operational_baseline_status: initialized
+operational_baseline_version: forward_operational_reinitialization_vm_dsr_combo_v1
+operational_baseline_date: '2026-06-18'
+operational_baseline_provenance: direction_owner_authorized_forward_only_operational_reinitialization
+continuity_from_original_activation: false
+prior_interval_status: unobserved_due_to_missing_authoritative_baseline
+initial_virtual_capital: 3000.0
+initialization_cost_rate: 0.0005
+initialization_turnover: 1.0
+initialization_cost: 1.5
+post_cost_equity: 2998.5
+latest_committed_observation_date: '2026-06-18'
+latest_committed_virtual_equity: 2998.5
+current_holdings:
+  SPY: 1499.2499999999998
+  QUAL: 1499.25
+virtual_shares:
+  SPY: 2.0077269459339373
+  QUAL: 6.94450879725134
+cash: 0.0
+target_allocation:
+  SPY: 0.5
+  QUAL: 0.5
+last_signal_date: '2026-06-17'
+last_rebalance_date: '2026-06-18'
+strategy_fingerprint: c734fe79bb86ebf2e62eb9113d691411c2d7d676adc9b24a3fcda657f8219a71
+component_forward_ledger: paper_forward_observations/paper_forward_vm_quality_lowvol_proxy_v1/component_forward_ledger.csv
+data_snapshot_hashes:
+  SPY: 78212246e31256790db5d065396dfbf18a13310f85b43b6f23e3ea34d40af779
+  QUAL: 47d1769c1b59528e3245195458a6aedfe0bd4f0a5db30ab64dc6c1732d46da7c
+latest_operational_update_id: forward_operational_reinitialization_vm_dsr_combo_v1
+latest_operational_update_evidence_path: evidence/forward_operational_reinitialization_vm_dsr_combo_v1/latest
+latest_operational_update_status: forward_operational_reinitialization_passed

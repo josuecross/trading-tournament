@@ -95,3 +95,20 @@ latest_combo_vm_dsr_usci_paper_forward_eligibility_review:
   paper_orders: false
   real_money_recommendation: false
   next_action: resume_productive_research_while_combo_vm_dsr_usci_observes
+latest_forward_operational_reinitialization_vm_dsr_combo_v1:
+  created_utc: '2026-07-17T05:07:44Z'
+  evidence_path: evidence/forward_operational_reinitialization_vm_dsr_combo_v1/latest
+  outcome: forward_operational_reinitialization_passed
+  vm_observation_id: paper_forward_vm_quality_lowvol_proxy_v1
+  dsr_observation_id: paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+  usci_observation_id: paper_forward_usci_dynamic_commodity_curve_selection_wrapper_v1
+  derived_observation_id: paper_forward_combo_vm_dsr_usci_equal_weight_monthly_v1
+  operational_baseline_date: '2026-06-18'
+  provenance: direction_owner_authorized_forward_only_operational_reinitialization
+  continuity_from_original_activation: false
+  prior_interval_status: unobserved_due_to_missing_authoritative_baseline
+  next_action: resume_targeted_fast_discovery_while_reinitialized_observations_run
+  broker_integration: false
+  paper_orders: false
+  live_orders: false
+  real_money_recommendation: false
