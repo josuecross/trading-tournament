@@ -32,6 +32,22 @@ RISK_LIMIT_EXIT_REASONS = {
 }
 
 
+def entry_slippage_cost_from_fill(fill_price: float, shares: float, slippage_pct: float) -> float:
+    if not np.isfinite(slippage_pct) or slippage_pct <= 0:
+        return 0.0
+    reference_price = fill_price / (1.0 + slippage_pct)
+    return abs(shares * reference_price * slippage_pct)
+
+
+def exit_slippage_cost_from_fill(fill_price: float, shares: float, slippage_pct: float, exit_reason: str) -> float:
+    if exit_reason in {"final_mark_to_market", "data_issue"}:
+        return 0.0
+    if not np.isfinite(slippage_pct) or slippage_pct <= 0 or slippage_pct >= 1.0:
+        return 0.0
+    reference_price = fill_price / (1.0 - slippage_pct)
+    return abs(shares * reference_price * slippage_pct)
+
+
 def is_backtest_strategy(name: str, cfg: dict[str, Any] | None = None) -> bool:
     if cfg is not None and not cfg.get("enabled", False):
         return False
@@ -106,6 +122,8 @@ class Portfolio:
         self.project_stop_info: dict[str, Any] = {}
         self.daily_entry_block = False
         self.weekly_entry_block = False
+        self.synthetic_safe_account_value = 0.0
+        self.synthetic_safe_account_last_accrual_date: pd.Timestamp | None = None
 
     def cluster_for_symbol(self, symbol: str) -> str:
         for cluster, symbols in self.config["universe"].get("clusters", {}).items():
@@ -126,6 +144,46 @@ class Portfolio:
     def has_position(self, strategy: str, symbol: str) -> bool:
         return any(pos.strategy == strategy and pos.symbol == symbol for pos in self.positions)
 
+    def accrue_synthetic_safe_account(self, date: pd.Timestamp, annual_rate: float) -> float:
+        if self.synthetic_safe_account_value <= 0.0:
+            self.synthetic_safe_account_last_accrual_date = pd.Timestamp(date)
+            return 0.0
+        current = pd.Timestamp(date)
+        if self.synthetic_safe_account_last_accrual_date is None:
+            self.synthetic_safe_account_last_accrual_date = current
+            return 0.0
+        elapsed_days = max(0, (current.normalize() - self.synthetic_safe_account_last_accrual_date.normalize()).days)
+        if elapsed_days == 0:
+            return 0.0
+        before = self.synthetic_safe_account_value
+        self.synthetic_safe_account_value *= float(np.exp(float(annual_rate) * elapsed_days / 365.0))
+        self.synthetic_safe_account_last_accrual_date = current
+        return float(self.synthetic_safe_account_value - before)
+
+    def transfer_cash_to_synthetic_safe(self, amount: float) -> None:
+        amount = float(amount)
+        if not np.isfinite(amount) or amount < -1e-9:
+            raise ValueError("Synthetic safe-account transfer amount must be finite and non-negative.")
+        if amount <= 1e-9:
+            return
+        if amount > self.cash + 1e-9:
+            raise ValueError("Synthetic safe-account transfer cannot exceed broker cash.")
+        amount = min(amount, self.cash)
+        self.cash -= amount
+        self.synthetic_safe_account_value += amount
+
+    def transfer_synthetic_safe_to_cash(self, amount: float) -> None:
+        amount = float(amount)
+        if not np.isfinite(amount) or amount < -1e-9:
+            raise ValueError("Synthetic safe-account withdrawal amount must be finite and non-negative.")
+        if amount <= 1e-9:
+            return
+        if amount > self.synthetic_safe_account_value + 1e-9:
+            raise ValueError("Synthetic safe-account withdrawal cannot exceed safe-account value.")
+        amount = min(amount, self.synthetic_safe_account_value)
+        self.synthetic_safe_account_value -= amount
+        self.cash += amount
+
     def mark_to_market(self, rows_by_symbol: dict[str, pd.Series]) -> tuple[float, dict[str, float]]:
         unrealized = {strategy: 0.0 for strategy in self.realized_pnl_by_strategy}
         market_value = 0.0
@@ -137,7 +195,7 @@ class Portfolio:
                 price = float(row["close"])
             market_value += pos.shares * price
             unrealized[pos.strategy] = unrealized.get(pos.strategy, 0.0) + (price - pos.entry_price) * pos.shares
-        return self.cash + market_value, unrealized
+        return self.cash + self.synthetic_safe_account_value + market_value, unrealized
 
     def strategy_total_pnl(self, strategy: str, unrealized: dict[str, float]) -> float:
         return self.realized_pnl_by_strategy.get(strategy, 0.0) + unrealized.get(strategy, 0.0)
@@ -241,7 +299,7 @@ class Portfolio:
         )
         stop_price_initial = float(position.metadata.get("stop_price_initial", position.stop_price))
         stop_distance = position.entry_price - stop_price_initial
-        slippage_exit = abs(position.shares * exit_price * self.slippage_pct)
+        slippage_exit = exit_slippage_cost_from_fill(exit_price, position.shares, self.slippage_pct, exit_reason)
         trade = {
             "trade_id": position.trade_id,
             "strategy": position.strategy,
@@ -477,7 +535,11 @@ class Portfolio:
                 ),
                 "strategy_status_at_entry": self.disabled_strategies.get(signal.strategy, "active"),
                 "stop_price_initial": float(stop_price),
-                "slippage_paid_estimate_entry": abs(shares * entry_price * self.slippage_pct),
+                "slippage_paid_estimate_entry": entry_slippage_cost_from_fill(
+                    entry_price,
+                    shares,
+                    self.slippage_pct,
+                ),
             }
         )
 

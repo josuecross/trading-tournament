@@ -662,6 +662,7 @@ def test_audit_packet_files_and_manifest_counts(tmp_path: Path):
         target_timing=pd.DataFrame(),
         risk_events=pd.DataFrame(),
         strategy_lifecycle_events=pd.DataFrame(),
+        overlay_events=pd.DataFrame(),
         killed_strategies=[],
         metadata={
             "effective_first_trading_date": "2020-01-01",

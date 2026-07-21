@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 
 from .metrics import build_benchmark_curves, compute_strategy_metrics, monthly_returns, regime_performance
+from .overlays import ManagedIntentBatch, TradeManagementOverlay
 from .portfolio import Portfolio, Position, is_backtest_strategy
 from .risk import compute_target_timing, evaluate_project_stop, project_stop_config, target_timing_frame
 from .strategies import A, EntrySignal, ExitSignal, StrategyEngine
@@ -35,6 +36,7 @@ class BacktestResult:
     target_timing: pd.DataFrame
     risk_events: pd.DataFrame
     strategy_lifecycle_events: pd.DataFrame
+    overlay_events: pd.DataFrame
     killed_strategies: list[str]
     metadata: dict[str, Any]
 
@@ -303,6 +305,11 @@ class Backtester:
         trailing_drawdown_stop_active: bool = False,
     ) -> dict[str, Any]:
         equity, unrealized, total = self._strategy_pnls(portfolio, rows)
+        gross_market_value = 0.0
+        for pos in portfolio.positions:
+            row_for_pos = rows.get(pos.symbol)
+            price = pos.entry_price if row_for_pos is None or pd.isna(row_for_pos.get("close")) else float(row_for_pos["close"])
+            gross_market_value += abs(pos.shares * price)
         row: dict[str, Any] = {
             "date": date.date().isoformat(),
             "equity": equity,
@@ -310,6 +317,11 @@ class Backtester:
             "drawdown_dollars": equity - high_water_mark,
             "drawdown_pct": equity / high_water_mark - 1.0 if high_water_mark else 0.0,
             "cash": portfolio.cash,
+            "synthetic_safe_account_value": portfolio.synthetic_safe_account_value,
+            "synthetic_safe_account_weight": portfolio.synthetic_safe_account_value / equity if equity else np.nan,
+            "cash_weight": portfolio.cash / equity if equity else np.nan,
+            "gross_market_value": gross_market_value,
+            "gross_exposure": gross_market_value / equity if equity else np.nan,
             "total_open_risk": portfolio.current_open_risk(),
             "open_positions": len(portfolio.positions),
             "daily_pnl": equity - prior_day_equity,
@@ -335,6 +347,7 @@ class Backtester:
         portfolio: Portfolio,
         pending_exits: list[PendingExit],
         slippage_pct: float,
+        overlay: TradeManagementOverlay | None = None,
     ) -> list[PendingExit]:
         remaining: list[PendingExit] = []
         for pending in pending_exits:
@@ -346,7 +359,20 @@ class Backtester:
                 remaining.append(pending)
                 continue
             exit_price = apply_exit_slippage(float(row["open"]), slippage_pct)
-            portfolio.close_position(pos, date, exit_price, pending.signal.reason, notes=pending.signal.notes)
+            trade = portfolio.close_position(pos, date, exit_price, pending.signal.reason, notes=pending.signal.notes)
+            if overlay is not None and trade:
+                overlay.on_after_exit_fill(
+                    date=date,
+                    signal=pending.signal,
+                    trade=trade,
+                    proposed_order={"side": "exit", "price_source": "next_open"},
+                    actual_fill={
+                        "fill_price": exit_price,
+                        "fill_time": pd.Timestamp(date).isoformat(),
+                        "exit_reason": pending.signal.reason,
+                    },
+                    modeled_cost=abs(pos.shares * exit_price * slippage_pct),
+                )
         return remaining
 
     def _fill_pending_entries(
@@ -358,6 +384,7 @@ class Backtester:
         slippage_pct: float,
         rows: dict[str, pd.Series],
         high_water_mark: float,
+        overlay: TradeManagementOverlay | None = None,
     ) -> list[PendingEntry]:
         remaining: list[PendingEntry] = []
         for pending in pending_entries:
@@ -371,7 +398,7 @@ class Backtester:
             entry_price = apply_entry_slippage(float(row["open"]), slippage_pct)
             stop_price, target_price = engine.compute_entry_stop_target(signal, entry_price)
             market_regime = str(row.get("market_regime", "unknown"))
-            portfolio.attempt_open_position(
+            position = portfolio.attempt_open_position(
                 signal,
                 date,
                 entry_price,
@@ -383,6 +410,29 @@ class Backtester:
                 high_water_mark=high_water_mark,
                 current_drawdown=equity - high_water_mark,
             )
+            if overlay is not None:
+                overlay.on_after_entry_fill(
+                    date=date,
+                    signal=signal,
+                    position=position,
+                    proposed_order={
+                        "side": "entry",
+                        "price_source": "next_open",
+                        "target_weight": signal.metadata.get("target_weight", np.nan),
+                        "requested_risk": signal.requested_risk,
+                    },
+                    actual_fill=(
+                        {
+                            "fill_price": entry_price,
+                            "fill_time": pd.Timestamp(date).isoformat(),
+                            "shares": position.shares,
+                            "trade_id": position.trade_id,
+                        }
+                        if position is not None
+                        else None
+                    ),
+                    modeled_cost=abs(position.shares * entry_price * slippage_pct) if position is not None else 0.0,
+                )
         return remaining
 
     def _process_intraday_stops(
@@ -393,11 +443,21 @@ class Backtester:
         slippage_pct: float,
         risk_events: list[dict[str, Any]],
         high_water_mark: float,
+        overlay: TradeManagementOverlay | None = None,
     ) -> None:
         for pos in list(portfolio.positions):
             row = self._row(pos.symbol, date)
             if row is None:
-                portfolio.close_position(pos, date, pos.entry_price, "data_issue", rule_followed=False, notes="missing daily bar")
+                trade = portfolio.close_position(pos, date, pos.entry_price, "data_issue", rule_followed=False, notes="missing daily bar")
+                if overlay is not None and trade:
+                    overlay.on_after_exit_fill(
+                        date=date,
+                        signal=None,
+                        trade=trade,
+                        proposed_order={"side": "exit", "price_source": "data_issue"},
+                        actual_fill={"fill_price": pos.entry_price, "fill_time": pd.Timestamp(date).isoformat()},
+                        modeled_cost=0.0,
+                    )
                 continue
             stop_hit = pd.notna(row.get("low")) and float(row["low"]) <= float(pos.stop_price)
             target_hit = pos.target_price is not None and pd.notna(row.get("high")) and float(row["high"]) >= float(pos.target_price)
@@ -430,7 +490,20 @@ class Backtester:
                     symbol=pos.symbol,
                     notes="Open was below stop; filled at open.",
                 )
-            portfolio.close_position(pos, date, exit_price, reason)
+            trade = portfolio.close_position(pos, date, exit_price, reason)
+            if overlay is not None and trade:
+                overlay.on_after_exit_fill(
+                    date=date,
+                    signal=None,
+                    trade=trade,
+                    proposed_order={"side": "exit", "price_source": reason},
+                    actual_fill={
+                        "fill_price": exit_price,
+                        "fill_time": pd.Timestamp(date).isoformat(),
+                        "exit_reason": reason,
+                    },
+                    modeled_cost=abs(pos.shares * exit_price * slippage_pct),
+                )
             if pos.strategy == A and reason in {"stop_loss", "stop_loss_gap"}:
                 engine.mark_a_stopped(pos.symbol)
 
@@ -569,6 +642,10 @@ class Backtester:
         slippage_pct: float,
         dates_override: list[pd.Timestamp] | None = None,
         lightweight_outputs: bool = False,
+        overlay: TradeManagementOverlay | None = None,
+        run_id: str | None = None,
+        base_strategy_id: str | None = None,
+        base_strategy_hash: str | None = None,
     ) -> BacktestResult:
         effective_dates = list(dates_override) if dates_override is not None else self._effective_calendar(start, end)
         if not effective_dates:
@@ -576,6 +653,21 @@ class Backtester:
 
         portfolio = Portfolio(self.config, slippage_pct)
         engine = StrategyEngine(self.data, self.config, indexed_data=self.indexed_data, row_cache=self._row_cache)
+        enabled_strategy_ids = [
+            strategy
+            for strategy, cfg in self.config.get("strategies", {}).items()
+            if is_backtest_strategy(strategy, cfg)
+        ]
+        if overlay is not None:
+            overlay.bind(
+                run_id=run_id or f"{period_name}_{overlay.overlay_id}",
+                base_strategy_id=base_strategy_id or ",".join(enabled_strategy_ids),
+                base_strategy_hash=base_strategy_hash or "",
+                data=self.data,
+                indexed_data=self.indexed_data,
+                calendar=effective_dates,
+                config=self.config,
+            )
         rebalance_days = self._weekly_rebalance_days(effective_dates)
         pending_entries: list[PendingEntry] = []
         pending_exits: list[PendingExit] = []
@@ -612,7 +704,16 @@ class Backtester:
                 weekly_entry_block = False
 
             rows = self._rows_by_symbol(date)
-            pending_exits = self._fill_pending_exits(date, portfolio, pending_exits, slippage_pct)
+            if overlay is not None:
+                overlay.on_before_order_fills(
+                    date=date,
+                    portfolio=portfolio,
+                    rows=rows,
+                    pending_entries=pending_entries,
+                    pending_exits=pending_exits,
+                    slippage_pct=slippage_pct,
+                )
+            pending_exits = self._fill_pending_exits(date, portfolio, pending_exits, slippage_pct, overlay)
             pending_exit_ids = {pending.signal.trade_id for pending in pending_exits}
             pending_entries = self._fill_pending_entries(
                 date,
@@ -622,8 +723,16 @@ class Backtester:
                 slippage_pct,
                 rows,
                 equity_high_water_mark,
+                overlay,
             )
-            self._process_intraday_stops(date, portfolio, engine, slippage_pct, risk_events, equity_high_water_mark)
+            if overlay is not None:
+                overlay.process_position_lifecycle(
+                    date=date,
+                    portfolio=portfolio,
+                    rows=self._rows_by_symbol(date),
+                    slippage_pct=slippage_pct,
+                )
+            self._process_intraday_stops(date, portfolio, engine, slippage_pct, risk_events, equity_high_water_mark, overlay)
 
             for pos in portfolio.positions:
                 pos.bars_held += 1
@@ -749,10 +858,7 @@ class Backtester:
             is_rebalance = date in rebalance_days
             if not portfolio.project_stopped:
                 exits = engine.generate_exits(date, portfolio, is_rebalance)
-                for exit_signal in exits:
-                    if exit_signal.trade_id not in pending_exit_ids:
-                        pending_exits.append(PendingExit(exit_signal))
-                        pending_exit_ids.add(exit_signal.trade_id)
+                entry_signals: list[EntrySignal] = []
 
                 if not daily_entry_block and not weekly_entry_block:
                     signals = engine.generate_entries(date, portfolio, is_rebalance)
@@ -790,9 +896,39 @@ class Backtester:
                                 signal.notes,
                             )
                         else:
-                            pending_entries.append(PendingEntry(signal))
+                            entry_signals.append(signal)
+
+                if overlay is not None:
+                    rows_now = self._rows_by_symbol(date)
+                    equity_now, _, _ = self._strategy_pnls(portfolio, rows_now)
+                    managed_batch = overlay.on_signal_batch(
+                        date=date,
+                        entries=entry_signals,
+                        exits=exits,
+                        portfolio=portfolio,
+                        rows=rows_now,
+                        equity=equity_now,
+                        pending_exit_ids=pending_exit_ids | {exit_signal.trade_id for exit_signal in exits},
+                    )
+                else:
+                    managed_batch = ManagedIntentBatch(entries=entry_signals, exits=exits)
+
+                for exit_signal in managed_batch.exits:
+                    if exit_signal.trade_id not in pending_exit_ids:
+                        pending_exits.append(PendingExit(exit_signal))
+                        pending_exit_ids.add(exit_signal.trade_id)
+                for signal in managed_batch.entries:
+                    pending_entries.append(PendingEntry(signal))
 
                 engine.update_trailing_stops(date, portfolio)
+
+            if overlay is not None:
+                overlay.on_end_of_day(
+                    date=date,
+                    portfolio=portfolio,
+                    rows=self._rows_by_symbol(date),
+                    slippage_pct=slippage_pct,
+                )
 
             equity_rows.append(
                 self._record_equity_row(
@@ -827,6 +963,13 @@ class Backtester:
                 self._rows_by_symbol(final_date),
                 equity_high_water_mark,
                 notes=f"{open_before_final} open positions closed/marked at final adjusted close.",
+            )
+        if overlay is not None:
+            overlay.on_end_of_day(
+                date=final_date,
+                portfolio=portfolio,
+                rows=self._rows_by_symbol(final_date),
+                slippage_pct=slippage_pct,
             )
         final_rows = self._rows_by_symbol(final_date)
         if equity_rows:
@@ -927,6 +1070,9 @@ class Backtester:
             "effective_first_trading_date": equity_curve["date"].iloc[0],
             "effective_last_trading_date": equity_curve["date"].iloc[-1],
             "slippage_pct_per_side": slippage_pct,
+            "overlay_id": overlay.overlay_id if overlay is not None else "",
+            "overlay_version": overlay.version if overlay is not None else "",
+            "overlay_config_hash": overlay.config_hash if overlay is not None else "",
             "project_stop_mode": project_stop["mode"],
             "project_stop_hit": bool(portfolio.project_stopped),
             **stop_info,
@@ -944,6 +1090,7 @@ class Backtester:
             target_timing=target_timing,
             risk_events=pd.DataFrame(risk_events),
             strategy_lifecycle_events=pd.DataFrame(lifecycle_events),
+            overlay_events=overlay.events_frame() if overlay is not None else pd.DataFrame(),
             killed_strategies=sorted(set(killed_strategies)),
             metadata=metadata,
         )

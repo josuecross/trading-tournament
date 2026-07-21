@@ -53,6 +53,8 @@ def write_csvs(result: BacktestResult, run_dir: Path) -> None:
     result.target_timing.to_csv(run_dir / "target_timing.csv", index=False)
     result.risk_events.to_csv(run_dir / "risk_events.csv", index=False)
     result.strategy_lifecycle_events.to_csv(run_dir / "strategy_lifecycle_events.csv", index=False)
+    overlay_events = getattr(result, "overlay_events", pd.DataFrame())
+    overlay_events.to_csv(run_dir / "overlay_events.csv", index=False)
 
 
 def plot_equity_and_drawdown(result: BacktestResult, run_dir: Path) -> None:
