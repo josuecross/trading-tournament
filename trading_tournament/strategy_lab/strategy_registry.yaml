@@ -10723,3 +10723,311 @@ strategies:
   no_candidate_exhaustive_run: true
   no_paper_forward_checkpoint: true
   no_real_money_recommendation: true
+- id: ice_vaneck_us_fallen_angel_angl_v1
+  display_name: ICE/VanEck US Fallen Angel ANGL
+  entity_type: strategy_configuration
+  lane: paper_forward
+  stage: paper_demo_eligible
+  outcome: paper_demo_eligible
+  instrument_family: ETF
+  strategy_family: fallen_angel_credit_anomaly
+  family_id: fallen_angel_credit_anomaly
+  version: v1
+  parent_id: correction_angl__ice_vaneck_us_fallen_angel_angl_v1__methodology_correction_child
+  credibility_tier: tier4_paper_forward
+  status: gated
+  route: diversifier_only
+  role: diversifier_only
+  rules_frozen: true
+  paper_forward_active: false
+  paper_demo_eligible: true
+  implementation_status: implemented
+  data_source: existing_adjusted_etf_cache_and_frozen_reference_virtual_nav
+  evidence_source: correct_angl_forward_boundary_and_data_freshness_v1
+  latest_evidence_path: evidence/correction/correct_angl_forward_boundary_and_data_freshness_v1/latest
+  validation_lineage: rerun_fast_source_v3__ice_vaneck_us_fallen_angel_angl_v1__data_feasibility_adjustment_child|validation_angl__ice_vaneck_us_fallen_angel_angl_v1__validation_variant_child|correction_angl__ice_vaneck_us_fallen_angel_angl_v1__methodology_correction_child
+  parent_validation_trial_id: rerun_fast_source_v3__ice_vaneck_us_fallen_angel_angl_v1__data_feasibility_adjustment_child
+  latest_known_result_summary: ANGL remains paper/demo eligible only as the validated 20% diversifier sleeve; the separate
+    observation is blocked after the forward-boundary methodology correction.
+  instrument_universe: ANGL
+  allocation_rule: 100% ANGL within assigned 20% diversifier sleeve
+  timing_rule: none
+  validated_portfolio_use: 80pct_frozen_reference_20pct_ANGL_monthly_rebalanced
+  standalone_100pct_angl_observation_approved: false
+  no_independent_strategy_created: true
+  broker_integration: false
+  paper_orders: false
+  live_orders: false
+  real_money_recommendation: false
+  next_action: authorize_specific_missing_angl_observation_market_data_remediation
+  allowed_next_action: authorize_specific_missing_angl_observation_market_data_remediation
+  forbidden_next_actions:
+  - standalone_100pct_angl_observation
+  - change_sleeve_weight
+  - tune_rebalance_frequency
+  - run_candidate_exhaustive
+  - promote_to_real_money
+  - add_broker_integration
+  - place_orders
+  - place_live_orders
+  risk_framework_status: paper_demo_eligible_diversifier_only_observation_blocked
+  paper_forward_allowed_by_risk_framework: true
+  promotion_blockers: diversifier_only;observation_blocked;no_real_money_authorization
+  promotion_requirements: A valid separately initialized paper/demo observation is required before any later operational review;
+    no automatic promotion is authorized.
+  demotion_or_kill_criteria: Missing data, reconciliation failure, duplicate virtual trade, invalid weight, stale signal,
+    unexplained NAV discrepancy, or direction-owner decision.
+  notes: Strategy validation remains positive and paper/demo eligible only as the 20% ANGL sleeve in the validated monthly
+    80/20 construction. The separate observation is blocked, has no forward evidence, and retains next_action=initialize_angl_after_next_completed_common_session_v1.
+    No standalone or real-money approval exists.
+  strategy_id: ice_vaneck_us_fallen_angel_angl_v1
+  family: fallen_angel_credit_anomaly
+  instrument_lane: ETF
+  evidence_tier: tier4_paper_forward
+  current_status: paper_demo_eligible
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: paper_demo_eligible_direction_owner_approved_diversifier_only
+  primary_failure_mode: observation_methodology_failure_separate_from_validation_positive
+  duplication_risk: not_an_independent_family
+  risk_budget_status: diversifier_only_observation_blocked
+  evidence_needed: valid_forward_observation_after_next_completed_common_session
+  duplicate_of: ''
+  blocked_reason: separate_observation_blocked_forward_boundary_methodology_failure
+  frozen: true
+  no_real_money_recommendation: true
+  strategy_architecture: structural_fallen_angel_credit_sleeve
+  source_or_research_lineage: strategy_source_library_refresh_v1
+  parameters:
+    allocation_within_assigned_diversifier_sleeve:
+      ANGL: 1.0
+    assigned_portfolio_sleeve_weight: 0.2
+    timing_rule: none
+    portfolio_rebalance_frequency: monthly
+  benchmark_or_control:
+  - frozen_current_active_vm_dsr_usci_combo
+  - HYG_buy_hold
+  - monthly_rebalanced_50_50_HYG_JNK
+  paper_demo_active: false
+  validation_trial_id: validation_angl__ice_vaneck_us_fallen_angel_angl_v1__validation_variant_child
+  methodology_correction_trial_id: correction_angl__ice_vaneck_us_fallen_angel_angl_v1__methodology_correction_child
+  methodology_correction_parent_trial_id: validation_angl__ice_vaneck_us_fallen_angel_angl_v1__validation_variant_child
+  observation_id: paper_forward_angl_20pct_diversifier_v1
+  observation_entity_type: paper_demo_observation
+  observation_stage: blocked
+  observation_outcome: observation_invalid_or_incomplete
+  observation_failure_reason: methodology_failure
+  observation_adaptation_label: paper_demo_observation_fix
+  observation_next_action: initialize_angl_after_next_completed_common_session_v1
+  observation_evidence_path: evidence/correction/correct_angl_forward_boundary_and_data_freshness_v1/latest
+  real_money_authorized: false
+  allowed_next_actions:
+  - no_action
+  promotion_reason: Direction-owner paper/demo eligibility is preserved only for the validated 20% ANGL diversifier sleeve;
+    the separate observation remains blocked.
+- id: lopez_de_prado_hrp_five_asset_v1
+  strategy_id: lopez_de_prado_hrp_five_asset_v1
+  family_id: hierarchical_risk_parity_allocation
+  family: hierarchical_risk_parity_allocation
+  strategy_family: hierarchical_risk_parity_allocation
+  display_name: Five-Asset Hierarchical Risk Parity
+  entity_type: strategy_configuration
+  strategy_architecture: hierarchical_risk_based_multi_asset_allocation
+  source_or_research_lineage: strategy_source_library_refresh_v1__lopez_de_prado_hrp
+  instrument_universe: SPY|EEM|IEF|DBC|VNQ
+  parameters:
+    return_type: daily_log_return
+    lookback_trading_days: 252
+    covariance_estimator: sample_covariance
+    distance_formula: sqrt((1-rho)/2)
+    linkage_method: single
+    tie_break: lexical_ticker_order
+    rebalance_frequency: monthly
+    execution: month_end_signal_next_available_session_close
+    warmup_rule: equal_weights_before_252_observations
+  benchmark_or_control:
+  - frozen_current_active_vm_dsr_usci_combo
+  - monthly_equal_weight_same_five_etfs
+  - clare_inverse_volatility_five_asset_risk_parity_v1
+  - static_initial_hrp_weight_control
+  - IEF_single_asset_20pct_control
+  - BIL_cash_20pct_control
+  stage: closed
+  lane: archive
+  instrument_family: ETF
+  version: v1
+  parent_id: fast_source_v4__lopez_de_prado_hrp_five_asset_v1__canonical
+  credibility_tier: blocked
+  status: rejected
+  current_status: closed
+  outcome: validation_failed
+  trial_id: validation_hrp__lopez_de_prado_hrp_five_asset_v1__validation_variant_child
+  parent_trial_id: fast_source_v4__lopez_de_prado_hrp_five_asset_v1__canonical
+  adaptation_label: validation_variant
+  failure_reason: benchmark_like_behavior
+  primary_failure_reason: benchmark_like_behavior
+  decision_reason: IEF_or_BIL_economically_replicates_HRP_contribution
+  next_action: do_not_retest_exact_hrp_five_asset_configuration
+  allowed_next_action: no_action
+  allowed_next_actions:
+  - no_action
+  paper_demo_eligible: false
+  paper_demo_active: false
+  paper_forward_active: false
+  paper_forward_allowed_by_risk_framework: false
+  benchmark_reference_only: false
+  real_money_authorized: false
+  real_money_recommendation: false
+  no_real_money_recommendation: true
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  family_level_interpretation: exact_configuration_closed_no_incremental_value
+  registration_reason: retrospective_status_reconciliation
+  closure_scope: exact_five_etf_252d_sample_cov_single_linkage_monthly_next_session_close_configuration_only
+  data_source: existing_adjusted_etf_cache
+  implementation_status: archived
+  evidence_source: hrp_incremental_diversifier_validation_v1
+  latest_evidence_path: evidence/validation/hrp_incremental_diversifier_validation_v1/latest
+  latest_known_result_summary: 'Validation failed: IEF or BIL economically replicated HRP contribution.'
+  role: closed_exact_configuration
+  rules_frozen: true
+  risk_framework_status: not_paper_demo_eligible
+  risk_budget_status: closed_no_incremental_value
+  promotion_decision: do_not_promote
+  promotion_review_required: false
+  promotion_reason: Closed exact HRP configuration after validation failed with benchmark-like contribution.
+  promotion_blockers: validation_failed;benchmark_like_behavior;not_paper_demo_eligible;no_real_money_authorization
+  promotion_requirements: A materially distinct new HRP configuration and direction-owner evidence would be required before
+    any future review.
+  demotion_or_kill_criteria: Exact tested configuration is already closed after validation failure.
+  notes: Retrospective registry reconciliation for the exact tested five-asset HRP configuration only; family-wide HRP research
+    is not universally closed by this record.
+  instrument_lane: ETF
+  evidence_tier: blocked
+  primary_failure_mode: benchmark_like_behavior
+  duplication_risk: exact_configuration_no_incremental_value
+  evidence_needed: none_for_exact_closed_configuration
+  duplicate_of: ''
+  blocked_reason: benchmark_like_behavior
+  forbidden_next_actions:
+  - retest_exact_configuration
+  - change_rules
+  - tune_parameters
+  - promote_to_paper_demo
+  - activate_paper_demo
+  - promote_to_real_money
+  - add_broker_integration
+  - place_orders
+  configuration_fingerprint_schema: hrp_exact_config_fingerprint_v1
+  configuration_fingerprint: sha256:af5df45f6e2e6cf20018c2a32f91f26c7a02771ac81dda8a57062d9eb35ce551
+- id: pring_kst_default_centerline_spy_bil_v1
+  strategy_id: pring_kst_default_centerline_spy_bil_v1
+  family_id: multi_cycle_smoothed_roc_momentum
+  family: multi_cycle_smoothed_roc_momentum
+  strategy_family: multi_cycle_smoothed_roc_momentum
+  display_name: Pring KST Multi-Cycle Centerline State
+  entity_type: strategy_configuration
+  strategy_architecture: weighted_multi_horizon_smoothed_rate_of_change_filter
+  source_or_research_lineage: strategy_source_library_refresh_v2:src_pring_kst_1992_v1
+  instrument_universe: SPY|BIL
+  parameters:
+    roc_periods:
+    - 10
+    - 15
+    - 20
+    - 30
+    smoothing_periods:
+    - 10
+    - 10
+    - 10
+    - 15
+    component_weights:
+    - 1
+    - 2
+    - 3
+    - 4
+    centerline: 0
+    signal_line: unused
+    spy_rule: hold_SPY_when_KST_strictly_positive
+    bil_rule: hold_BIL_when_KST_nonpositive_or_before_warmup
+    signal_timestamp: completed_daily_close
+    execution: completed_close_signal_applied_to_following_session
+    costs_tested_bps:
+    - 0
+    - 5
+    - 10
+  benchmark_or_control:
+  - SPY_buy_and_hold
+  - SPY_30_session_ROC_sign_SPY_BIL
+  - SPY_200d_frozen_control
+  - static_6878_SPY_3122_BIL_monthly_rebalanced
+  stage: closed
+  lane: archive
+  instrument_family: ETF
+  version: v1
+  parent_id: fast_source_v5__pring_kst_default_centerline_spy_bil_v1__canonical
+  credibility_tier: blocked
+  status: rejected
+  current_status: closed
+  outcome: validation_failed
+  trial_id: pring_kst_incremental_standalone_validation_v1__validation_child
+  parent_trial_id: fast_source_v5__pring_kst_default_centerline_spy_bil_v1__canonical
+  adaptation_label: validation_variant
+  failure_reason: period_instability
+  primary_failure_reason: period_instability
+  decision_reason: rolling_control_dominance_and_negative_median_sharpe_differences
+  next_action: do_not_retest_exact_kst_default_centerline_configuration
+  allowed_next_action: no_action
+  allowed_next_actions:
+  - no_action
+  paper_demo_eligible: false
+  paper_demo_active: false
+  paper_forward_active: false
+  paper_forward_allowed_by_risk_framework: false
+  benchmark_reference_only: false
+  real_money_authorized: false
+  real_money_recommendation: false
+  no_real_money_recommendation: true
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  family_level_interpretation: exact_configuration_closed_period_instability
+  registration_reason: retrospective_status_reconciliation
+  closure_scope: exact_kst_10_15_20_30_roc_10_10_10_15_smoothing_1_2_3_4_weights_zero_centerline_spy_bil_next_session_configuration_only
+  data_source: existing_adjusted_etf_cache
+  implementation_status: archived
+  evidence_source: pring_kst_incremental_standalone_validation_v1
+  latest_evidence_path: evidence/validation/pring_kst_incremental_standalone_validation_v1/latest
+  latest_known_result_summary: Validation failed for period instability after rolling controls dominated in 66.3% of 36-month
+    windows and 68.8% of 60-month windows.
+  role: closed_exact_configuration
+  rules_frozen: true
+  risk_framework_status: not_paper_demo_eligible
+  risk_budget_status: closed_period_instability
+  promotion_decision: do_not_promote
+  promotion_review_required: false
+  promotion_reason: Closed exact KST configuration after validation failed for period instability.
+  promotion_blockers: validation_failed;period_instability;not_paper_demo_eligible;no_real_money_authorization
+  promotion_requirements: A materially distinct KST configuration and direction-owner evidence would be required before any
+    future review.
+  demotion_or_kill_criteria: Exact tested configuration is already closed after validation failure.
+  notes: Retrospective registry reconciliation for the exact tested KST default centerline SPY/BIL configuration only; all
+    KST and multi-cycle momentum research is not universally closed by this record.
+  instrument_lane: ETF
+  evidence_tier: blocked
+  primary_failure_mode: period_instability
+  duplication_risk: exact_configuration_closed
+  evidence_needed: none_for_exact_closed_configuration
+  duplicate_of: ''
+  blocked_reason: period_instability
+  forbidden_next_actions:
+  - retest_exact_configuration
+  - change_rules
+  - tune_parameters
+  - promote_to_paper_demo
+  - activate_paper_demo
+  - promote_to_real_money
+  - add_broker_integration
+  - place_orders
+  configuration_fingerprint_schema: kst_exact_config_fingerprint_v1
+  configuration_fingerprint: sha256:ebe24bfac8fe1f7734818ad08c9f2c1e2af5b107e5882a420d7c4f1fe03fa0d9

@@ -22,6 +22,45 @@ active_observations:
   state: active_accepted_frozen_observation
   paper_forward_active: true
   protected: true
+
+- observation_id: paper_forward_angl_20pct_diversifier_v1
+  strategy_id: ice_vaneck_us_fallen_angel_angl_v1
+  entity_type: paper_demo_observation
+  stage: blocked
+  outcome: observation_invalid_or_incomplete
+  state: blocked_observation_invalid_or_incomplete
+  paper_forward_active: false
+  protected: true
+  parent_strategy_id: ice_vaneck_us_fallen_angel_angl_v1
+  parent_trial_id: correction_angl__ice_vaneck_us_fallen_angel_angl_v1__methodology_correction_child
+  observation_route: diversifier_only
+  reference_portfolio_id: frozen_current_active_vm_dsr_usci_combo
+  candidate_sleeve_id: ANGL
+  target_weights:
+    frozen_reference: 0.8
+    ANGL: 0.2
+  rebalance_frequency: monthly
+  signal_timing: month_end_close
+  execution_convention: next_available_session_close
+  cost_assumption: 5_bps_per_one_way_turnover
+  original_activation_timestamp: '2026-07-24T00:00:00+00:00'
+  original_first_forward_observation_date: '2026-06-18'
+  original_latest_common_data_date: '2026-06-18'
+  correction_activation_timestamp: '2026-07-24T00:00:01+00:00'
+  corrected_first_forward_observation_date: ''
+  first_forward_observation_date: ''
+  current_status: blocked
+  failure_reason: data_unavailable
+  defect_type: forward_boundary_precedes_activation
+  adaptation_label: paper_demo_observation_fix
+  next_action: authorize_specific_missing_angl_observation_market_data_remediation
+  broker_integration: false
+  paper_orders: false
+  live_orders: false
+  real_money_recommendation: false
+  review_trigger: after_three_completed_scheduled_month_end_rebalance_cycles_or_immediate_operational_exception
+  latest_operational_update_id: initialize_angl_after_next_completed_common_session_v1
+  latest_operational_update_evidence_path: evidence/paper_demo/initialize_angl_after_next_completed_common_session_v1/latest
 benchmark_controls:
 - strategy_id: static_all_weather_benchmark_v1
   state: benchmark_control_only
