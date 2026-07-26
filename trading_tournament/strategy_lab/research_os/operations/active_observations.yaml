@@ -26,9 +26,9 @@ active_observations:
 - observation_id: paper_forward_angl_20pct_diversifier_v1
   strategy_id: ice_vaneck_us_fallen_angel_angl_v1
   entity_type: paper_demo_observation
-  stage: blocked
+  stage: deferred
   outcome: observation_invalid_or_incomplete
-  state: blocked_observation_invalid_or_incomplete
+  state: deferred_observation_invalid_or_incomplete
   paper_forward_active: false
   protected: true
   parent_strategy_id: ice_vaneck_us_fallen_angel_angl_v1
@@ -49,18 +49,32 @@ active_observations:
   correction_activation_timestamp: '2026-07-24T00:00:01+00:00'
   corrected_first_forward_observation_date: ''
   first_forward_observation_date: ''
-  current_status: blocked
-  failure_reason: data_unavailable
-  defect_type: forward_boundary_precedes_activation
+  current_status: deferred
+  failure_reason: data_or_comparability_failure
+  defect_type: canonical_common_session_data_comparability_failure
   adaptation_label: paper_demo_observation_fix
-  next_action: authorize_specific_missing_angl_observation_market_data_remediation
+  next_action: revisit_angl_observation_only_after_material_data_capability_change_v1
   broker_integration: false
   paper_orders: false
   live_orders: false
   real_money_recommendation: false
   review_trigger: after_three_completed_scheduled_month_end_rebalance_cycles_or_immediate_operational_exception
-  latest_operational_update_id: initialize_angl_after_next_completed_common_session_v1
-  latest_operational_update_evidence_path: evidence/paper_demo/initialize_angl_after_next_completed_common_session_v1/latest
+  latest_operational_update_id: defer_angl_observation_data_lane_v1
+  latest_operational_update_evidence_path: evidence/lifecycle/defer_angl_observation_data_lane_v1/latest
+  semantic_stage: deferred
+  paper_demo_active: false
+  forward_records_created: 0
+  valid_forward_record_count: 0
+  deferred_reason: deterministic_canonical_common_session_data_not_available
+  automatic_remediation_attempts_exhausted: true
+  last_attempted_session: '2026-07-24'
+  last_data_outcome: canonical_observation_data_version_blocked
+  reopen_conditions:
+  - authorized_provider_deterministic_full_cohort
+  - canonical_pipeline_materially_corrected_and_verified
+  - separately_approved_observation_methodology_change
+  elapsed_time_alone_reopen_condition: false
+  june_18_record_classification: historical_reconciliation_only
 benchmark_controls:
 - strategy_id: static_all_weather_benchmark_v1
   state: benchmark_control_only
