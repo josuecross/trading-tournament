@@ -17,16 +17,7 @@ registry:
   no_real_money_recommendation: true
   active_combo_reconciliation_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\active_combo_series_reconciliation\latest
   active_combo_reference_available: true
-  current_research_checkpoint_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\current_research_checkpoint\latest
-  etf_discovery_status: paused
-  candidate_pipeline_empty: true
-  next_engineering_action: none_active_combo_repaired
-  next_research_action_after_engineering: choose_structurally_distinct_lane_or_archive
-  no_candidate_exhaustive_run: true
-  no_paper_forward_action: true
-  no_real_money_recommendation: true
   active_combo_benchmark_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\active_combo_benchmark\latest
-  active_combo_reference_available: true
   lane_id: breadth_state_regime_lane
   lane_status: no_candidate_archive_lane
   future_rows:
@@ -694,7 +685,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: focused_candidate_exhaustive_and_paper_forward
   latest_evidence_path: evidence/paper_forward_runs/latest/
-  latest_known_result_summary: Leading ETF watchlist candidate after exact compact challenge audit; active paper-forward observation.
+  latest_known_result_summary: Leading ETF watchlist candidate after exact compact challenge audit; active paper-forward
+    observation.
   allowed_next_action: observe_only
   forbidden_next_actions:
   - change_rules
@@ -818,8 +810,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: keep_frozen_control
-  promotion_reason: Conservative registry default from status=benchmark, tier=benchmark, lane=paper_forward. Run promotion
-    review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=benchmark, tier=benchmark, lane=paper_forward. Run
+    promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: control_or_benchmark
@@ -867,8 +859,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: keep_frozen_control
-  promotion_reason: Conservative registry default from status=benchmark, tier=benchmark, lane=paper_forward. Run promotion
-    review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=benchmark, tier=benchmark, lane=paper_forward. Run
+    promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: control_or_benchmark
@@ -891,8 +883,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: compact_challenge_diagnostic
   latest_evidence_path: evidence/challenge_runs/latest/
-  latest_known_result_summary: Target odds improved, but exact diagnostic showed worst 90-day drawdown beyond the -$600 risk
-    budget.
+  latest_known_result_summary: Target odds improved, but exact diagnostic showed worst 90-day drawdown beyond the
+    -$600 risk budget.
   allowed_next_action: audit_harden
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -914,8 +906,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: mark_too_risky
-  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge. Run
-    promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: risk_budget_or_stop_risk
   duplication_risk: not_flagged
   risk_budget_status: breach_or_high_risk_flagged
@@ -947,7 +939,8 @@ strategies:
   - treat_as_validated
   - tune_leverage_multiplier
   promotion_requirements: Not eligible without separate Tier 2 leverage feasibility review and fixed risk model.
-  demotion_or_kill_criteria: Stop risk, drawdown, or stress degradation remains materially worse than unlevered SPY_200d.
+  demotion_or_kill_criteria: Stop risk, drawdown, or stress degradation remains materially worse than unlevered
+    SPY_200d.
   notes: Diagnostic only; not a paper-forward or real-money candidate.
   strategy_id: SPY_200d_trend_model_sim_1_5x_v1
   family: trend leverage diagnostic
@@ -960,8 +953,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: mark_too_risky
-  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge. Run
-    promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: risk_budget_or_stop_risk
   duplication_risk: not_flagged
   risk_budget_status: breach_or_high_risk_flagged
@@ -1006,8 +999,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: mark_too_risky
-  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge. Run
-    promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: risk_budget_or_stop_risk
   duplication_risk: not_flagged
   risk_budget_status: breach_or_high_risk_flagged
@@ -1052,8 +1045,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: mark_too_risky
-  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge. Run
-    promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: risk_budget_or_stop_risk
   duplication_risk: not_flagged
   risk_budget_status: breach_or_high_risk_flagged
@@ -1085,7 +1078,8 @@ strategies:
   - treat_as_validated
   - tune_exposure_multiplier
   promotion_requirements: Not eligible without separate Tier 2 exposure feasibility review and fixed risk model.
-  demotion_or_kill_criteria: Stop risk, overshoot, drawdown, or stress degradation is materially worse than unlevered SPY_200d.
+  demotion_or_kill_criteria: Stop risk, overshoot, drawdown, or stress degradation is materially worse than unlevered
+    SPY_200d.
   notes: Diagnostic only; no real margin, liquidation, or leveraged ETF path-dependency model.
   strategy_id: SPY_200d_exposure_frontier_1_05x_v1
   family: SPY_200d exposure frontier diagnostic
@@ -1098,8 +1092,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: mark_too_risky
-  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge. Run
-    promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: risk_budget_or_stop_risk
   duplication_risk: not_flagged
   risk_budget_status: breach_or_high_risk_flagged
@@ -1131,7 +1125,8 @@ strategies:
   - treat_as_validated
   - tune_exposure_multiplier
   promotion_requirements: Not eligible without separate Tier 2 exposure feasibility review and fixed risk model.
-  demotion_or_kill_criteria: Stop risk, overshoot, drawdown, or stress degradation is materially worse than unlevered SPY_200d.
+  demotion_or_kill_criteria: Stop risk, overshoot, drawdown, or stress degradation is materially worse than unlevered
+    SPY_200d.
   notes: Diagnostic only; no real margin, liquidation, or leveraged ETF path-dependency model.
   strategy_id: SPY_200d_exposure_frontier_1_10x_v1
   family: SPY_200d exposure frontier diagnostic
@@ -1144,8 +1139,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: mark_too_risky
-  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge. Run
-    promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: risk_budget_or_stop_risk
   duplication_risk: not_flagged
   risk_budget_status: breach_or_high_risk_flagged
@@ -1177,7 +1172,8 @@ strategies:
   - treat_as_validated
   - tune_exposure_multiplier
   promotion_requirements: Not eligible without separate Tier 2 exposure feasibility review and fixed risk model.
-  demotion_or_kill_criteria: Stop risk, overshoot, drawdown, or stress degradation is materially worse than unlevered SPY_200d.
+  demotion_or_kill_criteria: Stop risk, overshoot, drawdown, or stress degradation is materially worse than unlevered
+    SPY_200d.
   notes: Diagnostic only; no real margin, liquidation, or leveraged ETF path-dependency model.
   strategy_id: SPY_200d_exposure_frontier_1_15x_v1
   family: SPY_200d exposure frontier diagnostic
@@ -1190,8 +1186,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: mark_too_risky
-  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge. Run
-    promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: risk_budget_or_stop_risk
   duplication_risk: not_flagged
   risk_budget_status: breach_or_high_risk_flagged
@@ -1223,8 +1219,8 @@ strategies:
   - treat_as_validated
   - tune_exposure_multiplier
   promotion_requirements: Not eligible without separate Tier 2 exposure feasibility review and fixed risk model.
-  demotion_or_kill_criteria: Stop risk, overshoot, drawdown, or stress degradation remains materially worse than unlevered
-    SPY_200d.
+  demotion_or_kill_criteria: Stop risk, overshoot, drawdown, or stress degradation remains materially worse than
+    unlevered SPY_200d.
   notes: Diagnostic only; no real margin, liquidation, or leveraged ETF path-dependency model.
   strategy_id: SPY_200d_exposure_frontier_1_20x_v1
   family: SPY_200d exposure frontier diagnostic
@@ -1237,8 +1233,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: mark_too_risky
-  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge. Run
-    promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: risk_budget_or_stop_risk
   duplication_risk: not_flagged
   risk_budget_status: breach_or_high_risk_flagged
@@ -1270,8 +1266,8 @@ strategies:
   - treat_as_validated
   - tune_exposure_multiplier
   promotion_requirements: Not eligible without separate Tier 2 exposure feasibility review and fixed risk model.
-  demotion_or_kill_criteria: Stop risk, overshoot, drawdown, or stress degradation remains materially worse than unlevered
-    SPY_200d.
+  demotion_or_kill_criteria: Stop risk, overshoot, drawdown, or stress degradation remains materially worse than
+    unlevered SPY_200d.
   notes: Diagnostic only; no real margin, liquidation, or leveraged ETF path-dependency model.
   strategy_id: SPY_200d_exposure_frontier_1_25x_v1
   family: SPY_200d exposure frontier diagnostic
@@ -1284,8 +1280,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: mark_too_risky
-  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge. Run
-    promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=too_risky, tier=tier1_exploratory, lane=compact_challenge.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: risk_budget_or_stop_risk
   duplication_risk: not_flagged
   risk_budget_status: breach_or_high_risk_flagged
@@ -1308,7 +1304,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: compact_challenge_volatility_control_diagnostic
   latest_evidence_path: evidence/challenge_runs/latest/
-  latest_known_result_summary: Predeclared 12% target-volatility diagnostic with 60-day realized volatility and 1.00 cap.
+  latest_known_result_summary: Predeclared 12% target-volatility diagnostic with 60-day realized volatility and
+    1.00 cap.
   allowed_next_action: run_challenge_audit
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -1320,9 +1317,10 @@ strategies:
   risk_framework_status: diagnostic_only
   paper_forward_allowed_by_risk_framework: false
   promotion_blockers: tier1_exploratory;risk_control_diagnostic;not_paper_forward_allowed
-  promotion_requirements: Tier 2 review would require fixed-rule evidence, benchmark comparison, stress survival, and no parameter
-    tuning.
-  demotion_or_kill_criteria: Target probability collapses, drawdown is not improved, or stress costs make it too slow.
+  promotion_requirements: Tier 2 review would require fixed-rule evidence, benchmark comparison, stress survival,
+    and no parameter tuning.
+  demotion_or_kill_criteria: Target probability collapses, drawdown is not improved, or stress costs make it too
+    slow.
   notes: Tier 1 diagnostic only; does not modify frozen SPY_200d_trend_model v1.
   strategy_id: SPY_200d_vol_target_12_cap_1_00_v1
   family: SPY_200d volatility-control diagnostic
@@ -1359,8 +1357,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: compact_challenge_volatility_control_diagnostic
   latest_evidence_path: evidence/challenge_runs/latest/
-  latest_known_result_summary: Predeclared 12% target-volatility diagnostic with 60-day realized volatility and 1.10 cap;
-    approximate financing applies above 1.00 exposure.
+  latest_known_result_summary: Predeclared 12% target-volatility diagnostic with 60-day realized volatility and
+    1.10 cap; approximate financing applies above 1.00 exposure.
   allowed_next_action: run_challenge_audit
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -1372,8 +1370,8 @@ strategies:
   risk_framework_status: diagnostic_only
   paper_forward_allowed_by_risk_framework: false
   promotion_blockers: tier1_exploratory;risk_control_diagnostic;exposure_above_1x;not_paper_forward_allowed
-  promotion_requirements: Tier 2 review would require fixed-rule evidence, benchmark comparison, stress survival, and a credible
-    exposure/financing model.
+  promotion_requirements: Tier 2 review would require fixed-rule evidence, benchmark comparison, stress survival,
+    and a credible exposure/financing model.
   demotion_or_kill_criteria: Stop risk, drawdown, or stress degradation is materially worse than unmodified SPY_200d.
   notes: Tier 1 diagnostic only; no real margin model and no paper-forward eligibility.
   strategy_id: SPY_200d_vol_target_12_cap_1_10_v1
@@ -1411,8 +1409,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: compact_challenge_diversified_portfolio
   latest_evidence_path: evidence/challenge_runs/latest/
-  latest_known_result_summary: Exact diversified portfolio challenge wrapper matched SPY_200d closely; diagnostic only, not
-    paper-forward.
+  latest_known_result_summary: Exact diversified portfolio challenge wrapper matched SPY_200d closely; diagnostic
+    only, not paper-forward.
   allowed_next_action: run_challenge_audit
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -1437,8 +1435,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: keep_watchlist
-  promotion_reason: Conservative registry default from status=watchlist_diagnostic, tier=tier3_candidate_validation, lane=compact_challenge.
-    Run promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=watchlist_diagnostic, tier=tier3_candidate_validation,
+    lane=compact_challenge. Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -1461,8 +1459,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: compact_challenge_diversified_portfolio
   latest_evidence_path: evidence/challenge_runs/latest/
-  latest_known_result_summary: Exact diversified challenge showed lower drawdown but materially lower +300/+400 target rates
-    versus SPY_200d.
+  latest_known_result_summary: Exact diversified challenge showed lower drawdown but materially lower +300/+400
+    target rates versus SPY_200d.
   allowed_next_action: run_challenge_audit
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -1511,8 +1509,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: compact_challenge_diversified_portfolio
   latest_evidence_path: evidence/challenge_runs/latest/
-  latest_known_result_summary: Exact diversified challenge showed lower drawdown but too much target-rate sacrifice versus
-    SPY_200d.
+  latest_known_result_summary: Exact diversified challenge showed lower drawdown but too much target-rate sacrifice
+    versus SPY_200d.
   allowed_next_action: run_challenge_audit
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -1561,8 +1559,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: compact_challenge_diversified_portfolio
   latest_evidence_path: evidence/challenge_runs/latest/
-  latest_known_result_summary: Exact diversified challenge showed bond/cash defense reduced drawdown but made the +300/+400
-    challenge too slow.
+  latest_known_result_summary: Exact diversified challenge showed bond/cash defense reduced drawdown but made the
+    +300/+400 challenge too slow.
   allowed_next_action: run_challenge_audit
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -1611,8 +1609,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: compact_challenge_diversified_portfolio
   latest_evidence_path: evidence/challenge_runs/latest/
-  latest_known_result_summary: Exact diversified challenge showed gold/cash defense reduced drawdown but did not preserve
-    enough target probability.
+  latest_known_result_summary: Exact diversified challenge showed gold/cash defense reduced drawdown but did not
+    preserve enough target probability.
   allowed_next_action: run_challenge_audit
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -1661,8 +1659,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: compact_challenge_diversified_portfolio
   latest_evidence_path: evidence/challenge_runs/latest/
-  latest_known_result_summary: Exact diversified challenge showed multi-asset defense reduced drawdown but was too slow for
-    +300/+400.
+  latest_known_result_summary: Exact diversified challenge showed multi-asset defense reduced drawdown but was too
+    slow for +300/+400.
   allowed_next_action: run_challenge_audit
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -1736,8 +1734,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: keep_watchlist
-  promotion_reason: Conservative registry default from status=incomplete_evidence, tier=tier2_credible_prototype, lane=compact_challenge.
-    Run promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=incomplete_evidence, tier=tier2_credible_prototype,
+    lane=compact_challenge. Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -1785,8 +1783,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: keep_watchlist
-  promotion_reason: Conservative registry default from status=incomplete_evidence, tier=tier2_credible_prototype, lane=compact_challenge.
-    Run promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=incomplete_evidence, tier=tier2_credible_prototype,
+    lane=compact_challenge. Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -1933,8 +1931,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: keep_frozen_control
-  promotion_reason: Conservative registry default from status=benchmark_candidate, tier=tier3_candidate_validation, lane=compact_challenge.
-    Run promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=benchmark_candidate, tier=tier3_candidate_validation,
+    lane=compact_challenge. Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: control_or_benchmark
@@ -2029,8 +2027,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: keep_frozen_control
-  promotion_reason: Conservative registry default from status=benchmark, tier=benchmark, lane=compact_challenge. Run promotion
-    review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=benchmark, tier=benchmark, lane=compact_challenge.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: control_or_benchmark
@@ -2077,8 +2075,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: keep_frozen_control
-  promotion_reason: Conservative registry default from status=benchmark, tier=benchmark, lane=compact_challenge. Run promotion
-    review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=benchmark, tier=benchmark, lane=compact_challenge.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: control_or_benchmark
@@ -2125,8 +2123,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: keep_frozen_control
-  promotion_reason: Conservative registry default from status=benchmark, tier=benchmark, lane=compact_challenge. Run promotion
-    review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=benchmark, tier=benchmark, lane=compact_challenge.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: control_or_benchmark
@@ -2173,8 +2171,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: keep_watchlist
-  promotion_reason: Conservative registry default from status=incomplete_evidence, tier=tier2_credible_prototype, lane=compact_challenge.
-    Run promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=incomplete_evidence, tier=tier2_credible_prototype,
+    lane=compact_challenge. Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -2221,8 +2219,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: keep_watchlist
-  promotion_reason: Conservative registry default from status=incomplete_evidence, tier=tier3_candidate_validation, lane=compact_challenge.
-    Run promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=incomplete_evidence, tier=tier3_candidate_validation,
+    lane=compact_challenge. Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -2371,8 +2369,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: blocked
-  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=stock_memo. Run promotion review
-    for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=stock_memo. Run promotion
+    review for evidence-backed decision.
   primary_failure_mode: blocked_by_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -2420,8 +2418,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: blocked
-  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=options_memo. Run promotion review
-    for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=options_memo. Run promotion
+    review for evidence-backed decision.
   primary_failure_mode: blocked_by_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -2468,8 +2466,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: blocked
-  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=options_memo. Run promotion review
-    for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=options_memo. Run promotion
+    review for evidence-backed decision.
   primary_failure_mode: blocked_by_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -2516,8 +2514,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: blocked
-  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=futures_memo. Run promotion review
-    for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=futures_memo. Run promotion
+    review for evidence-backed decision.
   primary_failure_mode: blocked_by_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -2564,8 +2562,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: blocked
-  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=forex_memo. Run promotion review
-    for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=forex_memo. Run promotion
+    review for evidence-backed decision.
   primary_failure_mode: blocked_by_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -2612,8 +2610,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: blocked
-  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=intraday_memo. Run promotion review
-    for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=intraday_memo. Run promotion
+    review for evidence-backed decision.
   primary_failure_mode: blocked_by_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -2636,7 +2634,8 @@ strategies:
   data_source: none
   evidence_source: family_lab_blocked_spec
   latest_evidence_path: family_lab/independent_family_specs.yaml
-  latest_known_result_summary: Blocked; no product mechanics, decay, roll-yield, path-dependency, or event-risk model.
+  latest_known_result_summary: Blocked; no product mechanics, decay, roll-yield, path-dependency, or event-risk
+    model.
   allowed_next_action: create_gate0_memo
   forbidden_next_actions:
   - implement_strategy
@@ -2660,8 +2659,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: blocked
-  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=volatility_memo. Run promotion review
-    for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=volatility_memo. Run promotion
+    review for evidence-backed decision.
   primary_failure_mode: blocked_by_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -2708,8 +2707,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: blocked
-  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=archive. Run promotion review for
-    evidence-backed decision.
+  promotion_reason: Conservative registry default from status=blocked, tier=blocked, lane=archive. Run promotion
+    review for evidence-backed decision.
   primary_failure_mode: blocked_by_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -2752,8 +2751,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: true
   promotion_decision: promotion_review_required
-  promotion_reason: Conservative registry default from status=promotion_review_passed, tier=tier3_candidate_validation, lane=etf_research.
-    Run promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=promotion_review_passed, tier=tier3_candidate_validation,
+    lane=etf_research. Run promotion review for evidence-backed decision.
   primary_failure_mode: none_identified_from_registry_status
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -2762,7 +2761,8 @@ strategies:
   blocked_reason: ''
   current_permission_status: not_current_candidate
   historical_flag_only: true
-  stale_flag_warning: Historical flag retained for audit; current checkpoint grants no promotion/candidate_exhaustive permission.
+  stale_flag_warning: Historical flag retained for audit; current checkpoint grants no promotion/candidate_exhaustive
+    permission.
   current_candidate_exhaustive_permission: false
   current_promotion_review_permission: false
   latest_checkpoint_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\current_research_checkpoint\latest
@@ -2847,8 +2847,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: reject
-  promotion_reason: Conservative registry default from status=rejected, tier=blocked, lane=archive. Run promotion review for
-    evidence-backed decision.
+  promotion_reason: Conservative registry default from status=rejected, tier=blocked, lane=archive. Run promotion
+    review for evidence-backed decision.
   primary_failure_mode: rejected_by_existing_evidence
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -2892,8 +2892,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: reject
-  promotion_reason: Conservative registry default from status=rejected, tier=blocked, lane=archive. Run promotion review for
-    evidence-backed decision.
+  promotion_reason: Conservative registry default from status=rejected, tier=blocked, lane=archive. Run promotion
+    review for evidence-backed decision.
   primary_failure_mode: rejected_by_existing_evidence
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -2937,8 +2937,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: reject
-  promotion_reason: Conservative registry default from status=rejected, tier=blocked, lane=archive. Run promotion review for
-    evidence-backed decision.
+  promotion_reason: Conservative registry default from status=rejected, tier=blocked, lane=archive. Run promotion
+    review for evidence-backed decision.
   primary_failure_mode: rejected_by_existing_evidence
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -3257,7 +3257,8 @@ strategies:
   - run_backtest
   - approve_toy_demo
   - promote_to_real_money
-  promotion_requirements: Verified survivorship-free data, delistings, corporate actions, licensing, and cost/runtime feasibility.
+  promotion_requirements: Verified survivorship-free data, delistings, corporate actions, licensing, and cost/runtime
+    feasibility.
   demotion_or_kill_criteria: Credible data remains unavailable or too costly.
   notes: Implementation remains blocked.
   strategy_id: individual_stock_momentum_gate1a
@@ -3271,8 +3272,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: blocked
-  promotion_reason: Conservative registry default from status=deferred, tier=blocked, lane=stock_memo. Run promotion review
-    for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=deferred, tier=blocked, lane=stock_memo. Run promotion
+    review for evidence-backed decision.
   primary_failure_mode: blocked_by_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -3317,8 +3318,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: blocked
-  promotion_reason: Conservative registry default from status=memo_only, tier=tier0_research_map, lane=options_memo. Run promotion
-    review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=memo_only, tier=tier0_research_map, lane=options_memo.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -3363,8 +3364,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: blocked
-  promotion_reason: Conservative registry default from status=memo_only, tier=tier0_research_map, lane=futures_memo. Run promotion
-    review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=memo_only, tier=tier0_research_map, lane=futures_memo.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -3409,8 +3410,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: blocked
-  promotion_reason: Conservative registry default from status=memo_only, tier=tier0_research_map, lane=forex_memo. Run promotion
-    review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=memo_only, tier=tier0_research_map, lane=forex_memo.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -3455,8 +3456,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: blocked
-  promotion_reason: Conservative registry default from status=memo_only, tier=tier0_research_map, lane=intraday_memo. Run
-    promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=memo_only, tier=tier0_research_map, lane=intraday_memo.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -3501,8 +3502,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: keep_watchlist
-  promotion_reason: Conservative registry default from status=memo_only, tier=tier0_research_map, lane=volatility_memo. Run
-    promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=memo_only, tier=tier0_research_map, lane=volatility_memo.
+    Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -3824,11 +3825,11 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: paper_forward_cache_update_and_observation_activation
   latest_evidence_path: evidence/paper_forward_observations/combo_SPY200d_GLD_50_50_v1/latest/
-  latest_known_result_summary: Controlled SPY/GLD/BIL cache update run 20260606_040551 recorded latest common cached date
-    2026-06-05 for requested activation date 2026-06-05. Combo is active as a separate simulated paper/demo observation track.
-    SPY_200d remains frozen control and is not replaced. Start-date accounting audit fixed the first combo observation row
-    to exclude pre-start returns while preserving fixed rules. Observation consistency audit passed; checkpoint status remains
-    inconclusive_too_early.
+  latest_known_result_summary: Controlled SPY/GLD/BIL cache update run 20260606_040551 recorded latest common cached
+    date 2026-06-05 for requested activation date 2026-06-05. Combo is active as a separate simulated paper/demo
+    observation track. SPY_200d remains frozen control and is not replaced. Start-date accounting audit fixed the
+    first combo observation row to exclude pre-start returns while preserving fixed rules. Observation consistency
+    audit passed; checkpoint status remains inconclusive_too_early.
   canonical_rule_hash: 6695f0d3ec403e2f377d99f3f63d1fc57a66f45f2c27a9072ab8c0a60a19ee67
   hash_source_type: source_spec_reconstructed_hash
   current_phase: historical_research_expansion_parallel_to_paper_demo_observation
@@ -3853,12 +3854,12 @@ strategies:
   paper_forward_allowed_by_risk_framework: true
   real_money_recommendation: false
   promotion_blockers: paper_demo_observation_only;no_real_money_promotion
-  promotion_requirements: Run monthly paper/demo checkpoints under frozen rules; keep SPY_200d as frozen control; no real-money
-    promotion without separate governance.
+  promotion_requirements: Run monthly paper/demo checkpoints under frozen rules; keep SPY_200d as frozen control;
+    no real-money promotion without separate governance.
   demotion_or_kill_criteria: Excess stop risk or no profit/risk improvement versus SPY_200d.
-  notes: Controlled cache update resolved the data-date blocker; combo is paper/demo only and does not replace SPY_200d. Start-date
-    accounting audit corrected observation boundary accounting only; observation consistency audit passed; no strategy rule
-    changed.
+  notes: Controlled cache update resolved the data-date blocker; combo is paper/demo only and does not replace SPY_200d.
+    Start-date accounting audit corrected observation boundary accounting only; observation consistency audit passed;
+    no strategy rule changed.
   broker_integration: false
   live_orders: false
   observation_id: combo_SPY200d_GLD_50_50_v1_observation_v1
@@ -4148,8 +4149,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: profit_exploration
   latest_evidence_path: evidence/profit_exploration/latest/
-  latest_known_result_summary: Duplicate canonical rule of asset_class_tsmom_top1_v1; retained but not counted as independent
-    evidence.
+  latest_known_result_summary: Duplicate canonical rule of asset_class_tsmom_top1_v1; retained but not counted as
+    independent evidence.
   allowed_next_action: audit_harden
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -4175,8 +4176,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: mark_duplicate_or_near_duplicate
-  promotion_reason: Conservative registry default from status=duplicate_skipped, tier=tier2_credible_prototype, lane=profit_exploration.
-    Run promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=duplicate_skipped, tier=tier2_credible_prototype,
+    lane=profit_exploration. Run promotion review for evidence-backed decision.
   primary_failure_mode: duplicate_or_near_duplicate
   duplication_risk: flagged_by_registry
   risk_budget_status: not_assessed_in_registry
@@ -4213,8 +4214,8 @@ strategies:
   promotion_blockers: research_sample_non_final;not_paper_forward;no_real_money_promotion
   promotion_requirements: Candidate-exhaustive review and separate promotion decision.
   demotion_or_kill_criteria: Too slow, too risky, or no profit/risk improvement versus SPY_200d/combo benchmark.
-  notes: Direct registry row for requested GLD trend profit experiment; existing profit_GLD row remains as prior registry
-    naming.
+  notes: Direct registry row for requested GLD trend profit experiment; existing profit_GLD row remains as prior
+    registry naming.
   strategy_id: GLD_200d_trend_model_v1
   family: absolute_trend
   instrument_lane: ETF
@@ -4250,8 +4251,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: profit_exploration
   latest_evidence_path: evidence/profit_exploration/latest/
-  latest_known_result_summary: Research-sample completed; high target rates but stop/drawdown behavior classified too_risky/high_upside_high_risk,
-    with no candidate_exhaustive queue recommendation.
+  latest_known_result_summary: Research-sample completed; high target rates but stop/drawdown behavior classified
+    too_risky/high_upside_high_risk, with no candidate_exhaustive queue recommendation.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -4263,10 +4264,12 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: research_sample_only;not_candidate_exhaustive;not_paper_forward_allowed
-  promotion_requirements: Research-sample review, possible candidate_exhaustive review, and separate promotion review if justified.
-  demotion_or_kill_criteria: Duplicate of current finalists, too risky, unavailable data, or no improvement versus SPY_200d/combo/top2.
-  notes: Implemented as research_sample only; no candidate-exhaustive, paper-forward observation, broker integration, or real-money
-    recommendation is approved here.
+  promotion_requirements: Research-sample review, possible candidate_exhaustive review, and separate promotion review
+    if justified.
+  demotion_or_kill_criteria: Duplicate of current finalists, too risky, unavailable data, or no improvement versus
+    SPY_200d/combo/top2.
+  notes: Implemented as research_sample only; no candidate-exhaustive, paper-forward observation, broker integration,
+    or real-money recommendation is approved here.
   strategy_id: qqq_spy_gld_ief_dual_momentum_v1
   family: dual_momentum
   instrument_lane: ETF
@@ -4303,8 +4306,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: profit_exploration
   latest_evidence_path: evidence/profit_exploration/latest/
-  latest_known_result_summary: Research-sample completed for fixed Option A rule; equity-factor exposure share triggered duplicate/near-duplicate
-    warning, so no candidate_exhaustive queue recommendation.
+  latest_known_result_summary: Research-sample completed for fixed Option A rule; equity-factor exposure share triggered
+    duplicate/near-duplicate warning, so no candidate_exhaustive queue recommendation.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_backtest_before_implementation_prompt
@@ -4318,11 +4321,12 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: research_sample_only;duplicate_or_near_duplicate;not_candidate_exhaustive;not_paper_forward_allowed
-  promotion_requirements: Research-sample review, duplicate/equity-beta risk review, possible revised gate review if a future
-    non-variant rule is proposed, and separate promotion review if ever justified.
+  promotion_requirements: Research-sample review, duplicate/equity-beta risk review, possible revised gate review
+    if a future non-variant rule is proposed, and separate promotion review if ever justified.
   demotion_or_kill_criteria: Short ETF history, proxy mismatch, too slow, or no diversification versus current finalists.
-  notes: Implemented as research_sample only using MTUM, VTV, QUAL, USMV, SPY, and BIL. VLUE/SPLV variants are not implemented.
-    No candidate-exhaustive, paper-forward observation, broker integration, or real-money recommendation is approved here.
+  notes: Implemented as research_sample only using MTUM, VTV, QUAL, USMV, SPY, and BIL. VLUE/SPLV variants are not
+    implemented. No candidate-exhaustive, paper-forward observation, broker integration, or real-money recommendation
+    is approved here.
   strategy_id: value_momentum_factor_etf_rotation_v1
   family: factor_rotation
   instrument_lane: ETF
@@ -4372,7 +4376,8 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: queue_only;target_fit_review_required;not_implemented;not_paper_forward_allowed
-  promotion_requirements: Proxy review, proof it is not too slow, implementation approval, and separate promotion review.
+  promotion_requirements: Proxy review, proof it is not too slow, implementation approval, and separate promotion
+    review.
   demotion_or_kill_criteria: Too slow for +300/+400 or no improvement versus BIL/IEF/combo.
   notes: Defensive research queue item; no implementation approved.
   strategy_id: low_vol_quality_defensive_rotation_v1
@@ -4411,9 +4416,9 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: profit_exploration
   latest_evidence_path: evidence/profit_exploration/latest/
-  latest_known_result_summary: Research_sample completed with core nine sectors XLB/XLE/XLF/XLI/XLK/XLP/XLU/XLV/XLY plus BIL
-    fallback. It is watchlist only because the sample showed equity-beta duplicate risk and did not earn candidate_exhaustive
-    queue status.
+  latest_known_result_summary: Research_sample completed with core nine sectors XLB/XLE/XLF/XLI/XLK/XLP/XLU/XLV/XLY
+    plus BIL fallback. It is watchlist only because the sample showed equity-beta duplicate risk and did not earn
+    candidate_exhaustive queue status.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_backtest_before_implementation_prompt
@@ -4431,11 +4436,11 @@ strategies:
   promotion_blockers: research_sample_only;not_candidate_exhaustive;not_paper_forward_allowed
   promotion_requirements: Better sampled evidence versus combo/top2 without equity-beta duplication, candidate_exhaustive
     review, benchmark review, and separate promotion review if justified.
-  demotion_or_kill_criteria: Near-duplicate of A-sector stream, equity-beta duplicate warning, drawdown-budget overuse, or
-    no improvement versus SPY_200d.
-  notes: Implemented as research_sample only using the fixed core-nine universe. XLC/XLRE variants are not implemented. A_ETF_sector_momentum
-    is not modified. Research_sample verdict is watchlist, not candidate_exhaustive_queue. No paper-forward observation, broker
-    integration, or real-money recommendation is approved here.
+  demotion_or_kill_criteria: Near-duplicate of A-sector stream, equity-beta duplicate warning, drawdown-budget overuse,
+    or no improvement versus SPY_200d.
+  notes: Implemented as research_sample only using the fixed core-nine universe. XLC/XLRE variants are not implemented.
+    A_ETF_sector_momentum is not modified. Research_sample verdict is watchlist, not candidate_exhaustive_queue.
+    No paper-forward observation, broker integration, or real-money recommendation is approved here.
   strategy_id: sector_top2_momentum_simple_v1
   family: sector_momentum
   instrument_lane: sector_ETF
@@ -4473,10 +4478,10 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: profit_exploration
   latest_evidence_path: evidence/profit_exploration/latest/
-  latest_known_result_summary: Managed-futures proxy research_sample implementation uses DBMF/KMLM wrapper prices and BIL
-    fallback only. The research_sample row showed low +300/+400 target rates versus combo/top2 with no stop hits and lower
-    drawdown, so current verdict is too_slow rather than candidate_exhaustive. Evidence must stay short-history and fund-wrapper
-    proxy labeled; no direct futures strategy evidence is claimed.
+  latest_known_result_summary: Managed-futures proxy research_sample implementation uses DBMF/KMLM wrapper prices
+    and BIL fallback only. The research_sample row showed low +300/+400 target rates versus combo/top2 with no stop
+    hits and lower drawdown, so current verdict is too_slow rather than candidate_exhaustive. Evidence must stay
+    short-history and fund-wrapper proxy labeled; no direct futures strategy evidence is claimed.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -4492,13 +4497,13 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: research_sample_only;short_history;fund_wrapper_proxy_only;too_slow;not_candidate_exhaustive;not_paper_forward_allowed
-  promotion_requirements: Research_sample review, possible candidate_exhaustive short-history gate if justified, benchmark/correlation
-    review, and separate promotion review if ever justified.
-  demotion_or_kill_criteria: Too slow for +300/+400, stop/drawdown worse than combo/top2, one-fund dependence, proxy mismatch,
-    or no diversification versus current finalists.
-  notes: Implemented as research_sample only using DBMF, KMLM, and BIL. CTA/FMF/WTMF are not implemented. No futures contract
-    logic is added. No candidate-exhaustive, paper-forward observation, broker integration, or real-money recommendation is
-    approved here.
+  promotion_requirements: Research_sample review, possible candidate_exhaustive short-history gate if justified,
+    benchmark/correlation review, and separate promotion review if ever justified.
+  demotion_or_kill_criteria: Too slow for +300/+400, stop/drawdown worse than combo/top2, one-fund dependence, proxy
+    mismatch, or no diversification versus current finalists.
+  notes: Implemented as research_sample only using DBMF, KMLM, and BIL. CTA/FMF/WTMF are not implemented. No futures
+    contract logic is added. No candidate-exhaustive, paper-forward observation, broker integration, or real-money
+    recommendation is approved here.
   strategy_id: managed_futures_proxy_etf_trend_v1
   family: managed_futures_style_trend
   instrument_lane: ETF_or_fund_proxy
@@ -4534,11 +4539,11 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: profit_exploration_and_combination_lab
   latest_evidence_path: evidence/combination_lab/batch1_diagnostics_completion/latest/
-  latest_known_result_summary: Historical Combination Batch 1 research_sample completed as fixed 50/50 blend of combo_SPY200d_GLD_50_50_v1
-    and asset_class_tsmom_top2_v1. Verdict audit corrected the label from too_slow to duplicate_or_near_duplicate because
-    correlations to combo/top2 were high and duplicate warning was true. Diagnostics completion found no meaningful incremental
-    target-window case for advancement. No candidate_exhaustive queue. Active combo paper/demo rules were not changed and
-    SPY_200d was not replaced.
+  latest_known_result_summary: Historical Combination Batch 1 research_sample completed as fixed 50/50 blend of
+    combo_SPY200d_GLD_50_50_v1 and asset_class_tsmom_top2_v1. Verdict audit corrected the label from too_slow to
+    duplicate_or_near_duplicate because correlations to combo/top2 were high and duplicate warning was true. Diagnostics
+    completion found no meaningful incremental target-window case for advancement. No candidate_exhaustive queue.
+    Active combo paper/demo rules were not changed and SPY_200d was not replaced.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -4552,9 +4557,10 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: research_sample_only;duplicate_or_near_duplicate;not_candidate_exhaustive;not_paper_forward_allowed
-  promotion_requirements: Separate research_sample review and candidate_exhaustive review only if future evidence justifies
-    it.
-  demotion_or_kill_criteria: Duplicate behavior, too slow, worse drawdown/stop risk versus combo/top2, or no stop-aware improvement.
+  promotion_requirements: Separate research_sample review and candidate_exhaustive review only if future evidence
+    justifies it.
+  demotion_or_kill_criteria: Duplicate behavior, too slow, worse drawdown/stop risk versus combo/top2, or no stop-aware
+    improvement.
   notes: Fixed predeclared Batch 1 combination; no optimized weights, no paper-forward activation, no broker integration,
     and no real-money recommendation.
   strategy_id: combo_plus_top2_50_50_v1
@@ -4593,11 +4599,12 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: profit_exploration_and_combination_lab
   latest_evidence_path: evidence/combination_lab/batch1_diagnostics_completion/latest/
-  latest_known_result_summary: Historical Combination Batch 1 research_sample completed as fixed 80/20 blend of combo_SPY200d_GLD_50_50_v1
-    and managed_futures_proxy_etf_trend_v1. Verdict audit corrected the label from generic too_slow to short_history_watchlist.
-    It was too slow at 30/60 days but had stronger 180-day target rates and lower drawdown-budget usage. Diagnostics completion
-    found no incremental 180-day +300/+400 target windows versus combo/top2; the sleeve mainly reduced drawdown magnitude.
-    No candidate_exhaustive queue. Managed-futures sleeve remains short-history fund-wrapper proxy evidence only.
+  latest_known_result_summary: Historical Combination Batch 1 research_sample completed as fixed 80/20 blend of
+    combo_SPY200d_GLD_50_50_v1 and managed_futures_proxy_etf_trend_v1. Verdict audit corrected the label from generic
+    too_slow to short_history_watchlist. It was too slow at 30/60 days but had stronger 180-day target rates and
+    lower drawdown-budget usage. Diagnostics completion found no incremental 180-day +300/+400 target windows versus
+    combo/top2; the sleeve mainly reduced drawdown magnitude. No candidate_exhaustive queue. Managed-futures sleeve
+    remains short-history fund-wrapper proxy evidence only.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -4613,10 +4620,10 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: research_sample_only;short_horizon_too_slow;short_history;fund_wrapper_proxy_only;target_window_co_movement_available_no_incremental_hits;not_candidate_exhaustive;not_paper_forward_allowed
-  promotion_requirements: Separate research_sample review and candidate_exhaustive short-history gate only if future evidence
-    justifies it.
-  demotion_or_kill_criteria: Short-history proxy limitations, 30/60-day target weakness, worse drawdown/stop risk, or no stop-aware
-    improvement versus combo/top2.
+  promotion_requirements: Separate research_sample review and candidate_exhaustive short-history gate only if future
+    evidence justifies it.
+  demotion_or_kill_criteria: Short-history proxy limitations, 30/60-day target weakness, worse drawdown/stop risk,
+    or no stop-aware improvement versus combo/top2.
   notes: Fixed predeclared Batch 1 combination using DBMF/KMLM wrapper proxy evidence through managed_futures_proxy_etf_trend_v1;
     no futures contract logic is added.
   strategy_id: combo_plus_managed_futures_80_20_v1
@@ -4630,8 +4637,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: keep_watchlist
-  promotion_reason: Conservative registry default from status=short_history_watchlist, tier=tier2_credible_prototype, lane=profit_exploration.
-    Run promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=short_history_watchlist, tier=tier2_credible_prototype,
+    lane=profit_exploration. Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -4655,11 +4662,12 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: profit_exploration_and_combination_lab
   latest_evidence_path: evidence/combination_lab/batch1_diagnostics_completion/latest/
-  latest_known_result_summary: Historical Combination Batch 1 research_sample completed as fixed 80/20 blend of asset_class_tsmom_top2_v1
-    and managed_futures_proxy_etf_trend_v1. Verdict audit corrected the label from generic too_slow to short_history_watchlist.
-    It was too slow at 30/60 days but had stronger 180-day target rates and lower drawdown-budget usage. Diagnostics completion
-    found no incremental 180-day +300/+400 target windows versus combo/top2; the sleeve mainly reduced drawdown magnitude.
-    No candidate_exhaustive queue. Managed-futures sleeve remains short-history fund-wrapper proxy evidence only.
+  latest_known_result_summary: Historical Combination Batch 1 research_sample completed as fixed 80/20 blend of
+    asset_class_tsmom_top2_v1 and managed_futures_proxy_etf_trend_v1. Verdict audit corrected the label from generic
+    too_slow to short_history_watchlist. It was too slow at 30/60 days but had stronger 180-day target rates and
+    lower drawdown-budget usage. Diagnostics completion found no incremental 180-day +300/+400 target windows versus
+    combo/top2; the sleeve mainly reduced drawdown magnitude. No candidate_exhaustive queue. Managed-futures sleeve
+    remains short-history fund-wrapper proxy evidence only.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -4675,10 +4683,10 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: research_sample_only;short_horizon_too_slow;short_history;fund_wrapper_proxy_only;target_window_co_movement_available_no_incremental_hits;not_candidate_exhaustive;not_paper_forward_allowed
-  promotion_requirements: Separate research_sample review and candidate_exhaustive short-history gate only if future evidence
-    justifies it.
-  demotion_or_kill_criteria: Short-history proxy limitations, target dilution, 30/60-day target weakness, worse drawdown/stop
-    risk, or no stop-aware improvement versus combo/top2.
+  promotion_requirements: Separate research_sample review and candidate_exhaustive short-history gate only if future
+    evidence justifies it.
+  demotion_or_kill_criteria: Short-history proxy limitations, target dilution, 30/60-day target weakness, worse
+    drawdown/stop risk, or no stop-aware improvement versus combo/top2.
   notes: Fixed predeclared Batch 1 combination using DBMF/KMLM wrapper proxy evidence through managed_futures_proxy_etf_trend_v1;
     no futures contract logic is added.
   strategy_id: top2_plus_managed_futures_80_20_v1
@@ -4692,8 +4700,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: keep_watchlist
-  promotion_reason: Conservative registry default from status=short_history_watchlist, tier=tier2_credible_prototype, lane=profit_exploration.
-    Run promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=short_history_watchlist, tier=tier2_credible_prototype,
+    lane=profit_exploration. Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -4730,8 +4738,8 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: queue_only;data_cache_review_required;not_implemented;not_paper_forward_allowed
-  promotion_requirements: Symbol availability review, target-potential review, implementation approval, and separate promotion
-    review.
+  promotion_requirements: Symbol availability review, target-potential review, implementation approval, and separate
+    promotion review.
   demotion_or_kill_criteria: Too slow for +300/+400 or no drawdown improvement versus BIL/IEF/combo.
   notes: Defensive bond ETF queue item only.
   strategy_id: treasury_duration_trend_rotation_v1
@@ -4770,10 +4778,10 @@ strategies:
   data_source: yfinance_compatible_fast_exploratory_adjusted_daily_cache
   evidence_source: commodity_fast_exploratory_screen
   latest_evidence_path: evidence/commodity_exploratory/latest/
-  latest_known_result_summary: Fast exploratory public-data commodity wrapper screen completed for DBC, PDBC, COMT, GSG, and
-    USCI through the separate commodity_basket_tsmom_top2_v1 research_sample row. This umbrella family remains not implemented
-    and not paper-forward; product identity, wrapper/tax, roll-risk, and stricter data review remain required before stronger
-    validation.
+  latest_known_result_summary: Fast exploratory public-data commodity wrapper screen completed for DBC, PDBC, COMT,
+    GSG, and USCI through the separate commodity_basket_tsmom_top2_v1 research_sample row. This umbrella family
+    remains not implemented and not paper-forward; product identity, wrapper/tax, roll-risk, and stricter data review
+    remain required before stronger validation.
   allowed_next_action: issuer_methodology_review
   forbidden_next_actions:
   - implement_without_data_quality
@@ -4791,12 +4799,12 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: fast_exploratory_only;product_identity_review_required;wrapper_tax_roll_risk_review_required;not_implemented;not_paper_forward_allowed
-  promotion_requirements: Product identity and terms/cache-rights review, stricter data quality evidence, official product/fund/issuer
-    confirmation, inception/common-overlap review, wrapper-risk labels, candidate_exhaustive gate if justified, and separate
-    promotion approval.
+  promotion_requirements: Product identity and terms/cache-rights review, stricter data quality evidence, official
+    product/fund/issuer confirmation, inception/common-overlap review, wrapper-risk labels, candidate_exhaustive
+    gate if justified, and separate promotion approval.
   demotion_or_kill_criteria: Roll-yield distortion, short history, too risky, or no improvement versus GLD/combo.
-  notes: Family umbrella only. The concrete fast exploratory screen is commodity_basket_tsmom_top2_v1. Evidence remains research-only
-    and wrapper-based, not direct futures strategy evidence.
+  notes: Family umbrella only. The concrete fast exploratory screen is commodity_basket_tsmom_top2_v1. Evidence
+    remains research-only and wrapper-based, not direct futures strategy evidence.
   strategy_id: commodity_basket_etf_momentum_v1
   family: commodity_momentum
   instrument_lane: commodity_ETF
@@ -4833,9 +4841,9 @@ strategies:
   data_source: yfinance_compatible_fast_exploratory_adjusted_daily_cache
   evidence_source: commodity_exploratory_screen
   latest_evidence_path: evidence/commodity_exploratory/latest/
-  latest_known_result_summary: Fast exploratory commodity wrapper research_sample screen. Uses DBC, PDBC, COMT, GSG, USCI,
-    and BIL only; no futures contract logic, leverage, margin, shorting, candidate_exhaustive, paper-forward activation, broker
-    integration, live orders, or real-money recommendation.
+  latest_known_result_summary: Fast exploratory commodity wrapper research_sample screen. Uses DBC, PDBC, COMT,
+    GSG, USCI, and BIL only; no futures contract logic, leverage, margin, shorting, candidate_exhaustive, paper-forward
+    activation, broker integration, live orders, or real-money recommendation.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -4849,13 +4857,13 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: exploratory_public_data_only;risk_budget_breach;not_candidate_exhaustive_validated;not_paper_forward_allowed;product_identity_review_required;wrapper_tax_roll_risk_review_required
-  promotion_requirements: Research-sample review, product identity review if promising, wrapper/tax/roll-risk review, candidate_exhaustive
-    review if justified, and separate promotion approval.
-  demotion_or_kill_criteria: Too slow, too risky, duplicate of GLD/top2/commodity sleeve, product concentration, or poor data
-    quality.
+  promotion_requirements: Research-sample review, product identity review if promising, wrapper/tax/roll-risk review,
+    candidate_exhaustive review if justified, and separate promotion approval.
+  demotion_or_kill_criteria: Too slow, too risky, duplicate of GLD/top2/commodity sleeve, product concentration,
+    or poor data quality.
   notes: 'Exactly one fast exploratory commodity wrapper rule. Verdict corrected to research_sample_candidate_risk_budget_breach
-    because the base screen showed target power but breached the -600 drawdown budget. Labels: exploratory_public_data, commodity_wrapper_evidence_research_sample_only,
-    not_validated, not_paper_forward, not_real_money.'
+    because the base screen showed target power but breached the -600 drawdown budget. Labels: exploratory_public_data,
+    commodity_wrapper_evidence_research_sample_only, not_validated, not_paper_forward, not_real_money.'
   strategy_id: commodity_basket_tsmom_top2_v1
   family: commodity_wrapper_time_series_momentum
   instrument_lane: commodity_ETF
@@ -4892,8 +4900,8 @@ strategies:
   data_source: yfinance_compatible_fast_exploratory_adjusted_daily_cache
   evidence_source: commodity_risk_control_batch1
   latest_evidence_path: evidence/commodity_lab/risk_control_batch1/latest/
-  latest_known_result_summary: Commodity Risk-Control Batch 1 verdict audit found the 200d filter ineffective or requiring
-    bug review because it retained the base commodity 90d/180d drawdown breach.
+  latest_known_result_summary: Commodity Risk-Control Batch 1 verdict audit found the 200d filter ineffective or
+    requiring bug review because it retained the base commodity 90d/180d drawdown breach.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -4907,11 +4915,11 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: exploratory_public_data_only;risk_budget_breach;not_candidate_exhaustive_validated;not_paper_forward_allowed;product_identity_review_required;wrapper_tax_roll_risk_review_required
-  promotion_requirements: Research-sample review, product identity review if promising, wrapper/tax/roll-risk review, candidate_exhaustive
-    review if justified, and separate promotion approval.
+  promotion_requirements: Research-sample review, product identity review if promising, wrapper/tax/roll-risk review,
+    candidate_exhaustive review if justified, and separate promotion approval.
   demotion_or_kill_criteria: Too slow, too risky, duplicate exposure, product concentration, or poor data quality.
-  notes: 'Commodity Risk-Control Batch 1 verdict audit row only. Audited verdict: filter_ineffective_or_bug_review. No futures
-    contract logic, leverage, margin, shorting, broker integration, or paper-forward activation.'
+  notes: 'Commodity Risk-Control Batch 1 verdict audit row only. Audited verdict: filter_ineffective_or_bug_review.
+    No futures contract logic, leverage, margin, shorting, broker integration, or paper-forward activation.'
   strategy_id: commodity_basket_tsmom_top2_200d_filter_v1
   family: commodity_wrapper_time_series_momentum
   instrument_lane: commodity_ETF
@@ -4948,8 +4956,9 @@ strategies:
   data_source: yfinance_compatible_fast_exploratory_adjusted_daily_cache
   evidence_source: commodity_risk_control_batch1
   latest_evidence_path: evidence/commodity_lab/risk_control_batch1/latest/
-  latest_known_result_summary: Commodity Risk-Control Batch 1 verdict audit classifies Half BIL as a defensive watchlist row.
-    It reduced drawdown inside the -600 budget but diluted targets enough that it is too slow for stronger validation.
+  latest_known_result_summary: Commodity Risk-Control Batch 1 verdict audit classifies Half BIL as a defensive watchlist
+    row. It reduced drawdown inside the -600 budget but diluted targets enough that it is too slow for stronger
+    validation.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -4963,11 +4972,11 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: exploratory_public_data_only;not_candidate_exhaustive_validated;not_paper_forward_allowed;product_identity_review_required;wrapper_tax_roll_risk_review_required
-  promotion_requirements: Research-sample review, product identity review if promising, wrapper/tax/roll-risk review, candidate_exhaustive
-    review if justified, and separate promotion approval.
+  promotion_requirements: Research-sample review, product identity review if promising, wrapper/tax/roll-risk review,
+    candidate_exhaustive review if justified, and separate promotion approval.
   demotion_or_kill_criteria: Too slow, too risky, duplicate exposure, product concentration, or poor data quality.
-  notes: 'Commodity Risk-Control Batch 1 verdict audit row only. Audited verdict: too_slow_defensive_watchlist. No optimized
-    weights, futures contract logic, or paper-forward activation.'
+  notes: 'Commodity Risk-Control Batch 1 verdict audit row only. Audited verdict: too_slow_defensive_watchlist.
+    No optimized weights, futures contract logic, or paper-forward activation.'
   strategy_id: commodity_basket_tsmom_top2_half_bil_v1
   family: fixed_strategy_combination
   instrument_lane: commodity_ETF
@@ -5004,8 +5013,9 @@ strategies:
   data_source: yfinance_compatible_fast_exploratory_adjusted_daily_cache
   evidence_source: commodity_risk_control_batch1_diagnostics_completion
   latest_evidence_path: evidence/commodity_lab/risk_control_batch1_diagnostics_completion/latest/
-  latest_known_result_summary: Commodity Risk-Control Batch 1 diagnostics completion found some incremental target windows,
-    but the result remains mostly combo with a small commodity tilt. Candidate_exhaustive review is not recommended.
+  latest_known_result_summary: Commodity Risk-Control Batch 1 diagnostics completion found some incremental target
+    windows, but the result remains mostly combo with a small commodity tilt. Candidate_exhaustive review is not
+    recommended.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -5021,9 +5031,10 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: exploratory_public_data_only;not_candidate_exhaustive_validated;not_paper_forward_allowed;product_identity_review_required;wrapper_tax_roll_risk_review_required
-  promotion_requirements: Research-sample review, product identity review if promising, wrapper/tax/roll-risk review, candidate_exhaustive
-    review if justified by new diagnostics, and separate promotion approval.
-  demotion_or_kill_criteria: Too slow, too risky, duplicate combo/GLD exposure, product concentration, or poor data quality.
+  promotion_requirements: Research-sample review, product identity review if promising, wrapper/tax/roll-risk review,
+    candidate_exhaustive review if justified by new diagnostics, and separate promotion approval.
+  demotion_or_kill_criteria: Too slow, too risky, duplicate combo/GLD exposure, product concentration, or poor data
+    quality.
   notes: 'Historical-only risk-control blend. Diagnostics completion decision: diagnostics_support_watchlist_only_for_combo_plus_commodity_80_20.
     It does not change the active combo_SPY200d_GLD_50_50_v1 paper/demo observation.'
   strategy_id: combo_plus_commodity_basket_80_20_v1
@@ -5062,7 +5073,8 @@ strategies:
   data_source: not_applicable_queue_only
   evidence_source: strategy_candidate_queue
   latest_evidence_path: evidence/strategy_candidate_queue/latest/
-  latest_known_result_summary: Queue-only crypto Tier 2 review candidate; existing crypto evidence remains Tier 1 exploratory.
+  latest_known_result_summary: Queue-only crypto Tier 2 review candidate; existing crypto evidence remains Tier
+    1 exploratory.
   allowed_next_action: research_memo
   forbidden_next_actions:
   - run_backtest
@@ -5075,7 +5087,8 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: queue_only;crypto_tier2_required;execution_model_missing;not_implemented
-  promotion_requirements: Dedicated Tier 2 data/execution memo with exchange-specific data, fees, spreads, and 24/7 handling.
+  promotion_requirements: Dedicated Tier 2 data/execution memo with exchange-specific data, fees, spreads, and 24/7
+    handling.
   demotion_or_kill_criteria: Execution friction, data quality, or stop risk invalidates target potential.
   notes: No crypto changes, leverage, perps, futures, margin, or broker/exchange work in this task.
   strategy_id: crypto_spot_tsmom_tier2_review_v1
@@ -5114,8 +5127,8 @@ strategies:
   data_source: cached_or_public_crypto_spot_daily_BTC_ETH_plus_BIL
   evidence_source: crypto_tier2_risk_control_batch1
   latest_evidence_path: evidence/crypto_lab/tier2_risk_control_batch1/latest/
-  latest_known_result_summary: Crypto Spot Tier 2 Risk-Control Batch 1 row completed; target potential remained exploratory
-    but stop/drawdown behavior was too risky for candidate_exhaustive review.
+  latest_known_result_summary: Crypto Spot Tier 2 Risk-Control Batch 1 row completed; target potential remained
+    exploratory but stop/drawdown behavior was too risky for candidate_exhaustive review.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -5136,10 +5149,10 @@ strategies:
   promotion_blockers: crypto_tier2_exploratory;not_candidate_exhaustive_validated;not_paper_forward_allowed;exchange_cost_24_7_review_required
   promotion_requirements: Research-sample review, exchange/cost/24-7/session treatment review if promising, candidate_exhaustive
     review if justified, and separate promotion approval.
-  demotion_or_kill_criteria: Too risky, too slow, duplicate combo exposure, weak data quality, or unacceptable crypto execution
-    assumptions.
-  notes: BTC/ETH spot-only exploratory row; no leverage, margin, shorting, futures, perpetuals, options, broker integration,
-    live orders, or real-money recommendation.
+  demotion_or_kill_criteria: Too risky, too slow, duplicate combo exposure, weak data quality, or unacceptable crypto
+    execution assumptions.
+  notes: BTC/ETH spot-only exploratory row; no leverage, margin, shorting, futures, perpetuals, options, broker
+    integration, live orders, or real-money recommendation.
   strategy_id: crypto_spot_tsmom_top1_cash_filter_v1
   family: crypto_spot_trend
   instrument_lane: crypto_spot
@@ -5176,8 +5189,8 @@ strategies:
   data_source: cached_or_public_crypto_spot_daily_BTC_ETH_plus_BIL
   evidence_source: crypto_tier2_risk_control_batch1
   latest_evidence_path: evidence/crypto_lab/tier2_risk_control_batch1/latest/
-  latest_known_result_summary: Crypto Spot Tier 2 Risk-Control Batch 1 row completed; target potential remained exploratory
-    but stop/drawdown behavior was too risky for candidate_exhaustive review.
+  latest_known_result_summary: Crypto Spot Tier 2 Risk-Control Batch 1 row completed; target potential remained
+    exploratory but stop/drawdown behavior was too risky for candidate_exhaustive review.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -5198,10 +5211,10 @@ strategies:
   promotion_blockers: crypto_tier2_exploratory;not_candidate_exhaustive_validated;not_paper_forward_allowed;exchange_cost_24_7_review_required
   promotion_requirements: Research-sample review, exchange/cost/24-7/session treatment review if promising, candidate_exhaustive
     review if justified, and separate promotion approval.
-  demotion_or_kill_criteria: Too risky, too slow, duplicate combo exposure, weak data quality, or unacceptable crypto execution
-    assumptions.
-  notes: BTC/ETH spot-only exploratory row; no leverage, margin, shorting, futures, perpetuals, options, broker integration,
-    live orders, or real-money recommendation.
+  demotion_or_kill_criteria: Too risky, too slow, duplicate combo exposure, weak data quality, or unacceptable crypto
+    execution assumptions.
+  notes: BTC/ETH spot-only exploratory row; no leverage, margin, shorting, futures, perpetuals, options, broker
+    integration, live orders, or real-money recommendation.
   strategy_id: crypto_spot_equal_weight_200d_filter_v1
   family: crypto_spot_trend
   instrument_lane: crypto_spot
@@ -5213,8 +5226,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: mark_too_risky
-  promotion_reason: Conservative registry default from status=high_upside_high_risk_watchlist, tier=tier2_exploratory, lane=profit_exploration.
-    Run promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=high_upside_high_risk_watchlist, tier=tier2_exploratory,
+    lane=profit_exploration. Run promotion review for evidence-backed decision.
   primary_failure_mode: risk_budget_or_stop_risk
   duplication_risk: not_flagged
   risk_budget_status: breach_or_high_risk_flagged
@@ -5238,8 +5251,9 @@ strategies:
   data_source: cached_or_public_crypto_spot_daily_BTC_ETH_plus_BIL
   evidence_source: crypto_tier2_risk_control_batch1
   latest_evidence_path: evidence/crypto_lab/tier2_risk_control_batch1/latest/
-  latest_known_result_summary: Crypto Spot Tier 2 Risk-Control Batch 1 row completed; historical-only 90/10 combo blend had
-    improved risk control versus standalone crypto rows but did not clear candidate_exhaustive review requirements.
+  latest_known_result_summary: Crypto Spot Tier 2 Risk-Control Batch 1 row completed; historical-only 90/10 combo
+    blend had improved risk control versus standalone crypto rows but did not clear candidate_exhaustive review
+    requirements.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -5260,8 +5274,8 @@ strategies:
   promotion_blockers: crypto_tier2_exploratory;not_candidate_exhaustive_validated;not_paper_forward_allowed;active_combo_rules_unchanged;exchange_cost_24_7_review_required
   promotion_requirements: Research-sample review, exchange/cost/24-7/session treatment review if promising, candidate_exhaustive
     review if justified, and separate promotion approval.
-  demotion_or_kill_criteria: Too risky, too slow, duplicate combo exposure, weak data quality, or unacceptable crypto execution
-    assumptions.
+  demotion_or_kill_criteria: Too risky, too slow, duplicate combo exposure, weak data quality, or unacceptable crypto
+    execution assumptions.
   notes: Historical-only 90/10 combo-plus-crypto row. It does not change the active combo_SPY200d_GLD_50_50_v1 paper/demo
     observation.
   strategy_id: combo_plus_crypto_spot_tsmom_90_10_v1
@@ -5275,8 +5289,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: keep_watchlist
-  promotion_reason: Conservative registry default from status=research_sample_candidate, tier=tier2_exploratory, lane=profit_exploration.
-    Run promotion review for evidence-backed decision.
+  promotion_reason: Conservative registry default from status=research_sample_candidate, tier=tier2_exploratory,
+    lane=profit_exploration. Run promotion review for evidence-backed decision.
   primary_failure_mode: instrument_or_mechanics_gate
   duplication_risk: not_flagged
   risk_budget_status: not_assessed_in_registry
@@ -5300,9 +5314,9 @@ strategies:
   data_source: cached_or_yfinance_compatible_adjusted_daily_etf_fund_wrapper_data
   evidence_source: global_multi_asset_fast_exploration_batch1
   latest_evidence_path: evidence/multi_asset_lab/fast_exploration_batch1/latest/
-  latest_known_result_summary: Global Multi-Asset ETF Fast Exploration Batch 1 completed. The top2 row had strong target power
-    but a 180d worst drawdown slightly beyond the -600 budget, so it remains exploratory watchlist and does not deserve candidate_exhaustive
-    review now.
+  latest_known_result_summary: Global Multi-Asset ETF Fast Exploration Batch 1 completed. The top2 row had strong
+    target power but a 180d worst drawdown slightly beyond the -600 budget, so it remains exploratory watchlist
+    and does not deserve candidate_exhaustive review now.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -5321,13 +5335,13 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: risk_budget_breach;not_candidate_exhaustive_validated;not_paper_forward_allowed;exploratory_public_data
-  promotion_requirements: Research-sample review, product/wrapper data-quality review if promising, candidate_exhaustive review
-    only if separately justified, and separate promotion approval.
+  promotion_requirements: Research-sample review, product/wrapper data-quality review if promising, candidate_exhaustive
+    review only if separately justified, and separate promotion approval.
   demotion_or_kill_criteria: Too risky, too slow, duplicate combo/top2/SPY/GLD exposure, weak data quality, or unacceptable
     ETF/fund wrapper assumptions.
-  notes: Fixed global multi-asset top2 ETF/fund wrapper row using SPY, QQQ, IWM, EFA, EEM, IEF, TLT, GLD, PDBC, COMT, and
-    BIL fallback. No leverage, margin, shorting, futures, options, forex, intraday logic, broker integration, live orders,
-    or real-money recommendation.
+  notes: Fixed global multi-asset top2 ETF/fund wrapper row using SPY, QQQ, IWM, EFA, EEM, IEF, TLT, GLD, PDBC,
+    COMT, and BIL fallback. No leverage, margin, shorting, futures, options, forex, intraday logic, broker integration,
+    live orders, or real-money recommendation.
   strategy_id: global_multi_asset_tsmom_top2_v1
   family: global_multi_asset_etf_momentum
   instrument_lane: etf_fund_wrappers
@@ -5364,8 +5378,8 @@ strategies:
   data_source: cached_or_yfinance_compatible_adjusted_daily_etf_fund_wrapper_data
   evidence_source: global_multi_asset_fast_exploration_batch1
   latest_evidence_path: evidence/multi_asset_lab/fast_exploration_batch1/latest/
-  latest_known_result_summary: Global Multi-Asset ETF Fast Exploration Batch 1 completed. The defensive 50% BIL row controlled
-    drawdown but diluted target power and did not beat primary benchmark tradeoffs.
+  latest_known_result_summary: Global Multi-Asset ETF Fast Exploration Batch 1 completed. The defensive 50% BIL
+    row controlled drawdown but diluted target power and did not beat primary benchmark tradeoffs.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -5386,8 +5400,8 @@ strategies:
   promotion_blockers: target_dilution;not_candidate_exhaustive_validated;not_paper_forward_allowed;exploratory_public_data
   promotion_requirements: Research-sample review and stronger evidence before any future candidate_exhaustive consideration.
   demotion_or_kill_criteria: Too slow, duplicate exposure, weak data quality, or unacceptable ETF/fund wrapper assumptions.
-  notes: Fixed 50% global multi-asset top2 and 50% BIL row. No optimized weights, no leverage, margin, shorting, futures,
-    options, forex, intraday logic, broker integration, live orders, or real-money recommendation.
+  notes: Fixed 50% global multi-asset top2 and 50% BIL row. No optimized weights, no leverage, margin, shorting,
+    futures, options, forex, intraday logic, broker integration, live orders, or real-money recommendation.
   strategy_id: global_multi_asset_tsmom_top2_defensive_50_v1
   family: global_multi_asset_etf_momentum
   instrument_lane: etf_fund_wrappers
@@ -5424,8 +5438,9 @@ strategies:
   data_source: cached_or_yfinance_compatible_adjusted_daily_etf_fund_wrapper_data
   evidence_source: global_multi_asset_fast_exploration_batch1
   latest_evidence_path: evidence/multi_asset_lab/fast_exploration_batch1/latest/
-  latest_known_result_summary: Global Multi-Asset ETF Fast Exploration Batch 1 completed. The 80/20 combo blend stayed inside
-    the risk budget but did not improve the combo stop-aware score enough and remained below top2, SPY_200d, and GLD.
+  latest_known_result_summary: Global Multi-Asset ETF Fast Exploration Batch 1 completed. The 80/20 combo blend
+    stayed inside the risk budget but did not improve the combo stop-aware score enough and remained below top2,
+    SPY_200d, and GLD.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -5444,10 +5459,10 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: no_material_score_improvement_vs_combo;not_candidate_exhaustive_validated;active_combo_rules_unchanged;not_paper_forward_allowed
-  promotion_requirements: Research-sample review, exact co-movement diagnostics if reconsidered, candidate_exhaustive review
-    only if separately justified, and separate promotion approval.
-  demotion_or_kill_criteria: Mostly combo behavior, weak incremental targets, worse benchmark score, weak data quality, or
-    unacceptable ETF/fund wrapper assumptions.
+  promotion_requirements: Research-sample review, exact co-movement diagnostics if reconsidered, candidate_exhaustive
+    review only if separately justified, and separate promotion approval.
+  demotion_or_kill_criteria: Mostly combo behavior, weak incremental targets, worse benchmark score, weak data quality,
+    or unacceptable ETF/fund wrapper assumptions.
   notes: Historical-only 80% combo and 20% global multi-asset sleeve. It does not change the active combo_SPY200d_GLD_50_50_v1
     paper/demo observation or replace SPY_200d.
   strategy_id: combo_plus_global_multi_asset_80_20_v1
@@ -5486,10 +5501,11 @@ strategies:
   data_source: not_applicable_queue_only
   evidence_source: individual_stock_momentum_gate1f_sharadar_fallback_review
   latest_evidence_path: evidence/research_memos/gate1f/individual_stock_momentum/latest/
-  latest_known_result_summary: Gate 1F Sharadar fallback review completed after Norgate was blocked for no local access. Nasdaq
-    Data Link / Sharadar remains a plausible serious provider path, but package/table selection, terms/security, local cache
-    rights, delisting treatment, and PIT/all-listed universe support remain unresolved. No stock strategy, stock loader, provider
-    API call, data download, backtest, Profit Exploration, candidate_exhaustive, or paper-forward approval occurred.
+  latest_known_result_summary: Gate 1F Sharadar fallback review completed after Norgate was blocked for no local
+    access. Nasdaq Data Link / Sharadar remains a plausible serious provider path, but package/table selection,
+    terms/security, local cache rights, delisting treatment, and PIT/all-listed universe support remain unresolved.
+    No stock strategy, stock loader, provider API call, data download, backtest, Profit Exploration, candidate_exhaustive,
+    or paper-forward approval occurred.
   allowed_next_action: user_select_sharadar_package
   forbidden_next_actions:
   - run_backtest
@@ -5515,13 +5531,14 @@ strategies:
   real_money_recommendation: false
   promotion_blockers: sharadar_package_not_selected;terms_acceptance_not_confirmed;cache_rights_unclear;delisting_treatment_unknown;point_in_time_universe_unclear;not_implemented
   promotion_requirements: Survivorship-free data, delisting returns, point-in-time universe, execution model, cost/runtime,
-    benchmark review, provider/access verification, Sharadar package/table selection, terms/security/cache-rights review,
-    and a future tiny-sample quality review before any implementation.
-  demotion_or_kill_criteria: Data access infeasible, costs too high, survivorship controls missing, or execution model unavailable.
-  notes: Research-only Gate 1F Sharadar fallback review only. Norgate remains blocked for no local access; Sharadar is plausible
-    but still pending package and terms selection. Current-ticker yfinance stock momentum is toy-only, not serious evidence.
-    No provider calls, API keys, secrets, stock data loader, stock strategy, broker integration, live orders, or real-money
-    recommendation are approved.
+    benchmark review, provider/access verification, Sharadar package/table selection, terms/security/cache-rights
+    review, and a future tiny-sample quality review before any implementation.
+  demotion_or_kill_criteria: Data access infeasible, costs too high, survivorship controls missing, or execution
+    model unavailable.
+  notes: Research-only Gate 1F Sharadar fallback review only. Norgate remains blocked for no local access; Sharadar
+    is plausible but still pending package and terms selection. Current-ticker yfinance stock momentum is toy-only,
+    not serious evidence. No provider calls, API keys, secrets, stock data loader, stock strategy, broker integration,
+    live orders, or real-money recommendation are approved.
   strategy_id: individual_stock_momentum_gate1b_v1
   family: individual_stock_momentum
   instrument_lane: individual_stocks
@@ -5558,8 +5575,8 @@ strategies:
   data_source: not_applicable_queue_only
   evidence_source: strategy_candidate_queue
   latest_evidence_path: evidence/strategy_candidate_queue/latest/
-  latest_known_result_summary: Queue-only blocked reference for options, futures, forex, intraday, volatility products, and
-    crypto leverage/perps.
+  latest_known_result_summary: Queue-only blocked reference for options, futures, forex, intraday, volatility products,
+    and crypto leverage/perps.
   allowed_next_action: research_memo
   forbidden_next_actions:
   - run_backtest
@@ -5573,7 +5590,8 @@ strategies:
   real_money_recommendation: false
   promotion_blockers: queue_only;execution_model_missing;data_model_missing;risk_model_missing;not_implemented
   promotion_requirements: Full Gate 0 and Gate 1 before any code.
-  demotion_or_kill_criteria: Remains blocked until data, execution, margin, spread, roll, chain, and timestamp models exist.
+  demotion_or_kill_criteria: Remains blocked until data, execution, margin, spread, roll, chain, and timestamp models
+    exist.
   notes: Blocked reference only; no high-complexity instrument implementation is approved.
   strategy_id: options_futures_forex_intraday_blocked_reference_v1
   family: multi_blocked_reference
@@ -5610,8 +5628,8 @@ strategies:
   data_source: existing_adjusted_etf_cache_or_missing
   evidence_source: cached_etf_recompute
   latest_evidence_path: evidence/paper_forward_activations/vm_quality_lowvol_proxy_v1/latest/
-  latest_known_result_summary: Active/frozen recovered paper-demo observation; 180d median equity about $3,247.09 and stop-hit
-    rate 0.0% from conversation-recovered evidence.
+  latest_known_result_summary: Active/frozen recovered paper-demo observation; 180d median equity about $3,247.09
+    and stop-hit rate 0.0% from conversation-recovered evidence.
   allowed_next_action: observe_only
   forbidden_next_actions:
   - change_rules
@@ -5669,8 +5687,8 @@ strategies:
   data_source: existing_adjusted_etf_cache_or_missing
   evidence_source: cached_etf_recompute
   latest_evidence_path: evidence/paper_forward_activations/dsr_sector_equal_weight_defensive_filter_v1/latest/
-  latest_known_result_summary: Active/frozen recovered paper-demo observation; 180d median equity about $3,302.75 and stop-hit
-    rate 0.0% from conversation-recovered evidence.
+  latest_known_result_summary: Active/frozen recovered paper-demo observation; 180d median equity about $3,302.75
+    and stop-hit rate 0.0% from conversation-recovered evidence.
   allowed_next_action: observe_only
   forbidden_next_actions:
   - change_rules
@@ -5728,8 +5746,8 @@ strategies:
   data_source: existing_adjusted_etf_cache_or_missing
   evidence_source: dsr_top3_promotion_review_cached_etf_diagnostic
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\promotion_reviews\dsr_sector_top3_momentum_defensive_cash_v1\latest
-  latest_known_result_summary: Promotion review passed and candidate_exhaustive was recommended, but deferred because same
-    family as active DSR row.
+  latest_known_result_summary: Promotion review passed and candidate_exhaustive was recommended, but deferred because
+    same family as active DSR row.
   allowed_next_action: archive_dsr_sector_top3_momentum_defensive_cash_v1_as_dsr_duplicate_diagnostic
   forbidden_next_actions:
   - add_broker_integration
@@ -5767,8 +5785,8 @@ strategies:
   promotion_blockers: conversation_recovered_only;not_recomputed
   promotion_requirements: Manual review and appropriate validation gate before any promotion.
   demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
-  notes: Recovered state row; no broker integration, live orders, or real-money recommendation. Roadmap priority recorded;
-    planning-only, no new strategy test.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation. Roadmap priority
+    recorded; planning-only, no new strategy test.
   strategy_id: dsr_sector_top3_momentum_defensive_cash_v1
   family: defensive_sector_rotation_etf
   instrument_lane: ETF
@@ -5789,8 +5807,8 @@ strategies:
   blocked_reason: ''
   priority_rank: 5
   roadmap_status: deferred_candidate_queue
-  roadmap_reason: Promotion review already passed and candidate validation was recommended before being deferred. Same-family
-    as active DSR equal-weight, so it remains deferred until new family discovery advances.
+  roadmap_reason: Promotion review already passed and candidate validation was recommended before being deferred.
+    Same-family as active DSR equal-weight, so it remains deferred until new family discovery advances.
   next_allowed_action: archive_dsr_sector_top3_momentum_defensive_cash_v1_as_dsr_duplicate_diagnostic
   promotion_review_completed: true
   latest_promotion_review_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\promotion_reviews\dsr_sector_top3_momentum_defensive_cash_v1\latest
@@ -5811,8 +5829,8 @@ strategies:
   data_source: existing_adjusted_etf_cache_or_missing
   evidence_source: conversation_recovered
   latest_evidence_path: evidence/candidate_exhaustive/gror_balanced_momentum_60_40_v1/latest/
-  latest_known_result_summary: Promotion review recovered as promote_to_candidate_exhaustive_queue; candidate_exhaustive not
-    run.
+  latest_known_result_summary: Promotion review recovered as promote_to_candidate_exhaustive_queue; candidate_exhaustive
+    not run.
   allowed_next_action: keep_gror_balanced_momentum_60_40_v1_candidate_watchlist_choose_next_lane
   forbidden_next_actions:
   - add_broker_integration
@@ -5876,7 +5894,8 @@ strategies:
   next_allowed_action: keep_gror_balanced_momentum_60_40_v1_candidate_watchlist_choose_next_lane
   current_permission_status: not_current_candidate
   historical_flag_only: true
-  stale_flag_warning: Historical flag retained for audit; current checkpoint grants no promotion/candidate_exhaustive permission.
+  stale_flag_warning: Historical flag retained for audit; current checkpoint grants no promotion/candidate_exhaustive
+    permission.
   current_candidate_exhaustive_permission: false
   current_promotion_review_permission: false
   latest_checkpoint_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\current_research_checkpoint\latest
@@ -5896,7 +5915,8 @@ strategies:
   data_source: existing_adjusted_etf_cache_or_missing
   evidence_source: conversation_recovered
   latest_evidence_path: evidence/research_roadmap/latest/
-  latest_known_result_summary: Watchlist family; no promotion candidate. Profit power existed but failed risk/duplicate gates.
+  latest_known_result_summary: Watchlist family; no promotion candidate. Profit power existed but failed risk/duplicate
+    gates.
   allowed_next_action: keep_quality_momentum_on_watchlist
   forbidden_next_actions:
   - add_broker_integration
@@ -5933,8 +5953,8 @@ strategies:
   promotion_blockers: conversation_recovered_only;not_recomputed
   promotion_requirements: Manual review and appropriate validation gate before any promotion.
   demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
-  notes: Recovered state row; no broker integration, live orders, or real-money recommendation. Roadmap priority recorded;
-    planning-only, no new strategy test.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation. Roadmap priority
+    recorded; planning-only, no new strategy test.
   strategy_id: quality_momentum_etf_proxy
   family: quality_momentum_etf_proxy
   instrument_lane: ETF
@@ -5955,8 +5975,8 @@ strategies:
   blocked_reason: ''
   priority_rank: 7
   roadmap_status: watchlist_no_more_rescue_now
-  roadmap_reason: Already investigated. It had profit power but failed risk/duplicate gates, including one bounded risk-control
-    rescue batch. Do not rescue again unless new evidence appears.
+  roadmap_reason: Already investigated. It had profit power but failed risk/duplicate gates, including one bounded
+    risk-control rescue batch. Do not rescue again unless new evidence appears.
   next_allowed_action: keep_quality_momentum_on_watchlist
 - id: quality_momentum_etf_proxy_risk_control_batch_1
   display_name: Quality Momentum Etf Proxy Risk Control Batch 1
@@ -6048,7 +6068,8 @@ strategies:
   data_source: existing_adjusted_etf_cache_or_missing
   evidence_source: conversation_recovered
   latest_evidence_path: evidence/recovery/latest/
-  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as recomputed.
+  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as
+    recomputed.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -6101,7 +6122,8 @@ strategies:
   data_source: existing_adjusted_etf_cache_or_missing
   evidence_source: conversation_recovered
   latest_evidence_path: evidence/recovery/latest/
-  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as recomputed.
+  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as
+    recomputed.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -6154,7 +6176,8 @@ strategies:
   data_source: existing_adjusted_etf_cache_or_missing
   evidence_source: conversation_recovered
   latest_evidence_path: evidence/recovery/latest/
-  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as recomputed.
+  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as
+    recomputed.
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - observe_as_paper_forward
@@ -6207,8 +6230,8 @@ strategies:
   data_source: existing_adjusted_etf_cache_or_missing
   evidence_source: managed_futures_etf_wrapper_review
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\research_samples\managed_futures_etf_wrapper\latest
-  latest_known_result_summary: Managed-futures ETF/fund-wrapper design gate approved fixed variants for a future explicitly
-    prompted research_sample. No strategy/backtest/data download was run.
+  latest_known_result_summary: Managed-futures ETF/fund-wrapper design gate approved fixed variants for a future
+    explicitly prompted research_sample. No strategy/backtest/data download was run.
   allowed_next_action: create_dual_momentum_paa_etf_wrapper_fast_exploration_review_prompt
   forbidden_next_actions:
   - add_broker_integration
@@ -6284,8 +6307,8 @@ strategies:
   priority_rank: 1
   roadmap_status: next_family_to_review
   roadmap_reason: Highest next priority because the project needs a family that is more additive than SPY/QQQ/sector/growth
-    behavior. Trend-following / managed-futures-style ETF wrappers may provide a different return stream. This must be ETF/fund-wrapper
-    only, not direct futures trading.
+    behavior. Trend-following / managed-futures-style ETF wrappers may provide a different return stream. This must
+    be ETF/fund-wrapper only, not direct futures trading.
   next_allowed_action: create_dual_momentum_paa_etf_wrapper_fast_exploration_review_prompt
   lane_review_verdict: approve_future_research_sample_prompt
   family_verdict: watchlist_family
@@ -6305,7 +6328,8 @@ strategies:
   data_source: existing_adjusted_etf_cache_or_missing
   evidence_source: conversation_recovered
   latest_evidence_path: evidence/research_roadmap/latest/
-  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as recomputed.
+  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as
+    recomputed.
   allowed_next_action: defer_commodity_wrapper_until_after_managed_futures_review
   forbidden_next_actions:
   - add_broker_integration
@@ -6342,8 +6366,8 @@ strategies:
   promotion_blockers: conversation_recovered_only;not_recomputed
   promotion_requirements: Manual review and appropriate validation gate before any promotion.
   demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
-  notes: Recovered state row; no broker integration, live orders, or real-money recommendation. Roadmap priority recorded;
-    planning-only, no new strategy test.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation. Roadmap priority
+    recorded; planning-only, no new strategy test.
   strategy_id: commodity_wrapper
   family: commodity_wrapper
   instrument_lane: ETF
@@ -6383,7 +6407,8 @@ strategies:
   data_source: existing_adjusted_etf_cache_or_missing
   evidence_source: conversation_recovered
   latest_evidence_path: evidence/research_roadmap/latest/
-  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as recomputed.
+  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as
+    recomputed.
   allowed_next_action: defer_crypto_spot
   forbidden_next_actions:
   - add_broker_integration
@@ -6420,8 +6445,8 @@ strategies:
   promotion_blockers: conversation_recovered_only;not_recomputed
   promotion_requirements: Manual review and appropriate validation gate before any promotion.
   demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
-  notes: Recovered state row; no broker integration, live orders, or real-money recommendation. Roadmap priority recorded;
-    planning-only, no new strategy test.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation. Roadmap priority
+    recorded; planning-only, no new strategy test.
   strategy_id: crypto_spot
   family: crypto_spot
   instrument_lane: ETF
@@ -6460,7 +6485,8 @@ strategies:
   data_source: existing_adjusted_etf_cache_or_missing
   evidence_source: conversation_recovered
   latest_evidence_path: evidence/research_roadmap/latest/
-  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as recomputed.
+  latest_known_result_summary: Recovered from project conversation after lost updates; metrics are not claimed as
+    recomputed.
   allowed_next_action: keep_individual_stock_momentum_blocked
   forbidden_next_actions:
   - add_broker_integration
@@ -6497,8 +6523,8 @@ strategies:
   promotion_blockers: conversation_recovered_only;not_recomputed
   promotion_requirements: Manual review and appropriate validation gate before any promotion.
   demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
-  notes: Recovered state row; no broker integration, live orders, or real-money recommendation. Roadmap priority recorded;
-    planning-only, no new strategy test.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation. Roadmap priority
+    recorded; planning-only, no new strategy test.
   strategy_id: individual_stock_momentum
   family: individual_stock_momentum
   instrument_lane: ETF
@@ -6519,8 +6545,8 @@ strategies:
   blocked_reason: ''
   priority_rank: 10
   roadmap_status: blocked_or_deferred
-  roadmap_reason: Blocked/deferred because of survivorship, provider, package, and terms issues. Not appropriate for the current
-    minimal ETF-wrapper direction.
+  roadmap_reason: Blocked/deferred because of survivorship, provider, package, and terms issues. Not appropriate
+    for the current minimal ETF-wrapper direction.
   next_allowed_action: keep_individual_stock_momentum_blocked
 - id: dsr_sector_top2_momentum_200d_bil_v1
   display_name: DSR Sector Top2 Momentum 200d BIL v1
@@ -6538,9 +6564,9 @@ strategies:
   data_source: existing_adjusted_etf_cache_or_missing
   evidence_source: dsr_top2_promotion_review_cached_etf_diagnostic
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\promotion_reviews\dsr_sector_top2_momentum_200d_bil_v1\latest
-  latest_known_result_summary: 'Conversation-recovered future-review row: strong DSR research-sample candidate deserving a
-    separate promotion review. It was not activated, did not receive candidate_exhaustive, and must not supersede the active
-    DSR equal-weight observation.'
+  latest_known_result_summary: 'Conversation-recovered future-review row: strong DSR research-sample candidate deserving
+    a separate promotion review. It was not activated, did not receive candidate_exhaustive, and must not supersede
+    the active DSR equal-weight observation.'
   allowed_next_action: archive_dsr_sector_top2_momentum_200d_bil_v1_as_dsr_duplicate_diagnostic
   forbidden_next_actions:
   - add_broker_integration
@@ -6577,8 +6603,8 @@ strategies:
   promotion_blockers: conversation_recovered_only;not_recomputed
   promotion_requirements: Manual review and appropriate validation gate before any promotion.
   demotion_or_kill_criteria: Missing evidence, duplicate exposure, or risk budget failure.
-  notes: Recovered state row; no broker integration, live orders, or real-money recommendation. Roadmap priority recorded;
-    planning-only, no new strategy test.
+  notes: Recovered state row; no broker integration, live orders, or real-money recommendation. Roadmap priority
+    recorded; planning-only, no new strategy test.
   strategy_id: dsr_sector_top2_momentum_200d_bil_v1
   family: defensive_sector_rotation_etf
   instrument_lane: ETF
@@ -6600,15 +6626,16 @@ strategies:
   metrics: missing_or_unavailable
   priority_rank: 4
   roadmap_status: future_review_candidate
-  roadmap_reason: Promising DSR same-family row. Exact metrics are missing/unavailable after recovery, and active DSR equal-weight
-    is already frozen, so this is lower priority than new family discovery.
+  roadmap_reason: Promising DSR same-family row. Exact metrics are missing/unavailable after recovery, and active
+    DSR equal-weight is already frozen, so this is lower priority than new family discovery.
   next_allowed_action: archive_dsr_sector_top2_momentum_200d_bil_v1_as_dsr_duplicate_diagnostic
   promotion_review_completed: true
   latest_promotion_review_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\promotion_reviews\dsr_sector_top2_momentum_200d_bil_v1\latest
   missing_evidence: ''
   current_permission_status: not_current_candidate
   historical_flag_only: true
-  stale_flag_warning: Historical flag retained for audit; current checkpoint grants no promotion/candidate_exhaustive permission.
+  stale_flag_warning: Historical flag retained for audit; current checkpoint grants no promotion/candidate_exhaustive
+    permission.
   current_candidate_exhaustive_permission: false
   current_promotion_review_permission: false
   latest_checkpoint_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\current_research_checkpoint\latest
@@ -6628,8 +6655,8 @@ strategies:
   data_source: not_applicable_planning_only
   evidence_source: dual_momentum_paa_etf_wrapper_review
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\research_samples\dual_momentum_paa_etf_wrapper\latest
-  latest_known_result_summary: Dual momentum / PAA ETF-wrapper design gate approved fixed variants for a future explicitly
-    prompted research_sample. No strategy/backtest/data download was run.
+  latest_known_result_summary: Dual momentum / PAA ETF-wrapper design gate approved fixed variants for a future
+    explicitly prompted research_sample. No strategy/backtest/data download was run.
   allowed_next_action: create_gtaa_faber_style_benchmark_lane_review_prompt
   forbidden_next_actions:
   - add_broker_integration
@@ -6679,8 +6706,8 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: planning_only;not_tested;no_real_money_path
-  promotion_requirements: Must pass the proper review, sample, promotion, and candidate validation gates before any observation
-    review.
+  promotion_requirements: Must pass the proper review, sample, promotion, and candidate validation gates before
+    any observation review.
   demotion_or_kill_criteria: Missing evidence, duplicate exposure, risk budget failure, or data/provider unsuitability.
   notes: ETF/fund-wrapper only. No direct futures, leverage, shorting, broker path, or real-money recommendation.
   strategy_id: dual_momentum_paa_etf_wrapper
@@ -6703,8 +6730,8 @@ strategies:
   blocked_reason: ''
   priority_rank: 2
   roadmap_status: future_family_review
-  roadmap_reason: Clean relative momentum plus absolute momentum / protective allocation style. Plausible, but must be checked
-    carefully for duplication with GROR, SPY_200d, and active combo.
+  roadmap_reason: Clean relative momentum plus absolute momentum / protective allocation style. Plausible, but must
+    be checked carefully for duplication with GROR, SPY_200d, and active combo.
   next_allowed_action: create_gtaa_faber_style_benchmark_lane_review_prompt
   lane_review_verdict: approve_future_research_sample_prompt
   family_verdict: watchlist_family
@@ -6724,8 +6751,8 @@ strategies:
   data_source: not_applicable_planning_only
   evidence_source: research_roadmap_planning_only
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\research_samples\gtaa_faber_style_benchmark_lane\latest
-  latest_known_result_summary: Roadmap planning row only; no strategy implementation, market data, or computation has been
-    run.
+  latest_known_result_summary: Roadmap planning row only; no strategy implementation, market data, or computation
+    has been run.
   allowed_next_action: continue_best_parallel_discovery_family
   forbidden_next_actions:
   - add_broker_integration
@@ -6759,11 +6786,11 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: planning_only;not_tested;no_real_money_path
-  promotion_requirements: Must pass the proper review, sample, promotion, and candidate validation gates before any observation
-    review.
+  promotion_requirements: Must pass the proper review, sample, promotion, and candidate validation gates before
+    any observation review.
   demotion_or_kill_criteria: Missing evidence, duplicate exposure, risk budget failure, or data/provider unsuitability.
-  notes: Research roadmap backlog row. ETF/fund-wrapper only where applicable. Roadmap priority recorded; planning-only, no
-    new strategy test.
+  notes: Research roadmap backlog row. ETF/fund-wrapper only where applicable. Roadmap priority recorded; planning-only,
+    no new strategy test.
   strategy_id: gtaa_faber_style_benchmark_lane
   family: gtaa_faber_style_benchmark_lane
   instrument_lane: ETF
@@ -6784,8 +6811,8 @@ strategies:
   blocked_reason: ''
   priority_rank: 3
   roadmap_status: future_benchmark_family
-  roadmap_reason: Simple global tactical allocation / moving-average benchmark family. Useful as a benchmark and sanity check,
-    but likely overlaps with SPY_200d, GROR, and active combo.
+  roadmap_reason: Simple global tactical allocation / moving-average benchmark family. Useful as a benchmark and
+    sanity check, but likely overlaps with SPY_200d, GROR, and active combo.
   next_allowed_action: continue_best_parallel_discovery_family
   family_verdict: watchlist_family
 - id: static_all_weather_or_permanent_portfolio_benchmark
@@ -6804,8 +6831,8 @@ strategies:
   data_source: not_applicable_planning_only
   evidence_source: research_roadmap_planning_only
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\research_samples\static_all_weather_or_permanent_portfolio_benchmark\latest
-  latest_known_result_summary: Roadmap planning row only; no strategy implementation, market data, or computation has been
-    run.
+  latest_known_result_summary: Roadmap planning row only; no strategy implementation, market data, or computation
+    has been run.
   allowed_next_action: continue_best_parallel_discovery_family
   forbidden_next_actions:
   - add_broker_integration
@@ -6839,11 +6866,11 @@ strategies:
   paper_forward_allowed_by_risk_framework: false
   real_money_recommendation: false
   promotion_blockers: planning_only;not_tested;no_real_money_path
-  promotion_requirements: Must pass the proper review, sample, promotion, and candidate validation gates before any observation
-    review.
+  promotion_requirements: Must pass the proper review, sample, promotion, and candidate validation gates before
+    any observation review.
   demotion_or_kill_criteria: Missing evidence, duplicate exposure, risk budget failure, or data/provider unsuitability.
-  notes: Research roadmap backlog row. ETF/fund-wrapper only where applicable. Roadmap priority recorded; planning-only, no
-    new strategy test.
+  notes: Research roadmap backlog row. ETF/fund-wrapper only where applicable. Roadmap priority recorded; planning-only,
+    no new strategy test.
   strategy_id: static_all_weather_or_permanent_portfolio_benchmark
   family: static_all_weather_or_permanent_portfolio_benchmark
   instrument_lane: ETF
@@ -6864,8 +6891,8 @@ strategies:
   blocked_reason: ''
   priority_rank: 6
   roadmap_status: future_benchmark_or_control
-  roadmap_reason: Potentially useful benchmark/control family. Likely too defensive/slow for the profit-first objective unless
-    it provides strong drawdown diversification.
+  roadmap_reason: Potentially useful benchmark/control family. Likely too defensive/slow for the profit-first objective
+    unless it provides strong drawdown diversification.
   next_allowed_action: continue_best_parallel_discovery_family
   family_verdict: watchlist_family
 - id: mf_wrapper_top1_trend_v1
@@ -6917,8 +6944,8 @@ strategies:
   - paper_forward_activation
   - real_money_recommendation
   - run_candidate_exhaustive_without_promotion_review
-  latest_known_result_summary: 'Fast exploratory managed-futures ETF-wrapper research_sample verdict: watchlist. Exploratory
-    non-final evidence only.'
+  latest_known_result_summary: 'Fast exploratory managed-futures ETF-wrapper research_sample verdict: watchlist.
+    Exploratory non-final evidence only.'
   promotion_review_required: false
   promotion_decision: watchlist
   promotion_reason: score=47.93; duplicate=not_proven_duplicate; short_history=False
@@ -6971,8 +6998,8 @@ strategies:
   - paper_forward_activation
   - real_money_recommendation
   - run_candidate_exhaustive_without_promotion_review
-  latest_known_result_summary: 'Fast exploratory managed-futures ETF-wrapper research_sample verdict: watchlist. Exploratory
-    non-final evidence only.'
+  latest_known_result_summary: 'Fast exploratory managed-futures ETF-wrapper research_sample verdict: watchlist.
+    Exploratory non-final evidence only.'
   promotion_review_required: false
   promotion_decision: watchlist
   promotion_reason: score=48.38; duplicate=not_proven_duplicate; short_history=False
@@ -7079,8 +7106,8 @@ strategies:
   - paper_forward_activation
   - real_money_recommendation
   - run_candidate_exhaustive_without_promotion_review
-  latest_known_result_summary: 'Fast exploratory managed-futures ETF-wrapper research_sample verdict: watchlist. Exploratory
-    non-final evidence only.'
+  latest_known_result_summary: 'Fast exploratory managed-futures ETF-wrapper research_sample verdict: watchlist.
+    Exploratory non-final evidence only.'
   promotion_review_required: false
   promotion_decision: watchlist
   promotion_reason: score=50.06; duplicate=not_proven_duplicate; short_history=False
@@ -7133,8 +7160,8 @@ strategies:
   - paper_forward_activation
   - real_money_recommendation
   - run_candidate_exhaustive_without_promotion_review
-  latest_known_result_summary: 'Fast exploratory managed-futures ETF-wrapper research_sample verdict: evidence_missing. Exploratory
-    non-final evidence only.'
+  latest_known_result_summary: 'Fast exploratory managed-futures ETF-wrapper research_sample verdict: evidence_missing.
+    Exploratory non-final evidence only.'
   promotion_review_required: false
   promotion_decision: evidence_missing
   promotion_reason: protected active combo/VM/DSR benchmark series not safely inferable without mutation
@@ -7167,8 +7194,8 @@ strategies:
   current_status: too_risky
   strategy_verdict: too_risky
   family_verdict: watchlist_family
-  latest_known_result_summary: 'Fast exploratory dual momentum/PAA ETF-wrapper research_sample verdict: too_risky. Exploratory
-    non-final evidence only.'
+  latest_known_result_summary: 'Fast exploratory dual momentum/PAA ETF-wrapper research_sample verdict: too_risky.
+    Exploratory non-final evidence only.'
   allowed_next_action: create_gtaa_faber_style_benchmark_lane_review_prompt
   next_allowed_action: create_gtaa_faber_style_benchmark_lane_review_prompt
   allowed_next_actions:
@@ -7221,8 +7248,8 @@ strategies:
   current_status: too_risky
   strategy_verdict: too_risky
   family_verdict: watchlist_family
-  latest_known_result_summary: 'Fast exploratory dual momentum/PAA ETF-wrapper research_sample verdict: too_risky. Exploratory
-    non-final evidence only.'
+  latest_known_result_summary: 'Fast exploratory dual momentum/PAA ETF-wrapper research_sample verdict: too_risky.
+    Exploratory non-final evidence only.'
   allowed_next_action: create_gtaa_faber_style_benchmark_lane_review_prompt
   next_allowed_action: create_gtaa_faber_style_benchmark_lane_review_prompt
   allowed_next_actions:
@@ -7275,8 +7302,8 @@ strategies:
   current_status: too_risky
   strategy_verdict: too_risky
   family_verdict: watchlist_family
-  latest_known_result_summary: 'Fast exploratory dual momentum/PAA ETF-wrapper research_sample verdict: too_risky. Exploratory
-    non-final evidence only.'
+  latest_known_result_summary: 'Fast exploratory dual momentum/PAA ETF-wrapper research_sample verdict: too_risky.
+    Exploratory non-final evidence only.'
   allowed_next_action: create_gtaa_faber_style_benchmark_lane_review_prompt
   next_allowed_action: create_gtaa_faber_style_benchmark_lane_review_prompt
   allowed_next_actions:
@@ -7329,8 +7356,8 @@ strategies:
   current_status: watchlist
   strategy_verdict: watchlist
   family_verdict: watchlist_family
-  latest_known_result_summary: 'Fast exploratory dual momentum/PAA ETF-wrapper research_sample verdict: watchlist. Exploratory
-    non-final evidence only.'
+  latest_known_result_summary: 'Fast exploratory dual momentum/PAA ETF-wrapper research_sample verdict: watchlist.
+    Exploratory non-final evidence only.'
   allowed_next_action: create_gtaa_faber_style_benchmark_lane_review_prompt
   next_allowed_action: create_gtaa_faber_style_benchmark_lane_review_prompt
   allowed_next_actions:
@@ -7383,8 +7410,8 @@ strategies:
   current_status: watchlist
   strategy_verdict: watchlist
   family_verdict: watchlist_family
-  latest_known_result_summary: 'Fast exploratory dual momentum/PAA ETF-wrapper research_sample verdict: watchlist. Exploratory
-    non-final evidence only.'
+  latest_known_result_summary: 'Fast exploratory dual momentum/PAA ETF-wrapper research_sample verdict: watchlist.
+    Exploratory non-final evidence only.'
   allowed_next_action: create_gtaa_faber_style_benchmark_lane_review_prompt
   next_allowed_action: create_gtaa_faber_style_benchmark_lane_review_prompt
   allowed_next_actions:
@@ -7424,7 +7451,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: qvm_top2_sibling_disposition_from_qvm_risk_adjusted_review
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\promotion_reviews\qvm_quality_value_momentum_top2_v1\latest
-  latest_known_result_summary: 'Approved-cache discovery verdict: promotion_review_candidate; 180d median equity 3470.9143.'
+  latest_known_result_summary: 'Approved-cache discovery verdict: promotion_review_candidate; 180d median equity
+    3470.9143.'
   allowed_next_action: archive_qvm_quality_value_momentum_top2_v1_as_duplicate_diagnostic
   forbidden_next_actions:
   - add_broker_integration
@@ -7468,7 +7496,8 @@ strategies:
   missing_evidence: ''
   current_permission_status: not_current_candidate
   historical_flag_only: true
-  stale_flag_warning: Historical flag retained for audit; current checkpoint grants no promotion/candidate_exhaustive permission.
+  stale_flag_warning: Historical flag retained for audit; current checkpoint grants no promotion/candidate_exhaustive
+    permission.
   current_candidate_exhaustive_permission: false
   current_promotion_review_permission: false
   latest_checkpoint_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\current_research_checkpoint\latest
@@ -7488,7 +7517,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: qvm_risk_adjusted_top2_promotion_review_cached_etf
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\promotion_reviews\qvm_quality_value_momentum_risk_adjusted_top2_v1\latest
-  latest_known_result_summary: 'Approved-cache discovery verdict: promotion_review_candidate; 180d median equity 3512.7671.'
+  latest_known_result_summary: 'Approved-cache discovery verdict: promotion_review_candidate; 180d median equity
+    3512.7671.'
   allowed_next_action: mark_qvm_quality_value_momentum_risk_adjusted_top2_v1_too_risky
   forbidden_next_actions:
   - add_broker_integration
@@ -7532,7 +7562,8 @@ strategies:
   missing_evidence: ''
   current_permission_status: not_current_candidate
   historical_flag_only: true
-  stale_flag_warning: Historical flag retained for audit; current checkpoint grants no promotion/candidate_exhaustive permission.
+  stale_flag_warning: Historical flag retained for audit; current checkpoint grants no promotion/candidate_exhaustive
+    permission.
   current_candidate_exhaustive_permission: false
   current_promotion_review_permission: false
   latest_checkpoint_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\current_research_checkpoint\latest
@@ -7552,7 +7583,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: parallel_discovery_approved_cache_batch
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\new_batch_approved_cache\latest
-  latest_known_result_summary: 'Approved-cache discovery verdict: duplicate_or_near_duplicate; 180d median equity 3306.4896.'
+  latest_known_result_summary: 'Approved-cache discovery verdict: duplicate_or_near_duplicate; 180d median equity
+    3306.4896.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -7607,7 +7639,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: parallel_discovery_approved_cache_batch
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\new_batch_approved_cache\latest
-  latest_known_result_summary: 'Approved-cache discovery verdict: duplicate_or_near_duplicate; 180d median equity 3401.0407.'
+  latest_known_result_summary: 'Approved-cache discovery verdict: duplicate_or_near_duplicate; 180d median equity
+    3401.0407.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -7662,7 +7695,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: parallel_discovery_approved_cache_batch
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\new_batch_approved_cache\latest
-  latest_known_result_summary: 'Approved-cache discovery verdict: needs_benchmark_delta_review; 180d median equity 3220.3816.'
+  latest_known_result_summary: 'Approved-cache discovery verdict: needs_benchmark_delta_review; 180d median equity
+    3220.3816.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -7717,7 +7751,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: parallel_discovery_approved_cache_batch
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\new_batch_approved_cache\latest
-  latest_known_result_summary: 'Approved-cache discovery verdict: needs_benchmark_delta_review; 180d median equity 3238.4836.'
+  latest_known_result_summary: 'Approved-cache discovery verdict: needs_benchmark_delta_review; 180d median equity
+    3238.4836.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -7772,7 +7807,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: parallel_discovery_approved_cache_batch
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\new_batch_approved_cache\latest
-  latest_known_result_summary: 'Approved-cache discovery verdict: needs_benchmark_delta_review; 180d median equity 3243.2537.'
+  latest_known_result_summary: 'Approved-cache discovery verdict: needs_benchmark_delta_review; 180d median equity
+    3243.2537.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -7827,7 +7863,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: parallel_discovery_approved_cache_batch
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\new_batch_approved_cache\latest
-  latest_known_result_summary: 'Approved-cache discovery verdict: duplicate_or_near_duplicate; 180d median equity 3279.8122.'
+  latest_known_result_summary: 'Approved-cache discovery verdict: duplicate_or_near_duplicate; 180d median equity
+    3279.8122.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -7882,7 +7919,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: parallel_discovery_approved_cache_batch
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\new_batch_approved_cache\latest
-  latest_known_result_summary: 'Approved-cache discovery verdict: duplicate_or_near_duplicate; 180d median equity 3248.7777.'
+  latest_known_result_summary: 'Approved-cache discovery verdict: duplicate_or_near_duplicate; 180d median equity
+    3248.7777.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -7937,7 +7975,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: lvq_lowvol_quality_spy_regime_promotion_review_cached_etf
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\promotion_reviews\lvq_lowvol_quality_spy_regime_v1\latest
-  latest_known_result_summary: 'Approved-cache discovery verdict: promotion_review_candidate; 180d median equity 3350.0801.'
+  latest_known_result_summary: 'Approved-cache discovery verdict: promotion_review_candidate; 180d median equity
+    3350.0801.'
   allowed_next_action: keep_lvq_lowvol_quality_spy_regime_v1_on_watchlist
   forbidden_next_actions:
   - add_broker_integration
@@ -7981,7 +8020,8 @@ strategies:
   missing_evidence: ''
   current_permission_status: not_current_candidate
   historical_flag_only: true
-  stale_flag_warning: Historical flag retained for audit; current checkpoint grants no promotion/candidate_exhaustive permission.
+  stale_flag_warning: Historical flag retained for audit; current checkpoint grants no promotion/candidate_exhaustive
+    permission.
   current_candidate_exhaustive_permission: false
   current_promotion_review_permission: false
   latest_checkpoint_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\current_research_checkpoint\latest
@@ -8001,7 +8041,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: parallel_discovery_approved_cache_batch
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\new_batch_approved_cache\latest
-  latest_known_result_summary: 'Approved-cache discovery verdict: duplicate_or_near_duplicate; 180d median equity 3362.5063.'
+  latest_known_result_summary: 'Approved-cache discovery verdict: duplicate_or_near_duplicate; 180d median equity
+    3362.5063.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -8166,7 +8207,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: approved_cache_batch_2_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\approved_cache_batch_2\latest
-  latest_known_result_summary: 'Approved-cache batch 2 verdict: needs_benchmark_delta_review; 180d median equity 3215.5573.'
+  latest_known_result_summary: 'Approved-cache batch 2 verdict: needs_benchmark_delta_review; 180d median equity
+    3215.5573.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -8221,7 +8263,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: approved_cache_batch_2_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\approved_cache_batch_2\latest
-  latest_known_result_summary: 'Approved-cache batch 2 verdict: needs_benchmark_delta_review; 180d median equity 3247.807.'
+  latest_known_result_summary: 'Approved-cache batch 2 verdict: needs_benchmark_delta_review; 180d median equity
+    3247.807.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -8276,7 +8319,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: approved_cache_batch_2_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\approved_cache_batch_2\latest
-  latest_known_result_summary: 'Approved-cache batch 2 verdict: needs_benchmark_delta_review; 180d median equity 3232.6381.'
+  latest_known_result_summary: 'Approved-cache batch 2 verdict: needs_benchmark_delta_review; 180d median equity
+    3232.6381.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -8331,7 +8375,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: approved_cache_batch_2_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\approved_cache_batch_2\latest
-  latest_known_result_summary: 'Approved-cache batch 2 verdict: needs_benchmark_delta_review; 180d median equity 3179.0998.'
+  latest_known_result_summary: 'Approved-cache batch 2 verdict: needs_benchmark_delta_review; 180d median equity
+    3179.0998.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -8386,7 +8431,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: approved_cache_batch_2_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\approved_cache_batch_2\latest
-  latest_known_result_summary: 'Approved-cache batch 2 verdict: needs_benchmark_delta_review; 180d median equity 3262.9594.'
+  latest_known_result_summary: 'Approved-cache batch 2 verdict: needs_benchmark_delta_review; 180d median equity
+    3262.9594.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -8441,7 +8487,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: approved_cache_batch_2_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\approved_cache_batch_2\latest
-  latest_known_result_summary: 'Approved-cache batch 2 verdict: needs_benchmark_delta_review; 180d median equity 3238.4836.'
+  latest_known_result_summary: 'Approved-cache batch 2 verdict: needs_benchmark_delta_review; 180d median equity
+    3238.4836.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -8496,7 +8543,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: approved_cache_batch_2_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\approved_cache_batch_2\latest
-  latest_known_result_summary: 'Approved-cache batch 2 verdict: duplicate_or_near_duplicate; 180d median equity 3264.9455.'
+  latest_known_result_summary: 'Approved-cache batch 2 verdict: duplicate_or_near_duplicate; 180d median equity
+    3264.9455.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -8551,7 +8599,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: approved_cache_batch_2_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\approved_cache_batch_2\latest
-  latest_known_result_summary: 'Approved-cache batch 2 verdict: duplicate_or_near_duplicate; 180d median equity 3230.1674.'
+  latest_known_result_summary: 'Approved-cache batch 2 verdict: duplicate_or_near_duplicate; 180d median equity
+    3230.1674.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -8716,7 +8765,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: approved_cache_batch_3_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\approved_cache_batch_3\latest
-  latest_known_result_summary: 'Approved-cache batch 3 verdict: duplicate_or_near_duplicate; 180d median equity 3353.7412.'
+  latest_known_result_summary: 'Approved-cache batch 3 verdict: duplicate_or_near_duplicate; 180d median equity
+    3353.7412.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -8771,7 +8821,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: approved_cache_batch_3_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\approved_cache_batch_3\latest
-  latest_known_result_summary: 'Approved-cache batch 3 verdict: duplicate_or_near_duplicate; 180d median equity 3301.5378.'
+  latest_known_result_summary: 'Approved-cache batch 3 verdict: duplicate_or_near_duplicate; 180d median equity
+    3301.5378.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -8881,7 +8932,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: approved_cache_batch_3_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\approved_cache_batch_3\latest
-  latest_known_result_summary: 'Approved-cache batch 3 verdict: duplicate_or_near_duplicate; 180d median equity 3342.2178.'
+  latest_known_result_summary: 'Approved-cache batch 3 verdict: duplicate_or_near_duplicate; 180d median equity
+    3342.2178.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -9046,7 +9098,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: approved_cache_batch_3_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\approved_cache_batch_3\latest
-  latest_known_result_summary: 'Approved-cache batch 3 verdict: duplicate_or_near_duplicate; 180d median equity 3342.2178.'
+  latest_known_result_summary: 'Approved-cache batch 3 verdict: duplicate_or_near_duplicate; 180d median equity
+    3342.2178.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -9101,7 +9154,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: approved_cache_batch_3_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\approved_cache_batch_3\latest
-  latest_known_result_summary: 'Approved-cache batch 3 verdict: duplicate_or_near_duplicate; 180d median equity 3282.2214.'
+  latest_known_result_summary: 'Approved-cache batch 3 verdict: duplicate_or_near_duplicate; 180d median equity
+    3282.2214.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -9486,7 +9540,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: expanded_universe_batch_1_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\expanded_universe_batch_1\latest
-  latest_known_result_summary: 'Expanded universe batch 1 verdict: too_slow_for_profit_goal; 180d median equity 3272.9146.'
+  latest_known_result_summary: 'Expanded universe batch 1 verdict: too_slow_for_profit_goal; 180d median equity
+    3272.9146.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -9541,7 +9596,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: expanded_universe_batch_1_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\expanded_universe_batch_1\latest
-  latest_known_result_summary: 'Expanded universe batch 1 verdict: too_slow_for_profit_goal; 180d median equity 3197.5906.'
+  latest_known_result_summary: 'Expanded universe batch 1 verdict: too_slow_for_profit_goal; 180d median equity
+    3197.5906.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -9596,7 +9652,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: expanded_universe_batch_1_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\expanded_universe_batch_1\latest
-  latest_known_result_summary: 'Expanded universe batch 1 verdict: too_slow_for_profit_goal; 180d median equity 3114.5732.'
+  latest_known_result_summary: 'Expanded universe batch 1 verdict: too_slow_for_profit_goal; 180d median equity
+    3114.5732.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -9706,7 +9763,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: expanded_universe_batch_1_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\expanded_universe_batch_1\latest
-  latest_known_result_summary: 'Expanded universe batch 1 verdict: too_slow_for_profit_goal; 180d median equity 3194.8205.'
+  latest_known_result_summary: 'Expanded universe batch 1 verdict: too_slow_for_profit_goal; 180d median equity
+    3194.8205.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -9761,7 +9819,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: expanded_universe_batch_1_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\expanded_universe_batch_1\latest
-  latest_known_result_summary: 'Expanded universe batch 1 verdict: too_slow_for_profit_goal; 180d median equity 3144.4959.'
+  latest_known_result_summary: 'Expanded universe batch 1 verdict: too_slow_for_profit_goal; 180d median equity
+    3144.4959.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -9816,7 +9875,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: expanded_universe_batch_1_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\expanded_universe_batch_1\latest
-  latest_known_result_summary: 'Expanded universe batch 1 verdict: too_slow_for_profit_goal; 180d median equity 3260.2131.'
+  latest_known_result_summary: 'Expanded universe batch 1 verdict: too_slow_for_profit_goal; 180d median equity
+    3260.2131.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -9871,7 +9931,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: expanded_universe_batch_1_discovery
   latest_evidence_path: C:\Users\te3442\Documents\GitHub\trading-tournament\trading_tournament\evidence\parallel_research_discovery\expanded_universe_batch_1\latest
-  latest_known_result_summary: 'Expanded universe batch 1 verdict: too_slow_for_profit_goal; 180d median equity 3296.4492.'
+  latest_known_result_summary: 'Expanded universe batch 1 verdict: too_slow_for_profit_goal; 180d median equity
+    3296.4492.'
   allowed_next_action: research_sample_review
   forbidden_next_actions:
   - run_candidate_exhaustive
@@ -10402,8 +10463,8 @@ strategies:
   real_money_recommendation: false
   promotion_blockers: research_sample_only;not_candidate_exhaustive;not_paper_forward_allowed
   promotion_requirements: Separate promotion review only; no candidate_exhaustive from discovery batch.
-  demotion_or_kill_criteria: Weak target profile, unacceptable drawdown, duplicate exposure, benchmark lag, or state diagnostics
-    distorted by availability.
+  demotion_or_kill_criteria: Weak target profile, unacceptable drawdown, duplicate exposure, benchmark lag, or state
+    diagnostics distorted by availability.
   notes: Fixed-rule breadth-state regime discovery row; no broker/live-order/real-money path.
   strategy_id: bsr_breadth_state_top_assets_v1
   family: breadth_state_regime
@@ -10461,8 +10522,8 @@ strategies:
   real_money_recommendation: false
   promotion_blockers: research_sample_only;not_candidate_exhaustive;not_paper_forward_allowed
   promotion_requirements: Separate promotion review only; no candidate_exhaustive from discovery batch.
-  demotion_or_kill_criteria: Weak target profile, unacceptable drawdown, duplicate exposure, benchmark lag, or state diagnostics
-    distorted by availability.
+  demotion_or_kill_criteria: Weak target profile, unacceptable drawdown, duplicate exposure, benchmark lag, or state
+    diagnostics distorted by availability.
   notes: Fixed-rule breadth-state regime discovery row; no broker/live-order/real-money path.
   strategy_id: bsr_breadth_state_defensive_shift_v1
   family: breadth_state_regime
@@ -10520,8 +10581,8 @@ strategies:
   real_money_recommendation: false
   promotion_blockers: research_sample_only;not_candidate_exhaustive;not_paper_forward_allowed
   promotion_requirements: Separate promotion review only; no candidate_exhaustive from discovery batch.
-  demotion_or_kill_criteria: Weak target profile, unacceptable drawdown, duplicate exposure, benchmark lag, or state diagnostics
-    distorted by availability.
+  demotion_or_kill_criteria: Weak target profile, unacceptable drawdown, duplicate exposure, benchmark lag, or state
+    diagnostics distorted by availability.
   notes: Fixed-rule breadth-state regime discovery row; no broker/live-order/real-money path.
   strategy_id: bsr_breadth_state_lowvol_overlay_v1
   family: breadth_state_regime
@@ -10579,8 +10640,8 @@ strategies:
   real_money_recommendation: false
   promotion_blockers: research_sample_only;not_candidate_exhaustive;not_paper_forward_allowed
   promotion_requirements: Separate promotion review only; no candidate_exhaustive from discovery batch.
-  demotion_or_kill_criteria: Weak target profile, unacceptable drawdown, duplicate exposure, benchmark lag, or state diagnostics
-    distorted by availability.
+  demotion_or_kill_criteria: Weak target profile, unacceptable drawdown, duplicate exposure, benchmark lag, or state
+    diagnostics distorted by availability.
   notes: Fixed-rule breadth-state regime discovery row; no broker/live-order/real-money path.
   strategy_id: bsr_breadth_state_active_combo_overlay_v1
   family: breadth_state_regime
@@ -10620,7 +10681,8 @@ strategies:
   data_source: existing_adjusted_etf_cache
   evidence_source: usci_paper_forward_eligibility_review_v1
   latest_evidence_path: evidence/usci_paper_forward_eligibility_review_v1/latest/
-  latest_known_result_summary: Direction-owner override preserves formal historical_edge_recently_weakened validation label but approves observation-only paper-forward monitoring for exact static USCI wrapper versus DBC.
+  latest_known_result_summary: Direction-owner override preserves formal historical_edge_recently_weakened validation
+    label but approves observation-only paper-forward monitoring for exact static USCI wrapper versus DBC.
   allowed_next_action: observe_only
   forbidden_next_actions:
   - change_rules
@@ -10635,8 +10697,10 @@ strategies:
   real_money_recommendation: false
   promotion_blockers: no_real_money_promotion;observation_only;recent_short_horizon_relative_weakness
   promotion_requirements: Observation-only monitoring and future independent review before any promotion.
-  demotion_or_kill_criteria: Persistent relative weakness versus DBC, data quality failure, redundancy, or owner decision.
-  notes: Static investable-wrapper observation only. Buy-and-hold USCI versus DBC; no timing, futures reconstruction, leverage, shorting, broker path, orders, or real-money recommendation.
+  demotion_or_kill_criteria: Persistent relative weakness versus DBC, data quality failure, redundancy, or owner
+    decision.
+  notes: Static investable-wrapper observation only. Buy-and-hold USCI versus DBC; no timing, futures reconstruction,
+    leverage, shorting, broker path, orders, or real-money recommendation.
   strategy_id: paper_forward_usci_dynamic_commodity_curve_selection_wrapper_v1
   family: commodity_curve_selection
   instrument_lane: ETF
@@ -10648,7 +10712,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: paper_forward_observation_approved_direction_owner_override
-  promotion_reason: Historical evidence gate passed using frozen current-methodology packet; recent weakness disclosed as monitoring risk.
+  promotion_reason: Historical evidence gate passed using frozen current-methodology packet; recent weakness disclosed
+    as monitoring risk.
   primary_failure_mode: current_short_horizon_relative_weakness
   duplication_risk: not_redundant_with_active_vm_or_dsr
   risk_budget_status: active_observation
@@ -10679,7 +10744,8 @@ strategies:
   data_source: component_paper_forward_observations
   evidence_source: combo_vm_dsr_usci_paper_forward_eligibility_review_v1
   latest_evidence_path: evidence/combo_vm_dsr_usci_paper_forward_eligibility_review_v1/latest/
-  latest_known_result_summary: Exact VM/DSR/USCI one-third monthly derived observation approved after immutable bounded-screen and validation packets; selection-conditioned and historical USCI-regime weakness retained.
+  latest_known_result_summary: Exact VM/DSR/USCI one-third monthly derived observation approved after immutable
+    bounded-screen and validation packets; selection-conditioned and historical USCI-regime weakness retained.
   allowed_next_action: observe_only
   forbidden_next_actions:
   - change_rules
@@ -10694,9 +10760,12 @@ strategies:
   paper_forward_allowed_by_risk_framework: true
   real_money_recommendation: false
   promotion_blockers: observation_only;selection_conditioned_evidence;historical_usci_regime_weakness_retained;no_real_money_authorization
-  promotion_requirements: Independent paper-forward observation and future direction-owner review; no automatic promotion.
-  demotion_or_kill_criteria: Missing component data, stale observation data, accounting defect, persistent relative weakness, or direction-owner decision.
-  notes: Separate virtual account; component capital is not reserved or debited. Active combo remains benchmark/reference only.
+  promotion_requirements: Independent paper-forward observation and future direction-owner review; no automatic
+    promotion.
+  demotion_or_kill_criteria: Missing component data, stale observation data, accounting defect, persistent relative
+    weakness, or direction-owner decision.
+  notes: Separate virtual account; component capital is not reserved or debited. Active combo remains benchmark/reference
+    only.
   strategy_id: paper_forward_combo_vm_dsr_usci_equal_weight_monthly_v1
   family: multi_strategy_diversified_portfolio
   instrument_lane: ETF
@@ -10708,7 +10777,8 @@ strategies:
   candidate_exhaustive_recommended: false
   promotion_review_required: false
   promotion_decision: paper_forward_observation_only_approved
-  promotion_reason: Bounded screen comparative_evidence_positive and validation_supports_paper_forward_review preserved; activation is observation-only.
+  promotion_reason: Bounded screen comparative_evidence_positive and validation_supports_paper_forward_review preserved;
+    activation is observation-only.
   primary_failure_mode: selection_conditioned_current_methodology_evidence
   duplication_risk: benchmark_overlap_managed_by_active_combo_reference
   risk_budget_status: active_observation
@@ -10747,8 +10817,8 @@ strategies:
   latest_evidence_path: evidence/correction/correct_angl_forward_boundary_and_data_freshness_v1/latest
   validation_lineage: rerun_fast_source_v3__ice_vaneck_us_fallen_angel_angl_v1__data_feasibility_adjustment_child|validation_angl__ice_vaneck_us_fallen_angel_angl_v1__validation_variant_child|correction_angl__ice_vaneck_us_fallen_angel_angl_v1__methodology_correction_child
   parent_validation_trial_id: rerun_fast_source_v3__ice_vaneck_us_fallen_angel_angl_v1__data_feasibility_adjustment_child
-  latest_known_result_summary: ANGL remains paper/demo eligible only as the validated 20% diversifier sleeve; its separate
-    observation data lane is deferred after the final canonical cohort correction failed.
+  latest_known_result_summary: ANGL remains paper/demo eligible only as the validated 20% diversifier sleeve; its
+    separate observation data lane is deferred after the final canonical cohort correction failed.
   instrument_universe: ANGL
   allocation_rule: 100% ANGL within assigned 20% diversifier sleeve
   timing_rule: none
@@ -10773,13 +10843,14 @@ strategies:
   risk_framework_status: paper_demo_eligible_diversifier_only_observation_deferred
   paper_forward_allowed_by_risk_framework: true
   promotion_blockers: diversifier_only;observation_deferred;no_real_money_authorization
-  promotion_requirements: A valid separately initialized paper/demo observation is required before any later operational review;
-    no automatic promotion is authorized.
-  demotion_or_kill_criteria: Missing data, reconciliation failure, duplicate virtual trade, invalid weight, stale signal,
-    unexplained NAV discrepancy, or direction-owner decision.
-  notes: Strategy validation remains positive and paper/demo eligible only as the 20% ANGL sleeve in the validated monthly
-    80/20 construction. The separate observation is deferred, has no forward evidence, and may be revisited only after a material
-    data capability or separately approved methodology change. No standalone or real-money approval exists.
+  promotion_requirements: A valid separately initialized paper/demo observation is required before any later operational
+    review; no automatic promotion is authorized.
+  demotion_or_kill_criteria: Missing data, reconciliation failure, duplicate virtual trade, invalid weight, stale
+    signal, unexplained NAV discrepancy, or direction-owner decision.
+  notes: Strategy validation remains positive and paper/demo eligible only as the 20% ANGL sleeve in the validated
+    monthly 80/20 construction. The separate observation is deferred, has no forward evidence, and may be revisited
+    only after a material data capability or separately approved methodology change. No standalone or real-money
+    approval exists.
   strategy_id: ice_vaneck_us_fallen_angel_angl_v1
   family: fallen_angel_credit_anomaly
   instrument_lane: ETF
@@ -10824,8 +10895,8 @@ strategies:
   real_money_authorized: false
   allowed_next_actions:
   - no_action
-  promotion_reason: Direction-owner paper/demo eligibility remains limited to the validated 20% ANGL diversifier sleeve; its
-    separate observation data lane is deferred.
+  promotion_reason: Direction-owner paper/demo eligibility remains limited to the validated 20% ANGL diversifier
+    sleeve; its separate observation data lane is deferred.
   observation_semantic_stage: deferred
   observation_deferred_reason: deterministic_canonical_common_session_data_not_available
   observation_automatic_remediation_attempts_exhausted: true
@@ -10903,11 +10974,11 @@ strategies:
   promotion_review_required: false
   promotion_reason: Closed exact HRP configuration after validation failed with benchmark-like contribution.
   promotion_blockers: validation_failed;benchmark_like_behavior;not_paper_demo_eligible;no_real_money_authorization
-  promotion_requirements: A materially distinct new HRP configuration and direction-owner evidence would be required before
-    any future review.
+  promotion_requirements: A materially distinct new HRP configuration and direction-owner evidence would be required
+    before any future review.
   demotion_or_kill_criteria: Exact tested configuration is already closed after validation failure.
-  notes: Retrospective registry reconciliation for the exact tested five-asset HRP configuration only; family-wide HRP research
-    is not universally closed by this record.
+  notes: Retrospective registry reconciliation for the exact tested five-asset HRP configuration only; family-wide
+    HRP research is not universally closed by this record.
   instrument_lane: ETF
   evidence_tier: blocked
   primary_failure_mode: benchmark_like_behavior
@@ -11003,8 +11074,8 @@ strategies:
   implementation_status: archived
   evidence_source: pring_kst_incremental_standalone_validation_v1
   latest_evidence_path: evidence/validation/pring_kst_incremental_standalone_validation_v1/latest
-  latest_known_result_summary: Validation failed for period instability after rolling controls dominated in 66.3% of 36-month
-    windows and 68.8% of 60-month windows.
+  latest_known_result_summary: Validation failed for period instability after rolling controls dominated in 66.3%
+    of 36-month windows and 68.8% of 60-month windows.
   role: closed_exact_configuration
   rules_frozen: true
   risk_framework_status: not_paper_demo_eligible
@@ -11013,11 +11084,11 @@ strategies:
   promotion_review_required: false
   promotion_reason: Closed exact KST configuration after validation failed for period instability.
   promotion_blockers: validation_failed;period_instability;not_paper_demo_eligible;no_real_money_authorization
-  promotion_requirements: A materially distinct KST configuration and direction-owner evidence would be required before any
-    future review.
+  promotion_requirements: A materially distinct KST configuration and direction-owner evidence would be required
+    before any future review.
   demotion_or_kill_criteria: Exact tested configuration is already closed after validation failure.
-  notes: Retrospective registry reconciliation for the exact tested KST default centerline SPY/BIL configuration only; all
-    KST and multi-cycle momentum research is not universally closed by this record.
+  notes: Retrospective registry reconciliation for the exact tested KST default centerline SPY/BIL configuration
+    only; all KST and multi-cycle momentum research is not universally closed by this record.
   instrument_lane: ETF
   evidence_tier: blocked
   primary_failure_mode: period_instability
@@ -11102,21 +11173,23 @@ strategies:
   implementation_status: archived
   evidence_source: clare_inverse_volatility_incremental_diversifier_validation_v1
   latest_evidence_path: evidence/validation/clare_inverse_volatility_incremental_diversifier_validation_v1/latest
-  latest_known_result_summary: Validation failed because frozen first-valid inverse-volatility weights were better than dynamic
-    monthly recalculation on CAGR, Sharpe, and maximum drawdown.
+  latest_known_result_summary: Validation failed because frozen first-valid inverse-volatility weights were better
+    than dynamic monthly recalculation on CAGR, Sharpe, and maximum drawdown.
   role: closed_exact_configuration
   rules_frozen: true
   risk_framework_status: not_paper_demo_eligible
   risk_budget_status: closed_no_incremental_dynamic_weighting_value
   promotion_decision: do_not_promote
   promotion_review_required: false
-  promotion_reason: Closed exact dynamic inverse-volatility configuration after validation failed with benchmark-like behavior.
+  promotion_reason: Closed exact dynamic inverse-volatility configuration after validation failed with benchmark-like
+    behavior.
   promotion_blockers: validation_failed;benchmark_like_behavior;not_paper_demo_eligible;no_real_money_authorization
-  promotion_requirements: A materially distinct configuration and direction-owner evidence would be required before any future
-    review.
+  promotion_requirements: A materially distinct configuration and direction-owner evidence would be required before
+    any future review.
   demotion_or_kill_criteria: Exact tested configuration is already closed after validation failure.
-  notes: Retrospective registry reconciliation for the exact tested five-asset 12-month dynamic inverse-volatility configuration
-    only; inverse-volatility, risk-parity, and volatility-managed families are not universally closed by this record.
+  notes: Retrospective registry reconciliation for the exact tested five-asset 12-month dynamic inverse-volatility
+    configuration only; inverse-volatility, risk-parity, and volatility-managed families are not universally closed
+    by this record.
   instrument_lane: ETF
   evidence_tier: blocked
   primary_failure_mode: benchmark_like_behavior
@@ -11135,3 +11208,508 @@ strategies:
   - place_orders
   configuration_fingerprint_schema: inverse_volatility_exact_config_fingerprint_v1
   configuration_fingerprint: sha256:e1213bc8c0243c2dfaa432d88dc31b6240d6cb38750c21ced15b0a3a00c5008e
+- id: pagonidis_ibs_spy_next_open_intraday_v1
+  strategy_id: pagonidis_ibs_spy_next_open_intraday_v1
+  family_id: internal_bar_strength_mean_reversion
+  family: internal_bar_strength_mean_reversion
+  strategy_family: internal_bar_strength_mean_reversion
+  display_name: SPY IBS Next-Open Intraday Portability
+  entity_type: strategy_configuration
+  strategy_architecture: completed_close_range_position_signal_next_open_intraday_allocation
+  source_or_research_lineage: strategy_source_library_refresh_v5:pagonidis_ibs_equity_etf_reversal:execution_portability_test
+  instrument_universe: SPY|BIL
+  parameters:
+    ibs_formula: (adjusted_close-adjusted_low)/(adjusted_high-adjusted_low)
+    ibs_threshold: 0.2
+    comparison: strict_less_than
+    zero_range_behavior: inactive
+    signal_timestamp: completed_close_t
+    entry_timestamp: regular_session_open_t_plus_1
+    exit_timestamp: regular_session_close_t_plus_1
+    overnight_asset: BIL
+    inactive_session_asset: BIL
+    SPY_overnight_return_included: false
+    holding_period: one_regular_session
+    source_execution_translated: true
+    exact_source_replication_claimed: false
+    short_leg: none
+    additional_filter: none
+    stop_rule: none
+    primary_cost_bps_per_one_way_turnover: 5.0
+  benchmark_or_control:
+  - prior_day_negative_return_spy_intraday_v1
+  - all_sessions_spy_open_to_close_v1
+  - exposure_matched_fractional_spy_intraday_v1
+  - SPY_buy_and_hold
+  stage: closed
+  lane: archive
+  instrument_family: ETF
+  version: v1
+  parent_id: pagonidis_ibs_next_open_portability_v1__canonical
+  credibility_tier: blocked
+  status: rejected
+  current_status: closed
+  outcome: validation_failed
+  trial_id: pagonidis_ibs_next_open_incremental_validation_v1__child
+  validation_trial_id: pagonidis_ibs_next_open_incremental_validation_v1__child
+  parent_trial_id: pagonidis_ibs_next_open_portability_v1__canonical
+  adaptation_label: validation_variant
+  failure_reason: cost_drag
+  primary_failure_reason: cost_drag
+  decision_reason: break_even_one_way_cost_below_10bps_and_negative_return_at_10bps
+  secondary_diagnostic: second_half_and_rolling_period_instability
+  next_action: do_not_retest_exact_ibs_next_open_portability_configuration
+  allowed_next_action: no_action
+  allowed_next_actions:
+  - no_action
+  paper_demo_eligible: false
+  paper_demo_active: false
+  paper_forward_active: false
+  paper_forward_allowed_by_risk_framework: false
+  benchmark_reference_only: false
+  real_money_authorized: false
+  real_money_recommendation: false
+  no_real_money_recommendation: true
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  family_level_interpretation: exact_execution_portability_configuration_closed_cost_and_stability_failure
+  registration_reason: retrospective_status_reconciliation
+  closure_scope: exact_SPY_BIL_IBS_strict_lt_0_20_completed_close_signal_next_open_entry_same_session_close_exit_BIL_overnight_5bps_primary_no_filter_no_short_no_stop_configuration_only
+  data_source: existing_canonical_adjusted_SPY_BIL_cache
+  implementation_status: archived
+  evidence_source: pagonidis_ibs_next_open_incremental_validation_v1
+  latest_evidence_path: evidence/validation/pagonidis_ibs_next_open_incremental_validation_v1/latest
+  latest_known_result_summary: 'Validation failed: break-even one-way cost was approximately 6.4056 bps, full-period
+    return was negative at 10 bps, and second-half and rolling diagnostics were unstable.'
+  role: closed_exact_configuration
+  rules_frozen: true
+  risk_framework_status: not_paper_demo_eligible
+  risk_budget_status: closed_cost_and_stability_failure
+  promotion_decision: do_not_promote
+  promotion_review_required: false
+  promotion_reason: Closed exact IBS next-open portability configuration after validation failed for cost drag.
+  promotion_blockers: validation_failed;cost_drag;period_instability;not_paper_demo_eligible;no_real_money_authorization
+  promotion_requirements: A materially distinct execution configuration and explicit direction-owner evidence would
+    be required for future review.
+  demotion_or_kill_criteria: Exact tested configuration is already closed after validation failure.
+  notes: Retrospective reconciliation for the exact SPY/BIL IBS<0.20 next-open to same-close portability configuration
+    only. This does not close all IBS, mean-reversion, threshold, or source close-to-close configurations.
+  instrument_lane: ETF
+  evidence_tier: blocked
+  primary_failure_mode: cost_drag
+  duplication_risk: exact_configuration_closed
+  evidence_needed: none_for_exact_closed_configuration
+  duplicate_of: ''
+  blocked_reason: cost_drag
+  forbidden_next_actions:
+  - retest_exact_configuration
+  - change_IBS_threshold
+  - change_entry_or_exit_timing
+  - add_filter_stop_or_short
+  - promote_to_paper_demo
+  - activate_paper_demo
+  - promote_to_real_money
+  - add_broker_integration
+  - place_orders
+  configuration_fingerprint_schema: ibs_next_open_exact_config_fingerprint_v1
+  configuration_fingerprint: sha256:4dc6b560d7a4fedbb9c3b0968e380f45587708fca9f8c2c379ec030ddec212bb
+- id: donninger_vix_vix3m_unfiltered_three_state_spy_ief_adaptation_v1
+  strategy_id: donninger_vix_vix3m_unfiltered_three_state_spy_ief_adaptation_v1
+  family_id: implied_volatility_term_structure_equity_timing
+  family: implied_volatility_term_structure_equity_timing
+  strategy_family: implied_volatility_term_structure_equity_timing
+  display_name: Unfiltered VIX/VIX3M Three-State Diversifier
+  entity_type: strategy_configuration
+  strategy_architecture: raw_implied_volatility_curve_three_state_allocation
+  source_or_research_lineage: intermarket_source_sprint_v6:donninger_herorats:V4_predeclared_unfiltered_same_purpose_control
+  instrument_universe: SPY|IEF
+  parameters:
+    ratio: VIX_close/VIX3M_close
+    thresholds:
+    - 0.96
+    - 1.02
+    target_states:
+      ratio_lt_0_96:
+        SPY: 1.0
+        IEF: 0.0
+      ratio_0_96_to_1_02_inclusive:
+        SPY: 0.5
+        IEF: 0.5
+      ratio_gt_1_02:
+        SPY: 0.0
+        IEF: 1.0
+    missing_signal: retain_previous_target
+    no_previous_target:
+      SPY: 0.5
+      IEF: 0.5
+    execution: completed_official_close_following_regular_session_close
+    instruments:
+    - SPY
+    - IEF
+    outer_sleeve_weight: 0.2
+    reference_weight: 0.8
+    frozen_reference: frozen_current_active_vm_dsr_usci_combo
+    primary_cost_bps_per_one_way_turnover: 5.0
+    data_provenance: official_cboe_daily_history
+    vintage_status: official_current_history_non_vintage
+  benchmark_or_control:
+  - 100pct_frozen_reference
+  - 80pct_reference_20pct_sign_only_ivts_control
+  - 80pct_reference_20pct_unfiltered_exposure_matched_control
+  - 80pct_reference_20pct_IEF
+  stage: paper_demo_eligible
+  outcome: paper_demo_eligible
+  lane: paper_forward
+  instrument_family: ETF
+  version: v1
+  parent_id: validate_ivts_unfiltered_diversifier_project_untouched_preperiod_v1__child
+  credibility_tier: tier4_paper_forward
+  status: gated
+  role: 20pct_diversifier_only
+  route: diversifier_only
+  rules_frozen: true
+  paper_forward_active: false
+  paper_demo_eligible: true
+  implementation_status: implemented
+  data_source: official_Cboe_daily_VIX_VIX3M_forward_snapshots_and_canonical_adjusted_SPY_IEF_plus_frozen_reference
+  evidence_source: review_and_onboard_ivts_unfiltered_paper_demo_observation_v1
+  latest_evidence_path: evidence/paper_demo/review_and_onboard_ivts_unfiltered_paper_demo_observation_v1/latest
+  latest_known_result_summary: Positive project-untouched pre-period validation supports only the 20% diversifier
+    route; historical signal data remain current-history and non-vintage.
+  allowed_next_action: no_action
+  forbidden_next_actions:
+  - standalone_observation
+  - historical_forward_backfill
+  - claim_point_in_time_historical_safety
+  - change_thresholds_targets_instruments_or_timing
+  - change_sleeve_weight
+  - add_broker_integration
+  - place_orders
+  - promote_to_real_money
+  promotion_requirements: Prospective immutable-snapshot shadow observation and later direction-owner review; no
+    automatic promotion.
+  demotion_or_kill_criteria: Stale or mismatched Cboe signal data, missing tradable or reference valuation, accounting
+    defect, exposure breach, or direction-owner decision.
+  notes: Eligible only as 20% of the frozen 80/20 diversifier portfolio. Standalone, broker, real-money, exact-source,
+    and historical point-in-time claims are prohibited.
+  instrument_lane: ETF
+  evidence_tier: tier4_paper_forward
+  current_status: paper_demo_eligible
+  allowed_next_actions:
+  - no_action
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  promotion_review_required: false
+  promotion_decision: paper_demo_eligible_validated_20pct_diversifier_only
+  promotion_reason: validation_positive_project_untouched_preperiod
+  primary_failure_mode: activation_boundary_not_ready
+  duplication_risk: V4_unfiltered_control_lineage_preserved_no_duplicate_trial
+  risk_budget_status: 20pct_diversifier_observation_deferred
+  evidence_needed: current canonical SPY_IEF_and_frozen_reference_session_alignment
+  duplicate_of: ''
+  blocked_reason: activation_boundary_not_ready
+  risk_framework_status: paper_demo_eligible_20pct_diversifier_only
+  paper_forward_allowed_by_risk_framework: true
+  promotion_blockers: diversifier_only;historical_signal_data_current_history_non_vintage;no_real_money_authorization
+  standalone_eligible: false
+  broker_eligible: false
+  real_money_authorized: false
+  real_money_recommendation: false
+  historical_vintage_safety_established: false
+  forward_immutable_snapshot_requirement: true
+  principal_caveat: historical_signal_data_current_history_non_vintage
+  approved_sleeve_weight: 0.2
+  approved_reference_weight: 0.8
+  validation_trial_id: validate_ivts_unfiltered_diversifier_project_untouched_preperiod_v1__child
+  observation_id: paper_forward_ivts_unfiltered_20pct_diversifier_v1
+  configuration_fingerprint_schema: ivts_unfiltered_20pct_diversifier_observation_fingerprint_v1
+  configuration_fingerprint: sha256:4fc5cc1b1eb25cdfd455b595968ab609f85890479a5b03f3dc76a101cb8182e3
+  frozen: true
+  no_real_money_recommendation: true
+  next_action: direction_owner_review_ivts_observation_deferment_v1
+- id: kaufman_pjk_lr_channel_breakout_spy_bil_v1
+  strategy_id: kaufman_pjk_lr_channel_breakout_spy_bil_v1
+  family_id: projected_linear_regression_channel_breakout
+  family: projected_linear_regression_channel_breakout
+  strategy_family: projected_linear_regression_channel_breakout
+  display_name: Kaufman PJK 40-Day Regression-Channel Breakout
+  entity_type: strategy_configuration
+  strategy_architecture: long_only_projected_linear_regression_envelope_breakout
+  source_or_research_lineage: targeted_medium_frequency_breakout_source_sprint_v1:src_kaufman_pjk_lr_channel_breakout_spy_v1
+  instrument_universe: SPY|BIL
+  exact_source_replication_claimed: false
+  parameters:
+    channel_contract: TradingView_Rule_2_only
+    rule: 2
+    period_sessions: 40
+    price_source: adjusted_close
+    regression_window: latest_40_completed_closes
+    deviation_window: i_0_through_40_inclusive
+    entry_comparison: strictly_above_projected_upper
+    exit_comparison: strictly_below_projected_lower
+    signal_timestamp: completed_close_t
+    execution_timestamp: next_regular_session_open
+    active_asset: SPY
+    inactive_asset: BIL
+    long_only: true
+    leverage_allowed: false
+    shorting_allowed: false
+    warmup_sessions: 41
+    standalone_route: tested_and_closed
+    diversifier_route: 20pct_diversifier_only
+    outer_reference: frozen_current_active_vm_dsr_usci_combo
+    outer_reference_weight: 0.8
+    outer_candidate_weight: 0.2
+    outer_rebalance: monthly_following_session_close
+    primary_cost_bps_per_one_way_turnover: 5.0
+    exact_source_replication_claimed: false
+  benchmark_or_control:
+  - frozen_current_active_vm_dsr_usci_combo
+  - donchian_40_close_channel_spy_bil_v1
+  - kaufman_pjk_breakout_exposure_matched_spy_bil_v1
+  - kaufman_pjk_slope_only_40_spy_bil_v1
+  - SPY_200_day_trend_control
+  - BIL_buy_and_hold
+  stage: closed
+  lane: archive
+  instrument_family: ETF
+  version: v1
+  parent_id: implement_targeted_medium_frequency_breakout_candidate_v1__canonical
+  credibility_tier: blocked
+  status: rejected
+  current_status: closed
+  outcome: robustness_failed
+  trial_id: resolve_kaufman_diversifier_concentration_risk_v1__child
+  parent_trial_id: kaufman_breakout_diversifier_robustness_v1__child
+  adaptation_label: result_driven_robustness_diagnostic
+  failure_reason: concentration_risk
+  primary_failure_reason: concentration_risk
+  decision_reason: single_trade_concentration_exceeded_frozen_50pct_limit
+  decision_detail: single_2020_trade_contributed_113_38pct_of_total_additive_excess_and_removal_made_additive_excess_negative
+  strongest_contributing_trade: 2020-03-31_to_2020-09-09
+  largest_trade_fraction_of_additive_excess: 1.1337989832791708
+  additive_excess_after_removing_strongest_trade: -0.006514
+  secondary_failure_evidence: standalone_period_instability
+  secondary_route_failure: standalone_period_instability
+  standalone_outcome: closed_exploration
+  standalone_failure_reason: period_instability
+  diversifier_route: 20pct_diversifier_only
+  diversifier_outcome: robustness_failed
+  diversifier_failure_reason: concentration_risk
+  independent_validation_claimed: false
+  validation_supported: false
+  paper_demo_eligible: false
+  paper_demo_active: false
+  paper_forward_active: false
+  paper_forward_allowed_by_risk_framework: false
+  further_same_period_diagnostic_authorized: false
+  real_money_authorized: false
+  real_money_recommendation: false
+  no_real_money_recommendation: true
+  next_action: targeted_defensive_cross_asset_state_source_sprint_v1
+  allowed_next_action: no_action
+  allowed_next_actions:
+  - no_action
+  benchmark_reference_only: false
+  candidate_exhaustive_run: false
+  candidate_exhaustive_recommended: false
+  family_level_interpretation: exact_rule2_40_session_SPY_BIL_configuration_and_two_authorized_routes_closed_without_family_wide_closure
+  registration_reason: retrospective_status_reconciliation
+  closure_scope: exact_Kaufman_Rule2_40_session_SPY_BIL_completed_close_signal_following_session_open_long_only_standalone_and_20pct_frozen_reference_diversifier_routes_only
+  data_source: existing_canonical_adjusted_SPY_BIL_cache
+  implementation_status: archived
+  evidence_source: reconcile_and_close_kaufman_after_robustness_v1
+  latest_evidence_path: evidence/robustness/resolve_kaufman_diversifier_concentration_risk_v1/latest
+  latest_known_result_summary: Standalone exploration closed for period instability. The 20% diversifier route failed
+    robustness because one 2020 trade contributed 113.38% of total additive excess and removal made additive excess
+    negative.
+  role: closed_exact_configuration
+  rules_frozen: true
+  risk_framework_status: not_paper_demo_eligible
+  risk_budget_status: closed_concentration_and_stability_failure
+  promotion_decision: do_not_promote
+  promotion_review_required: false
+  promotion_reason: Closed exact Kaufman configuration after both authorized routes failed their final gates.
+  promotion_blockers: robustness_failed;concentration_risk;period_instability;not_validated;not_paper_demo_eligible;no_real_money_authorization
+  promotion_requirements: No further same-period diagnostic or variant is authorized by this closure. A materially
+    distinct source-backed configuration would require a separate direction-owner decision.
+  demotion_or_kill_criteria: Exact tested standalone and 20% diversifier routes are closed.
+  notes: Retrospective reconciliation for the exact Rule-2, 40-session, SPY/BIL following-open configuration and
+    its authorized 20% frozen-reference diversifier route only. The Kaufman, regression-channel, and breakout families
+    remain open to materially distinct source-backed configurations.
+  instrument_lane: ETF
+  evidence_tier: blocked
+  primary_failure_mode: concentration_risk
+  duplication_risk: exact_configuration_closed
+  evidence_needed: none_for_exact_closed_configuration
+  duplicate_of: ''
+  blocked_reason: concentration_risk
+  forbidden_next_actions:
+  - rerun_exact_configuration
+  - run_further_same_period_Kaufman_diagnostic
+  - change_rule_or_40_session_period
+  - change_SPY_or_BIL
+  - change_execution_timing
+  - change_20pct_sleeve_or_frozen_reference
+  - promote_to_validation
+  - promote_to_paper_demo
+  - activate_paper_demo
+  - promote_to_real_money
+  - add_broker_integration
+  - place_orders
+  configuration_fingerprint_schema: kaufman_rule2_40_spy_bil_exact_config_fingerprint_v1
+  configuration_fingerprint: sha256:b1e9fa3c59d5dca8a1c9954c0d9db9b88bf8e51b96670bcc89a8f9ace662892c
+- id: keller_vanputten_faa_4m_top3_v1
+  strategy_id: keller_vanputten_faa_4m_top3_v1
+  display_name: Flexible Asset Allocation 4-Month Top-Three
+  entity_type: strategy_lifecycle_record
+  stage: paper-demo-eligibility
+  outcome: paper_demo_eligible
+  eligibility: paper_demo_eligible
+  eligible_route: standalone_only
+  route: standalone_only
+  family_id: generalized_momentum_flexible_asset_allocation
+  strategy_family: generalized_momentum_flexible_asset_allocation
+  strategy_architecture: monthly_return_volatility_correlation_rank_with_absolute_momentum
+  source_or_research_lineage: targeted_native_etf_source_refresh_v1:src_keller_vanputten_faa_4m_top3_v1
+  instrument_universe: SPY|EFA|VWO|SHY|AGG|GSG|VNQ
+  exact_source_replication_claimed: false
+  eligibility_basis: exploration_passed_and_final_robustness_positive
+  paper_demo_recommendation: standard_virtual_observation
+  paper_demo_eligible: true
+  paper_demo_active: true
+  paper_forward_active: true
+  paper_forward_allowed_by_risk_framework: true
+  credibility_tier: tier4_paper_forward
+  status: active_paper_demo_observation
+  rules_frozen: true
+  parameters:
+    formation_months: 4
+    return_rank_weight: 1.0
+    volatility_rank_weight: 0.5
+    correlation_rank_weight: 0.5
+    selected_count: 3
+    absolute_momentum_fallback: SHY
+    selected_slot_weight: 1/3
+    execution: following_regular_session_close
+    primary_cost_bps_per_one_way_turnover: 5.0
+  trial_lineage:
+  - native_etf_two_v1__faa__canonical
+  - native_etf_two_candidate_final_robustness_v1__faa__child
+  - faa_4m_top3_prospective_validation_v1__forward
+  historical_exploration_outcome: exploratory_followup_candidate_standalone
+  historical_robustness_outcome: robustness_positive
+  historical_robustness_interpretation: ready_for_prospective_validation_design_standalone_asset_allocation
+  direction_correction: separate_prospective_validation_not_a_mandatory_stage
+  superseded_validation_trial_id: faa_4m_top3_prospective_validation_v1__forward
+  replacement_observation_id: paper_demo_faa_4m_top3_v1
+  latest_evidence_path: evidence/paper_demo_observation/record_faa_standard_paper_demo_observation_v1/20260804T001133595281Z
+  evidence_source: correct_faa_stage_and_onboard_paper_demo_observation_v1
+  latest_lifecycle_update_utc: '2026-08-03T03:26:36.410134+00:00'
+  real_money_authorized: false
+  real_money_recommendation: false
+  broker_integration: false
+  paper_orders: false
+  live_orders: false
+  automatic_real_money_promotion: false
+  next_action: record_faa_standard_paper_demo_observation_v1
+  allowed_next_action: record_faa_standard_paper_demo_observation_v1
+  forbidden_next_actions:
+  - continue_custom_faa_prospective_validation_recorder
+  - historical_paper_demo_backfill
+  - change_strategy_rule
+  - create_new_strategy_id
+  - add_broker_integration
+  - place_orders
+  - promote_to_real_money
+  risk_framework_status: paper_demo_eligible_standalone_only
+  promotion_blockers: forward_observation_only;no_real_money_authorization
+  notes: Historical robustness is complete. Paper/demo observation gathers future evidence and does not automatically
+    authorize real-money use.
+  frozen: true
+  configuration_fingerprint: sha256:807be2451bc740f9080bb0fb2180bf37db70dfa1c997a513373e784d013b90b5
+  initialization_status: initialized_active_recording
+  latest_operational_update_utc: '2026-08-04T00:11:36.123524+00:00'
+- id: barbara_decelerated_psar_spy_bil_v1
+  strategy_id: barbara_decelerated_psar_spy_bil_v1
+  display_name: Decelerated PSAR SPY/BIL Timing
+  entity_type: strategy_lifecycle_record
+  stage: paper-demo-eligibility
+  outcome: paper_demo_eligible
+  eligibility: paper_demo_eligible
+  eligible_route: 20pct_diversifier_only
+  route: 20pct_diversifier_only
+  family_id: decelerated_parabolic_trend_state
+  strategy_family: decelerated_parabolic_trend_state
+  strategy_architecture: long_only_adaptive_parabolic_stop_and_reverse_state
+  source_or_research_lineage: barbara_2021_decelerated_psar_appendix
+  instrument_universe: SPY|BIL
+  exact_source_replication_claimed: false
+  eligibility_basis: route_specific_exploration_passed_and_final_robustness_positive
+  paper_demo_recommendation: standard_virtual_observation
+  paper_demo_eligible: true
+  paper_demo_active: true
+  paper_forward_active: true
+  paper_forward_allowed_by_risk_framework: true
+  status: active_paper_demo_observation
+  initialization_status: initialized_active_recording
+  rules_frozen: true
+  parameters:
+    AF_min: 0.02
+    AF_max: 0.2
+    AF_forward_step: 0.02
+    AF_backward_step: 0.05
+    change_period_sessions: 3
+    change_threshold: 0.02
+    strict_acceleration_comparison: change3 > 0.02
+    equality_branch: deceleration
+    signal: completed_session
+    execution: following_regular_session_close
+    reference_id: frozen_current_active_vm_dsr_usci_combo
+    reference_weight: 0.8
+    candidate_sleeve_weight: 0.2
+    outer_rebalance: monthly
+    primary_cost_bps_per_one_way_turnover: 5.0
+  trial_lineage:
+  - fast_pv_v1__decelerated_psar__canonical
+  - decelerated_psar_diversifier_incremental_value_followup_v1__child
+  - decelerated_psar_diversifier_final_robustness_v1__child
+  historical_standalone_outcome: closed_exploration
+  historical_standalone_failure_reason: benchmark_like_behavior
+  historical_diversifier_outcome: robustness_positive
+  historical_robustness_interpretation: ready_for_prospective_validation_design
+  independent_validation_completed: false
+  direction_correction: separate_prospective_validation_not_a_mandatory_project_stage
+  prior_activation_outcome: prospective_activation_repair_failed
+  replacement_observation_id: paper_demo_decelerated_psar_20pct_diversifier_v1
+  historical_claim_boundary:
+    reference_sharpe_approx: 0.838
+    candidate_portfolio_sharpe_approx: 0.9
+    reference_maximum_drawdown_approx: -0.2064
+    candidate_portfolio_maximum_drawdown_approx: -0.178
+    exact_exposure_matched_control_higher_CAGR: true
+    bootstrap_probability_higher_sharpe_vs_exact_exposure_approx: 0.398
+    claim: diversification_and_downside_improvement_not_standalone_alpha
+    future_performance_guaranteed: false
+  latest_evidence_path: evidence/paper_demo_observation/record_psar_standard_paper_demo_observation_v1/20260804T001133595281Z
+  latest_lifecycle_update_utc: '2026-08-03T05:51:34.940329+00:00'
+  real_money_authorized: false
+  real_money_recommendation: false
+  broker_integration: false
+  paper_orders: false
+  live_orders: false
+  automatic_real_money_promotion: false
+  next_action: record_psar_standard_paper_demo_observation_v1
+  allowed_next_action: record_psar_standard_paper_demo_observation_v1
+  forbidden_next_actions:
+  - restart_psar_prospective_validation
+  - retry_custom_psar_activation
+  - historical_paper_demo_backfill
+  - change_psar_parameters
+  - change_20pct_sleeve
+  - add_broker_integration
+  - place_orders
+  - promote_to_real_money
+  frozen: true
+  configuration_fingerprint: sha256:9f069592c83059577ddfde193808a6f7a5c4d145ceef431675019fd409a01125
+  latest_operational_update_utc: '2026-08-04T00:11:40.838269+00:00'

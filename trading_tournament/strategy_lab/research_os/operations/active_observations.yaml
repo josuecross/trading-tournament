@@ -22,7 +22,6 @@ active_observations:
   state: active_accepted_frozen_observation
   paper_forward_active: true
   protected: true
-
 - observation_id: paper_forward_angl_20pct_diversifier_v1
   strategy_id: ice_vaneck_us_fallen_angel_angl_v1
   entity_type: paper_demo_observation
@@ -75,6 +74,151 @@ active_observations:
   - separately_approved_observation_methodology_change
   elapsed_time_alone_reopen_condition: false
   june_18_record_classification: historical_reconciliation_only
+- observation_id: paper_forward_ivts_unfiltered_20pct_diversifier_v1
+  strategy_id: donninger_vix_vix3m_unfiltered_three_state_spy_ief_adaptation_v1
+  entity_type: paper_demo_observation
+  stage: deferred
+  outcome: paper_demo_eligible_observation_deferred
+  state: deferred_activation_boundary_not_ready
+  paper_forward_active: false
+  protected: true
+  parent_strategy_id: donninger_vix_vix3m_unfiltered_three_state_spy_ief_adaptation_v1
+  parent_trial_id: validate_ivts_unfiltered_diversifier_project_untouched_preperiod_v1__child
+  exploration_parent_trial_id: ivts_unfiltered_diversifier_incremental_value_followup_v1__child
+  observation_route: diversifier_only
+  portfolio_id: 80pct_frozen_reference_20pct_unfiltered_ivts
+  reference_portfolio_id: frozen_current_active_vm_dsr_usci_combo
+  candidate_sleeve_id: donninger_vix_vix3m_unfiltered_three_state_spy_ief_adaptation_v1
+  target_weights:
+    frozen_reference: 0.8
+    unfiltered_ivts_candidate: 0.2
+  inner_instruments:
+  - SPY
+  - IEF
+  inner_rule:
+    ratio: VIX_close/VIX3M_close
+    thresholds:
+    - 0.96
+    - 1.02
+    target_states:
+      ratio_lt_0_96:
+        SPY: 1.0
+        IEF: 0.0
+      ratio_0_96_to_1_02_inclusive:
+        SPY: 0.5
+        IEF: 0.5
+      ratio_gt_1_02:
+        SPY: 0.0
+        IEF: 1.0
+    missing_signal: retain_previous_target
+    no_previous_target:
+      SPY: 0.5
+      IEF: 0.5
+    execution: completed_official_close_following_regular_session_close
+    instruments:
+    - SPY
+    - IEF
+    outer_sleeve_weight: 0.2
+    reference_weight: 0.8
+    frozen_reference: frozen_current_active_vm_dsr_usci_combo
+    primary_cost_bps_per_one_way_turnover: 5.0
+    data_provenance: official_cboe_daily_history
+    vintage_status: official_current_history_non_vintage
+  outer_rebalance_frequency: monthly
+  observation_mode: forward_shadow_simulation
+  broker_submission: false
+  paper_orders: false
+  live_orders: false
+  real_money_authorized: false
+  historical_backfill: prohibited
+  historical_forward_records_created: 0
+  forward_records_created: 0
+  activation_timestamp: ''
+  first_forward_observation_date: ''
+  proposed_first_execution_session: '2026-07-27'
+  initialization_status: not_initialized_deferred
+  initialization_labeled_separately: true
+  latest_captured_signal_date: '2026-07-24'
+  latest_snapshot_path: evidence/paper_demo/review_and_onboard_ivts_unfiltered_paper_demo_observation_v1/latest/forward_snapshots/2026-07-24/onboarding_capture/snapshot_record.json
+  latest_snapshot_hash: sha256:a0c5bbb38953c836aa9ad80dd6679678ce859bfe4c51f1c35dad3a29d6369376
+  snapshot_role: onboarding_operational_probe_not_forward_observation
+  current_status: deferred
+  failure_reason: activation_boundary_not_ready
+  next_action: direction_owner_review_ivts_observation_deferment_v1
+  cost_assumption: 5_bps_per_one_way_turnover
+  diagnostic_cost_ledgers_bps:
+  - 0.0
+  - 10.0
+  standalone_eligible: false
+  broker_eligible: false
+  historical_vintage_safety_established: false
+  forward_immutable_snapshot_requirement: true
+  principal_caveat: historical_signal_data_current_history_non_vintage
+  comparators:
+  - 100pct_frozen_reference
+  - 80pct_reference_20pct_sign_only_ivts_control
+  - 80pct_reference_20pct_unfiltered_exposure_matched_control
+  - 80pct_reference_20pct_IEF
+- observation_id: paper_demo_faa_4m_top3_v1
+  strategy_id: keller_vanputten_faa_4m_top3_v1
+  entity_type: paper_demo_observation
+  stage: paper-demo-onboarding
+  outcome: faa_paper_demo_observation_onboarded
+  state: active_accepted_frozen_observation
+  paper_forward_active: true
+  paper_demo_active: true
+  protected: true
+  route: standalone_only
+  mode: virtual_observation
+  status: active_paper_demo_observation
+  initialization_status: initialized_active_recording
+  activation_timestamp: '2026-08-03T03:26:36.410134+00:00'
+  first_signal_date: '2026-07-31'
+  scheduled_first_execution_date: '2026-08-03'
+  first_eligible_performance_date: '2026-08-04'
+  historical_backfill: false
+  broker_orders: false
+  paper_broker_orders: false
+  real_money_authorization: false
+  next_action: record_faa_standard_paper_demo_observation_v1
+  current_checkpoint_status: active_recording_no_performance_rows
+  initialization_execution_date: '2026-08-03'
+  current_virtual_equity: 2998.5
+  performance_rows: 0
+  pending_reason: ''
+  latest_operational_update_utc: '2026-08-04T00:11:36.123524+00:00'
+- observation_id: paper_demo_decelerated_psar_20pct_diversifier_v1
+  strategy_id: barbara_decelerated_psar_spy_bil_v1
+  entity_type: paper_demo_observation
+  stage: paper-demo-onboarding
+  outcome: psar_paper_demo_observation_onboarded
+  state: active_accepted_frozen_observation
+  paper_forward_active: true
+  paper_demo_active: true
+  protected: true
+  route: 20pct_diversifier_only
+  mode: virtual_observation
+  status: active_paper_demo_observation
+  initialization_status: initialized_active_recording
+  pending_reason: ''
+  activation_timestamp: '2026-08-03T05:51:34.940329+00:00'
+  reference_id: frozen_current_active_vm_dsr_usci_combo
+  reference_observation_id: paper_forward_combo_vm_dsr_usci_equal_weight_monthly_v1
+  reference_weight: 0.8
+  psar_sleeve_weight: 0.2
+  historical_backfill: false
+  performance_rows: 0
+  broker_orders: false
+  paper_broker_orders: false
+  real_money_authorization: false
+  next_action: record_psar_standard_paper_demo_observation_v1
+  target_freeze_timestamp: '2026-08-03T18:00:34.150763+00:00'
+  scheduled_first_execution_date: '2026-08-03'
+  first_eligible_performance_date: '2026-08-04'
+  current_checkpoint_status: active_recording_no_performance_rows
+  initialization_execution_date: '2026-08-03'
+  current_virtual_equity: 2998.5
+  latest_operational_update_utc: '2026-08-04T00:11:40.838269+00:00'
 benchmark_controls:
 - strategy_id: static_all_weather_benchmark_v1
   state: benchmark_control_only
@@ -165,3 +309,46 @@ latest_forward_operational_reinitialization_vm_dsr_combo_v1:
   paper_orders: false
   live_orders: false
   real_money_recommendation: false
+latest_faa_stage_correction_and_paper_demo_onboarding:
+  created_utc: '2026-08-03T03:26:36.410134+00:00'
+  evidence_path: evidence/paper_demo_onboarding/correct_faa_stage_and_onboard_paper_demo_observation_v1/latest
+  strategy_id: keller_vanputten_faa_4m_top3_v1
+  observation_id: paper_demo_faa_4m_top3_v1
+  outcome: faa_paper_demo_observation_onboarded
+  paper_demo_eligible: true
+  paper_forward_active: true
+  custom_prospective_validation_superseded: true
+  broker_integration: false
+  paper_orders: false
+  live_orders: false
+  real_money_authorization: false
+  next_action: record_faa_standard_paper_demo_observation_v1
+latest_psar_stage_correction_and_paper_demo_onboarding:
+  created_utc: '2026-08-03T05:51:34.940329+00:00'
+  evidence_path: evidence/paper_demo_onboarding/correct_psar_stage_and_onboard_paper_demo_observation_v1/latest
+  strategy_id: barbara_decelerated_psar_spy_bil_v1
+  observation_id: paper_demo_decelerated_psar_20pct_diversifier_v1
+  outcome: psar_paper_demo_observation_onboarded
+  paper_demo_eligible: true
+  paper_forward_active: true
+  initialization_status: pending_first_valid_signal_or_execution
+  custom_prospective_validation_superseded: true
+  broker_integration: false
+  paper_orders: false
+  live_orders: false
+  real_money_authorization: false
+  next_action: record_psar_standard_paper_demo_observation_v1
+latest_psar_standard_paper_demo_recording:
+  created_utc: '2026-08-03T18:00:34.150763+00:00'
+  evidence_path: evidence/paper_demo_observation/record_psar_standard_paper_demo_observation_v1/20260803T180001656265Z
+  strategy_id: barbara_decelerated_psar_spy_bil_v1
+  observation_id: paper_demo_decelerated_psar_20pct_diversifier_v1
+  outcome: psar_standard_target_frozen_pending_execution
+  initialization_status: scheduled_for_first_prospective_execution
+  scheduled_first_execution_date: '2026-08-03'
+  first_eligible_performance_date: '2026-08-04'
+  broker_integration: false
+  paper_orders: false
+  live_orders: false
+  real_money_authorization: false
+  next_action: record_psar_standard_paper_demo_observation_v1
