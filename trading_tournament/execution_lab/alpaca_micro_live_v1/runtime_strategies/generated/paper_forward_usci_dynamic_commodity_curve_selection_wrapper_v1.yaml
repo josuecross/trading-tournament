@@ -1,0 +1,32 @@
+strategy_id: paper_forward_usci_dynamic_commodity_curve_selection_wrapper_v1
+handoff_package_id: paper_forward_usci_dynamic_commodity_curve_selection_wrapper_v1_standard_handoff_v1
+source: standard_v1_handoff_import
+runtime_version: alpaca_runtime_v1
+enabled: false
+runtime_ready: false
+paper_trading_allowed: false
+live_trading_allowed: false
+import_status: unsupported
+calculator_binding: calculator_binding_missing
+provider_requirements:
+- commodity
+- usci
+- curve
+required_instruments:
+- USCI
+- DBC
+- commodity_futures_reconstruction
+required_data_fields:
+- close
+- adjusted_close
+- total_return
+- curve
+schedule: effective=initial_valid_observation_session_close;formation=observation_initialization_only
+target_output: target_weights
+source_hashes:
+  manifest: sha256:4246c7720b5356deba84af19d6c85f3cd1b90116801125300065051191884e57
+  contract: sha256:c946028fb1d6d3806caf5228bc110430a6ec786de4250fb47022867df61a70b9
+  fixture: sha256:0659313a0a35c30d58be8d2b428b319cc0f04f2c7297aa7a2458a8517a2d6515
+conformance:
+  status: calculator_missing
+blocked_reason: calculator_binding_missing;provider_adapter_required:commodity_curve_usci

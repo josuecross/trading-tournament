@@ -1,0 +1,21 @@
+{
+  "CPI_conformance_status": "pass",
+  "acceptance_status": "validated_not_active",
+  "activation_performed": false,
+  "blocking_reasons": [],
+  "calculator_conformance_status": "pass",
+  "calendar_conformance_status": "pass",
+  "conformance_bundle_hash": "sha256:153796a1552b46b2aa48e8d12c5fa2f6d3b7f5a797e002168136c3d3293e9fd8",
+  "current_target_calculated": false,
+  "fixture_validation_status": "pass",
+  "handoff_id": "spdj_dynamic_inflation_forward_observation_handoff_v1",
+  "idempotency_status": "pass",
+  "next_action": "initialize_spdj_dynamic_inflation_paper_demo_observation_v1",
+  "operational_provider_status": "operational_history_ready",
+  "package_hash": "sha256:f1844b722c11db1fd21b91192a56d2b1953c6719994f9de113c16e72882998b9",
+  "prior_acceptance_status_preserved_in_prior_evidence": "blocked",
+  "state_persistence_status": "pass",
+  "supersedes_for_validation_only": "pilot_import_validate_spdj_under_forward_observation_standard_v1",
+  "validation_attempt_id": "resolve_spdj_standard_import_conformance_and_provider_boundary_v1",
+  "validation_timestamp": "2026-08-10T22:08:20.652042+00:00"
+}

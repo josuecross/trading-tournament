@@ -1,0 +1,15 @@
+{
+  "dataset_id": "phase2_public_cpi_point_in_time_v2",
+  "difference_reason": "source_contract_resolution_only",
+  "historical_payloads_changed": false,
+  "missing_release_source": "data/public_signals/phase2_public_cpi_point_in_time_v1/release_reconciliation.csv",
+  "network_acquisition_performed": false,
+  "normalized_from": "data/public_signals/phase2_public_cpi_point_in_time_v1/cpi_point_in_time_signal.csv",
+  "parent_dataset_hash": "sha256:cac4891195e4c3054de4b680b7ddab7123dafefe25926040b4fbd32a3ee85d7e",
+  "parent_dataset_id": "phase2_public_cpi_point_in_time_v1",
+  "parent_dataset_tree_hash": "sha256:60dcfea6c6d60db8381fb391e42981c60ead0dfd9ed10fe72b679dc4adf0f8fb",
+  "series_id": "CPIAUCNS",
+  "source_resolution_status": "direction_owner_source_supported_portability_interpretation",
+  "strategy_methodology": "https://www.spglobal.com/spdji/en/documents/methodologies/methodology-sp-multi-asset-dynamic-inflation-strategy-index.pdf",
+  "supporting_research": "https://www.spglobal.com/spdji/en/documents/research/research-a-dynamic-multi-asset-approach-to-inflation-hedging.pdf"
+}

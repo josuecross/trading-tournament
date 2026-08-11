@@ -1,0 +1,21 @@
+{
+  "allocation_policy": null,
+  "calendar_binding": "XNYS",
+  "cash_buffer": null,
+  "deployment_profile_id": "spdj_standard_handoff_validation_profile_v1",
+  "deployment_status": "validated_not_active",
+  "handoff_id": "spdj_dynamic_inflation_forward_observation_handoff_v1",
+  "live_submission_enabled": false,
+  "market_data_capability_binding": "alpaca_historical_bars_sip_adjustment_all_validation_only",
+  "max_order_notional": null,
+  "notional_limit": null,
+  "observation_mode": "paper_demo",
+  "paper_submission_enabled": false,
+  "rebalance_tolerance": null,
+  "receiver_parameters": {},
+  "receiver_strategy_id": "spdj_multi_asset_dynamic_inflation_etf_portability_v1",
+  "risk_profile_id": null,
+  "shared_symbol_policy": null,
+  "sleeve_id": null,
+  "strategy_instance_id": "spdj_multi_asset_dynamic_inflation_etf_portability_v1__inactive_validation_instance"
+}

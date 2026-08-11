@@ -1,0 +1,24 @@
+{
+  "backtest_run": false,
+  "core_file_hashes": {
+    "data/public_signals/phase2_public_cpi_point_in_time_v2/cpi_point_in_time_signal.csv": "sha256:598e81c42df2f425091cfa156dd2c927a46001348b68b3ebb91b019b8284633d",
+    "data/public_signals/phase2_public_cpi_point_in_time_v2/data_dictionary.json": "sha256:35c296172aea884149e920953999844e629110276b618bb66494b6f75858e1b8",
+    "data/public_signals/phase2_public_cpi_point_in_time_v2/missing_release_exception.csv": "sha256:877ad50c44e0393cd11362a5bcac00f6e54a6e532a4863a5151346a8d84cc561",
+    "data/public_signals/phase2_public_cpi_point_in_time_v2/source_manifest.json": "sha256:fa2715a3c319338065c0a7d5a00adb7163597b4bbf179091dae1d373502cbb5b",
+    "data/public_signals/phase2_public_cpi_point_in_time_v2/warmup_contract.json": "sha256:5135b1743fa9cdb90018f7d0fb3999d4d4a43508bb123193d553edae266d17a2"
+  },
+  "dataset_id": "phase2_public_cpi_point_in_time_v2",
+  "deterministic_from_preserved_V1_inputs": true,
+  "difference_reason": "source_contract_resolution_only",
+  "forward_observation_accessed_or_changed": false,
+  "frozen_dataset_hash": "sha256:e221af86dfd616f4fa65bec016910deaffe47f1d6e690495a4033cd0e3eefcc8",
+  "historical_source_payloads_changed": false,
+  "immutable": true,
+  "parent_dataset_hash": "sha256:cac4891195e4c3054de4b680b7ddab7123dafefe25926040b4fbd32a3ee85d7e",
+  "parent_dataset_id": "phase2_public_cpi_point_in_time_v1",
+  "performance_metrics_calculated": false,
+  "series_id": "CPIAUCNS",
+  "strategy_implemented": false,
+  "task_id": "resolve_refreeze_spdj_dynamic_inflation_signal_contract_v2",
+  "trial_created": false
+}

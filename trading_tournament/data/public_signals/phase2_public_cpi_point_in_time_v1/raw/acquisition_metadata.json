@@ -1,0 +1,70 @@
+{
+  "alfred_access_attempt": {
+    "api_key_present": false,
+    "api_key_source": "missing",
+    "api_key_value_persisted": false,
+    "error": "ReadTimeout: HTTPSConnectionPool(host='alfred.stlouisfed.org', port=443): Read timed out. (read timeout=12)",
+    "http_status": 0,
+    "official_endpoint": "https://alfred.stlouisfed.org/series/downloaddata",
+    "point_in_time_safety_dependency": "BLS_archives_are_primary_and_sufficient_when_complete",
+    "response_hash": "",
+    "retrieval_timestamp": "2026-08-10T03:22:56+00:00",
+    "series_id": "CPIAUCNS",
+    "status": "official_endpoint_blocked"
+  },
+  "alpaca_or_broker_access": false,
+  "archive_index_content_hash": "sha256:7831a73248da698b5ec685642b7c0f3319744a3c72c7fe109c9fd70e07aa1cee",
+  "archive_index_content_length": 130727,
+  "archive_index_http_status": 200,
+  "archive_index_transport": "official_browser_navigation_DOM_snapshot",
+  "archive_index_url": "https://www.bls.gov/bls/news-release/cpi.htm",
+  "bls_public_api_fallbacks": [
+    {
+      "content_hash": "sha256:3b1c8491c9d6e4c7a523f8240d847140f3a151c7f3b1788981c9f36ed0581c39",
+      "http_status": 200,
+      "provider": "U.S. Bureau of Labor Statistics Public Data API",
+      "raw_storage_path": "data/public_signals/phase2_public_cpi_point_in_time_v1/raw/bls_public_api_2003_2012.json",
+      "requested_years": [
+        2003,
+        2012
+      ],
+      "retrieval_timestamp": "2026-08-10T03:22:56+00:00",
+      "series_id": "CUUR0000SA0"
+    },
+    {
+      "content_hash": "sha256:c15d1a2c692ffdb3fa401092a17eb069754374019f07c180a7e82c0c59d1a8d0",
+      "http_status": 200,
+      "provider": "U.S. Bureau of Labor Statistics Public Data API",
+      "raw_storage_path": "data/public_signals/phase2_public_cpi_point_in_time_v1/raw/bls_public_api_2013_2016.json",
+      "requested_years": [
+        2013,
+        2016
+      ],
+      "retrieval_timestamp": "2026-08-10T03:22:56+00:00",
+      "series_id": "CUUR0000SA0"
+    }
+  ],
+  "canonical_reference_month_start": "2005-07",
+  "latest_archived_reference_month": "2026-06",
+  "network_scope": [
+    "official_BLS_CPI",
+    "official_ALFRED_CPIAUCNS_access_check",
+    "official_SP_methodology"
+  ],
+  "official_missing_reference_months": [
+    {
+      "archive_label": "October 2025 Consumer Price Index \u2013 Not published because of 2025 lapse in federal government appropriations",
+      "reference_month": "2025-10",
+      "status": "officially_not_published"
+    }
+  ],
+  "raw_reference_month_start": "2004-07",
+  "retrieval_timestamp": "2026-08-10T03:22:56+00:00",
+  "selected_release_count": 263,
+  "sp_methodology_access": {
+    "network_retrieval_in_this_run": false,
+    "status": "authoritative_methodology_previously_preserved_and_reviewed",
+    "url": "https://www.spglobal.com/spdji/en/documents/methodologies/methodology-sp-multi-asset-dynamic-inflation-strategy-index.pdf"
+  },
+  "task_id": "acquire_validate_freeze_phase2_public_signal_inputs_v1"
+}

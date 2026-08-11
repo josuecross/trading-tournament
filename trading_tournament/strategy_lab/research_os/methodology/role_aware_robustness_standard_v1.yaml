@@ -1,0 +1,105 @@
+standard_id: "role_aware_robustness_standard_v1"
+adopted_by_task: "adopt_role_aware_robustness_standard_and_reassess_v1"
+mode: "methodology-standardization-and-bounded-reassessment"
+stage: "correction"
+status: "authoritative_project_wide_standard"
+primary_role_taxonomy:
+  - "return_seeking_standalone_strategy"
+  - "defensive_equity_timing_strategy"
+  - "dynamic_multi_asset_allocation_strategy"
+  - "20pct_diversifier_sleeve"
+  - "crisis_sensitive_or_convex_defensive_mechanism"
+  - "event_based_strategy"
+  - "cross_sectional_allocation_strategy"
+  - "trade_management_overlay"
+pre_robustness_role_policy:
+  exactly_one_primary_role_required: true
+  secondary_descriptors_allowed: true
+  secondary_descriptors_change_hard_gate_contract: false
+  post_evidence_role_change_requires_direction_owner_authorized_trial: true
+universal_hard_gates:
+  - "parent_reproduction_passes"
+  - "trial_source_and_adaptation_lineage_reconcile"
+  - "accounting_timing_weight_exposure_and_cost_invariants_pass"
+  - "data_and_comparability_integrity_pass"
+  - "positive_after_cost_return_when_route_requires"
+  - "no_decisive_control_dominates_full_period_candidate_or_approved_route"
+  - "full_period_materiality_vs_each_decisive_control_sharpe_ge_0_02_or_drawdown_ge_0_01"
+  - "static_average_weight_and_exposure_matched_controls_remain_decisive"
+  - "archived_10bps_gate_survives"
+  - "archived_15_or_20bps_gate_remains_binding_when_preregistered"
+  - "no_hidden_tuning_parameter_universe_execution_route_or_control_change"
+  - "no_unresolved_methodology_data_source_or_lineage_failure"
+numeric_threshold_policy:
+  chronological_stability_quarters: "3_of_4_when_role_requires_continuous_period_evidence"
+  rolling_stability_fraction: "greater_than_0_50_for_both_36_and_60_month_windows"
+  decisive_control_rolling_domination_cap: "no_more_than_0_50_for_either_window_set"
+  named_control_bootstrap_threshold: 0.7
+  other_decisive_control_bootstrap_threshold: 0.6
+  diversifier_reference_bootstrap_threshold: 0.75
+  leave_one_event_trade_episode_or_drawdown_survival_threshold: 0.75
+  single_role_valid_concentration_unit_cap: 0.6
+  rationale:
+    rolling: "majority_of_independent_windows"
+    bootstrap: "named_mechanism_control_distinguished_from_secondary_controls"
+    leave_one_out: "survival_in_three_quarters_of_counterfactual_cases"
+    concentration_cap: "allows_lumpy_mechanisms_while_prohibiting_one_unit_explaining_nearly_all_value"
+generic_calendar_neutralization_policy:
+  tests_no_longer_universal_hard_gates:
+    - "strongest_positive_month_neutralization"
+    - "three_strongest_positive_months_neutralization"
+    - "strongest_calendar_year_neutralization"
+  diagnostic_only_roles:
+    - "defensive_equity_timing_strategy"
+    - "20pct_diversifier_sleeve"
+    - "crisis_sensitive_or_convex_defensive_mechanism"
+    - "event_based_strategy"
+    - "trade_management_overlay"
+  dynamic_multi_asset_strongest_year_diagnostic_when:
+    - "no_static_average_weight_domination"
+    - "rolling_control_survival"
+    - "role_valid_asset_and_year_contribution_caps"
+    - "bootstrap_thresholds"
+  may_remain_hard_when_preregistered_roles:
+    - "return_seeking_standalone_strategy"
+    - "cross_sectional_allocation_strategy"
+  diagnostic_failure_alone_can_determine_outcome: false
+role_specific_hard_gate_contracts:
+  dynamic_multi_asset_allocation_strategy:
+    - "static_average_weights_do_not_dominate_full_period"
+    - "candidate_improves_every_decisive_control_in_at_least_3_of_4_quarters"
+    - "candidate_improves_every_decisive_control_in_more_than_half_rolling_36_month_windows"
+    - "candidate_improves_every_decisive_control_in_more_than_half_rolling_60_month_windows"
+    - "no_decisive_control_dominates_in_more_than_half_of_either_rolling_set"
+    - "named_control_bootstrap_at_least_0_70"
+    - "other_control_bootstrap_at_least_0_60"
+    - "no_single_asset_over_0_60_positive_incremental_value"
+    - "no_single_calendar_year_over_0_60_positive_incremental_value"
+    - "ordinary_inverse_volatility_or_static_allocation_does_not_reproduce_result"
+  defensive_equity_timing_strategy:
+    - "at_least_10_completed_defensive_episodes_overall"
+    - "at_least_3_completed_defensive_episodes_in_each_chronological_half"
+    - "candidate_improves_named_self_trend_or_timing_control_in_at_least_3_of_4_quarters"
+    - "candidate_improves_every_decisive_control_in_more_than_half_rolling_36_and_60_month_windows"
+    - "no_decisive_control_dominates_in_more_than_half_of_either_rolling_set"
+    - "leave_one_defensive_episode_out_survival_at_least_0_75_vs_named_control"
+    - "no_single_defensive_episode_over_0_60_positive_incremental_value"
+    - "no_single_calendar_year_over_0_60_positive_incremental_value"
+    - "named_control_bootstrap_at_least_0_70"
+    - "other_control_bootstrap_at_least_0_60"
+    - "static_exposure_self_trend_and_same_signal_component_controls_do_not_reproduce_result"
+  20pct_diversifier_sleeve:
+    - "approved_80_20_route_remains_positive_when_required"
+    - "candidate_portfolio_improves_frozen_reference_in_at_least_3_of_4_quarters"
+    - "candidate_portfolio_improves_reference_in_more_than_half_rolling_36_and_60_month_windows"
+    - "no_critical_control_portfolio_dominates_in_more_than_half_of_either_rolling_set"
+    - "average_candidate_minus_reference_return_in_reference_negative_months_is_positive"
+    - "candidate_outperforms_reference_in_more_than_half_reference_negative_months"
+    - "leave_one_role_valid_episode_or_drawdown_survival_at_least_0_75"
+    - "no_single_episode_trade_or_drawdown_over_0_60_positive_incremental_value"
+    - "exposure_matching_does_not_dominate_full_period"
+    - "bootstrap_at_least_0_75_vs_reference_and_0_60_vs_each_decisive_control"
+historical_preservation_policy:
+  original_robustness_packets_are_not_overwritten: true
+  reassessment_child_trial_required_for_any_changed_interpretation: true
+  paper_demo_observation_created_by_standardization_task: false

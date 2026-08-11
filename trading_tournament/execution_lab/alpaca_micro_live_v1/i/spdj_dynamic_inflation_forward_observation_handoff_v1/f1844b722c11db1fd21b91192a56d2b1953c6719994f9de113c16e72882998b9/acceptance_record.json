@@ -1,0 +1,21 @@
+{
+  "acceptance_status": "validated_not_active",
+  "activation_performed": false,
+  "blocking_reasons": [],
+  "calculator_conformance_status": "pass",
+  "contract_validation_status": "pass",
+  "deployment_profile_status": "validated_inactive",
+  "fixture_validation_status": "pass",
+  "handoff_id": "spdj_dynamic_inflation_forward_observation_handoff_v1",
+  "import_mode": "import_inactive",
+  "importer_hash": "sha256:7d55a71c23a578fa70303caa8017bbdc959bf850f22876aa99ca5d05e397aaec",
+  "importer_version": "forward_observation_standard_importer_v1",
+  "integrity_status": "package_validated",
+  "normalized_standard_schema": "forward_observation_handoff_standard_v1:1",
+  "operational_provider_status": "operational_history_ready",
+  "package_hash": "sha256:f1844b722c11db1fd21b91192a56d2b1953c6719994f9de113c16e72882998b9",
+  "receiver_strategy_id": "spdj_multi_asset_dynamic_inflation_etf_portability_v1",
+  "research_strategy_id": "spdj_multi_asset_dynamic_inflation_etf_portability_v1",
+  "source_schema": "spdj_forward_observation_handoff_schema_v1:v1",
+  "timestamp": "2026-08-10T22:08:20.652042+00:00"
+}

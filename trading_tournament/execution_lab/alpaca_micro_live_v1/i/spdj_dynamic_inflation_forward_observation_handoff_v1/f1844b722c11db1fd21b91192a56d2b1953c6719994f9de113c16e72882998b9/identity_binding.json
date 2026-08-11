@@ -1,0 +1,8 @@
+{
+  "binding_provenance": "explicit_pilot_binding_preserving_research_strategy_id",
+  "binding_timestamp": "2026-08-10T20:59:03.219119+00:00",
+  "handoff_id": "spdj_dynamic_inflation_forward_observation_handoff_v1",
+  "receiver_strategy_id": "spdj_multi_asset_dynamic_inflation_etf_portability_v1",
+  "research_strategy_id": "spdj_multi_asset_dynamic_inflation_etf_portability_v1",
+  "strategy_instance_id": "spdj_multi_asset_dynamic_inflation_etf_portability_v1__inactive_validation_instance"
+}

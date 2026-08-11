@@ -1,0 +1,29 @@
+strategy_id: schwoerer_hyg_ema100_spy_bil_v1
+handoff_package_id: schwoerer_hyg_ema100_spy_bil_v1_standard_handoff_v1
+source: standard_v1_handoff_import
+runtime_version: alpaca_runtime_v1
+enabled: false
+runtime_ready: false
+paper_trading_allowed: false
+live_trading_allowed: false
+import_status: conformance_passed_disabled
+calculator_binding: calculator_binding_present_fixture_passed
+provider_requirements:
+- alpaca_equity_etf_daily_bars
+required_instruments:
+- HYG
+- forbidden
+- SPY
+- BIL
+required_data_fields:
+- close
+- adjusted_close
+schedule: execution=following_regular_session_close;signal=completed_daily_close
+target_output: target_weights
+source_hashes:
+  manifest: sha256:e3d92ca71e49f6ca27062a68cc0ff8338637d516f7fd045f077430d980d93130
+  contract: sha256:a83a2f8ed429b581527141e113cd4c405463fd0b0a561361c718226174a10cd0
+  fixture: sha256:6acc381cfe795e9043c211257b4b19b5ceb294aa6d4b908d2fd96232d3e63aa5
+conformance:
+  status: fixture_passed
+blocked_reason: disabled_pending_runtime_enablement

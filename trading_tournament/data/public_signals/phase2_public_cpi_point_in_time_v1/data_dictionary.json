@@ -1,0 +1,24 @@
+{
+  "dataset_id": "phase2_public_cpi_point_in_time_v1",
+  "fields": {
+    "bls_release_date": "Actual archived BLS CPI announcement date",
+    "bls_release_time_et": "Authoritative embargo release time when present",
+    "computed_yoy_from_same_vintage": "Unrounded YoY from levels available in the same BLS information state",
+    "cpi_all_items_nsa_level_as_published": "CPI-U All Items NSA level in the archived release",
+    "cpi_yoy_percent_as_published": "BLS-published rounded 12-month All Items rate",
+    "point_in_time_safe": "Whether archived release evidence establishes the information state",
+    "published_yoy_source": "Direct archived release row or explicitly labeled published-precision reconstruction from official final CPI-U NSA levels when the legacy release payload could not be rendered",
+    "reference_month": "CPI reference month, YYYY-MM",
+    "signal_available_timestamp": "Earliest documented public availability timestamp",
+    "signal_regime": "Mechanical low/medium/high label from the preferred published BLS rate",
+    "source_effective_after_close_date": "Next SPY/NYSE session after announcement; not an executed trade date",
+    "source_reconciliation_status": "Published versus computed YoY reconciliation classification"
+  },
+  "missing_data_contract": "No forward fill, interpolation, or synthetic release; official nonpublication remains an explicit gap.",
+  "regime_contract": {
+    "high": "YoY > 2.5",
+    "low": "YoY < 1.5",
+    "medium": "1.5 <= YoY <= 2.5"
+  },
+  "series_id": "CPIAUCNS"
+}

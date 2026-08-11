@@ -1,0 +1,30 @@
+{
+  "canonical_signal_rule": "cpi_yoy_unrounded_from_point_in_time_CPIAUCNS_levels",
+  "dataset_id": "phase2_public_cpi_point_in_time_v2",
+  "difference_reason": "source_contract_resolution_only",
+  "fields": {
+    "bls_published_rounded_yoy": "One-decimal BLS release value retained as a diagnostic",
+    "canonical_cpi_yoy_unrounded": "100 * (CPI_t / CPI_t_minus_12 - 1) without threshold rounding",
+    "canonical_regime": "Strategy-use regime derived only from canonical unrounded YoY",
+    "publication_status": "Official publication status for the reference month",
+    "rebalance_event": "Whether an actual CPI announcement creates a source-defined event",
+    "source_effective_after_close_date": "Next U.S. equity session after release; not a simulated trade"
+  },
+  "missing_release_contract": {
+    "classification": "source_consistent_exception_handling",
+    "rule": "no_CPI_announcement_no_rebalance_event",
+    "signal_forward_fill": false,
+    "signal_imputation": false,
+    "synthetic_regime": false
+  },
+  "parent_dataset_hash": "sha256:cac4891195e4c3054de4b680b7ddab7123dafefe25926040b4fbd32a3ee85d7e",
+  "parent_dataset_id": "phase2_public_cpi_point_in_time_v1",
+  "series_id": "CPIAUCNS",
+  "threshold_contract": {
+    "high": "unrounded YoY > 2.5",
+    "low": "unrounded YoY < 1.5",
+    "medium": "1.5 <= unrounded YoY <= 2.5",
+    "preprocessing_rounding": "none",
+    "tolerance_band": "none"
+  }
+}

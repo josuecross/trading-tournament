@@ -219,6 +219,89 @@ active_observations:
   initialization_execution_date: '2026-08-03'
   current_virtual_equity: 2998.5
   latest_operational_update_utc: '2026-08-04T00:11:40.838269+00:00'
+- observation_id: paper_demo_varadi_mca8_weekly_v1
+  strategy_id: varadi_minimum_correlation_8etf_60d_weekly_v1
+  entity_type: paper_demo_observation
+  stage: paper-demo-onboarding
+  outcome: role_aware_candidates_standard_paper_demo_onboarded
+  state: active_accepted_frozen_observation
+  paper_forward_active: true
+  paper_demo_active: true
+  protected: true
+  route: standalone_only
+  mode: virtual_observation
+  status: active_paper_demo_observation
+  initialization_status: pending_first_valid_signal_or_execution
+  activation_timestamp: '2026-08-07T02:58:16.354300+00:00'
+  historical_backfill: false
+  performance_rows: 0
+  broker_orders: false
+  paper_broker_orders: false
+  real_money_authorization: false
+  next_action: record_role_aware_candidates_standard_paper_demo_observations_v1
+  pending_reason: waiting_for_next_completed_weekly_signal_after_current_task_timestamp_no_late_execution
+  latest_completed_session: '2026-08-06'
+  latest_expired_signal_date: '2026-07-31'
+  latest_expired_execution_date: '2026-08-03'
+  next_valid_signal_date: '2026-08-07'
+  next_valid_execution_date: '2026-08-10'
+  expired_signal_execution_authorized: false
+- observation_id: paper_demo_schwoerer_hyg_ema100_spy_bil_v1
+  strategy_id: schwoerer_hyg_ema100_spy_bil_v1
+  entity_type: paper_demo_observation
+  stage: paper-demo-onboarding
+  outcome: role_aware_candidates_standard_paper_demo_onboarded
+  state: active_accepted_frozen_observation
+  paper_forward_active: true
+  paper_demo_active: true
+  protected: true
+  route: standalone_only
+  mode: virtual_observation
+  status: active_paper_demo_observation
+  initialization_status: scheduled_for_first_prospective_execution
+  activation_timestamp: '2026-08-07T02:58:16.354300+00:00'
+  historical_backfill: false
+  performance_rows: 0
+  broker_orders: false
+  paper_broker_orders: false
+  real_money_authorization: false
+  next_action: record_role_aware_candidates_standard_paper_demo_observations_v1
+  pending_reason: target_frozen_before_next_eligible_regular_session_close
+  target_freeze_timestamp: '2026-08-07T02:58:16.354300+00:00'
+  target_freeze_event_label: standard_observation_current_state_initialization_not_performance
+  scheduled_first_execution_date: '2026-08-07'
+  first_eligible_performance_date: '2026-08-10'
+- observation_id: paper_demo_factory_v1_trend_quality_20pct_diversifier_v1
+  strategy_id: factory_v1_spy_trend_quality_state_d1
+  entity_type: paper_demo_observation
+  stage: paper-demo-onboarding
+  outcome: role_aware_candidates_standard_paper_demo_onboarded
+  state: active_accepted_frozen_observation
+  paper_forward_active: true
+  paper_demo_active: true
+  protected: true
+  route: 20pct_diversifier_only
+  mode: virtual_observation
+  status: active_paper_demo_observation
+  initialization_status: pending_first_valid_signal_or_execution
+  activation_timestamp: '2026-08-07T02:58:16.354300+00:00'
+  historical_backfill: false
+  performance_rows: 0
+  broker_orders: false
+  paper_broker_orders: false
+  real_money_authorization: false
+  next_action: record_role_aware_candidates_standard_paper_demo_observations_v1
+  pending_reason: reference_current_state_unavailable_for_latest_completed_session_no_late_execution
+  latest_completed_session: '2026-08-06'
+  reference_status: pending_latest_reference_common_session
+  missing_reference_symbols:
+  - USCI
+  reference_diagnostic_date: '2026-08-05'
+  reference_id: frozen_current_active_vm_dsr_usci_combo
+  reference_observation_id: paper_forward_combo_vm_dsr_usci_equal_weight_monthly_v1
+  reference_weight: 0.8
+  sleeve_weight: 0.2
+  latest_d1_signal_date: '2026-08-06'
 benchmark_controls:
 - strategy_id: static_all_weather_benchmark_v1
   state: benchmark_control_only
@@ -352,3 +435,24 @@ latest_psar_standard_paper_demo_recording:
   live_orders: false
   real_money_authorization: false
   next_action: record_psar_standard_paper_demo_observation_v1
+latest_role_aware_reassessment_candidates_standard_paper_demo_onboarding:
+  created_utc: '2026-08-07T02:58:16.354300+00:00'
+  evidence_path: evidence/paper_demo_onboarding/onboard_role_aware_reassessment_candidates_standard_paper_demo_v1/latest
+  outcome: role_aware_candidates_standard_paper_demo_onboarded
+  strategy_ids:
+  - varadi_minimum_correlation_8etf_60d_weekly_v1
+  - schwoerer_hyg_ema100_spy_bil_v1
+  - factory_v1_spy_trend_quality_state_d1
+  observation_ids:
+  - paper_demo_varadi_mca8_weekly_v1
+  - paper_demo_schwoerer_hyg_ema100_spy_bil_v1
+  - paper_demo_factory_v1_trend_quality_20pct_diversifier_v1
+  paper_demo_eligible: true
+  paper_forward_active: true
+  standard_framework_used: true
+  custom_prospective_validation_created: false
+  broker_integration: false
+  paper_orders: false
+  live_orders: false
+  real_money_authorization: false
+  next_action: record_role_aware_candidates_standard_paper_demo_observations_v1

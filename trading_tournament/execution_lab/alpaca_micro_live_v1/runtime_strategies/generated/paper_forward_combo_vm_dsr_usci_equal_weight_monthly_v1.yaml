@@ -1,0 +1,32 @@
+strategy_id: paper_forward_combo_vm_dsr_usci_equal_weight_monthly_v1
+handoff_package_id: paper_forward_combo_vm_dsr_usci_equal_weight_monthly_v1_standard_handoff_v1
+source: standard_v1_handoff_import
+runtime_version: alpaca_runtime_v1
+enabled: false
+runtime_ready: false
+paper_trading_allowed: false
+live_trading_allowed: false
+import_status: unsupported
+calculator_binding: calculator_binding_missing
+provider_requirements:
+- commodity
+- usci
+- curve
+required_instruments:
+- paper_forward_vm_quality_lowvol_proxy_v1
+- paper_forward_dsr_sector_equal_weight_defensive_filter_v1
+- paper_forward_usci_dynamic_commodity_curve_selection_wrapper_v1
+- forbidden
+required_data_fields:
+- close
+- curve
+- returns
+schedule: rebalance=first_common_valid_component_session_of_each_calendar_month_at_close;target_return_boundary=after_rebalance_close
+target_output: target_weights
+source_hashes:
+  manifest: sha256:c22713869003102112a5c1f5714cad31707d9afd9dfd9d1a0ff0e11fe8b470ca
+  contract: sha256:308239fe4702cdf71ccdd5bc7a19572815d108a12c570682b746c69102a5d11e
+  fixture: sha256:4a008e4f2d1ece56217608894a4d2e82623726384057a9089116a28b767127d0
+conformance:
+  status: calculator_missing
+blocked_reason: calculator_binding_missing;provider_adapter_required:commodity_curve_usci

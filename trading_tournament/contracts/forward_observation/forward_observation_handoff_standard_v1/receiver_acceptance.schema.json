@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "forward_observation_handoff_standard_v1/receiver_acceptance.schema.json",
+  "title": "Receiver Handoff Acceptance Record V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["handoff_id", "package_hash", "source_schema", "normalized_standard_schema", "research_strategy_id", "import_mode", "integrity_status", "contract_validation_status", "fixture_validation_status", "deployment_profile_status", "acceptance_status", "blocking_reasons", "timestamp", "importer_version", "importer_hash", "activation_performed"],
+  "properties": {
+    "handoff_id": {"type": "string"},
+    "package_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "source_schema": {"type": "string"},
+    "normalized_standard_schema": {"const": "forward_observation_handoff_standard_v1:1"},
+    "research_strategy_id": {"type": "string"},
+    "receiver_strategy_id": {"type": ["string", "null"]},
+    "import_mode": {"enum": ["validate_only", "import_inactive"]},
+    "integrity_status": {"type": "string"},
+    "contract_validation_status": {"type": "string"},
+    "fixture_validation_status": {"type": "string"},
+    "deployment_profile_status": {"type": "string"},
+    "acceptance_status": {"enum": ["package_validated", "contract_validated", "fixtures_validated", "validated_not_active", "blocked"]},
+    "blocking_reasons": {"type": "array"},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "importer_version": {"type": "string"},
+    "importer_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "activation_performed": {"const": false}
+  }
+}

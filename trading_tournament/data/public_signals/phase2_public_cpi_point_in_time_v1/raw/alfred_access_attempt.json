@@ -1,0 +1,13 @@
+{
+  "api_key_present": false,
+  "api_key_source": "missing",
+  "api_key_value_persisted": false,
+  "error": "ReadTimeout: HTTPSConnectionPool(host='alfred.stlouisfed.org', port=443): Read timed out. (read timeout=12)",
+  "http_status": 0,
+  "official_endpoint": "https://alfred.stlouisfed.org/series/downloaddata",
+  "point_in_time_safety_dependency": "BLS_archives_are_primary_and_sufficient_when_complete",
+  "response_hash": "",
+  "retrieval_timestamp": "2026-08-10T03:22:56+00:00",
+  "series_id": "CPIAUCNS",
+  "status": "official_endpoint_blocked"
+}

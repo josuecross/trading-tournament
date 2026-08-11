@@ -1,0 +1,25 @@
+{
+  "CPI_dataset_hash": "sha256:e221af86dfd616f4fa65bec016910deaffe47f1d6e690495a4033cd0e3eefcc8",
+  "bundle_id": "spdj_standard_handoff_conformance_inputs_v1",
+  "conformance_bundle_hash": "sha256:153796a1552b46b2aa48e8d12c5fa2f6d3b7f5a797e002168136c3d3293e9fd8",
+  "created_at": "2026-08-10T22:08:20.652042+00:00",
+  "files": {
+    "cpi_regression_input.csv": "sha256:5e8eb6fa62c225192eeecb3d478fc073a541fd0342e65391dd424ab6865a21e4",
+    "fixture_input_ranges.csv": "sha256:ce4455e2203368a90613062d0c1bf87307f278030339336f38a494b397339eb5",
+    "monthly_return_input.csv": "sha256:9583fbb5e5dc29b5e642871326ebe37c2e30d32e08989411d943e9f3bbe94fc1",
+    "source_provenance.json": "sha256:cb7f3217264e50563feb22d57e3279742a78a6a55aac5d8091a874fdfe29e214"
+  },
+  "fixture_count": 15,
+  "fixture_manifest_hash": "sha256:e6fe3734288360d1826adf25198a9f6507ff1509b61c7011ec7580fc8fd740b0",
+  "hash_scope": "sorted relative path plus NUL plus bytes plus NUL; manifest conformance_bundle_hash normalized to sentinel",
+  "input_representation": "monthly_return_input",
+  "operational_market_data": false,
+  "parent_handoff_id": "spdj_dynamic_inflation_forward_observation_handoff_v1",
+  "parent_package_hash": "sha256:f1844b722c11db1fd21b91192a56d2b1953c6719994f9de113c16e72882998b9",
+  "schema_id": "forward_observation_conformance_input_bundle_v1",
+  "schema_version": 1,
+  "software_conformance_reference": true,
+  "source_price_bundle_hash": "sha256:ab05bef8ac2b12c6391bca65cb1312148db7d64bed11e9932379464f8bcc72c8",
+  "source_research_evidence_hash": "sha256:86f55d845af1b4aac643dd076c46873e13e976db04b13b09264bd69cacb96599",
+  "strategy_id": "spdj_multi_asset_dynamic_inflation_etf_portability_v1"
+}

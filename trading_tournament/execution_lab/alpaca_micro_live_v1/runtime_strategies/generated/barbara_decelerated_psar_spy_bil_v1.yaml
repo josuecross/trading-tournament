@@ -1,0 +1,29 @@
+strategy_id: barbara_decelerated_psar_spy_bil_v1
+handoff_package_id: barbara_decelerated_psar_spy_bil_v1_standard_handoff_v1
+source: standard_v1_handoff_import
+runtime_version: alpaca_runtime_v1
+enabled: false
+runtime_ready: false
+paper_trading_allowed: false
+live_trading_allowed: false
+import_status: conformance_passed_disabled
+calculator_binding: calculator_binding_present_fixture_passed
+provider_requirements:
+- frozen_reference
+required_instruments:
+- SPY
+- BIL
+- frozen_current_active_vm_dsr_usci_combo
+- forbidden
+required_data_fields:
+- close
+- adjusted_close
+schedule: execution=following_regular_session_close;signal=completed_regular_session
+target_output: target_weights
+source_hashes:
+  manifest: sha256:bff1e72ba6b3fe8a85410cdfb930d7170eed23dc91d632ba1667c0758dee65bf
+  contract: sha256:86237b579e99d9dfd0f65c5b45cfe0bc64975e0e027cd0cc482790153d848129
+  fixture: sha256:4039737237dfc309439f8174e56aa09d1dcd695b324ffca6a6c30e8cee915396
+conformance:
+  status: fixture_passed
+blocked_reason: disabled_pending_runtime_enablement

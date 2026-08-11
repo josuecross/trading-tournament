@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "forward_observation_conformance_input_bundle_v1/conformance_input_bundle.schema.json",
+  "title": "Forward Observation Conformance Input Bundle V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_id",
+    "schema_version",
+    "bundle_id",
+    "created_at",
+    "parent_handoff_id",
+    "parent_package_hash",
+    "strategy_id",
+    "source_price_bundle_hash",
+    "CPI_dataset_hash",
+    "fixture_manifest_hash",
+    "source_research_evidence_hash",
+    "input_representation",
+    "files",
+    "fixture_count",
+    "conformance_bundle_hash",
+    "hash_scope",
+    "software_conformance_reference",
+    "operational_market_data"
+  ],
+  "properties": {
+    "schema_id": {"const": "forward_observation_conformance_input_bundle_v1"},
+    "schema_version": {"const": 1},
+    "bundle_id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "parent_handoff_id": {"type": "string", "minLength": 1},
+    "parent_package_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "strategy_id": {"type": "string", "minLength": 1},
+    "source_price_bundle_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "CPI_dataset_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "fixture_manifest_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "source_research_evidence_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "input_representation": {"enum": ["monthly_return_input"]},
+    "files": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+    },
+    "fixture_count": {"type": "integer", "minimum": 1},
+    "conformance_bundle_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "hash_scope": {"type": "string", "minLength": 1},
+    "software_conformance_reference": {"const": true},
+    "operational_market_data": {"const": false}
+  }
+}

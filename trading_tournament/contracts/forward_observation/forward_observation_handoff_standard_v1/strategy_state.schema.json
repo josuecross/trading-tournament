@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "forward_observation_handoff_standard_v1/strategy_state.schema.json",
+  "title": "Receiver Strategy State V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["strategy_instance_id", "handoff_id", "receiver_strategy_id", "lifecycle_state", "last_processed_event_id", "last_processed_event_timestamp", "current_effective_target_version", "current_effective_target", "current_effective_cash_weight", "current_effective_timestamp", "pending_target_version", "pending_target", "pending_cash_weight", "pending_effective_timestamp", "handled_event_ids", "last_successful_calculation_at", "state_updated_at"],
+  "properties": {
+    "strategy_instance_id": {"type": "string"},
+    "handoff_id": {"type": "string"},
+    "receiver_strategy_id": {"type": "string"},
+    "lifecycle_state": {"type": "string"},
+    "last_processed_event_id": {"type": ["string", "null"]},
+    "last_processed_event_timestamp": {"type": ["string", "null"]},
+    "current_effective_target_version": {"type": ["string", "null"]},
+    "current_effective_target": {"type": "object", "additionalProperties": {"type": "number"}},
+    "current_effective_cash_weight": {"type": "number"},
+    "current_effective_timestamp": {"type": ["string", "null"]},
+    "pending_target_version": {"type": ["string", "null"]},
+    "pending_target": {"type": "object", "additionalProperties": {"type": "number"}},
+    "pending_cash_weight": {"type": "number"},
+    "pending_effective_timestamp": {"type": ["string", "null"]},
+    "handled_event_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "last_successful_calculation_at": {"type": ["string", "null"]},
+    "state_updated_at": {"type": ["string", "null"]}
+  }
+}

@@ -1,0 +1,29 @@
+strategy_id: ice_vaneck_us_fallen_angel_angl_v1
+handoff_package_id: ice_vaneck_us_fallen_angel_angl_v1_standard_handoff_v1
+source: standard_v1_handoff_import
+runtime_version: alpaca_runtime_v1
+enabled: false
+runtime_ready: false
+paper_trading_allowed: false
+live_trading_allowed: false
+import_status: conformance_passed_disabled
+calculator_binding: calculator_binding_present_fixture_passed
+provider_requirements:
+- frozen_reference
+required_instruments:
+- ANGL
+- frozen_current_active_vm_dsr_usci_combo
+- forbidden
+required_data_fields:
+- close
+- adjusted_close
+- total_return
+schedule: execution=following_regular_session_close;formation=completed_month_end
+target_output: target_weights
+source_hashes:
+  manifest: sha256:a057de625ad06d90fd997b6bae087ea4de200b1a32f21362b4081aebae6f454b
+  contract: sha256:6517fe760faf50fe67cc30be4c76b7c134084dcfa2c4b35cad87d460493e5608
+  fixture: sha256:8674bc6cfd880335394f24e78e04d234bf962fc91182601c4bb17b00a853e30f
+conformance:
+  status: fixture_passed
+blocked_reason: disabled_pending_runtime_enablement

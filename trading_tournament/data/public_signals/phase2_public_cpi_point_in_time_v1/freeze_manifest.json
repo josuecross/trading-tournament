@@ -1,0 +1,27 @@
+{
+  "backtest_run": false,
+  "core_file_hashes": {
+    "data/public_signals/phase2_public_cpi_point_in_time_v1/cpi_point_in_time_signal.csv": "sha256:2b60bee1cdeb00cab33a46b2a6479e5faf0ef8db05dfee119ed22a1fadb30c85",
+    "data/public_signals/phase2_public_cpi_point_in_time_v1/data_dictionary.json": "sha256:ecb0db423db2c03af2eee64d886f02a326957d60d962b9e7ac1a8d60854df0e7",
+    "data/public_signals/phase2_public_cpi_point_in_time_v1/release_reconciliation.csv": "sha256:ac592e86ab2fb544dace1943ef5f80d93a9c0d773a2d26dd64d7408ff8f164f5",
+    "data/public_signals/phase2_public_cpi_point_in_time_v1/source_manifest.json": "sha256:53f312c636757fbb4dd9318ccefd7d74ed0c3eae15c05a03082d68e7b4e2eac5",
+    "data/public_signals/phase2_public_cpi_point_in_time_v1/vintage_reconciliation.csv": "sha256:f02ddb9583588555625e268528865c05793e2b343babec138b0cb207657b5a66"
+  },
+  "dataset_id": "phase2_public_cpi_point_in_time_v1",
+  "deterministic_from_preserved_raw_inputs": true,
+  "frozen_dataset_hash": "sha256:cac4891195e4c3054de4b680b7ddab7123dafefe25926040b4fbd32a3ee85d7e",
+  "immutable": true,
+  "performance_metrics_calculated": false,
+  "raw_input_hashes": {
+    "data/public_signals/phase2_public_cpi_point_in_time_v1/raw/acquisition_metadata.json": "sha256:3802ec0748beb0563d512f48701a46a558ce1e6761d77a9354fc6dc6f626ec64",
+    "data/public_signals/phase2_public_cpi_point_in_time_v1/raw/alfred_access_attempt.json": "sha256:49e4921547b59fa13cba642ae4c577bccae21df9cc8aa8b905c34082e168b515",
+    "data/public_signals/phase2_public_cpi_point_in_time_v1/raw/bls_cpi_archive_index.html": "sha256:7831a73248da698b5ec685642b7c0f3319744a3c72c7fe109c9fd70e07aa1cee",
+    "data/public_signals/phase2_public_cpi_point_in_time_v1/raw/bls_public_api_2003_2012.json": "sha256:3b1c8491c9d6e4c7a523f8240d847140f3a151c7f3b1788981c9f36ed0581c39",
+    "data/public_signals/phase2_public_cpi_point_in_time_v1/raw/bls_public_api_2013_2016.json": "sha256:c15d1a2c692ffdb3fa401092a17eb069754374019f07c180a7e82c0c59d1a8d0",
+    "data/public_signals/phase2_public_cpi_point_in_time_v1/raw/bls_release_payloads.jsonl": "sha256:1771f53e9cf073a58cfc0510cbd07f34fe75f42ec6309f666356a2829c9ec5ad"
+  },
+  "series_id": "CPIAUCNS",
+  "strategy_implemented": false,
+  "task_id": "acquire_validate_freeze_phase2_public_signal_inputs_v1",
+  "trial_created": false
+}

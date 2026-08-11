@@ -1,0 +1,29 @@
+strategy_id: factory_v1_spy_trend_quality_state_d1
+handoff_package_id: factory_v1_spy_trend_quality_state_d1_standard_handoff_v1
+source: standard_v1_handoff_import
+runtime_version: alpaca_runtime_v1
+enabled: false
+runtime_ready: false
+paper_trading_allowed: false
+live_trading_allowed: false
+import_status: conformance_passed_disabled
+calculator_binding: calculator_binding_present_fixture_passed
+provider_requirements:
+- frozen_reference
+required_instruments:
+- SPY
+- BIL
+- frozen_current_active_vm_dsr_usci_combo
+- forbidden
+required_data_fields:
+- close
+- adjusted_close
+schedule: execution=following_regular_session_close;signal=completed_daily_close
+target_output: target_weights
+source_hashes:
+  manifest: sha256:56122828e9cabf8e9cd4134f4b9191d1fb31ca3786d95c3731d1ac6064c4f3df
+  contract: sha256:a788f162796e2ae311e1a91b77f0530cd5d1b2536fdf1d5ebaca71e087ebebcc
+  fixture: sha256:45b9997130ba1aa4776173021dbdcf5c8d74d8360699c095795823f1432795ae
+conformance:
+  status: fixture_passed
+blocked_reason: disabled_pending_runtime_enablement

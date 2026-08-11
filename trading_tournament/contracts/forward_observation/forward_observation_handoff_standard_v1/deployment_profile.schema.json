@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "forward_observation_handoff_standard_v1/deployment_profile.schema.json",
+  "title": "Receiver Deployment Profile V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["deployment_profile_id", "receiver_strategy_id", "strategy_instance_id", "handoff_id", "observation_mode", "paper_submission_enabled", "live_submission_enabled", "deployment_status"],
+  "properties": {
+    "deployment_profile_id": {"type": "string", "minLength": 1},
+    "receiver_strategy_id": {"type": "string", "minLength": 1},
+    "strategy_instance_id": {"type": "string", "minLength": 1},
+    "handoff_id": {"type": "string", "minLength": 1},
+    "observation_mode": {"enum": ["inactive", "paper_demo"]},
+    "sleeve_id": {"type": ["string", "null"]},
+    "allocation_policy": {"type": ["string", "null"]},
+    "shared_symbol_policy": {"type": ["object", "null"]},
+    "market_data_capability_binding": {"type": ["string", "null"]},
+    "calendar_binding": {"type": ["string", "null"]},
+    "notional_limit": {"type": ["number", "null"], "minimum": 0},
+    "max_order_notional": {"type": ["number", "null"], "minimum": 0},
+    "rebalance_tolerance": {"type": ["number", "null"], "minimum": 0},
+    "cash_buffer": {"type": ["number", "null"], "minimum": 0},
+    "paper_submission_enabled": {"type": "boolean"},
+    "live_submission_enabled": {"const": false},
+    "risk_profile_id": {"type": ["string", "null"]},
+    "deployment_status": {"enum": ["inactive", "validated_not_active", "paper_demo_initialized", "paper_demo_active", "paper_demo_paused", "paper_demo_disabled"]},
+    "receiver_parameters": {"type": "object"}
+  }
+}

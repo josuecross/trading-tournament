@@ -1,0 +1,50 @@
+source: standard_v1_handoff_import_dry_run_registry
+registry_scope: first_batch_disabled_runtime_dry_run_only
+all_runtime_ready_member: false
+paper_submit_allowed: false
+live_trading_allowed: false
+strategies:
+- handoff_package_id: ice_vaneck_us_fallen_angel_angl_v1_standard_handoff_v1
+  strategy_id: ice_vaneck_us_fallen_angel_angl_v1
+  generated_spec: runtime_strategies\generated\ice_vaneck_us_fallen_angel_angl_v1.yaml
+  calculator_id: angl_80_20_monthly_calculator_v1
+  conformance_status: fixture_passed
+  dry_run_enabled: true
+  conformance_passed: true
+  runtime_ready: false
+  paper_trading_allowed: false
+  live_trading_allowed: false
+  paper_submit_allowed: false
+- handoff_package_id: schwoerer_hyg_ema100_spy_bil_v1_standard_handoff_v1
+  strategy_id: schwoerer_hyg_ema100_spy_bil_v1
+  generated_spec: runtime_strategies\generated\schwoerer_hyg_ema100_spy_bil_v1.yaml
+  calculator_id: hyg_ema100_spy_bil_calculator_v1
+  conformance_status: fixture_passed
+  dry_run_enabled: true
+  conformance_passed: true
+  runtime_ready: false
+  paper_trading_allowed: false
+  live_trading_allowed: false
+  paper_submit_allowed: false
+- handoff_package_id: barbara_decelerated_psar_spy_bil_v1_standard_handoff_v1
+  strategy_id: barbara_decelerated_psar_spy_bil_v1
+  generated_spec: runtime_strategies\generated\barbara_decelerated_psar_spy_bil_v1.yaml
+  calculator_id: decelerated_psar_calculator_v1
+  conformance_status: fixture_passed
+  dry_run_enabled: true
+  conformance_passed: true
+  runtime_ready: false
+  paper_trading_allowed: false
+  live_trading_allowed: false
+  paper_submit_allowed: false
+- handoff_package_id: factory_v1_spy_trend_quality_state_d1_standard_handoff_v1
+  strategy_id: factory_v1_spy_trend_quality_state_d1
+  generated_spec: runtime_strategies\generated\factory_v1_spy_trend_quality_state_d1.yaml
+  calculator_id: factory_d1_trend_quality_calculator_v1
+  conformance_status: fixture_passed
+  dry_run_enabled: true
+  conformance_passed: true
+  runtime_ready: false
+  paper_trading_allowed: false
+  live_trading_allowed: false
+  paper_submit_allowed: false

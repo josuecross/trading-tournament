@@ -1,0 +1,28 @@
+{
+  "current_effective_cash_weight": 0.0,
+  "current_effective_target": {
+    "AGG": 0.4,
+    "GLD": 0.0,
+    "GSG": 0.0,
+    "IYR": 0.0,
+    "SPY": 0.6,
+    "TIP": 0.0
+  },
+  "current_effective_target_version": "sha256:a845d139307e61b0be4634c0c46ee3eb683a2e82a5e5c77cd178bef16bf72a47",
+  "current_effective_timestamp": "2009-08-17T20:00:00Z",
+  "handled_event_ids": [
+    "CPIAUCNS:2009-07:2009-08-14"
+  ],
+  "handoff_id": "spdj_dynamic_inflation_forward_observation_handoff_v1",
+  "last_processed_event_id": "CPIAUCNS:2009-07:2009-08-14",
+  "last_processed_event_timestamp": "2009-07-31T21:00:00Z",
+  "last_successful_calculation_at": "2009-08-14T00:00:00Z",
+  "lifecycle_state": "validated_not_active",
+  "pending_cash_weight": 0.0,
+  "pending_effective_timestamp": null,
+  "pending_target": {},
+  "pending_target_version": null,
+  "receiver_strategy_id": "spdj_multi_asset_dynamic_inflation_etf_portability_v1",
+  "state_updated_at": "2009-08-17T20:00:00Z",
+  "strategy_instance_id": "spdj_multi_asset_dynamic_inflation_etf_portability_v1__inactive_validation_instance"
+}

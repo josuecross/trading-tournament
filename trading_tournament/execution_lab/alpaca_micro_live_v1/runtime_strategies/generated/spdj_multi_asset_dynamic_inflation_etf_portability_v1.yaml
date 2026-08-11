@@ -1,0 +1,52 @@
+strategy_id: spdj_multi_asset_dynamic_inflation_etf_portability_v1
+handoff_package_id: spdj_dynamic_inflation_forward_observation_handoff_v1
+source: standard_v1_handoff_import
+runtime_version: alpaca_runtime_v1
+enabled: false
+runtime_ready: false
+paper_trading_allowed: false
+live_trading_allowed: false
+import_status: blocked
+calculator_binding: calculator_module_required
+provider_requirements:
+- cpi
+- inflation
+required_instruments:
+- receiver-owned share quantities and cash residuals; never emitted by this research
+  handoff
+- regime
+- calculation_reference_date
+- strategy_target
+- target_effective_after_close_date
+- event_status
+- calculation_provenance
+- research_target_calculation_interface_only
+- share_quantities
+- cash_residuals
+- orders
+- fills
+- execution_tolerances
+- virtual_equity
+- CPI_release_event
+- receiver
+- CPI_reference_month
+- canonical_CPI_YoY
+- CPI_publication_timestamp
+- validated_US_equity_trading_calendar
+- adjusted_ETF_price_series_through_previous_month_end
+- currently_effective_target_weights
+- state_persistence_or_no_release
+- spdj_forward_observation_interface_contract_v1
+- six normalized research target weights
+required_data_fields:
+- close
+- cpi
+schedule: ''
+target_output: target_weights
+source_hashes:
+  manifest: sha256:bd1176b5369175af01e0688ffa9cc134429ebba371b31aa84ee40b6f3720aa31
+  contract: sha256:3cd1232ec424762d06ef12814728fb346b5ae1f99380345165d7ba6d67ea49e5
+  fixture: sha256:e6fe3734288360d1826adf25198a9f6507ff1509b61c7011ec7580fc8fd740b0
+conformance:
+  status: fixture_missing
+blocked_reason: calculator_module_required;contract_missing_required_field;provider_adapter_required:event_inflation

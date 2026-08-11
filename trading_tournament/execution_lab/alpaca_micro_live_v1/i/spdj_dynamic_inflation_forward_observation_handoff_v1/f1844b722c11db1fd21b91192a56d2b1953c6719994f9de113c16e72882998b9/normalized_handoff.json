@@ -1,0 +1,329 @@
+{
+  "calculator_contract": {
+    "calculator_configuration": {
+      "signal_contract": {
+        "canonical_signal": "cpi_yoy_unrounded_from_point_in_time_CPIAUCNS_levels",
+        "formula": "100 * (CPI_t / CPI_t_minus_12 - 1)",
+        "information_set": "CPI information actually publicly available at the relevant release event",
+        "live_vendor_prescribed": false,
+        "no_release_behavior": {
+          "forward_fill": false,
+          "historical_conformance_example": "2025-10",
+          "interpolation": false,
+          "previous_effective_target_persists": true,
+          "rebalance_event": false,
+          "retroactive_signal": false,
+          "rule": "no_CPI_announcement_no_rebalance_event",
+          "state": "no_release_no_event",
+          "synthetic_regime": false
+        },
+        "preclassification_rounding": "none",
+        "regimes": {
+          "high": "CPI_YoY > 2.5",
+          "low": "CPI_YoY < 1.5",
+          "medium": "1.5 <= CPI_YoY <= 2.5"
+        },
+        "rounded_news_release_percentage_role": "diagnostic_only_not_permitted_for_regime_classification",
+        "schema_version": "spdj_cpi_signal_contract_v1",
+        "series_id": "CPIAUCNS",
+        "statistical_authority": "U.S. Bureau of Labor Statistics",
+        "statistical_definition": "CPI-U All Items, U.S. City Average, Not Seasonally Adjusted"
+      },
+      "target_algorithms": {
+        "high": {
+          "ETF_return_input": "complete rolling 12-month cumulative returns within allowed window",
+          "assets": [
+            "SPY",
+            "IYR",
+            "GSG",
+            "GLD",
+            "AGG",
+            "TIP"
+          ],
+          "beta_transform": {
+            "beta < 0": "B = 1 / (1 - beta)",
+            "beta >= 0": "B = 1 + beta"
+          },
+          "constraints": [
+            "all_six_assets",
+            "nonnegative",
+            "fully_invested",
+            "no_beta_truncation",
+            "no_winsorization",
+            "no_weight_caps",
+            "no_cash_overlay",
+            "no_leverage"
+          ],
+          "first_36_month_window_complete_pair_count": 25,
+          "history": "same 36-to-120 expanding/rolling monthly return window",
+          "normalization": "weight_i = B_i / sum(B)",
+          "regression": "R12m = alpha + beta * CPI_YoY"
+        },
+        "low": {
+          "AGG": 0.4,
+          "GLD": 0.0,
+          "GSG": 0.0,
+          "IYR": 0.0,
+          "SPY": 0.6,
+          "TIP": 0.0
+        },
+        "medium": {
+          "assets": [
+            "SPY",
+            "IYR",
+            "GSG",
+            "GLD",
+            "AGG",
+            "TIP"
+          ],
+          "constraints": [
+            "finite",
+            "nonnegative",
+            "fully_invested",
+            "no_caps",
+            "no_floors",
+            "no_leverage"
+          ],
+          "history": "36 monthly returns expanding one month at a time through 120, then latest rolling 120",
+          "normalization": "raw_weight_i / sum(raw_weights)",
+          "raw_weight_formula": "1 / volatility_i",
+          "volatility": "sample standard deviation using ddof=1"
+        }
+      },
+      "warmup": {
+        "first_ProIB_pair_count": 25,
+        "first_source_compliant_historical_formation": "2009-08-17",
+        "first_valid_ProIB_historical_formation": "2009-08-17",
+        "first_valid_VolWt_historical_formation": "2009-08-17",
+        "historical_dates_are_conformance_facts_not_operational_constants": true,
+        "maximum_underlying_monthly_returns": 120,
+        "minimum_underlying_monthly_returns": 36
+      }
+    },
+    "calculator_contract_version": "spdj_dynamic_inflation_calculator_v1",
+    "calculator_type": "external_event_allocation",
+    "permitted_receiver_parameters": []
+  },
+  "envelope": {
+    "architecture_id": "monthly_cpi_regime_dynamic_multi_asset_inflation_allocation",
+    "canonical_trial_id": "spdj_multi_asset_dynamic_inflation_etf_portability_v1__canonical",
+    "caveats": [
+      {
+        "caveat_id": "C1",
+        "classification": "nonblocking_material",
+        "finding": "The implementation maps source exposures to tradable ETFs and does not reproduce the official S&P index.",
+        "handoff_requirement": "Preserve the ETF-portability label and exact frozen mapping.",
+        "title": "ETF portability"
+      },
+      {
+        "caveat_id": "C2",
+        "classification": "nonblocking_material",
+        "finding": "At 5 bps the 60/40 control has higher full-history CAGR; existing evidence records a slightly higher candidate Sharpe and materially better candidate drawdown.",
+        "handoff_requirement": "Do not claim raw-CAGR superiority over 60/40.",
+        "title": "60/40 raw-return tradeoff"
+      },
+      {
+        "caveat_id": "C3",
+        "classification": "nonblocking_material",
+        "finding": "One of four blocks is dominated by 60/40, a different block by equal weight, and no block by both controls simultaneously.",
+        "handoff_requirement": "Retain the block-level robustness findings with the export.",
+        "title": "Chronological control dominance"
+      },
+      {
+        "caveat_id": "C4",
+        "classification": "nonblocking_material",
+        "finding": "The reserved evaluation was untouched through selection, but later robustness reused already observed history.",
+        "handoff_requirement": "Treat future observation as prospective evidence; do not relabel robustness history as a new holdout.",
+        "title": "No additional untouched holdout"
+      },
+      {
+        "caveat_id": "C5",
+        "classification": "nonblocking_material",
+        "finding": "SPY, IYR, GLD, AGG, and TIP are economically close source-preserving proxies; GSG is recorded as exact-match exposure.",
+        "handoff_requirement": "Preserve mapping classifications and prohibit silent remapping.",
+        "title": "Source-to-ETF proxy risk"
+      },
+      {
+        "caveat_id": "C6",
+        "classification": "nonblocking_minor",
+        "finding": "October 2025 had no official CPI release and creates no rebalance event under the frozen contract.",
+        "handoff_requirement": "Represent no-release months as explicit no-event records without imputation.",
+        "title": "CPI exceptional release handling"
+      }
+    ],
+    "created_at": "2026-08-10T16:58:30.321286+00:00",
+    "explicit_nonclaims": [
+      "alpha is not proven",
+      "future profitability is not established",
+      "the official S&P index was not replicated",
+      "the strategy is not declared safe",
+      "broker readiness is not established",
+      "paper execution is not verified",
+      "micro-live readiness is not established",
+      "real-money trading is not approved"
+    ],
+    "family_id": "public_cpi_dynamic_inflation_regime_allocation",
+    "handoff_id": "spdj_dynamic_inflation_forward_observation_handoff_v1",
+    "handoff_version": "v1",
+    "package_content_hash": "sha256:f1844b722c11db1fd21b91192a56d2b1953c6719994f9de113c16e72882998b9",
+    "research_claim": "The frozen ETF-portability implementation passed its preregistered exploration and robustness research gates and is eligible for export to a separate forward-observation system for prospective paper/demo observation.",
+    "research_eligibility_evidence_id": "sha256:2cf743f374f790fc9625b08867ce3e1ec1c6d987bfd87dbdf13065f71a1def65",
+    "research_eligibility_status": "spdj_dynamic_inflation_research_eligible_for_handoff",
+    "schema_id": "forward_observation_handoff_standard_v1",
+    "schema_version": 1,
+    "source_hashes": {
+      "CPI_logical_dataset": "sha256:e221af86dfd616f4fa65bec016910deaffe47f1d6e690495a4033cd0e3eefcc8",
+      "canonical_code": "sha256:55eff61ee55999df76d023e570440197c7dbf0d05da41775cf23671dbd15b1e4",
+      "eligibility_evidence": "sha256:2cf743f374f790fc9625b08867ce3e1ec1c6d987bfd87dbdf13065f71a1def65",
+      "exploration_evidence": "sha256:0f3cff1fbed4af952e5264fb60d21b4f0bdec2d7080bb3d16c356bef3e9ccea9",
+      "frozen_universe": "sha256:5bafb89d6c32712178c2a1fc57e8eb177daa9257625e7bcd317cefe2ea3c9861",
+      "price_bundle": "sha256:ab05bef8ac2b12c6391bca65cb1312148db7d64bed11e9932379464f8bcc72c8",
+      "robustness_evidence": "sha256:d8c22c89989128454228795221d3b4d81b21d572c10c8e3b300e70b40586ec59",
+      "symbol_cache_AGG": "sha256:6d36039d38f725e5560ed5ca7377566e2d01217a62d54321708dd88e97bceff8",
+      "symbol_cache_GLD": "sha256:026735f172aebd56aa930ccbb80aed5ca87b75eeebbe90d9e1a73d380620dacc",
+      "symbol_cache_GSG": "sha256:845910ad6da60e9e523ccb9633ce5173ea1635705efddcb4d214c9e56f997598",
+      "symbol_cache_IYR": "sha256:818b0d665e20640c515ff7992e50a0240e8d4ee0f309f9a4a543da17e9e55123",
+      "symbol_cache_SPY": "sha256:3bc5829e35312ea770e562d893e3de0983887d9808bd8d7fc2ab621028abb922",
+      "symbol_cache_TIP": "sha256:4f5fdf49779fd522a190db529268a81ea1ee3706b543f4a10b055c0bfa1dadbd"
+    },
+    "strategy_id": "spdj_multi_asset_dynamic_inflation_etf_portability_v1",
+    "strategy_version": "v1"
+  },
+  "required_fixture_types": [
+    "signal_formula_fixture",
+    "target_weight_fixture",
+    "threshold_or_tie_fixture",
+    "timing_fixture",
+    "missing_event_fixture",
+    "restart_fixture",
+    "duplicate_event_fixture"
+  ],
+  "signal_dependencies": [
+    {
+      "authority_provider_class": "U.S. Bureau of Labor Statistics",
+      "contract_version": "spdj_cpi_signal_contract_v1",
+      "formula_configuration_reference": "signal_contract.json",
+      "frequency": "monthly_release_event",
+      "freshness_policy": {
+        "cutoff": "actual_publication_of_corresponding_CPI_release",
+        "late_event": "reject_or_diagnose_per_deployment"
+      },
+      "missing_release_behavior": "no_release_no_event",
+      "point_in_time_required": true,
+      "publication_timing_required": true,
+      "series_dataset_id": "CPIAUCNS",
+      "signal_id": "spdj_cpi_yoy_point_in_time",
+      "signal_type": "external_release_signal"
+    },
+    {
+      "authority_provider_class": "receiver_validated_adjusted_total_return_market_data",
+      "contract_version": "spdj_price_semantics_contract_v1",
+      "formula_configuration_reference": "strategy_contract.json:target_algorithms",
+      "frequency": "daily_to_monthly",
+      "freshness_policy": {
+        "cutoff": "previous_calendar_month_final_trading_close"
+      },
+      "missing_release_behavior": "block_calculation",
+      "point_in_time_required": false,
+      "publication_timing_required": false,
+      "series_dataset_id": "SPY|IYR|GSG|GLD|AGG|TIP",
+      "signal_id": "spdj_etf_allocation_history",
+      "signal_type": "market_price_signal"
+    }
+  ],
+  "timing_contract": {
+    "calculation_information_cutoff": "previous_calendar_month_final_trading_close",
+    "calendar_id": "XNYS",
+    "effective_rule": {
+      "boundary": "after_close",
+      "kind": "next_valid_session",
+      "offset": 1
+    },
+    "no_event_behavior": "no_release_no_event_preserve_current_effective_target",
+    "signal_availability_cutoff": "actual_publication_of_corresponding_CPI_release"
+  },
+  "tradable_contract": {
+    "cash_behavior": "fully_invested_six_asset_target_no_cash_overlay",
+    "instruments": [
+      {
+        "approved_mappings": [
+          "SPY"
+        ],
+        "exposure": "economically_close_source_preserving_proxy",
+        "history_frequency": "monthly_total_return_from_adjusted_daily_history",
+        "lookback": 120,
+        "minimum_history": 36,
+        "price_semantics": "adjusted_total_return_compatible_ETF_price_history",
+        "role": "risk_or_defensive_asset",
+        "substitution_policy": "approved_explicit_mapping",
+        "symbol": "SPY"
+      },
+      {
+        "approved_mappings": [
+          "IYR"
+        ],
+        "exposure": "economically_close_source_preserving_proxy",
+        "history_frequency": "monthly_total_return_from_adjusted_daily_history",
+        "lookback": 120,
+        "minimum_history": 36,
+        "price_semantics": "adjusted_total_return_compatible_ETF_price_history",
+        "role": "risk_or_defensive_asset",
+        "substitution_policy": "approved_explicit_mapping",
+        "symbol": "IYR"
+      },
+      {
+        "approved_mappings": [],
+        "exposure": "exact_match",
+        "history_frequency": "monthly_total_return_from_adjusted_daily_history",
+        "lookback": 120,
+        "minimum_history": 36,
+        "price_semantics": "adjusted_total_return_compatible_ETF_price_history",
+        "role": "risk_or_defensive_asset",
+        "substitution_policy": "exact_only",
+        "symbol": "GSG"
+      },
+      {
+        "approved_mappings": [
+          "GLD"
+        ],
+        "exposure": "economically_close_source_preserving_proxy",
+        "history_frequency": "monthly_total_return_from_adjusted_daily_history",
+        "lookback": 120,
+        "minimum_history": 36,
+        "price_semantics": "adjusted_total_return_compatible_ETF_price_history",
+        "role": "risk_or_defensive_asset",
+        "substitution_policy": "approved_explicit_mapping",
+        "symbol": "GLD"
+      },
+      {
+        "approved_mappings": [
+          "AGG"
+        ],
+        "exposure": "economically_close_source_preserving_proxy",
+        "history_frequency": "monthly_total_return_from_adjusted_daily_history",
+        "lookback": 120,
+        "minimum_history": 36,
+        "price_semantics": "adjusted_total_return_compatible_ETF_price_history",
+        "role": "risk_or_defensive_asset",
+        "substitution_policy": "approved_explicit_mapping",
+        "symbol": "AGG"
+      },
+      {
+        "approved_mappings": [
+          "TIP"
+        ],
+        "exposure": "economically_close_source_preserving_proxy",
+        "history_frequency": "monthly_total_return_from_adjusted_daily_history",
+        "lookback": 120,
+        "minimum_history": 36,
+        "price_semantics": "adjusted_total_return_compatible_ETF_price_history",
+        "role": "risk_or_defensive_asset",
+        "substitution_policy": "approved_explicit_mapping",
+        "symbol": "TIP"
+      }
+    ],
+    "leverage_allowed": false,
+    "shorting_allowed": false,
+    "target_normalization_rule": "fully_invested_long_only"
+  }
+}

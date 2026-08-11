@@ -1,0 +1,40 @@
+strategy_id: internal_capture_asymmetry_63d_top3_v1
+handoff_package_id: internal_capture_asymmetry_63d_top3_v1_standard_handoff_v1
+source: standard_v1_handoff_import
+runtime_version: alpaca_runtime_v1
+enabled: false
+runtime_ready: false
+paper_trading_allowed: false
+live_trading_allowed: false
+import_status: blocked
+calculator_binding: calculator_binding_missing
+provider_requirements:
+- alpaca_equity_etf_daily_bars
+required_instruments:
+- BIL
+- SPY
+- QQQ
+- IWM
+- EFA
+- EEM
+- HYG
+- LQD
+- TLT
+- TIP
+- GLD
+- DBC
+- IYR
+- forbidden
+required_data_fields:
+- close
+- adjusted_close
+- total_return
+schedule: execution=following_regular_session_close;signal=completed_month_end_close
+target_output: target_weights
+source_hashes:
+  manifest: sha256:9dd7d02140f61461f2c925c268954d49a45865363335438eeacf076ca6850e44
+  contract: sha256:375e2f4cc36ba1e190700f2b70bb3f4d55cafdaf5bf101e75e4639f53051f83d
+  fixture: sha256:dbfc52a492433a000d9bec4ae9086691ce4f313cf6fe58b92faf38fca7351648
+conformance:
+  status: calculator_missing
+blocked_reason: calculator_binding_missing

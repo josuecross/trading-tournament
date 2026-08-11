@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "forward_observation_handoff_standard_v1/handoff.schema.json",
+  "title": "Forward Observation Handoff Standard V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["envelope", "tradable_contract", "signal_dependencies", "calculator_contract", "timing_contract", "required_fixture_types"],
+  "properties": {
+    "envelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_id", "schema_version", "handoff_id", "handoff_version", "strategy_id", "strategy_version", "family_id", "architecture_id", "canonical_trial_id", "research_eligibility_status", "research_eligibility_evidence_id", "created_at", "package_content_hash", "source_hashes", "research_claim", "explicit_nonclaims", "caveats"],
+      "properties": {
+        "schema_id": {"const": "forward_observation_handoff_standard_v1"},
+        "schema_version": {"const": 1},
+        "handoff_id": {"type": "string", "minLength": 1},
+        "handoff_version": {"type": "string", "minLength": 1},
+        "strategy_id": {"type": "string", "minLength": 1},
+        "strategy_version": {"type": "string", "minLength": 1},
+        "family_id": {"type": "string", "minLength": 1},
+        "architecture_id": {"type": "string", "minLength": 1},
+        "canonical_trial_id": {"type": "string", "minLength": 1},
+        "research_eligibility_status": {"type": "string", "minLength": 1},
+        "research_eligibility_evidence_id": {"type": "string", "minLength": 1},
+        "created_at": {"type": "string", "format": "date-time"},
+        "package_content_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+        "source_hashes": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}},
+        "research_claim": {"type": "string", "minLength": 1},
+        "explicit_nonclaims": {"type": "array", "items": {"type": "string"}},
+        "caveats": {"type": "array"}
+      }
+    },
+    "tradable_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["instruments", "shorting_allowed", "leverage_allowed", "cash_behavior", "target_normalization_rule"],
+      "properties": {
+        "instruments": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["symbol", "role", "exposure", "substitution_policy", "approved_mappings", "price_semantics", "history_frequency", "minimum_history", "lookback"],
+            "properties": {
+              "symbol": {"type": "string", "minLength": 1},
+              "role": {"type": "string"},
+              "exposure": {"type": "string"},
+              "substitution_policy": {"enum": ["forbidden", "exact_only", "approved_explicit_mapping"]},
+              "approved_mappings": {"type": "array", "items": {"type": "string"}},
+              "price_semantics": {"type": "string"},
+              "history_frequency": {"type": "string"},
+              "minimum_history": {"type": "integer", "minimum": 0},
+              "lookback": {"type": "integer", "minimum": 0}
+            }
+          }
+        },
+        "shorting_allowed": {"type": "boolean"},
+        "leverage_allowed": {"type": "boolean"},
+        "cash_behavior": {"type": "string"},
+        "target_normalization_rule": {"type": "string"}
+      }
+    },
+    "signal_dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["signal_id", "signal_type", "contract_version", "authority_provider_class", "series_dataset_id", "point_in_time_required", "publication_timing_required", "frequency", "freshness_policy", "missing_release_behavior", "formula_configuration_reference"]
+      }
+    },
+    "calculator_contract": {
+      "type": "object",
+      "required": ["calculator_type", "calculator_contract_version", "calculator_configuration"],
+      "properties": {
+        "calculator_type": {"type": "string"},
+        "calculator_contract_version": {"type": "string"},
+        "calculator_configuration": {"type": "object"},
+        "permitted_receiver_parameters": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "timing_contract": {
+      "type": "object",
+      "required": ["calendar_id", "calculation_information_cutoff", "signal_availability_cutoff", "effective_rule", "no_event_behavior"],
+      "properties": {
+        "calendar_id": {"type": "string"},
+        "calculation_information_cutoff": {"type": "string"},
+        "signal_availability_cutoff": {"type": "string"},
+        "effective_rule": {"type": "object", "required": ["kind"]},
+        "no_event_behavior": {"type": "string"}
+      }
+    },
+    "required_fixture_types": {"type": "array", "items": {"type": "string"}}
+  }
+}

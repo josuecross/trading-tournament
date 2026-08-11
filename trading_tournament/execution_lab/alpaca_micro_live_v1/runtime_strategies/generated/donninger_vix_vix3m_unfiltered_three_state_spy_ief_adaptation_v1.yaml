@@ -1,0 +1,38 @@
+strategy_id: donninger_vix_vix3m_unfiltered_three_state_spy_ief_adaptation_v1
+handoff_package_id: donninger_vix_vix3m_unfiltered_three_state_spy_ief_adaptation_v1_standard_handoff_v1
+source: standard_v1_handoff_import
+runtime_version: alpaca_runtime_v1
+enabled: false
+runtime_ready: false
+paper_trading_allowed: false
+live_trading_allowed: false
+import_status: blocked
+calculator_binding: calculator_binding_missing
+provider_requirements:
+- vix
+- vix3m
+- curve
+- frozen_reference
+required_instruments:
+- SPY
+- IEF
+- frozen_current_active_vm_dsr_usci_combo
+- VIX
+- VIX3M
+- forbidden
+required_data_fields:
+- close
+- adjusted_close
+- total_return
+- vix
+- vix3m
+- curve
+schedule: inner_execution=following_regular_session_close;same_day_return_allowed=False;signal=completed_official_Cboe_daily_close
+target_output: target_weights
+source_hashes:
+  manifest: sha256:223a06f6c6a79e2df223e841ac53bc70796e13e0beb6af7072cf193e295759a8
+  contract: sha256:a4a2ca852c494f18d7fffb9209daace159691bd41d3cc770c6768a2636778613
+  fixture: sha256:e5ef9f9756576dd1a32427bb64784fe2404f628186298b5d2176d64387d332b8
+conformance:
+  status: calculator_missing
+blocked_reason: calculator_binding_missing;provider_adapter_required:frozen_reference_virtual_sleeve;provider_adapter_required:vix_vix3m

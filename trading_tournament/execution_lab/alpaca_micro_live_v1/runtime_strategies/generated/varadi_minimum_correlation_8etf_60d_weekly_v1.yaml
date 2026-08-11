@@ -1,0 +1,36 @@
+strategy_id: varadi_minimum_correlation_8etf_60d_weekly_v1
+handoff_package_id: varadi_minimum_correlation_8etf_60d_weekly_v1_standard_handoff_v1
+source: standard_v1_handoff_import
+runtime_version: alpaca_runtime_v1
+enabled: false
+runtime_ready: false
+paper_trading_allowed: false
+live_trading_allowed: false
+import_status: blocked
+calculator_binding: calculator_binding_missing
+provider_requirements:
+- alpaca_equity_etf_daily_bars
+required_instruments:
+- BIL
+- SPY
+- QQQ
+- EEM
+- IWM
+- EFA
+- TLT
+- IYR
+- GLD
+- forbidden
+required_data_fields:
+- close
+- adjusted_close
+- returns
+schedule: execution=following_regular_session_close;signal=final_completed_regular_session_of_week
+target_output: target_weights
+source_hashes:
+  manifest: sha256:8244d34f8584083684df4889db6d9f6bf688b24644f7a93733f0240c1933fedc
+  contract: sha256:ce2e42709935c186c508463bd30d77ba559e24a49c97d5aafc501ae14aff2109
+  fixture: sha256:a8521f55e7f8cf1ea1e964d3e8c3c4501e6ecd27bf778a81b01840b7eab7698e
+conformance:
+  status: calculator_missing
+blocked_reason: calculator_binding_missing

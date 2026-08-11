@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "forward_observation_handoff_standard_v1/lifecycle_event.schema.json",
+  "title": "Forward Observation Lifecycle Transition V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["prior_state", "next_state", "timestamp", "evidence_id", "actor_task_id", "reason"],
+  "properties": {
+    "prior_state": {"type": "string"},
+    "next_state": {"type": "string"},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "evidence_id": {"type": "string", "minLength": 1},
+    "actor_task_id": {"type": "string", "minLength": 1},
+    "reason": {"type": "string", "minLength": 1}
+  }
+}

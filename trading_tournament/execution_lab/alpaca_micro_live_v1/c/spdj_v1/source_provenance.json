@@ -1,0 +1,22 @@
+{
+  "CPI_dataset_hash": "sha256:e221af86dfd616f4fa65bec016910deaffe47f1d6e690495a4033cd0e3eefcc8",
+  "derivation": "calendar-month final frozen adjusted close; month-over-month return; no performance calculation",
+  "fixture_manifest_hash": "sha256:e6fe3734288360d1826adf25198a9f6507ff1509b61c7011ec7580fc8fd740b0",
+  "full_daily_cache_duplicated": false,
+  "operational_market_data": false,
+  "parent_handoff_id": "spdj_dynamic_inflation_forward_observation_handoff_v1",
+  "parent_package_hash": "sha256:f1844b722c11db1fd21b91192a56d2b1953c6719994f9de113c16e72882998b9",
+  "research_signal_evidence": "evidence/research_recovery/spdj_multi_asset_dynamic_inflation_etf_portability_v1/latest/monthly_signal_and_weights.csv",
+  "software_conformance_reference": true,
+  "source_price_bundle_hash": "sha256:ab05bef8ac2b12c6391bca65cb1312148db7d64bed11e9932379464f8bcc72c8",
+  "source_price_files": {
+    "AGG": "data/universe_expansion/pilot_etf_market_data_v1/AGG.csv",
+    "GLD": "data/universe_expansion/pilot_etf_market_data_v1/GLD.csv",
+    "GSG": "data/universe_expansion/phase2_bounded_multi_asset_market_data_v1/GSG.csv",
+    "IYR": "data/universe_expansion/pilot_etf_market_data_v1/IYR.csv",
+    "SPY": "data/universe_expansion/pilot_etf_market_data_v1/SPY.csv",
+    "TIP": "data/universe_expansion/pilot_etf_market_data_v1/TIP.csv"
+  },
+  "source_research_evidence_hash": "sha256:86f55d845af1b4aac643dd076c46873e13e976db04b13b09264bd69cacb96599",
+  "strategy_id": "spdj_multi_asset_dynamic_inflation_etf_portability_v1"
+}
